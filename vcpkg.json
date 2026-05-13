@@ -1,0 +1,27 @@
+{
+  "name": "wsvt-cpp",
+  "version-string": "0.1.0",
+  "dependencies": [],
+  "features": {
+    "hdf5": {
+      "description": "Enable HDF5 read/write support",
+      "dependencies": [
+        "hdf5"
+      ]
+    },
+    "opencv": {
+      "description": "Enable OpenCV slope tracking estimate support",
+      "dependencies": [
+        {
+          "name": "opencv4",
+          "default-features": false,
+          "features": [
+            "core",
+            "imgproc",
+            "video"
+          ]
+        }
+      ]
+    }
+  }
+}

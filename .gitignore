@@ -1,0 +1,35 @@
+# Build directories
+build/
+build-*/
+out/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# IDE
+.vscode/
+.vs/
+*.swp
+*~
+*.user
+*.suo
+*.sln
+*.vcxproj*
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+
+# Binaries
+*.o
+*.a
+*.so
+*.out
+wsvt_cli
+
+# vcpkg
+vcpkg_installed/

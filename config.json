@@ -1,0 +1,21 @@
+{
+  "mode": "wsvt_dir",
+  "img_dir": "../wsvtdata/sample",
+  "ref_dir": "../wsvtdata/ref",
+  "out_dir": "testresult/output",
+  "export": true,
+  "set": {
+    "crop": 2048,
+    "cal_half_window": 30,
+    "n_cores": 128,
+    "n_group": 2,
+    "energy": 14000,
+    "p_x": 6.5e-07,
+    "z": 0.425,
+    "wavelet_level_cut": 1,
+    "pyramid_level": 1,
+    "n_iter": 1,
+    "use_wavelet": true,
+    "save_img": true
+  }
+}

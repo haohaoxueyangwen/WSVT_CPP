@@ -51,94 +51,81 @@ Image2D<float> frankot_chellappa_fftw(
     const std::size_t w = shape.w;
     const int rows = static_cast<int>(h);
     const int cols = static_cast<int>(w);
-    const std::size_t n_real = h * w;
-    // r2c output: h * (w/2 + 1) complex values
-    const std::size_t n_complex = h * (w / 2 + 1);
+    const std::size_t n = h * w;
 
-    // RAII-managed FFTW buffers: automatic cleanup on any exit path
-    FFTWBuffer<float> in_x(n_real);
-    FFTWBuffer<float> in_y(n_real);
-    FFTWBuffer<fftwf_complex> fx(n_complex);
-    FFTWBuffer<fftwf_complex> fy(n_complex);
-    FFTWBuffer<fftwf_complex> div(n_complex);
-    FFTWBuffer<float> out(n_real);
+    // Use complex-to-complex transforms for clarity and correctness.
+    // RAII-managed FFTW buffers.
+    FFTWBuffer<fftwf_complex> buf_x(n);
+    FFTWBuffer<fftwf_complex> buf_y(n);
+    FFTWBuffer<fftwf_complex> buf_div(n);
+    FFTWBuffer<fftwf_complex> buf_out(n);
 
-    if (!in_x.data() || !in_y.data() || !fx.data() || !fy.data() ||
-        !div.data() || !out.data()) {
+    if (!buf_x.data() || !buf_y.data() || !buf_div.data() || !buf_out.data()) {
         throw std::runtime_error("FFTW allocation failed");
     }
 
-    // Copy input data
-    {
-        float* ix = in_x.data();
-        float* iy = in_y.data();
-        const float* dx = dpc_x.data();
-        const float* dy = dpc_y.data();
-        for (std::size_t i = 0; i < n_real; ++i) {
-            ix[i] = dx[i];
-            iy[i] = dy[i];
-        }
+    // Copy real input into complex buffers (imaginary = 0)
+    const float* dx = dpc_x.data();
+    const float* dy = dpc_y.data();
+    for (std::size_t i = 0; i < n; ++i) {
+        buf_x.data()[i][0] = dx[i];
+        buf_x.data()[i][1] = 0.0f;
+        buf_y.data()[i][0] = dy[i];
+        buf_y.data()[i][1] = 0.0f;
     }
 
-    // RAII-managed plans
-    FFTWPlan plan_fx{fftwf_plan_dft_r2c_2d(rows, cols, in_x.data(), fx.data(), FFTW_ESTIMATE)};
-    FFTWPlan plan_fy{fftwf_plan_dft_r2c_2d(rows, cols, in_y.data(), fy.data(), FFTW_ESTIMATE)};
-    FFTWPlan plan_inv{fftwf_plan_dft_c2r_2d(rows, cols, div.data(), out.data(), FFTW_ESTIMATE)};
-
-    // Forward transforms
+    // Forward FFT (complex-to-complex)
+    FFTWPlanT<> plan_fx(fftwf_plan_dft_2d(rows, cols, buf_x.data(), buf_x.data(), FFTW_FORWARD, FFTW_ESTIMATE));
+    FFTWPlanT<> plan_fy(fftwf_plan_dft_2d(rows, cols, buf_y.data(), buf_y.data(), FFTW_FORWARD, FFTW_ESTIMATE));
     plan_fx.execute();
     plan_fy.execute();
 
     // Frequency-domain integration: (-j*wx*Fx - j*wy*Fy) / (wx^2 + wy^2)
-    const float pi = static_cast<float>(std::acos(-1.0));
-    const float eps = 1e-12f;
-    const std::size_t half_w = w / 2 + 1;
-
-    fftwf_complex* fx_ptr = fx.data();
-    fftwf_complex* fy_ptr = fy.data();
-    fftwf_complex* div_ptr = div.data();
+    const double pi = std::acos(-1.0);
+    const double eps = 1e-12;
 
     for (std::size_t v = 0; v < h; ++v) {
-        float wy = 2.0f * pi *
-            static_cast<float>(v <= h / 2
-                ? static_cast<long long>(v)
-                : static_cast<long long>(v) - static_cast<long long>(h)) /
-            static_cast<float>(h);
-        for (std::size_t u = 0; u < half_w; ++u) {
-            float wx = 2.0f * pi *
-                static_cast<float>(u <= w / 2
-                    ? static_cast<long long>(u)
-                    : static_cast<long long>(u) - static_cast<long long>(w)) /
-                static_cast<float>(w);
+        // fftfreq: v/h for v <= h/2, (v-h)/h for v > h/2
+        const double fv = (v <= h / 2) ? static_cast<double>(v) : static_cast<double>(v) - static_cast<double>(h);
+        const double wy = 2.0 * pi * fv / static_cast<double>(h);
+        for (std::size_t u = 0; u < w; ++u) {
+            const double fu = (u <= w / 2) ? static_cast<double>(u) : static_cast<double>(u) - static_cast<double>(w);
+            const double wx = 2.0 * pi * fu / static_cast<double>(w);
 
-            const float den = std::max(wx * wx + wy * wy, eps);
-            const std::size_t k = v * half_w + u;
+            const double den = std::max(wx * wx + wy * wy, eps);
+            const std::size_t k = v * w + u;
 
-            // num = -j*wx*fx[k] - j*wy*fy[k]
-            // -j*(a+bi) = b - ja
-            const float num_r = wx * fx_ptr[k][1] + wy * fy_ptr[k][1];
-            const float num_i = -(wx * fx_ptr[k][0] + wy * fy_ptr[k][0]);
+            // -j * wx * Fx - j * wy * Fy
+            // If F = a + bi, then -j*F = b - ja
+            // So: -j*wx*F = wx*b - j*wx*a; -j*wy*F = wy*b - j*wy*a
+            const double fx_r = static_cast<double>(buf_x.data()[k][0]);
+            const double fx_i = static_cast<double>(buf_x.data()[k][1]);
+            const double fy_r = static_cast<double>(buf_y.data()[k][0]);
+            const double fy_i = static_cast<double>(buf_y.data()[k][1]);
 
-            div_ptr[k][0] = num_r / den;
-            div_ptr[k][1] = num_i / den;
+            const double num_r = wx * fx_i + wy * fy_i;
+            const double num_i = -(wx * fx_r + wy * fy_r);
+
+            buf_div.data()[k][0] = static_cast<float>(num_r / den);
+            buf_div.data()[k][1] = static_cast<float>(num_i / den);
         }
     }
 
-    // Inverse transform (FFTW c2r does NOT normalize)
+    // Inverse FFT (complex-to-complex)
+    FFTWPlanT<> plan_inv(fftwf_plan_dft_2d(rows, cols, buf_div.data(), buf_out.data(), FFTW_BACKWARD, FFTW_ESTIMATE));
     plan_inv.execute();
 
-    // Copy result and normalize (FFTW convention: unnormalized, divide by N)
-    const float scale = 1.0f / static_cast<float>(n_real);
-    std::vector<float> phi(n_real, 0.0f);
-    const float* out_ptr = out.data();
-    float mean = 0.0f;
-    for (std::size_t i = 0; i < n_real; ++i) {
-        phi[i] = out_ptr[i] * scale;
-        mean += phi[i];
+    // Extract real part and normalize (FFTW convention: unnormalized, divide by N)
+    const double scale = 1.0 / static_cast<double>(n);
+    std::vector<float> phi(n, 0.0f);
+    double mean = 0.0;
+    for (std::size_t i = 0; i < n; ++i) {
+        phi[i] = static_cast<float>(static_cast<double>(buf_out.data()[i][0]) * scale);
+        mean += static_cast<double>(phi[i]);
     }
-    mean /= static_cast<float>(n_real);
+    mean /= static_cast<double>(n);
     for (float& v : phi) {
-        v -= mean;
+        v -= static_cast<float>(mean);
     }
 
     return Image2D<float>(std::move(phi), shape);

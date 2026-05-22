@@ -91,13 +91,8 @@ Image2D read_image_gray(const std::string& filename) {
     Image2D out;
     out.h = static_cast<std::size_t>(gray32.rows);
     out.w = static_cast<std::size_t>(gray32.cols);
-    out.data.resize(out.h * out.w, 0.0f);
-    for (std::size_t y = 0; y < out.h; ++y) {
-        const float* row = gray32.ptr<float>(static_cast<int>(y));
-        for (std::size_t x = 0; x < out.w; ++x) {
-            out.data[y * out.w + x] = row[x];
-        }
-    }
+    out.data.resize(out.h * out.w);
+    std::memcpy(out.data.data(), gray32.ptr<float>(0), out.h * out.w * sizeof(float));
     return out;
 #else
     throw std::runtime_error("read_image_gray requires OpenCV (WSVT_HAS_OPENCV)");

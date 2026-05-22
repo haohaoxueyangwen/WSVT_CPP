@@ -184,24 +184,49 @@ std::vector<std::vector<float>> wavedec_depth_hwd(
     const std::size_t filt_len = dec_lo.size();
     const std::size_t plane = h * w;
 
-    // Working buffer: current approximation coefficients in HWD layout
-    std::vector<float> current(img_hwd.begin(), img_hwd.end());
+    // Avoid copying img_hwd into a local buffer at level 0; read directly from input.
+    // From level 1 onward, ping-pong between two heap buffers for "current" approximation.
+    const float* current_ptr = img_hwd.data();
     std::size_t cur_depth = depth_in;
+    std::vector<float> approx_buf;  // owns level >=1 approx output
 
     std::vector<std::vector<float>> coeffs;
     coeffs.reserve(static_cast<std::size_t>(level + 1));
 
     for (int lv = 0; lv < level; ++lv) {
         const std::size_t out_depth = (cur_depth + filt_len - 1) / 2;
-        std::vector<float> approx(plane * out_depth, 0.0f);
-        std::vector<float> detail(plane * out_depth, 0.0f);
+        std::vector<float> approx(plane * out_depth);
+        std::vector<float> detail(plane * out_depth);
+
+        // Largest oc where the entire filter window (oc*2 .. oc*2+filt_len-1) stays in bounds.
+        // i.e. oc*2 + filt_len - 1 < cur_depth -> oc < (cur_depth - filt_len + 1) / 2.
+        // Use a safe count of oc values without boundary clamp.
+        const std::size_t safe_out = (cur_depth >= filt_len)
+            ? ((cur_depth - filt_len) / 2 + 1)
+            : 0;
 
 #pragma omp parallel for schedule(static)
         for (std::size_t pixel = 0; pixel < plane; ++pixel) {
-            const float* pixel_in = current.data() + pixel * cur_depth;
+            const float* pixel_in = current_ptr + pixel * cur_depth;
             float* pixel_a = approx.data() + pixel * out_depth;
             float* pixel_d = detail.data() + pixel * out_depth;
-            for (std::size_t oc = 0; oc < out_depth; ++oc) {
+
+            // Bulk: no boundary clamp -> vectorizable.
+            for (std::size_t oc = 0; oc < safe_out; ++oc) {
+                float a = 0.0f, d = 0.0f;
+                const float* base = pixel_in + oc * 2;
+                #pragma omp simd reduction(+:a,d)
+                for (std::size_t k = 0; k < filt_len; ++k) {
+                    const float v = base[k];
+                    a += dec_lo[k] * v;
+                    d += dec_hi[k] * v;
+                }
+                pixel_a[oc] = a;
+                pixel_d[oc] = d;
+            }
+
+            // Tail: boundary clamp needed (replicate-last-sample padding).
+            for (std::size_t oc = safe_out; oc < out_depth; ++oc) {
                 float a = 0.0f, d = 0.0f;
                 for (std::size_t k = 0; k < filt_len; ++k) {
                     std::size_t ic = oc * 2 + k;
@@ -216,10 +241,16 @@ std::vector<std::vector<float>> wavedec_depth_hwd(
         }
 
         coeffs.push_back(std::move(detail));
-        current = std::move(approx);
+        approx_buf = std::move(approx);
+        current_ptr = approx_buf.data();
         cur_depth = out_depth;
     }
-    coeffs.push_back(std::move(current));
+    // Final approximation: move the ping-pong buffer (or, if level==0, materialize the input)
+    if (level == 0) {
+        coeffs.emplace_back(img_hwd.begin(), img_hwd.end());
+    } else {
+        coeffs.push_back(std::move(approx_buf));
+    }
     return coeffs;
 }
 

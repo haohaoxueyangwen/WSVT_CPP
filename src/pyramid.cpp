@@ -248,6 +248,19 @@ AlignedVector<float> stack_template_window_hwd(
     out_depth = ch * static_cast<std::size_t>(axis * axis);
     AlignedVector<float> out(h * w * out_depth, 0.0f);
 
+    // Fast path: n_template=0 means no spatial shifts — just CHW->HWD transpose.
+    if (n_template == 0) {
+        const std::size_t plane = h * w;
+        #pragma omp parallel for schedule(static)
+        for (std::size_t pixel = 0; pixel < plane; ++pixel) {
+            float* dst = out.data() + pixel * ch;
+            for (std::size_t c = 0; c < ch; ++c) {
+                dst[c] = img[c * plane + pixel];
+            }
+        }
+        return out;
+    }
+
     #pragma omp parallel for collapse(3) schedule(static)
     for (int dx = -n_template; dx <= n_template; ++dx) {
         for (int dy = -n_template; dy <= n_template; ++dy) {
@@ -383,8 +396,34 @@ PyramidResult pyramid_data(
         throw std::invalid_argument("pyramid_data input size mismatch");
     }
 
-    auto ref_result = build_pyramid_single(ref_data, ch, h, w, pyramid_level, n_template, mode);
-    auto img_result = build_pyramid_single(img_data, ch, h, w, pyramid_level, n_template, mode);
+    int inner_threads = 1;
+#ifdef _OPENMP
+    inner_threads = std::max(1, omp_get_max_threads() / 2);
+#endif
+
+    PyramidResult ref_result, img_result;
+    // ref and img builds are independent — run in parallel.
+    // Each section reduces its inner thread pool to half the total to avoid oversubscription.
+    #pragma omp parallel sections num_threads(2)
+    {
+        #pragma omp section
+        {
+#ifdef _OPENMP
+            omp_set_num_threads(inner_threads);
+#endif
+            ref_result = build_pyramid_single(ref_data, ch, h, w, pyramid_level, n_template, mode);
+        }
+        #pragma omp section
+        {
+#ifdef _OPENMP
+            omp_set_num_threads(inner_threads);
+#endif
+            img_result = build_pyramid_single(img_data, ch, h, w, pyramid_level, n_template, mode);
+        }
+    }
+#ifdef _OPENMP
+    omp_set_num_threads(inner_threads * 2);
+#endif
 
     PyramidResult merged;
     merged.ref_levels = std::move(ref_result.ref_levels);

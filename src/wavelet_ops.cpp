@@ -180,110 +180,128 @@ WaveletResult wavelet_transform_multiprocess(std::span<const float> img, std::si
 // Decomposes along the depth axis using 1D DWT per pixel.
 // Output: [h, w, out_depth] in HWD layout — no transpose needed.
 
-namespace {
-
-std::vector<std::vector<float>> wavedec_depth_hwd(
-    std::span<const float> img_hwd,
-    std::size_t h, std::size_t w, std::size_t depth_in,
-    const std::vector<float>& dec_lo,
-    const std::vector<float>& dec_hi,
-    int level) {
-    const std::size_t filt_len = dec_lo.size();
-    const std::size_t plane = h * w;
-
-    // Avoid copying img_hwd into a local buffer at level 0; read directly from input.
-    // From level 1 onward, ping-pong between two heap buffers for "current" approximation.
-    const float* current_ptr = img_hwd.data();
-    std::size_t cur_depth = depth_in;
-    std::vector<float> approx_buf;  // owns level >=1 approx output
-
-    std::vector<std::vector<float>> coeffs;
-    coeffs.reserve(static_cast<std::size_t>(level + 1));
-
-    for (int lv = 0; lv < level; ++lv) {
-        const std::size_t out_depth = (cur_depth + filt_len - 1) / 2;
-        std::vector<float> approx(plane * out_depth);
-        std::vector<float> detail(plane * out_depth);
-
-#pragma omp parallel for schedule(static)
-        for (std::size_t pixel = 0; pixel < plane; ++pixel) {
-            const float* pixel_in = current_ptr + pixel * cur_depth;
-            float* pixel_a = approx.data() + pixel * out_depth;
-            float* pixel_d = detail.data() + pixel * out_depth;
-
-            const auto offset = static_cast<long long>(filt_len - 2);
-            for (std::size_t oc = 0; oc < out_depth; ++oc) {
-                float a = 0.0f, d = 0.0f;
-                for (std::size_t k = 0; k < filt_len; ++k) {
-                    const auto ic_signed = static_cast<long long>(oc * 2 + k) - offset;
-                    if (ic_signed < 0 || ic_signed >= static_cast<long long>(cur_depth)) {
-                        continue;
-                    }
-                    const auto ic = static_cast<std::size_t>(ic_signed);
-                    const float v = pixel_in[ic];
-                    const std::size_t fk = filt_len - 1 - k;
-                    a += dec_lo[fk] * v;
-                    d += dec_hi[fk] * v;
-                }
-                pixel_a[oc] = a;
-                pixel_d[oc] = d;
-            }
-        }
-
-        coeffs.push_back(std::move(detail));
-        approx_buf = std::move(approx);
-        current_ptr = approx_buf.data();
-        cur_depth = out_depth;
-    }
-    // Final approximation: move the ping-pong buffer (or, if level==0, materialize the input)
-    if (level == 0) {
-        coeffs.emplace_back(img_hwd.begin(), img_hwd.end());
-    } else {
-        coeffs.push_back(std::move(approx_buf));
-    }
-    return coeffs;
-}
-
-}  // namespace
-
 WaveletResult wavelet_transform_hwd(
     std::span<const float> img_hwd,
     std::size_t h, std::size_t w, std::size_t depth_in,
     WaveletFamily wavelet, int w_level, int return_level) {
+    return wavelet_transform_hwd_streamed(img_hwd, h, w, depth_in, wavelet, w_level,
+                                          return_level);
+}
+
+WaveletResult wavelet_transform_hwd_streamed(
+    std::span<const float> img_hwd,
+    std::size_t h, std::size_t w, std::size_t depth_in,
+    WaveletFamily wavelet, int w_level, int return_level) {
     if (img_hwd.size() != h * w * depth_in) {
-        throw std::invalid_argument("wavelet_transform_hwd: input size mismatch");
+        throw std::invalid_argument("wavelet_transform_hwd_streamed: input size mismatch");
+    }
+    if (w_level < 0) {
+        throw std::invalid_argument("wavelet_transform_hwd_streamed: w_level must be non-negative");
     }
 
     std::vector<float> dec_lo, dec_hi;
     get_wavelet_filters(wavelet, dec_lo, dec_hi);
 
-    auto coeffs = wavedec_depth_hwd(img_hwd, h, w, depth_in, dec_lo, dec_hi, w_level);
+    const std::size_t filt_len = dec_lo.size();
+    const std::size_t plane = h * w;
+    std::vector<std::size_t> detail_depths(static_cast<std::size_t>(w_level));
+    std::size_t cur_depth_for_shape = depth_in;
+    for (int lv = 0; lv < w_level; ++lv) {
+        const std::size_t next_depth = (cur_depth_for_shape + filt_len - 1) / 2;
+        detail_depths[static_cast<std::size_t>(lv)] = next_depth;
+        cur_depth_for_shape = next_depth;
+    }
 
-    const int total_levels = static_cast<int>(coeffs.size());
+    const int total_levels = w_level + 1;
     const int effective_return_level = std::clamp(return_level, 1, total_levels);
     const int start_idx = total_levels - effective_return_level;
 
-    const std::size_t plane = h * w;
     std::size_t out_depth = 0;
-    for (int i = start_idx; i < total_levels; ++i) {
-        out_depth += coeffs[static_cast<std::size_t>(i)].size() / plane;
+    std::vector<std::size_t> detail_offsets(static_cast<std::size_t>(w_level), 0);
+    std::vector<bool> keep_detail(static_cast<std::size_t>(w_level), false);
+    for (int lv = 0; lv < w_level; ++lv) {
+        if (lv >= start_idx) {
+            keep_detail[static_cast<std::size_t>(lv)] = true;
+            detail_offsets[static_cast<std::size_t>(lv)] = out_depth;
+            out_depth += detail_depths[static_cast<std::size_t>(lv)];
+        }
     }
+    const std::size_t approx_offset = out_depth;
+    const std::size_t approx_depth = cur_depth_for_shape;
+    out_depth += approx_depth;
 
-    // Concatenate selected levels along depth axis — already in HWD layout
     AlignedVector<float> out(plane * out_depth, 0.0f);
-    std::size_t d_offset = 0;
 
-    for (int i = start_idx; i < total_levels; ++i) {
-        const auto& c = coeffs[static_cast<std::size_t>(i)];
-        const std::size_t c_depth = c.size() / plane;
+    if (w_level == 0) {
+#pragma omp parallel for schedule(static)
+        for (std::size_t pixel = 0; pixel < plane; ++pixel) {
+            const float* src = img_hwd.data() + pixel * depth_in;
+            float* dst = out.data() + pixel * out_depth + approx_offset;
+            std::memcpy(dst, src, depth_in * sizeof(float));
+        }
+    } else {
+        const float* current_ptr = img_hwd.data();
+        std::size_t cur_depth = depth_in;
+        std::vector<float> approx_buf;
+
+        for (int lv = 0; lv < w_level; ++lv) {
+            const std::size_t next_depth = detail_depths[static_cast<std::size_t>(lv)];
+            std::vector<float> approx(plane * next_depth);
+            const bool write_detail = keep_detail[static_cast<std::size_t>(lv)];
+            const std::size_t detail_offset = detail_offsets[static_cast<std::size_t>(lv)];
+
+#pragma omp parallel for schedule(static)
+            for (std::size_t pixel = 0; pixel < plane; ++pixel) {
+                const float* pixel_in = current_ptr + pixel * cur_depth;
+                float* pixel_a = approx.data() + pixel * next_depth;
+                const auto offset = static_cast<long long>(filt_len - 2);
+                if (write_detail) {
+                    float* pixel_d = out.data() + pixel * out_depth + detail_offset;
+                    for (std::size_t oc = 0; oc < next_depth; ++oc) {
+                        float a = 0.0f, d = 0.0f;
+                        for (std::size_t k = 0; k < filt_len; ++k) {
+                            const auto ic_signed = static_cast<long long>(oc * 2 + k) - offset;
+                            if (ic_signed < 0 || ic_signed >= static_cast<long long>(cur_depth)) {
+                                continue;
+                            }
+                            const auto ic = static_cast<std::size_t>(ic_signed);
+                            const float v = pixel_in[ic];
+                            const std::size_t fk = filt_len - 1 - k;
+                            a += dec_lo[fk] * v;
+                            d += dec_hi[fk] * v;
+                        }
+                        pixel_a[oc] = a;
+                        pixel_d[oc] = d;
+                    }
+                } else {
+                    for (std::size_t oc = 0; oc < next_depth; ++oc) {
+                        float a = 0.0f;
+                        for (std::size_t k = 0; k < filt_len; ++k) {
+                            const auto ic_signed = static_cast<long long>(oc * 2 + k) - offset;
+                            if (ic_signed < 0 || ic_signed >= static_cast<long long>(cur_depth)) {
+                                continue;
+                            }
+                            const auto ic = static_cast<std::size_t>(ic_signed);
+                            const float v = pixel_in[ic];
+                            const std::size_t fk = filt_len - 1 - k;
+                            a += dec_lo[fk] * v;
+                        }
+                        pixel_a[oc] = a;
+                    }
+                }
+            }
+
+            approx_buf = std::move(approx);
+            current_ptr = approx_buf.data();
+            cur_depth = next_depth;
+        }
 
 #pragma omp parallel for schedule(static)
         for (std::size_t pixel = 0; pixel < plane; ++pixel) {
-            const float* src = c.data() + pixel * c_depth;
-            float* dst = out.data() + pixel * out_depth + d_offset;
-            std::memcpy(dst, src, c_depth * sizeof(float));
+            const float* src = approx_buf.data() + pixel * approx_depth;
+            float* dst = out.data() + pixel * out_depth + approx_offset;
+            std::memcpy(dst, src, approx_depth * sizeof(float));
         }
-        d_offset += c_depth;
     }
 
     WaveletResult result;

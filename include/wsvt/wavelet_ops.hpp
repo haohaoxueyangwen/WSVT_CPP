@@ -112,4 +112,15 @@ struct WaveletTaskResult {
     int w_level = 1,
     int return_level = 1);
 
+/// Strict-equivalent streaming HWD transform. It computes every approximation
+/// needed by the decomposition chain, but writes only returned coefficients.
+[[nodiscard]] WaveletResult wavelet_transform_hwd_streamed(
+    std::span<const float> img_hwd,
+    std::size_t h,
+    std::size_t w,
+    std::size_t depth_in,
+    WaveletFamily wavelet = WaveletFamily::Db2,
+    int w_level = 1,
+    int return_level = 1);
+
 }  // namespace wsvt

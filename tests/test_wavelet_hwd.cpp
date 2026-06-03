@@ -83,6 +83,34 @@ TEST_CASE("wavelet_transform_hwd output shape", "[wavelet][hwd]") {
     REQUIRE(result.level_name.size() == 2);
 }
 
+TEST_CASE("wavelet_transform_hwd_streamed matches CHW selected levels", "[wavelet][hwd]") {
+    constexpr std::size_t depth = 33, h = 5, w = 7;
+    const auto signal_chw = make_signal_chw(depth, h, w);
+    const auto signal_hwd = chw_to_hwd(signal_chw, depth, h, w);
+
+    for (auto wavelet : {WaveletFamily::Db2, WaveletFamily::Db3}) {
+        DYNAMIC_SECTION("wavelet=" << static_cast<int>(wavelet)) {
+            for (const int return_level : {1, 2, 3, 4}) {
+                DYNAMIC_SECTION("return_level=" << return_level) {
+                    const auto legacy = wavelet_transform(signal_chw, depth, h, w, wavelet, 3, return_level);
+                    const auto streamed = wavelet_transform_hwd_streamed(signal_hwd, h, w, depth, wavelet, 3, return_level);
+
+                    REQUIRE(streamed.out_h == legacy.out_h);
+                    REQUIRE(streamed.out_w == legacy.out_w);
+                    REQUIRE(streamed.out_depth == legacy.out_depth);
+                    REQUIRE(streamed.level_name == legacy.level_name);
+                    REQUIRE(streamed.coeffs_filter.size() == legacy.coeffs_filter.size());
+
+                    for (std::size_t i = 0; i < legacy.coeffs_filter.size(); ++i) {
+                        REQUIRE_THAT(static_cast<double>(streamed.coeffs_filter[i]),
+                                     Catch::Matchers::WithinAbs(static_cast<double>(legacy.coeffs_filter[i]), 1e-5));
+                    }
+                }
+            }
+        }
+    }
+}
+
 TEST_CASE("wavelet_transform_hwd matches PyWavelets db3 zero-mode golden values", "[wavelet][hwd]") {
     constexpr std::size_t h = 1, w = 2, depth = 5;
     const std::vector<float> signal = {

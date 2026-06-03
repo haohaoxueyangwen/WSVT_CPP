@@ -17,7 +17,6 @@
 #include <cmath>
 #include <iomanip>
 #include <limits>
-#include <memory>
 #include <numeric>
 #include <sstream>
 #include <span>
@@ -29,40 +28,6 @@
 #endif
 
 namespace wsvt {
-
-namespace {
-
-std::vector<float> warp_replicate_bilinear(const std::vector<float>& ref, const std::vector<float>& dx, const std::vector<float>& dy, std::size_t h, std::size_t w) {
-    std::vector<float> out(h * w, 0.0f);
-    const float* __restrict__ ref_ptr = ref.data();
-    const int ih = static_cast<int>(h);
-    const int iw = static_cast<int>(w);
-
-    #pragma omp parallel for schedule(static)
-    for (std::size_t idx = 0; idx < h * w; ++idx) {
-        const std::size_t y = idx / w;
-        const std::size_t x = idx % w;
-        const double sx = static_cast<double>(x) - static_cast<double>(dx[idx]);
-        const double sy = static_cast<double>(y) - static_cast<double>(dy[idx]);
-        const double x0d = std::floor(sx);
-        const double y0d = std::floor(sy);
-        const int x0 = std::clamp(static_cast<int>(x0d), 0, iw - 1);
-        const int y0 = std::clamp(static_cast<int>(y0d), 0, ih - 1);
-        const int x1 = std::clamp(x0 + 1, 0, iw - 1);
-        const int y1 = std::clamp(y0 + 1, 0, ih - 1);
-        const double fx = sx - x0d;
-        const double fy = sy - y0d;
-        const double v00 = ref_ptr[y0 * iw + x0];
-        const double v10 = ref_ptr[y0 * iw + x1];
-        const double v01 = ref_ptr[y1 * iw + x0];
-        const double v11 = ref_ptr[y1 * iw + x1];
-        out[idx] = static_cast<float>((v00 * (1.0 - fx) + v10 * fx) * (1.0 - fy)
-                                    + (v01 * (1.0 - fx) + v11 * fx) * fy);
-    }
-    return out;
-}
-
-}
 
 WXST::WXST(
     const std::vector<float>& img,
@@ -424,9 +389,12 @@ WXSTOutput WXST::solver() {
     prColor("displace time: " + std::to_string(displace_time_s) + " s", "light_purple");
     (void)configure_openmp_threads(1, "post-process/FFTW phase recovery", 1);
     const auto post_t0 = std::chrono::steady_clock::now();
-    auto warped_ref = warp_replicate_bilinear(ref_data_, displace_x, displace_y, h_, w_);
     std::vector<float> transmission(h_ * w_, 0.0f);
-    for (std::size_t i = 0; i < transmission.size(); ++i) transmission[i] = img_data_[i] / (std::fabs(warped_ref[i]) + 1e-6f);
+    for (std::size_t i = 0; i < transmission.size(); ++i) {
+        const double ref_safe = std::max(static_cast<double>(ref_data_[i]), 1e-10);
+        const double ratio = static_cast<double>(img_data_[i]) / ref_safe;
+        transmission[i] = static_cast<float>(std::clamp(ratio, 0.01, 10.0));
+    }
     const std::size_t pad_crop = static_cast<std::size_t>(cal_half_window_);
     auto displace_y_crop_img = crop_2d(
         ImageView2D<const float>{displace_y.data(), {h_, w_}}, pad_crop);
@@ -434,14 +402,11 @@ WXSTOutput WXST::solver() {
         ImageView2D<const float>{displace_x.data(), {h_, w_}}, pad_crop);
     auto darkfield_nd_crop_img = crop_2d(
         ImageView2D<const float>{darkfield_nd.data(), {h_, w_}}, pad_crop);
-    auto transmission_crop_img = crop_2d(
-        ImageView2D<const float>{transmission.data(), {h_, w_}}, pad_crop);
     const std::size_t out_h = displace_y_crop_img.shape().h;
     const std::size_t out_w = displace_y_crop_img.shape().w;
     auto displace_y_crop = std::move(displace_y_crop_img).take();
     auto displace_x_crop = std::move(displace_x_crop_img).take();
     auto darkfield_nd_crop = std::move(darkfield_nd_crop_img).take();
-    auto transmission_crop = std::move(transmission_crop_img).take();
     for (float& v : displace_y_crop) v = -v;
     for (float& v : displace_x_crop) v = -v;
     const double mean_dy = mean_2d(displace_y_crop);
@@ -457,7 +422,7 @@ WXSTOutput WXST::solver() {
         ImageView2D<const float>{dpc_x.data(), {out_h, out_w}},
         ImageView2D<const float>{dpc_y.data(), {out_h, out_w}}).take();
     const double phase_scale = p_x_ * 2.0 * 3.14159265358979323846 / wavelength_;
-    for (float& v : phase) v = static_cast<float>(static_cast<double>(v) * phase_scale);
+    for (float& v : phase) v = static_cast<float>(-static_cast<double>(v) * phase_scale);
     const auto post_t1 = std::chrono::steady_clock::now();
     const double postprocess_time_s = std::chrono::duration<double>(post_t1 - post_t0).count();
     prColor("post-process time: " + std::to_string(postprocess_time_s) + " s", "light_purple");
@@ -480,7 +445,9 @@ WXSTOutput WXST::solver() {
         std::move(dpc_y),
         std::move(dpc_x),
         std::move(phase),
-        std::move(transmission_crop),
+        std::move(transmission),
+        h_,
+        w_,
         std::move(darkfield_nd_crop),
         time_cost_s,
         pyramid_time,
@@ -501,7 +468,7 @@ WXSTOutput WXST::run(const std::string& result_path) {
             H5ItemF32{"DPC_x", NdArrayF32{{out.h, out.w}, out.dpc_x}},
             H5ItemF32{"DPC_y", NdArrayF32{{out.h, out.w}, out.dpc_y}},
             H5ItemF32{"phase", NdArrayF32{{out.h, out.w}, out.phase}},
-            H5ItemF32{"transmission_image", NdArrayF32{{out.h, out.w}, out.transmission}},
+            H5ItemF32{"transmission_image", NdArrayF32{{out.transmission_h, out.transmission_w}, out.transmission}},
             H5ItemF32{"darkfield_nd", NdArrayF32{{out.h, out.w}, out.darkfield_nd}}
         };
         write_h5(result_path, "WXST_result", items);

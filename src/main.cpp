@@ -125,7 +125,7 @@ int run_wxst_cmd(const std::string& img_h5, const std::string& img_key, const st
         wsvt::save_img(out.dpc_x, out.h, out.w, (od / "DPC_x.tif").string());
         wsvt::save_img(out.dpc_y, out.h, out.w, (od / "DPC_y.tif").string());
         wsvt::save_img(out.phase, out.h, out.w, (od / "phase.tif").string());
-        wsvt::save_img(out.transmission, out.h, out.w, (od / "transmission_image.tif").string());
+        wsvt::save_img(out.transmission, out.transmission_h, out.transmission_w, (od / "transmission_image.tif").string());
         wsvt::save_img(out.darkfield_nd, out.h, out.w, (od / "darkfield_nd.tif").string());
     }
     std::cout << "wxst done: " << out.h << "x" << out.w << std::endl;
@@ -173,7 +173,7 @@ int run_wxst_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
         wsvt::save_img(out.dpc_x, out.h, out.w, (od / "DPC_x.tif").string());
         wsvt::save_img(out.dpc_y, out.h, out.w, (od / "DPC_y.tif").string());
         wsvt::save_img(out.phase, out.h, out.w, (od / "phase.tif").string());
-        wsvt::save_img(out.transmission, out.h, out.w, (od / "transmission_image.tif").string());
+        wsvt::save_img(out.transmission, out.transmission_h, out.transmission_w, (od / "transmission_image.tif").string());
         wsvt::save_img(out.darkfield_nd, out.h, out.w, (od / "darkfield_nd.tif").string());
     }
     std::cout << "wxst_dir done: " << out.h << "x" << out.w << std::endl;

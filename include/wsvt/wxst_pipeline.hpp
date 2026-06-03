@@ -19,6 +19,8 @@ struct WXSTOutput {
     std::vector<float> dpc_x;
     std::vector<float> phase;
     std::vector<float> transmission;
+    std::size_t transmission_h;
+    std::size_t transmission_w;
     std::vector<float> darkfield_nd;
     double time_cost_s = 0.0;
     double pyramid_time_s = 0.0;

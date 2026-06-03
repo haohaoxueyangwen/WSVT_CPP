@@ -51,7 +51,8 @@ WSVT::WSVT(
     int n_iter,
     bool use_estimate,
     bool use_wavelet,
-    int use_gpu)
+    int use_gpu,
+    bool calc_darkfield)
     : img_data_(img_stack),
       ref_data_(ref_stack),
       ch_(ch),
@@ -74,11 +75,12 @@ WSVT::WSVT(
       use_estimate_(use_estimate),
       use_wavelet_(use_wavelet),
       use_gpu_(use_gpu == 1),
+      calc_darkfield_(calc_darkfield),
       wavelet_level_(0),
       displace_estimate_h_(h_),
-    displace_estimate_w_(w_),
-    last_pyramid_time_s_(0.0),
-    last_wavelet_time_s_(0.0) {
+      displace_estimate_w_(w_),
+      last_pyramid_time_s_(0.0),
+      last_wavelet_time_s_(0.0) {
     if (img_data_.size() != ch_ * h_ * w_ || ref_data_.size() != ch_ * h_ * w_) {
         throw std::invalid_argument("WSVT init size mismatch");
     }
@@ -123,7 +125,8 @@ WSVT::WSVT(
     int n_iter,
     bool use_estimate,
     bool use_wavelet,
-    int use_gpu)
+    int use_gpu,
+    bool calc_darkfield)
     : img_data_(std::move(img_stack)),
       ref_data_(std::move(ref_stack)),
       ch_(ch),
@@ -146,11 +149,12 @@ WSVT::WSVT(
       use_estimate_(use_estimate),
       use_wavelet_(use_wavelet),
       use_gpu_(use_gpu == 1),
+      calc_darkfield_(calc_darkfield),
       wavelet_level_(0),
       displace_estimate_h_(h_),
-    displace_estimate_w_(w_),
-    last_pyramid_time_s_(0.0),
-    last_wavelet_time_s_(0.0) {
+      displace_estimate_w_(w_),
+      last_pyramid_time_s_(0.0),
+      last_wavelet_time_s_(0.0) {
     if (img_data_.size() != ch_ * h_ * w_ || ref_data_.size() != ch_ * h_ * w_) {
         throw std::invalid_argument("WSVT init size mismatch");
     }
@@ -489,26 +493,37 @@ SolverOutput WSVT::solver() {
     std::size_t out_h = h_;
     std::size_t out_w = w_;
     std::size_t out_d = ch_;
-    std::vector<float> darkfield(out_h * out_w, 0.0f);
+    std::vector<float> darkfield;
+    double darkfield_time_s = 0.0;
 
-    if (n_template_ == 0) {
-        auto std_img = std_depth_chw_per_pixel(img_data_, ch_, h_, w_).take();
-        auto std_ref = std_depth_chw_per_pixel(ref_data_, ch_, h_, w_).take();
-        #pragma omp parallel for schedule(static)
-        for (std::size_t i = 0; i < darkfield.size(); ++i) {
-            darkfield[i] = std_img[i] / (std_ref[i] + 1e-6f);
+    if (calc_darkfield_) {
+        const auto darkfield_t0 = std::chrono::steady_clock::now();
+        if (n_template_ == 0) {
+            darkfield.assign(out_h * out_w, 0.0f);
+            auto std_img = std_depth_chw_per_pixel(img_data_, ch_, h_, w_).take();
+            auto std_ref = std_depth_chw_per_pixel(ref_data_, ch_, h_, w_).take();
+            #pragma omp parallel for schedule(static)
+            for (std::size_t i = 0; i < darkfield.size(); ++i) {
+                darkfield[i] = std_img[i] / (std_ref[i] + 1e-6f);
+            }
+        } else {
+            auto img_stack = stack_TemplateWindow(img_data_, ch_, h_, w_, out_h, out_w, out_d);
+            auto ref_stack = stack_TemplateWindow(ref_data_, ch_, h_, w_, out_h, out_w, out_d);
+            darkfield.assign(out_h * out_w, 0.0f);
+            auto std_img = std_depth_hwd(
+                TensorView3D<const float, Layout::HWD>{img_stack.data(), {out_h, out_w, out_d}}).take();
+            auto std_ref = std_depth_hwd(
+                TensorView3D<const float, Layout::HWD>{ref_stack.data(), {out_h, out_w, out_d}}).take();
+            #pragma omp parallel for schedule(static)
+            for (std::size_t i = 0; i < darkfield.size(); ++i) {
+                darkfield[i] = std_img[i] / (std_ref[i] + 1e-6f);
+            }
         }
+        const auto darkfield_t1 = std::chrono::steady_clock::now();
+        darkfield_time_s = std::chrono::duration<double>(darkfield_t1 - darkfield_t0).count();
+        prColor("raw darkfield time: " + std::to_string(darkfield_time_s) + " s", "light_purple");
     } else {
-        auto img_stack = stack_TemplateWindow(img_data_, ch_, h_, w_, out_h, out_w, out_d);
-        auto ref_stack = stack_TemplateWindow(ref_data_, ch_, h_, w_, out_h, out_w, out_d);
-        auto std_img = std_depth_hwd(
-            TensorView3D<const float, Layout::HWD>{img_stack.data(), {out_h, out_w, out_d}}).take();
-        auto std_ref = std_depth_hwd(
-            TensorView3D<const float, Layout::HWD>{ref_stack.data(), {out_h, out_w, out_d}}).take();
-        #pragma omp parallel for schedule(static)
-        for (std::size_t i = 0; i < darkfield.size(); ++i) {
-            darkfield[i] = std_img[i] / (std_ref[i] + 1e-6f);
-        }
+        prColor("raw darkfield time: 0.000000 s (disabled)", "light_purple");
     }
 
     // Transmission follows the Python WSVT reference: first frame sample/ref with clipping.
@@ -670,6 +685,7 @@ SolverOutput WSVT::solver() {
     prColor("total time: " + std::to_string(time_cost_s) + " s", "light_purple");
     prColor("  pyramid:    " + std::to_string(pyramid_time) + " s", "light_purple");
     prColor("  wavelet:    " + std::to_string(wavelet_time) + " s", "light_purple");
+    prColor("  darkfield:  " + std::to_string(darkfield_time_s) + " s", "light_purple");
     prColor("  displace:   " + std::to_string(displace_time_s) + " s", "light_purple");
     prColor("  post-proc:  " + std::to_string(postprocess_time_s) + " s", "light_purple");
 
@@ -690,7 +706,8 @@ SolverOutput WSVT::solver() {
         pyramid_time,
         wavelet_time,
         displace_time_s,
-        postprocess_time_s
+        postprocess_time_s,
+        darkfield_time_s
     };
 }
 
@@ -704,7 +721,9 @@ SolverOutput WSVT::run(const std::string& result_path, bool cleansave) {
             items.push_back(H5ItemF32{"displace_x", NdArrayF32{{out.h, out.w}, out.displace_x}});
             items.push_back(H5ItemF32{"displace_y", NdArrayF32{{out.h, out.w}, out.displace_y}});
             items.push_back(H5ItemF32{"transmission_image", NdArrayF32{{out.transmission_h, out.transmission_w}, out.transmission}});
-            items.push_back(H5ItemF32{"darkfield", NdArrayF32{{out.transmission_h, out.transmission_w}, out.darkfield}});
+            if (!out.darkfield.empty()) {
+                items.push_back(H5ItemF32{"darkfield", NdArrayF32{{out.transmission_h, out.transmission_w}, out.darkfield}});
+            }
             items.push_back(H5ItemF32{"darkfield_nd", NdArrayF32{{out.h, out.w}, out.darkfield_nd}});
         } else {
             items.push_back(H5ItemF32{"displace_x", NdArrayF32{{out.h, out.w}, out.displace_x}});
@@ -713,7 +732,9 @@ SolverOutput WSVT::run(const std::string& result_path, bool cleansave) {
             items.push_back(H5ItemF32{"DPC_y", NdArrayF32{{out.h, out.w}, out.dpc_y}});
             items.push_back(H5ItemF32{"phase", NdArrayF32{{out.h, out.w}, out.phase}});
             items.push_back(H5ItemF32{"transmission_image", NdArrayF32{{out.transmission_h, out.transmission_w}, out.transmission}});
-            items.push_back(H5ItemF32{"darkfield", NdArrayF32{{out.transmission_h, out.transmission_w}, out.darkfield}});
+            if (!out.darkfield.empty()) {
+                items.push_back(H5ItemF32{"darkfield", NdArrayF32{{out.transmission_h, out.transmission_w}, out.darkfield}});
+            }
             items.push_back(H5ItemF32{"darkfield_nd", NdArrayF32{{out.h, out.w}, out.darkfield_nd}});
         }
         write_h5(result_path, "WSVT_result", items);
@@ -739,8 +760,10 @@ SolverOutput WSVT::run(const std::string& result_path, bool cleansave) {
         parameter_dict["wavelet_time"] = out.wavelet_time_s;
         parameter_dict["displace_time"] = out.displace_time_s;
         parameter_dict["postprocess_time"] = out.postprocess_time_s;
+        parameter_dict["darkfield_time"] = out.darkfield_time_s;
         parameter_dict["use_wavelet"] = use_wavelet_;
         parameter_dict["use_GPU"] = use_gpu_;
+        parameter_dict["calc_darkfield"] = calc_darkfield_;
         parameter_dict["wavelet_level_cut"] = static_cast<double>(wavelet_level_cut_);
         JsonArray wavelet_add;
         for (const int v : wavelet_add_list_) {
@@ -760,6 +783,8 @@ SolverOutput WSVT::run(const std::string& result_path, bool cleansave) {
         events["wavelet_time_s"] = out.wavelet_time_s;
         events["displace_time_s"] = out.displace_time_s;
         events["postprocess_time_s"] = out.postprocess_time_s;
+        events["darkfield_time_s"] = out.darkfield_time_s;
+        events["calc_darkfield"] = calc_darkfield_;
         JsonArray stage_records;
         JsonObject pyr_stage;
         pyr_stage["stage"] = "pyramid";
@@ -769,6 +794,10 @@ SolverOutput WSVT::run(const std::string& result_path, bool cleansave) {
         wavelet_stage["stage"] = "wavelet_transform";
         wavelet_stage["elapsed_s"] = out.wavelet_time_s;
         stage_records.emplace_back(wavelet_stage);
+        JsonObject darkfield_stage;
+        darkfield_stage["stage"] = "raw_darkfield";
+        darkfield_stage["elapsed_s"] = out.darkfield_time_s;
+        stage_records.emplace_back(darkfield_stage);
         JsonObject displace_stage;
         displace_stage["stage"] = "displace";
         displace_stage["elapsed_s"] = out.displace_time_s;

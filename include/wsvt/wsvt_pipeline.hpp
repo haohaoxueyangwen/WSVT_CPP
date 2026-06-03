@@ -28,6 +28,7 @@ struct SolverOutput {
     double wavelet_time_s = 0.0;
     double displace_time_s = 0.0;
     double postprocess_time_s = 0.0;
+    double darkfield_time_s = 0.0;
     double load_time_s = 0.0;
     double save_time_s = 0.0;
 };
@@ -55,7 +56,8 @@ public:
         int n_iter = 1,
         bool use_estimate = false,
         bool use_wavelet = true,
-        int use_gpu = 0);
+        int use_gpu = 0,
+        bool calc_darkfield = true);
 
     /// Move-semantics overload: takes ownership of img/ref data without copying
     WSVT(
@@ -79,7 +81,8 @@ public:
         int n_iter = 1,
         bool use_estimate = false,
         bool use_wavelet = true,
-        int use_gpu = 0);
+        int use_gpu = 0,
+        bool calc_darkfield = true);
 
     AlignedVector<float> stack_TemplateWindow(const std::vector<float>& img, std::size_t in_ch, std::size_t in_h, std::size_t in_w, std::size_t& out_h, std::size_t& out_w, std::size_t& out_d) const;
     PyramidResult pyramid_data();
@@ -124,6 +127,7 @@ private:
     bool use_estimate_;
     bool use_wavelet_;
     bool use_gpu_;
+    bool calc_darkfield_;
     int wavelet_level_;
     std::vector<int> wavelet_add_list_;
     std::vector<float> displace_estimate_y_;

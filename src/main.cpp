@@ -208,6 +208,7 @@ int run_wsvt_cmd(const std::string& img_h5, const std::string& img_key, const st
     const bool use_estimate = opt_bool(opts, "use_estimate", false);
     const bool use_wavelet = opt_bool(opts, "use_wavelet", true);
     const int use_gpu = opt_bool(opts, "use_gpu", false) ? 1 : 0;
+    const bool calc_darkfield = opt_bool(opts, "calc_darkfield", true);
     const bool cleansave = opt_bool(opts, "cleansave", false);
     const bool save_img = opt_bool(opts, "save_img", false);
     std::filesystem::create_directories(out_dir);
@@ -215,7 +216,7 @@ int run_wsvt_cmd(const std::string& img_h5, const std::string& img_key, const st
         img.data, ref.data, ch, h, w,
         crop, cal_half_window, n_template, n_s_extend, n_cores, n_group,
         energy, p_x, mag_factor, z, wavelet_level_cut, pyramid_level, n_iter,
-        use_estimate, use_wavelet, use_gpu);
+        use_estimate, use_wavelet, use_gpu, calc_darkfield);
     const auto out = wsvt_solver.run(out_dir, cleansave);
     if (save_img) {
         const std::filesystem::path od(out_dir);
@@ -226,8 +227,12 @@ int run_wsvt_cmd(const std::string& img_h5, const std::string& img_key, const st
         wsvt::save_img(out.phase, out.h, out.w, (od / "phase.tif").string());
         wsvt::save_img(out.darkfield_nd, out.h, out.w, (od / "darkfield_nd.tif").string());
         wsvt::save_img(out.transmission, out.transmission_h, out.transmission_w, (od / "transmission_image.tif").string());
-        wsvt::save_img(out.darkfield, out.transmission_h, out.transmission_w, (od / "darkfield.tif").string());
+        if (!out.darkfield.empty()) {
+            wsvt::save_img(out.darkfield, out.transmission_h, out.transmission_w, (od / "darkfield.tif").string());
+        }
     }
+    std::cout << "raw darkfield: " << out.darkfield_time_s << " s"
+              << (calc_darkfield ? "" : " (disabled)") << std::endl;
     std::cout << "wsvt done: " << out.h << "x" << out.w << std::endl;
     return 0;
 }
@@ -320,6 +325,7 @@ int run_wsvt_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
     const bool use_estimate = opt_bool(opts, "use_estimate", false);
     const bool use_wavelet = opt_bool(opts, "use_wavelet", true);
     const int use_gpu = opt_bool(opts, "use_gpu", false) ? 1 : 0;
+    const bool calc_darkfield = opt_bool(opts, "calc_darkfield", true);
     const bool cleansave = opt_bool(opts, "cleansave", false);
     const bool save_img = opt_bool(opts, "save_img", false);
     std::filesystem::create_directories(out_dir);
@@ -327,7 +333,7 @@ int run_wsvt_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
         img_stack, ref_stack, ch, work_h, work_w,
         0, cal_half_window, n_template, n_s_extend, n_cores, n_group,
         energy, p_x, mag_factor, z, wavelet_level_cut, pyramid_level, n_iter,
-        use_estimate, use_wavelet, use_gpu);
+        use_estimate, use_wavelet, use_gpu, calc_darkfield);
     const auto out = wsvt_solver.run(out_dir, cleansave);
     const auto t_save_t0 = std::chrono::steady_clock::now();
     if (save_img) {
@@ -339,7 +345,9 @@ int run_wsvt_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
         wsvt::save_img(out.phase, out.h, out.w, (od / "phase.tif").string());
         wsvt::save_img(out.darkfield_nd, out.h, out.w, (od / "darkfield_nd.tif").string());
         wsvt::save_img(out.transmission, out.transmission_h, out.transmission_w, (od / "transmission_image.tif").string());
-        wsvt::save_img(out.darkfield, out.transmission_h, out.transmission_w, (od / "darkfield.tif").string());
+        if (!out.darkfield.empty()) {
+            wsvt::save_img(out.darkfield, out.transmission_h, out.transmission_w, (od / "darkfield.tif").string());
+        }
     }
     const auto t_save_t1 = std::chrono::steady_clock::now();
     const double save_time_s = std::chrono::duration<double>(t_save_t1 - t_save_t0).count();
@@ -349,6 +357,8 @@ int run_wsvt_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
     std::cout << "  align:      " << align_time_s << " s" << std::endl;
     std::cout << "  pyramid:    " << out.pyramid_time_s << " s" << std::endl;
     std::cout << "  wavelet:    " << out.wavelet_time_s << " s" << std::endl;
+    std::cout << "  raw darkfield: " << out.darkfield_time_s << " s"
+              << (calc_darkfield ? "" : " (disabled)") << std::endl;
     std::cout << "  displace:   " << out.displace_time_s << " s" << std::endl;
     std::cout << "  post-proc:  " << out.postprocess_time_s << " s" << std::endl;
     std::cout << "  save:       " << save_time_s << " s" << std::endl;

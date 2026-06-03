@@ -486,11 +486,30 @@ SolverOutput WSVT::solver() {
     auto p = wavelet_data();
     const double pyramid_time = last_pyramid_time_s_;
     const double wavelet_time = last_wavelet_time_s_;
-    std::size_t out_h = 0;
-    std::size_t out_w = 0;
-    std::size_t out_d = 0;
-    auto img_stack = stack_TemplateWindow(img_data_, ch_, h_, w_, out_h, out_w, out_d);
-    auto ref_stack = stack_TemplateWindow(ref_data_, ch_, h_, w_, out_h, out_w, out_d);
+    std::size_t out_h = h_;
+    std::size_t out_w = w_;
+    std::size_t out_d = ch_;
+    std::vector<float> darkfield(out_h * out_w, 0.0f);
+
+    if (n_template_ == 0) {
+        auto std_img = std_depth_chw_per_pixel(img_data_, ch_, h_, w_).take();
+        auto std_ref = std_depth_chw_per_pixel(ref_data_, ch_, h_, w_).take();
+        #pragma omp parallel for schedule(static)
+        for (std::size_t i = 0; i < darkfield.size(); ++i) {
+            darkfield[i] = std_img[i] / (std_ref[i] + 1e-6f);
+        }
+    } else {
+        auto img_stack = stack_TemplateWindow(img_data_, ch_, h_, w_, out_h, out_w, out_d);
+        auto ref_stack = stack_TemplateWindow(ref_data_, ch_, h_, w_, out_h, out_w, out_d);
+        auto std_img = std_depth_hwd(
+            TensorView3D<const float, Layout::HWD>{img_stack.data(), {out_h, out_w, out_d}}).take();
+        auto std_ref = std_depth_hwd(
+            TensorView3D<const float, Layout::HWD>{ref_stack.data(), {out_h, out_w, out_d}}).take();
+        #pragma omp parallel for schedule(static)
+        for (std::size_t i = 0; i < darkfield.size(); ++i) {
+            darkfield[i] = std_img[i] / (std_ref[i] + 1e-6f);
+        }
+    }
 
     // Transmission follows the Python WSVT reference: first frame sample/ref with clipping.
     std::vector<float> transmission(out_h * out_w, 0.0f);
@@ -499,17 +518,6 @@ SolverOutput WSVT::solver() {
         const float den = std::max(ref_data_[idx], 1.0e-10f);
         const float ratio = img_data_[idx] / den;
         transmission[idx] = std::clamp(ratio, 0.01f, 10.0f);
-    }
-
-    // Darkfield: OpenMP parallel
-    auto std_img = std_depth_hwd(
-        TensorView3D<const float, Layout::HWD>{img_stack.data(), {out_h, out_w, out_d}}).take();
-    auto std_ref = std_depth_hwd(
-        TensorView3D<const float, Layout::HWD>{ref_stack.data(), {out_h, out_w, out_d}}).take();
-    std::vector<float> darkfield(out_h * out_w, 0.0f);
-    #pragma omp parallel for schedule(static)
-    for (std::size_t i = 0; i < darkfield.size(); ++i) {
-        darkfield[i] = std_img[i] / (std_ref[i] + 1e-6f);
     }
 
     const int max_pyramid_searching_window = static_cast<int>(std::ceil(static_cast<double>(cal_half_window_) / std::pow(2.0, static_cast<double>(pyramid_level_))));

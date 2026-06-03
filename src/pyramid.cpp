@@ -186,11 +186,11 @@ AlignedVector<float> stack_template_window_hwd(
     }
 
     #pragma omp parallel for collapse(3) schedule(static)
-    for (int dx = -n_template; dx <= n_template; ++dx) {
-        for (int dy = -n_template; dy <= n_template; ++dy) {
+    for (int dy = -n_template; dy <= n_template; ++dy) {
+        for (int dx = -n_template; dx <= n_template; ++dx) {
             for (std::size_t c = 0; c < ch; ++c) {
                 const std::size_t d = static_cast<std::size_t>(
-                    (dx + n_template) * axis + (dy + n_template)) * ch + c;
+                    (dy + n_template) * axis + (dx + n_template)) * ch + c;
 
                 std::vector<std::size_t> wy(h), wx(w);
                 for (std::size_t i = 0; i < h; ++i) {

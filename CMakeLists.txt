@@ -71,8 +71,9 @@ find_package(OpenMP REQUIRED)
 target_link_libraries(wsvt_core PUBLIC OpenMP::OpenMP_CXX)
 
 # ── Conda / non-standard library paths ───────────────────────
+set(WSVT_RUNTIME_LIB_DIRS "")
 if(DEFINED ENV{CONDA_PREFIX})
-    target_link_directories(wsvt_core PUBLIC $ENV{CONDA_PREFIX}/lib)
+    list(APPEND WSVT_RUNTIME_LIB_DIRS "$ENV{CONDA_PREFIX}/lib")
 endif()
 
 # ── HDF5 (optional) ──────────────────────────────────────────
@@ -95,10 +96,28 @@ if(WSVT_WITH_OPENCV)
         target_compile_definitions(wsvt_core PRIVATE WSVT_HAS_OPENCV)
         target_include_directories(wsvt_core PRIVATE ${OpenCV_INCLUDE_DIRS})
         target_link_libraries(wsvt_core PUBLIC ${OpenCV_LIBS})
+        if(OpenCV_DIR)
+            get_filename_component(WSVT_OPENCV_CMAKE_DIR "${OpenCV_DIR}" DIRECTORY)
+            get_filename_component(WSVT_OPENCV_LIB_DIR "${WSVT_OPENCV_CMAKE_DIR}" DIRECTORY)
+            list(PREPEND WSVT_RUNTIME_LIB_DIRS "${WSVT_OPENCV_LIB_DIR}")
+            find_library(WSVT_TIFF_LIBRARY NAMES tiff PATHS "${WSVT_OPENCV_LIB_DIR}" NO_DEFAULT_PATH)
+            find_library(WSVT_DEFLATE_LIBRARY NAMES deflate PATHS "${WSVT_OPENCV_LIB_DIR}" NO_DEFAULT_PATH)
+            if(WSVT_TIFF_LIBRARY)
+                target_link_libraries(wsvt_core PUBLIC "${WSVT_TIFF_LIBRARY}")
+            endif()
+            if(WSVT_DEFLATE_LIBRARY)
+                target_link_libraries(wsvt_core PUBLIC "${WSVT_DEFLATE_LIBRARY}")
+            endif()
+        endif()
         message(STATUS "WSVT: OpenCV enabled")
     else()
         message(WARNING "WSVT: OpenCV not found, use_estimate=true will throw at runtime")
     endif()
+endif()
+
+if(WSVT_RUNTIME_LIB_DIRS)
+    list(REMOVE_DUPLICATES WSVT_RUNTIME_LIB_DIRS)
+    target_link_directories(wsvt_core BEFORE PUBLIC ${WSVT_RUNTIME_LIB_DIRS})
 endif()
 
 # ── FFTW3 (optional) ─────────────────────────────────────────
@@ -137,11 +156,6 @@ endif()
 # ── CLI executable ────────────────────────────────────────────
 add_executable(wsvt_cli src/main.cpp)
 target_link_libraries(wsvt_cli PRIVATE wsvt_core)
-# Resolve libtiff/libdeflate version mismatch between conda env and system
-if(WSVT_WITH_OPENCV AND OpenCV_FOUND AND DEFINED ENV{CONDA_PREFIX})
-    target_link_directories(wsvt_cli BEFORE PRIVATE "$ENV{CONDA_PREFIX}/lib")
-    target_link_libraries(wsvt_cli PRIVATE tiff deflate)
-endif()
 
 # ── Install / Export ──────────────────────────────────────────
 include(GNUInstallDirs)

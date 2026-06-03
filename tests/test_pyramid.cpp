@@ -3,6 +3,7 @@
 
 #include "wsvt/pyramid.hpp"
 
+#include <cmath>
 #include <cstddef>
 #include <numeric>
 #include <vector>
@@ -13,6 +14,15 @@ static std::vector<float> make_ramp(std::size_t ch, std::size_t h, std::size_t w
     std::vector<float> data(ch * h * w);
     std::iota(data.begin(), data.end(), 1.0f);
     return data;
+}
+
+static std::size_t wrap_index(long long v, std::size_t n) {
+    const long long m = static_cast<long long>(n);
+    long long r = v % m;
+    if (r < 0) {
+        r += m;
+    }
+    return static_cast<std::size_t>(r);
 }
 
 TEST_CASE("pyramid_data basic shapes", "[pyramid]") {
@@ -97,5 +107,62 @@ TEST_CASE("pyramid_data db3 aa matches PyWavelets zero-mode golden values", "[py
     for (std::size_t i = 0; i < expected.size(); ++i) {
         REQUIRE_THAT(static_cast<double>(level.data[i]),
                      Catch::Matchers::WithinAbs(static_cast<double>(expected[i]), 2e-5));
+    }
+}
+
+TEST_CASE("pyramid_data template stack uses Python row-major shift order", "[pyramid]") {
+    constexpr std::size_t ch = 1;
+    constexpr std::size_t h = 3;
+    constexpr std::size_t w = 4;
+    constexpr int n_template = 1;
+    constexpr int axis = 2 * n_template + 1;
+    constexpr std::size_t depth = ch * axis * axis;
+
+    auto ref = make_ramp(ch, h, w);
+    auto img = make_ramp(ch, h, w);
+
+    const auto result = pyramid_data(
+        ref, img, ch, h, w, 0, n_template,
+        PyramidDownsampleMode::Mean2x2,
+        PyramidNormalizationMode::PerLevelFeature);
+
+    REQUIRE(result.ref_levels.size() == 1);
+    const auto& level = result.ref_levels[0];
+    REQUIRE(level.d0 == depth);
+    REQUIRE(level.d1 == h);
+    REQUIRE(level.d2 == w);
+
+    for (std::size_t y = 0; y < h; ++y) {
+        for (std::size_t x = 0; x < w; ++x) {
+            std::vector<double> expected_raw(depth, 0.0);
+            for (int dy = -n_template; dy <= n_template; ++dy) {
+                for (int dx = -n_template; dx <= n_template; ++dx) {
+                    const std::size_t d = static_cast<std::size_t>(
+                        (dy + n_template) * axis + (dx + n_template));
+                    const auto src_y = wrap_index(static_cast<long long>(y) - dy, h);
+                    const auto src_x = wrap_index(static_cast<long long>(x) - dx, w);
+                    expected_raw[d] = static_cast<double>(ref[src_y * w + src_x]);
+                }
+            }
+
+            double mean = 0.0;
+            for (const double v : expected_raw) {
+                mean += v;
+            }
+            mean /= static_cast<double>(depth);
+
+            double var = 0.0;
+            for (const double v : expected_raw) {
+                const double diff = v - mean;
+                var += diff * diff;
+            }
+            const double inv_std = 1.0 / (std::sqrt(var / static_cast<double>(depth)) + 1.0e-6);
+
+            for (std::size_t d = 0; d < depth; ++d) {
+                const double expected = (expected_raw[d] - mean) * inv_std;
+                const double actual = level.data[(y * w + x) * depth + d];
+                REQUIRE_THAT(actual, Catch::Matchers::WithinAbs(expected, 1.0e-5));
+            }
+        }
     }
 }

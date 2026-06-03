@@ -52,20 +52,20 @@ AlignedVector<float> stack_template_window(
     AlignedVector<float> out(h * w * out_depth, 0.0f);
 
     // Match Python loop order:
-    //   for x in axis_Nw:                    # outer: w-axis shift
-    //       for y in axis_Nw:                # inner: h-axis shift
-    //           np.roll(np.roll(img, x, axis=-1), y, axis=-2)
+    //   for dy in axis_Nw:                   # outer: h-axis / row shift
+    //       for dx in axis_Nw:               # inner: w-axis / column shift
+    //           np.roll(np.roll(img, dy, axis=-2), dx, axis=-1)
     //
     // np.roll(img, x, axis=-1) reads from (col - x) for output col,
     // so we use wrap_index(col - dx, w) and wrap_index(row - dy, h).
 
     // OpenMP parallel over (dx, dy, c) — each combination is independent
     #pragma omp parallel for collapse(3) schedule(static)
-    for (int dx = -n_template; dx <= n_template; ++dx) {
-        for (int dy = -n_template; dy <= n_template; ++dy) {
+    for (int dy = -n_template; dy <= n_template; ++dy) {
+        for (int dx = -n_template; dx <= n_template; ++dx) {
             for (std::size_t c = 0; c < ch; ++c) {
                 const std::size_t d = static_cast<std::size_t>(
-                    (dx + n_template) * axis + (dy + n_template)) * ch + c;
+                    (dy + n_template) * axis + (dx + n_template)) * ch + c;
 
                 // Precompute wrap indices to avoid modulo in inner loop
                 std::vector<std::size_t> wy(h), wx(w);

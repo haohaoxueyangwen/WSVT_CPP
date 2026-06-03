@@ -7,6 +7,7 @@
 #include <cstddef>
 #include <cstring>
 #include <span>
+#include <stdexcept>
 #include <vector>
 
 #ifdef _OPENMP
@@ -132,6 +133,66 @@ inline double sample_bicubic(ImageView2D<const float> img, double y, double x) {
 }
 
 // ---- HWD tensor operations ----
+
+/// Depth-wise population standard deviation for a CHW tensor; produces a 2D image.
+inline Image2D<float> std_depth_chw_per_pixel(
+    std::span<const float> in,
+    std::size_t ch,
+    std::size_t h,
+    std::size_t w) {
+    if (in.size() != ch * h * w) {
+        throw std::invalid_argument("std_depth_chw_per_pixel size mismatch");
+    }
+    Image2D<float> out(Shape2D{h, w}, 0.0f);
+    const float* __restrict__ src = in.data();
+    float* __restrict__ dst = out.data();
+    const std::size_t plane = h * w;
+    const float inv_depth = 1.0f / static_cast<float>(ch);
+    std::vector<float> mean(plane, 0.0f);
+
+#ifdef _OPENMP
+    #pragma omp parallel
+#endif
+    {
+        std::size_t begin = 0;
+        std::size_t end = plane;
+#ifdef _OPENMP
+        const auto tid = static_cast<std::size_t>(omp_get_thread_num());
+        const auto nthreads = static_cast<std::size_t>(omp_get_num_threads());
+        begin = (plane * tid) / nthreads;
+        end = (plane * (tid + 1)) / nthreads;
+#endif
+
+        for (std::size_t c = 0; c < ch; ++c) {
+            const float* __restrict__ src_plane = src + c * plane;
+            #pragma omp simd
+            for (std::size_t idx = begin; idx < end; ++idx) {
+                mean[idx] += src_plane[idx];
+            }
+        }
+
+        #pragma omp simd
+        for (std::size_t idx = begin; idx < end; ++idx) {
+            mean[idx] *= inv_depth;
+            dst[idx] = 0.0f;
+        }
+
+        for (std::size_t c = 0; c < ch; ++c) {
+            const float* __restrict__ src_plane = src + c * plane;
+            #pragma omp simd
+            for (std::size_t idx = begin; idx < end; ++idx) {
+                const float d = src_plane[idx] - mean[idx];
+                dst[idx] += d * d;
+            }
+        }
+
+        #pragma omp simd
+        for (std::size_t idx = begin; idx < end; ++idx) {
+            dst[idx] = std::sqrt(dst[idx] * inv_depth);
+        }
+    }
+    return out;
+}
 
 /// Zero-pad an HWD tensor by (pad_y, pad_x); depth is preserved.
 inline Tensor3D<float, Layout::HWD> pad_hwd_zero(

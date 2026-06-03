@@ -9,7 +9,9 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Catch2)
 
 add_executable(wsvt_tests
+    test_common.cpp
     test_pyramid.cpp
+    test_template_window.cpp
     test_wavelet.cpp
     test_wavelet_hwd.cpp
     test_phase_recovery.cpp

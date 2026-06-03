@@ -292,15 +292,19 @@ int run_wsvt_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
         work_w = crop_sz;
     }
 
-    // Align ref_stack to img_stack (matching Python behavior)
-    const auto t_align_t0 = std::chrono::steady_clock::now();
-    const auto align_result = wsvt::stack_image_align(
-        ref_stack,
-        img_stack.data(), work_w,
-        ch, work_h, work_w);
-    const auto t_align_t1 = std::chrono::steady_clock::now();
-    const double align_time_s = std::chrono::duration<double>(t_align_t1 - t_align_t0).count();
-    std::cout << "align time: " << align_time_s << " s" << std::endl;
+    const bool align = opt_bool(opts, "align", true);
+    double align_time_s = 0.0;
+    if (align) {
+        const auto t_align_t0 = std::chrono::steady_clock::now();
+        const auto align_result = wsvt::stack_image_align(
+            ref_stack,
+            img_stack.data(), work_w,
+            ch, work_h, work_w);
+        (void)align_result;
+        const auto t_align_t1 = std::chrono::steady_clock::now();
+        align_time_s = std::chrono::duration<double>(t_align_t1 - t_align_t0).count();
+    }
+    std::cout << "align time: " << align_time_s << " s" << (align ? "" : " (disabled)") << std::endl;
     const int cal_half_window = opt_int(opts, "cal_half_window", 20);
     const int n_template = opt_int(opts, "n_template", 0);
     const int n_s_extend = opt_int(opts, "n_s_extend", 4);
@@ -342,13 +346,14 @@ int run_wsvt_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
     std::cout << "save time: " << save_time_s << " s" << std::endl;
     std::cout << "=== Timing Summary ===" << std::endl;
     std::cout << "  load:       " << load_time_s << " s" << std::endl;
+    std::cout << "  align:      " << align_time_s << " s" << std::endl;
     std::cout << "  pyramid:    " << out.pyramid_time_s << " s" << std::endl;
     std::cout << "  wavelet:    " << out.wavelet_time_s << " s" << std::endl;
     std::cout << "  displace:   " << out.displace_time_s << " s" << std::endl;
     std::cout << "  post-proc:  " << out.postprocess_time_s << " s" << std::endl;
     std::cout << "  save:       " << save_time_s << " s" << std::endl;
     std::cout << "  solver:     " << out.time_cost_s << " s" << std::endl;
-    std::cout << "  wall total: " << (load_time_s + out.time_cost_s + save_time_s) << " s" << std::endl;
+    std::cout << "  wall total: " << (load_time_s + align_time_s + out.time_cost_s + save_time_s) << " s" << std::endl;
     std::cout << "wsvt_dir done: " << out.h << "x" << out.w << std::endl;
     return 0;
 }

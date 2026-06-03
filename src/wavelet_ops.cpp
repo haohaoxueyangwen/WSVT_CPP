@@ -55,9 +55,13 @@ std::vector<std::string> build_level_name(int w_level, int return_level) {
     std::vector<std::string> level_name;
     level_name.reserve(static_cast<std::size_t>(w_level + 1));
     for (int kk = 0; kk < w_level; ++kk) {
-        level_name.push_back("D" + std::to_string(kk + 1));
+        std::string name = "D";
+        name += std::to_string(kk + 1);
+        level_name.push_back(std::move(name));
     }
-    level_name.push_back("A" + std::to_string(w_level));
+    std::string approx_name = "A";
+    approx_name += std::to_string(w_level);
+    level_name.push_back(std::move(approx_name));
     if (return_level < 0 || return_level > static_cast<int>(level_name.size())) {
         throw std::invalid_argument("return_level out of range");
     }
@@ -87,12 +91,17 @@ std::vector<std::vector<float>> wavedec_axis0(std::span<const float> img, std::s
             const std::size_t xx = pixel % w;
             for (std::size_t oc = 0; oc < out_ch; ++oc) {
                 float a = 0.0f, d = 0.0f;
+                const auto offset = static_cast<long long>(filt_len - 2);
                 for (std::size_t k = 0; k < filt_len; ++k) {
-                    std::size_t ic = oc * 2 + k;
-                    if (ic >= cur_ch) ic = cur_ch - 1;
+                    const auto ic_signed = static_cast<long long>(oc * 2 + k) - offset;
+                    if (ic_signed < 0 || ic_signed >= static_cast<long long>(cur_ch)) {
+                        continue;
+                    }
+                    const auto ic = static_cast<std::size_t>(ic_signed);
                     const float v = current[idx_chw(ic, yy, xx, h, w)];
-                    a += dec_lo[k] * v;
-                    d += dec_hi[k] * v;
+                    const std::size_t fk = filt_len - 1 - k;
+                    a += dec_lo[fk] * v;
+                    d += dec_hi[fk] * v;
                 }
                 approx[idx_chw(oc, yy, xx, h, w)] = a;
                 detail[idx_chw(oc, yy, xx, h, w)] = d;
@@ -122,10 +131,8 @@ WaveletResult wavelet_transform(std::span<const float> img, std::size_t ch, std:
     auto coeffs = wavedec_axis0(img, ch, h, w, dec_lo, dec_hi, w_level);
 
     const int total_levels = static_cast<int>(coeffs.size());
-    const int start_idx = total_levels - return_level;
-    if (start_idx < 0) {
-        throw std::invalid_argument("return_level exceeds available levels");
-    }
+    const int effective_return_level = std::clamp(return_level, 1, total_levels);
+    const int start_idx = total_levels - effective_return_level;
 
     std::size_t out_depth = 0;
     for (int i = start_idx; i < total_levels; ++i) {
@@ -157,7 +164,7 @@ WaveletResult wavelet_transform(std::span<const float> img, std::size_t ch, std:
     result.out_h = h;
     result.out_w = w;
     result.out_depth = out_depth;
-    result.level_name = build_level_name(w_level, return_level);
+    result.level_name = build_level_name(w_level, effective_return_level);
     return result;
 }
 
@@ -198,42 +205,25 @@ std::vector<std::vector<float>> wavedec_depth_hwd(
         std::vector<float> approx(plane * out_depth);
         std::vector<float> detail(plane * out_depth);
 
-        // Largest oc where the entire filter window (oc*2 .. oc*2+filt_len-1) stays in bounds.
-        // i.e. oc*2 + filt_len - 1 < cur_depth -> oc < (cur_depth - filt_len + 1) / 2.
-        // Use a safe count of oc values without boundary clamp.
-        const std::size_t safe_out = (cur_depth >= filt_len)
-            ? ((cur_depth - filt_len) / 2 + 1)
-            : 0;
-
 #pragma omp parallel for schedule(static)
         for (std::size_t pixel = 0; pixel < plane; ++pixel) {
             const float* pixel_in = current_ptr + pixel * cur_depth;
             float* pixel_a = approx.data() + pixel * out_depth;
             float* pixel_d = detail.data() + pixel * out_depth;
 
-            // Bulk: no boundary clamp -> vectorizable.
-            for (std::size_t oc = 0; oc < safe_out; ++oc) {
-                float a = 0.0f, d = 0.0f;
-                const float* base = pixel_in + oc * 2;
-                #pragma omp simd reduction(+:a,d)
-                for (std::size_t k = 0; k < filt_len; ++k) {
-                    const float v = base[k];
-                    a += dec_lo[k] * v;
-                    d += dec_hi[k] * v;
-                }
-                pixel_a[oc] = a;
-                pixel_d[oc] = d;
-            }
-
-            // Tail: boundary clamp needed (replicate-last-sample padding).
-            for (std::size_t oc = safe_out; oc < out_depth; ++oc) {
+            const auto offset = static_cast<long long>(filt_len - 2);
+            for (std::size_t oc = 0; oc < out_depth; ++oc) {
                 float a = 0.0f, d = 0.0f;
                 for (std::size_t k = 0; k < filt_len; ++k) {
-                    std::size_t ic = oc * 2 + k;
-                    if (ic >= cur_depth) ic = cur_depth - 1;
+                    const auto ic_signed = static_cast<long long>(oc * 2 + k) - offset;
+                    if (ic_signed < 0 || ic_signed >= static_cast<long long>(cur_depth)) {
+                        continue;
+                    }
+                    const auto ic = static_cast<std::size_t>(ic_signed);
                     const float v = pixel_in[ic];
-                    a += dec_lo[k] * v;
-                    d += dec_hi[k] * v;
+                    const std::size_t fk = filt_len - 1 - k;
+                    a += dec_lo[fk] * v;
+                    d += dec_hi[fk] * v;
                 }
                 pixel_a[oc] = a;
                 pixel_d[oc] = d;
@@ -270,10 +260,8 @@ WaveletResult wavelet_transform_hwd(
     auto coeffs = wavedec_depth_hwd(img_hwd, h, w, depth_in, dec_lo, dec_hi, w_level);
 
     const int total_levels = static_cast<int>(coeffs.size());
-    const int start_idx = total_levels - return_level;
-    if (start_idx < 0) {
-        throw std::invalid_argument("return_level exceeds available levels");
-    }
+    const int effective_return_level = std::clamp(return_level, 1, total_levels);
+    const int start_idx = total_levels - effective_return_level;
 
     const std::size_t plane = h * w;
     std::size_t out_depth = 0;
@@ -303,7 +291,7 @@ WaveletResult wavelet_transform_hwd(
     result.out_h = h;
     result.out_w = w;
     result.out_depth = out_depth;
-    result.level_name = build_level_name(w_level, return_level);
+    result.level_name = build_level_name(w_level, effective_return_level);
     return result;
 }
 

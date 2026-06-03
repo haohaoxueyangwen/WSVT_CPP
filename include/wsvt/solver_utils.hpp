@@ -13,6 +13,13 @@ namespace wsvt {
 
 [[nodiscard]] std::string now_iso8601_utc();
 
+[[nodiscard]] int configure_openmp_threads(
+    int requested_cores,
+    const char* label,
+    int max_active_levels);
+
+[[nodiscard]] std::vector<int> wavelet_add_list_for_depth(std::size_t depth);
+
 [[nodiscard]] double stddev_2d(const std::vector<float>& arr);
 
 [[nodiscard]] double pv_2d(const std::vector<float>& arr);

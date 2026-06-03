@@ -22,7 +22,6 @@
 #include <sstream>
 #include <span>
 #include <stdexcept>
-#include <thread>
 #include <utility>
 
 #ifdef _OPENMP
@@ -160,13 +159,7 @@ PyramidResult WXST::wavelet_data() {
         wavelet_level_ = dwt_max_level_db2(p.ref_levels[0].d0);
         prColor("max wavelet level: " + std::to_string(wavelet_level_), "green");
         int coefs_level = wavelet_level_ + 1 - wavelet_level_cut_;
-        if (p.ref_levels[0].d0 > 150) {
-            wavelet_add_list_ = {0, 0, 0, 0, 0, 0};
-        } else if (p.ref_levels[0].d0 > 50) {
-            wavelet_add_list_ = {0, 0, 1, 2, 2, 2};
-        } else {
-            wavelet_add_list_ = {0, 2, 2, 2, 2, 2};
-        }
+        wavelet_add_list_ = wavelet_add_list_for_depth(p.ref_levels[0].d0);
         const auto wavelet_t0 = std::chrono::steady_clock::now();
         for (std::size_t lv = 0; lv < p.ref_levels.size(); ++lv) {
             int wavelevel_add = (lv >= wavelet_add_list_.size() ? 2 : wavelet_add_list_[lv]);
@@ -221,6 +214,12 @@ std::array<std::vector<float>, 3> WXST::displace_wavelet(
     const std::vector<float>& displace_x,
     int cal_half_window,
     int n_pad) const {
+    if (img_wa_stack.size() != img_h * img_w * depth || ref_wa_stack.size() != ref_h * ref_w * depth) {
+        throw std::invalid_argument("displace_wavelet stack shape mismatch");
+    }
+    if (displace_y.size() != img_h * img_w || displace_x.size() != img_h * img_w) {
+        throw std::invalid_argument("displace_wavelet displacement shape mismatch");
+    }
     const std::size_t window_size = static_cast<std::size_t>(2 * cal_half_window + 1);
     const std::size_t ws2 = window_size * window_size;
 
@@ -349,17 +348,10 @@ std::array<std::vector<float>, 3> WXST::displace_wavelet(
 
 WXSTOutput WXST::solver() {
     const auto processing_t0 = std::chrono::steady_clock::now();
+    const int solver_threads = configure_openmp_threads(n_cores_, "pyramid/wavelet/displace", 2);
     auto p = wavelet_data();
     const double pyramid_time = last_pyramid_time_s_;
     const double wavelet_time = last_wavelet_time_s_;
-    const unsigned int hw_cores_u = std::thread::hardware_concurrency();
-    int cores = static_cast<int>(hw_cores_u == 0 ? 1 : hw_cores_u);
-    prColor("Computer available cores: " + std::to_string(cores), "green");
-    if (cores > n_cores_) cores = n_cores_;
-    prColor("Use " + std::to_string(cores) + " cores (OpenMP threads)", "light_purple");
-#ifdef _OPENMP
-    omp_set_num_threads(cores);
-#endif
     const int max_pyramid_searching_window = static_cast<int>(std::ceil(static_cast<double>(cal_half_window_) / std::pow(2.0, static_cast<double>(pyramid_level_))));
     std::vector<int> searching_window_pyramid_list(static_cast<std::size_t>(pyramid_level_), n_s_extend_);
     searching_window_pyramid_list.push_back(max_pyramid_searching_window);
@@ -430,6 +422,7 @@ WXSTOutput WXST::solver() {
     const auto displace_t1 = std::chrono::steady_clock::now();
     const double displace_time_s = std::chrono::duration<double>(displace_t1 - displace_t0).count();
     prColor("displace time: " + std::to_string(displace_time_s) + " s", "light_purple");
+    (void)configure_openmp_threads(1, "post-process/FFTW phase recovery", 1);
     const auto post_t0 = std::chrono::steady_clock::now();
     auto warped_ref = warp_replicate_bilinear(ref_data_, displace_x, displace_y, h_, w_);
     std::vector<float> transmission(h_ * w_, 0.0f);
@@ -468,6 +461,9 @@ WXSTOutput WXST::solver() {
     const auto post_t1 = std::chrono::steady_clock::now();
     const double postprocess_time_s = std::chrono::duration<double>(post_t1 - post_t0).count();
     prColor("post-process time: " + std::to_string(postprocess_time_s) + " s", "light_purple");
+#ifdef _OPENMP
+    omp_set_num_threads(solver_threads);
+#endif
     const auto processing_t1 = std::chrono::steady_clock::now();
     const double time_cost_s = std::chrono::duration<double>(processing_t1 - processing_t0).count();
     prColor("total time: " + std::to_string(time_cost_s) + " s", "light_purple");

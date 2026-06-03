@@ -1,6 +1,7 @@
 #include "wsvt/phase_recovery.hpp"
 #include "wsvt/types.hpp"
 
+#include <algorithm>
 #include <cmath>
 #include <complex>
 #include <mutex>
@@ -25,26 +26,24 @@ inline std::size_t idx2(std::size_t y, std::size_t x, std::size_t w) {
 
 #if defined(WSVT_HAS_FFTW)
 
-// Initialize FFTW threading once (thread-safe)
 static std::once_flag fftw_init_flag;
 
-static void init_fftw_threads() {
+static void configure_fftw_threads() {
     std::call_once(fftw_init_flag, [] {
-        if (fftwf_init_threads()) {
-            int nthreads = 1;
-            #ifdef _OPENMP
-            nthreads = omp_get_max_threads();
-            #endif
-            fftwf_plan_with_nthreads(nthreads);
-        }
+        fftwf_init_threads();
     });
+    int nthreads = 1;
+#ifdef _OPENMP
+    nthreads = omp_get_max_threads();
+#endif
+    fftwf_plan_with_nthreads(std::max(1, nthreads));
 }
 
 Image2D<float> frankot_chellappa_fftw(
     ImageView2D<const float> dpc_x,
     ImageView2D<const float> dpc_y) {
 
-    init_fftw_threads();
+    configure_fftw_threads();
 
     const Shape2D shape = dpc_x.shape();
     const std::size_t h = shape.h;

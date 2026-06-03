@@ -13,6 +13,11 @@ enum class PyramidDownsampleMode {
     Db3Aa = 1
 };
 
+enum class PyramidNormalizationMode {
+    PerLevelFeature = 0,
+    InitialStack = 1
+};
+
 struct PyramidLevel {
     AlignedVector<float> data;
     std::size_t d0{};
@@ -33,6 +38,7 @@ struct PyramidResult {
     std::size_t w,
     int pyramid_level,
     int n_template,
-    PyramidDownsampleMode mode = PyramidDownsampleMode::Db3Aa);
+    PyramidDownsampleMode mode = PyramidDownsampleMode::Db3Aa,
+    PyramidNormalizationMode normalization_mode = PyramidNormalizationMode::PerLevelFeature);
 
 }  // namespace wsvt

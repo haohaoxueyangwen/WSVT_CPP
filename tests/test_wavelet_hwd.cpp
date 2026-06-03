@@ -1,6 +1,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 
+#include "wsvt/solver_utils.hpp"
 #include "wsvt/wavelet_ops.hpp"
 
 #include <cmath>
@@ -80,4 +81,38 @@ TEST_CASE("wavelet_transform_hwd output shape", "[wavelet][hwd]") {
     REQUIRE(result.out_depth > 0);
     REQUIRE(result.coeffs_filter.size() == h * w * result.out_depth);
     REQUIRE(result.level_name.size() == 2);
+}
+
+TEST_CASE("wavelet_transform_hwd matches PyWavelets db3 zero-mode golden values", "[wavelet][hwd]") {
+    constexpr std::size_t h = 1, w = 2, depth = 5;
+    const std::vector<float> signal = {
+        1.0f, 3.0f, 5.0f, 7.0f, 9.0f,
+        2.0f, 4.0f, 6.0f, 8.0f, 10.0f,
+    };
+
+    const auto result = wavelet_transform_hwd(signal, h, w, depth, WaveletFamily::Db3, 1, 2);
+
+    REQUIRE(result.out_h == h);
+    REQUIRE(result.out_w == w);
+    REQUIRE(result.out_depth == 10);
+    const std::vector<float> expected = {
+        -0.19112009f, 0.19112033f, 3.6593761f, -0.44087872f, 0.31703663f,
+        0.020237602f, -0.1257779f, 3.3386838f, 11.450491f, 2.9940348f,
+        0.28310084f, 0.07045281f, 3.992047f, -0.4552222f, 0.3522629f,
+        -0.029977381f, 0.14887363f, 4.717671f, 13.049931f, 3.3267055f,
+    };
+
+    REQUIRE(result.coeffs_filter.size() == expected.size());
+    for (std::size_t i = 0; i < expected.size(); ++i) {
+        REQUIRE_THAT(static_cast<double>(result.coeffs_filter[i]),
+                     Catch::Matchers::WithinAbs(static_cast<double>(expected[i]), 2e-5));
+    }
+}
+
+TEST_CASE("wavelet_add_list_for_depth matches Python reference thresholds", "[wavelet]") {
+    REQUIRE(wavelet_add_list_for_depth(49) == std::vector<int>{0, 2, 2, 2, 2, 2});
+    REQUIRE(wavelet_add_list_for_depth(50) == std::vector<int>{0, 2, 2, 2, 2, 2});
+    REQUIRE(wavelet_add_list_for_depth(51) == std::vector<int>{0, 0, 1, 2, 2, 2});
+    REQUIRE(wavelet_add_list_for_depth(150) == std::vector<int>{0, 0, 1, 2, 2, 2});
+    REQUIRE(wavelet_add_list_for_depth(151) == std::vector<int>{0, 0, 0, 0, 0, 0});
 }

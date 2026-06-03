@@ -1,11 +1,18 @@
 #include "wsvt/solver_utils.hpp"
 
+#include "wsvt/console_ops.hpp"
+
 #include <algorithm>
 #include <chrono>
 #include <cmath>
 #include <iomanip>
 #include <numeric>
 #include <sstream>
+#include <thread>
+
+#ifdef _OPENMP
+#include <omp.h>
+#endif
 
 #if defined(WSVT_HAS_OPENCV)
 #include <opencv2/imgproc.hpp>
@@ -28,6 +35,33 @@ std::string now_iso8601_utc() {
     std::ostringstream oss;
     oss << std::put_time(&tm_utc, "%Y-%m-%dT%H:%M:%SZ");
     return oss.str();
+}
+
+int configure_openmp_threads(int requested_cores, const char* label, int max_active_levels) {
+    const unsigned int hw_cores_u = std::thread::hardware_concurrency();
+    int cores = static_cast<int>(hw_cores_u == 0 ? 1 : hw_cores_u);
+    if (label != nullptr) {
+        prColor(std::string("Computer available cores: ") + std::to_string(cores), "green");
+    }
+    cores = std::max(1, std::min(cores, std::max(1, requested_cores)));
+    if (label != nullptr) {
+        prColor(std::string("Use ") + std::to_string(cores) + " cores for " + label, "light_purple");
+    }
+#ifdef _OPENMP
+    omp_set_num_threads(cores);
+    omp_set_max_active_levels(std::max(1, max_active_levels));
+#endif
+    return cores;
+}
+
+std::vector<int> wavelet_add_list_for_depth(std::size_t depth) {
+    if (depth > 150) {
+        return {0, 0, 0, 0, 0, 0};
+    }
+    if (depth > 50) {
+        return {0, 0, 1, 2, 2, 2};
+    }
+    return {0, 2, 2, 2, 2, 2};
 }
 
 double stddev_2d(const std::vector<float>& arr) {

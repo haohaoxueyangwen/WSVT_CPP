@@ -22,7 +22,6 @@
 #include <sstream>
 #include <span>
 #include <stdexcept>
-#include <thread>
 #include <utility>
 
 #ifdef _OPENMP
@@ -200,7 +199,10 @@ PyramidResult WSVT::pyramid_data() {
         h_ = static_cast<std::size_t>(crop_);
         w_ = static_cast<std::size_t>(crop_);
     }
-    auto p = wsvt::pyramid_data(ref_data_, img_data_, ch_, h_, w_, pyramid_level_, n_template_, PyramidDownsampleMode::Db3Aa);
+    auto p = wsvt::pyramid_data(
+        ref_data_, img_data_, ch_, h_, w_,
+        pyramid_level_, n_template_, PyramidDownsampleMode::Db3Aa,
+        PyramidNormalizationMode::InitialStack);
     return p;
 }
 
@@ -218,31 +220,71 @@ PyramidResult WSVT::wavelet_data() {
         prColor("max wavelet level: " + std::to_string(wavelet_level_), "green");
         int coefs_level = wavelet_level_ + 1 - wavelet_level_cut_;
 
-        if (p.ref_levels[0].d0 > 150) {
-            wavelet_add_list_ = {0, 0, 0, 0, 0, 0};
-        } else if (p.ref_levels[0].d0 > 50) {
-            wavelet_add_list_ = {0, 0, 1, 2, 2, 2};
-        } else {
-            wavelet_add_list_ = {0, 2, 2, 2, 2, 2};
-        }
+        wavelet_add_list_ = wavelet_add_list_for_depth(p.ref_levels[0].d0);
 
         const auto wavelet_t0 = std::chrono::steady_clock::now();
         std::string wavelet_detail;
         for (std::size_t lv = 0; lv < p.ref_levels.size(); ++lv) {
             int wavelevel_add = (lv >= wavelet_add_list_.size() ? 2 : wavelet_add_list_[lv]);
-            const auto wt0 = std::chrono::steady_clock::now();
-            auto img_wa = wavelet_transform_hwd(
-                as_span(p.img_levels[lv].data), p.img_levels[lv].d1, p.img_levels[lv].d2, p.img_levels[lv].d0,
-                wavelet_method, wavelet_level_, coefs_level + wavelevel_add);
-            const auto wt1 = std::chrono::steady_clock::now();
-            auto ref_wa = wavelet_transform_hwd(
-                as_span(p.ref_levels[lv].data), p.ref_levels[lv].d1, p.ref_levels[lv].d2, p.ref_levels[lv].d0,
-                wavelet_method, wavelet_level_, coefs_level + wavelevel_add);
-            const auto wt2 = std::chrono::steady_clock::now();
+            WaveletResult img_wa;
+            WaveletResult ref_wa;
+            double img_wavelet_s = 0.0;
+            double ref_wavelet_s = 0.0;
+            bool use_nested_wavelet = false;
+            int outer_threads = 1;
+#ifdef _OPENMP
+            outer_threads = omp_get_max_threads();
+            use_nested_wavelet = (omp_get_max_active_levels() > 1 && outer_threads >= 4);
+#endif
+            if (use_nested_wavelet) {
+                const int inner_threads = std::max(1, outer_threads / 2);
+                #pragma omp parallel sections num_threads(2)
+                {
+                    #pragma omp section
+                    {
+#ifdef _OPENMP
+                        omp_set_num_threads(inner_threads);
+#endif
+                        const auto wt0 = std::chrono::steady_clock::now();
+                        img_wa = wavelet_transform_hwd(
+                            as_span(p.img_levels[lv].data), p.img_levels[lv].d1, p.img_levels[lv].d2, p.img_levels[lv].d0,
+                            wavelet_method, wavelet_level_, coefs_level + wavelevel_add);
+                        const auto wt1 = std::chrono::steady_clock::now();
+                        img_wavelet_s = std::chrono::duration<double>(wt1 - wt0).count();
+                    }
+                    #pragma omp section
+                    {
+#ifdef _OPENMP
+                        omp_set_num_threads(inner_threads);
+#endif
+                        const auto wt0 = std::chrono::steady_clock::now();
+                        ref_wa = wavelet_transform_hwd(
+                            as_span(p.ref_levels[lv].data), p.ref_levels[lv].d1, p.ref_levels[lv].d2, p.ref_levels[lv].d0,
+                            wavelet_method, wavelet_level_, coefs_level + wavelevel_add);
+                        const auto wt1 = std::chrono::steady_clock::now();
+                        ref_wavelet_s = std::chrono::duration<double>(wt1 - wt0).count();
+                    }
+                }
+#ifdef _OPENMP
+                omp_set_num_threads(outer_threads);
+#endif
+            } else {
+                const auto wt0 = std::chrono::steady_clock::now();
+                img_wa = wavelet_transform_hwd(
+                    as_span(p.img_levels[lv].data), p.img_levels[lv].d1, p.img_levels[lv].d2, p.img_levels[lv].d0,
+                    wavelet_method, wavelet_level_, coefs_level + wavelevel_add);
+                const auto wt1 = std::chrono::steady_clock::now();
+                ref_wa = wavelet_transform_hwd(
+                    as_span(p.ref_levels[lv].data), p.ref_levels[lv].d1, p.ref_levels[lv].d2, p.ref_levels[lv].d0,
+                    wavelet_method, wavelet_level_, coefs_level + wavelevel_add);
+                const auto wt2 = std::chrono::steady_clock::now();
+                img_wavelet_s = std::chrono::duration<double>(wt1 - wt0).count();
+                ref_wavelet_s = std::chrono::duration<double>(wt2 - wt1).count();
+            }
             p.img_levels[lv] = PyramidLevel{std::move(img_wa.coeffs_filter), img_wa.out_depth, img_wa.out_h, img_wa.out_w};
             p.ref_levels[lv] = PyramidLevel{std::move(ref_wa.coeffs_filter), ref_wa.out_depth, ref_wa.out_h, ref_wa.out_w};
-            wavelet_detail += " lv" + std::to_string(lv) + "_img=" + std::to_string(std::chrono::duration<double>(wt1 - wt0).count()) +
-                              "s_ref=" + std::to_string(std::chrono::duration<double>(wt2 - wt1).count()) + "s";
+            wavelet_detail += " lv" + std::to_string(lv) + "_img=" + std::to_string(img_wavelet_s) +
+                              "s_ref=" + std::to_string(ref_wavelet_s) + "s";
             prColor("pyramid level: " + std::to_string(lv) + "\nvector length: " + std::to_string(ref_wa.out_depth), "green");
         }
         const auto wavelet_t1 = std::chrono::steady_clock::now();
@@ -413,7 +455,6 @@ std::array<std::vector<float>, 3> WSVT::displace_wavelet(
             float result_disp_x = xx_axis[max_idx] + minor_disp_x;
             float result_disp_y = yy_axis[max_idx] + minor_disp_y;
 
-            // Clamp (matching Python's bug: disp_x clamped to max_axis_y)
             const float max_axis_x = xx_axis[window_size - 1];
             const float min_axis_x = xx_axis[0];
             const float max_axis_y = yy_axis[(window_size - 1) * window_size];
@@ -441,6 +482,7 @@ std::array<std::vector<float>, 3> WSVT::displace_wavelet(
 
 SolverOutput WSVT::solver() {
     const auto processing_t0 = std::chrono::steady_clock::now();
+    const int solver_threads = configure_openmp_threads(n_cores_, "pyramid/wavelet/displace", 2);
     auto p = wavelet_data();
     const double pyramid_time = last_pyramid_time_s_;
     const double wavelet_time = last_wavelet_time_s_;
@@ -450,18 +492,13 @@ SolverOutput WSVT::solver() {
     auto img_stack = stack_TemplateWindow(img_data_, ch_, h_, w_, out_h, out_w, out_d);
     auto ref_stack = stack_TemplateWindow(ref_data_, ch_, h_, w_, out_h, out_w, out_d);
 
-    // Transmission: OpenMP parallel
+    // Transmission follows the Python WSVT reference: first frame sample/ref with clipping.
     std::vector<float> transmission(out_h * out_w, 0.0f);
     #pragma omp parallel for schedule(static)
     for (std::size_t idx = 0; idx < out_h * out_w; ++idx) {
-        const std::size_t base = idx * out_d;
-        double s = 0.0;
-        #pragma omp simd reduction(+:s)
-        for (std::size_t k = 0; k < out_d; ++k) {
-            const float den = ref_stack[base + k];
-            s += static_cast<double>(img_stack[base + k] / (den + 1e-6f));
-        }
-        transmission[idx] = static_cast<float>(s / static_cast<double>(out_d));
+        const float den = std::max(ref_data_[idx], 1.0e-10f);
+        const float ratio = img_data_[idx] / den;
+        transmission[idx] = std::clamp(ratio, 0.01f, 10.0f);
     }
 
     // Darkfield: OpenMP parallel
@@ -474,17 +511,6 @@ SolverOutput WSVT::solver() {
     for (std::size_t i = 0; i < darkfield.size(); ++i) {
         darkfield[i] = std_img[i] / (std_ref[i] + 1e-6f);
     }
-
-    const unsigned int hw_cores_u = std::thread::hardware_concurrency();
-    int cores = static_cast<int>(hw_cores_u == 0 ? 1 : hw_cores_u);
-    prColor("Computer available cores: " + std::to_string(cores), "green");
-    if (cores > n_cores_) {
-        cores = n_cores_;
-    }
-    prColor("Use " + std::to_string(cores) + " cores (OpenMP threads)", "light_purple");
-#ifdef _OPENMP
-    omp_set_num_threads(cores);
-#endif
 
     const int max_pyramid_searching_window = static_cast<int>(std::ceil(static_cast<double>(cal_half_window_) / std::pow(2.0, static_cast<double>(pyramid_level_))));
     std::vector<int> searching_window_pyramid_list(static_cast<std::size_t>(pyramid_level_), n_s_extend_);
@@ -586,6 +612,7 @@ SolverOutput WSVT::solver() {
     prColor("  displace detail: upsample=" + std::to_string(total_displace_upsample_s) +
             "s pad=" + std::to_string(total_displace_pad_s) +
             "s search=" + std::to_string(total_displace_search_s) + "s", "light_purple");
+    (void)configure_openmp_threads(1, "post-process/FFTW phase recovery", 1);
     const auto post_t0 = std::chrono::steady_clock::now();
     const std::size_t disp_h = p.img_levels[0].d1;
     const std::size_t disp_w = p.img_levels[0].d2;
@@ -627,6 +654,9 @@ SolverOutput WSVT::solver() {
     prColor("post-process time: " + std::to_string(postprocess_time_s) + " s", "light_purple");
     prColor("  post detail: dpc_conv=" + std::to_string(postprocess_time_s - fc_time_s) +
             "s fc_phase=" + std::to_string(fc_time_s) + "s", "light_purple");
+#ifdef _OPENMP
+    omp_set_num_threads(solver_threads);
+#endif
     const auto processing_t1 = std::chrono::steady_clock::now();
     const double time_cost_s = std::chrono::duration<double>(processing_t1 - processing_t0).count();
     prColor("total time: " + std::to_string(time_cost_s) + " s", "light_purple");

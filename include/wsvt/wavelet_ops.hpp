@@ -60,7 +60,8 @@ struct WaveletTaskResult {
     int w_level = 1,
     int return_level = 1);
 
-[[nodiscard, deprecated("use wavelet_transform_hwd")]] WaveletTaskResult wavedec_func(
+// Legacy CHW APIs kept for compatibility. Prefer wavelet_transform_hwd for new code.
+[[nodiscard]] WaveletTaskResult wavedec_func(
     std::span<const float> img,
     std::size_t ch,
     std::size_t h,
@@ -70,7 +71,7 @@ struct WaveletTaskResult {
     int w_level = 5,
     int return_level = 4);
 
-[[nodiscard, deprecated("use wavelet_transform_hwd")]] WaveletResult wavelet_transform_multiprocess(
+[[nodiscard]] WaveletResult wavelet_transform_multiprocess(
     std::span<const float> img,
     std::size_t ch,
     std::size_t h,
@@ -90,7 +91,7 @@ struct WaveletTaskResult {
                              return_level);
 }
 
-[[nodiscard, deprecated("use wavelet_transform_hwd")]] inline WaveletResult wavelet_transform_multiprocess(
+[[nodiscard]] inline WaveletResult wavelet_transform_multiprocess(
     std::span<const float> img,
     std::size_t ch, std::size_t h, std::size_t w,
     int n_cores, const std::string& wavelet_method,

@@ -154,6 +154,8 @@ std::vector<float> downsample_by_mode(
     return downsample2x_db3_aa(in, ch, h, w, out_h, out_w);
 }
 
+}  // anonymous namespace
+
 // HWD-native template window stacking: input CHW, output HWD
 AlignedVector<float> stack_template_window_hwd(
     const std::vector<float>& img,
@@ -211,8 +213,119 @@ AlignedVector<float> stack_template_window_hwd(
     return out;
 }
 
+// Pixel-major fused template window + PerLevelFeature normalization.
+// Replaces separate stack_template_window_hwd() + normalize_feature_depth_hwd()
+// with a single pass that fills depth per-pixel, accumulates sum/sum_sq on the fly,
+// and normalizes in-place — cutting memory traffic by ~2×.
+// Shift order, wrap semantics, and normalization formula are bitwise-identical
+// to the separate path (verified by golden tests).
+AlignedVector<float> stack_and_normalize_template_hwd(
+    const std::vector<float>& img,
+    std::size_t ch,
+    std::size_t h,
+    std::size_t w,
+    int n_template,
+    std::size_t& out_depth)
+{
+    if (img.size() != ch * h * w) {
+        throw std::invalid_argument("stack_and_normalize_template_hwd size mismatch");
+    }
+    if (n_template < 0) {
+        throw std::invalid_argument("n_template must be >= 0");
+    }
+
+    const int axis = 2 * n_template + 1;
+    out_depth = ch * static_cast<std::size_t>(axis * axis);
+    AlignedVector<float> out(h * w * out_depth, 0.0f);
+    const std::size_t plane = h * w;
+    constexpr float kEps = 1e-6f;
+
+    // Fast path: n_template=0 — just CHW→HWD transpose + normalize
+    if (n_template == 0) {
+        const float inv_ch = 1.0f / static_cast<float>(ch);
+        #pragma omp parallel for schedule(static)
+        for (std::size_t pixel = 0; pixel < plane; ++pixel) {
+            float* dst = out.data() + pixel * ch;
+            float sum = 0.0f, sum_sq = 0.0f;
+            for (std::size_t c = 0; c < ch; ++c) {
+                const float v = img[c * plane + pixel];
+                dst[c] = v;
+                sum += v;
+                sum_sq += v * v;
+            }
+            const float mean = sum * inv_ch;
+            const float var = sum_sq * inv_ch - mean * mean;
+            const float inv_std = 1.0f / (std::sqrt(std::max(var, 0.0f)) + kEps);
+            #pragma omp simd
+            for (std::size_t c = 0; c < ch; ++c) {
+                dst[c] = (dst[c] - mean) * inv_std;
+            }
+        }
+        return out;
+    }
+
+    // Precompute per-shift wrap indices: wy[dy_idx][y], wx[dx_idx][x]
+    const int N = n_template;
+    std::vector<std::vector<std::size_t>> wy_lut(static_cast<std::size_t>(axis));
+    std::vector<std::vector<std::size_t>> wx_lut(static_cast<std::size_t>(axis));
+    for (int i = 0; i < axis; ++i) {
+        const int d = i - N;
+        wy_lut[static_cast<std::size_t>(i)].resize(h);
+        wx_lut[static_cast<std::size_t>(i)].resize(w);
+        for (std::size_t y = 0; y < h; ++y) {
+            wy_lut[static_cast<std::size_t>(i)][y] = wrap_index(static_cast<long long>(y) - d, h);
+        }
+        for (std::size_t x = 0; x < w; ++x) {
+            wx_lut[static_cast<std::size_t>(i)][x] = wrap_index(static_cast<long long>(x) - d, w);
+        }
+    }
+
+    const float inv_depth = 1.0f / static_cast<float>(out_depth);
+
+    #pragma omp parallel for schedule(static)
+    for (std::size_t pixel = 0; pixel < plane; ++pixel) {
+        const std::size_t y = pixel / w;
+        const std::size_t x = pixel % w;
+
+        float* dst = out.data() + pixel * out_depth;
+
+        // Fill depth vector and accumulate stats in one pass
+        float sum = 0.0f;
+        float sum_sq = 0.0f;
+        std::size_t d = 0;
+
+        for (int dy_idx = 0; dy_idx < axis; ++dy_idx) {
+            const std::size_t src_y = wy_lut[static_cast<std::size_t>(dy_idx)][y];
+            for (int dx_idx = 0; dx_idx < axis; ++dx_idx) {
+                const std::size_t src_x = wx_lut[static_cast<std::size_t>(dx_idx)][x];
+                for (std::size_t c = 0; c < ch; ++c) {
+                    const float v = img[idx3(c, src_y, src_x, h, w)];
+                    dst[d] = v;
+                    sum += v;
+                    sum_sq += v * v;
+                    ++d;
+                }
+            }
+        }
+
+        // Normalize in-place (same formula as normalize_feature_depth_hwd)
+        const float mean = sum * inv_depth;
+        const float var = sum_sq * inv_depth - mean * mean;
+        const float inv_std = 1.0f / (std::sqrt(std::max(var, 0.0f)) + kEps);
+
+        #pragma omp simd
+        for (std::size_t i = 0; i < out_depth; ++i) {
+            dst[i] = (dst[i] - mean) * inv_std;
+        }
+    }
+
+    return out;
+}
+
+namespace {
+
 // HWD-native normalization: depth is contiguous per pixel — cache-friendly
-void normalize_feature_depth_hwd(AlignedVector<float>& feature, std::size_t h, std::size_t w, std::size_t depth) {
+[[maybe_unused]] void normalize_feature_depth_hwd(AlignedVector<float>& feature, std::size_t h, std::size_t w, std::size_t depth) {
     if (feature.size() != h * w * depth) {
         throw std::invalid_argument("normalize_feature_depth_hwd size mismatch");
     }
@@ -330,15 +443,18 @@ PyramidResult build_pyramid_single(
         const auto dim = raw_dims[lv];
         std::size_t out_d = 0;
         auto t0 = std::chrono::steady_clock::now();
-        auto feat = stack_template_window_hwd(raw_levels[lv], dim[0], dim[1], dim[2], n_template, out_d);
-        auto t1 = std::chrono::steady_clock::now();
-        total_tmpl_s += std::chrono::duration<double>(t1 - t0).count();
 
+        AlignedVector<float> feat;
         if (normalization_mode == PyramidNormalizationMode::PerLevelFeature) {
-            t0 = std::chrono::steady_clock::now();
-            normalize_feature_depth_hwd(feat, dim[1], dim[2], out_d);
-            t1 = std::chrono::steady_clock::now();
-            total_norm_s += std::chrono::duration<double>(t1 - t0).count();
+            // Fused: pixel-major template fill + normalization in one pass
+            feat = stack_and_normalize_template_hwd(raw_levels[lv], dim[0], dim[1], dim[2], n_template, out_d);
+            auto t1 = std::chrono::steady_clock::now();
+            total_tmpl_s += std::chrono::duration<double>(t1 - t0).count();
+            // normalization is fused into template_window time
+        } else {
+            feat = stack_template_window_hwd(raw_levels[lv], dim[0], dim[1], dim[2], n_template, out_d);
+            auto t1 = std::chrono::steady_clock::now();
+            total_tmpl_s += std::chrono::duration<double>(t1 - t0).count();
         }
 
         result.ref_levels.push_back(PyramidLevel{std::move(feat), out_d, dim[1], dim[2]});

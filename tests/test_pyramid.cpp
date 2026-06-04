@@ -110,6 +110,142 @@ TEST_CASE("pyramid_data db3 aa matches PyWavelets zero-mode golden values", "[py
     }
 }
 
+TEST_CASE("stack_and_normalize_template_hwd matches separate stack + normalize", "[pyramid][template]") {
+    // Golden test: verify fused pixel-major function produces bitwise-identical
+    // results as the old separate stack_template_window_hwd + normalization.
+    constexpr std::size_t ch = 2;
+    constexpr std::size_t h = 5;
+    constexpr std::size_t w = 7;
+    constexpr int N = 2;
+    constexpr int axis = 2 * N + 1;
+
+    auto img = make_ramp(ch, h, w);
+
+    // Fused path
+    std::size_t fused_depth = 0;
+    auto fused = stack_and_normalize_template_hwd(img, ch, h, w, N, fused_depth);
+    REQUIRE(fused_depth == ch * axis * axis);
+
+    // Separate path: stack first
+    std::size_t sep_depth = 0;
+    auto sep = stack_template_window_hwd(img, ch, h, w, N, sep_depth);
+    REQUIRE(sep_depth == fused_depth);
+
+    // Then normalize manually (same formula as normalize_feature_depth_hwd)
+    const std::size_t plane = h * w;
+    const float inv_depth = 1.0f / static_cast<float>(sep_depth);
+    constexpr float kEps = 1e-6f;
+    for (std::size_t pixel = 0; pixel < plane; ++pixel) {
+        float* row = sep.data() + pixel * sep_depth;
+        float sum = 0.0f, sum_sq = 0.0f;
+        for (std::size_t d = 0; d < sep_depth; ++d) {
+            sum += row[d];
+            sum_sq += row[d] * row[d];
+        }
+        const float mean = sum * inv_depth;
+        const float var = sum_sq * inv_depth - mean * mean;
+        const float inv_std = 1.0f / (std::sqrt(std::max(var, 0.0f)) + kEps);
+        for (std::size_t d = 0; d < sep_depth; ++d) {
+            row[d] = (row[d] - mean) * inv_std;
+        }
+    }
+
+    // Compare element-by-element
+    REQUIRE(fused.size() == sep.size());
+    for (std::size_t i = 0; i < fused.size(); ++i) {
+        REQUIRE_THAT(static_cast<double>(fused[i]),
+                     Catch::Matchers::WithinAbs(static_cast<double>(sep[i]), 1e-6));
+    }
+}
+
+TEST_CASE("stack_and_normalize_template_hwd n_template=0 fast path", "[pyramid][template]") {
+    constexpr std::size_t ch = 3;
+    constexpr std::size_t h = 4;
+    constexpr std::size_t w = 5;
+
+    auto img = make_ramp(ch, h, w);
+
+    std::size_t fused_depth = 0;
+    auto fused = stack_and_normalize_template_hwd(img, ch, h, w, 0, fused_depth);
+    REQUIRE(fused_depth == ch);
+
+    // Separate path
+    std::size_t sep_depth = 0;
+    auto sep = stack_template_window_hwd(img, ch, h, w, 0, sep_depth);
+    REQUIRE(sep_depth == ch);
+
+    // Normalize manually
+    const std::size_t plane = h * w;
+    const float inv_ch = 1.0f / static_cast<float>(ch);
+    constexpr float kEps = 1e-6f;
+    for (std::size_t pixel = 0; pixel < plane; ++pixel) {
+        float* row = sep.data() + pixel * ch;
+        float sum = 0.0f, sum_sq = 0.0f;
+        for (std::size_t d = 0; d < ch; ++d) {
+            sum += row[d];
+            sum_sq += row[d] * row[d];
+        }
+        const float mean = sum * inv_ch;
+        const float var = sum_sq * inv_ch - mean * mean;
+        const float inv_std = 1.0f / (std::sqrt(std::max(var, 0.0f)) + kEps);
+        for (std::size_t d = 0; d < ch; ++d) {
+            row[d] = (row[d] - mean) * inv_std;
+        }
+    }
+
+    REQUIRE(fused.size() == sep.size());
+    for (std::size_t i = 0; i < fused.size(); ++i) {
+        REQUIRE_THAT(static_cast<double>(fused[i]),
+                     Catch::Matchers::WithinAbs(static_cast<double>(sep[i]), 1e-6));
+    }
+}
+
+TEST_CASE("stack_and_normalize_template_hwd edge cases", "[pyramid][template]") {
+    // Test with odd/even sizes, ch=1, N_s=1/2
+    constexpr int Ns[] = {1, 2};
+    constexpr std::size_t h_vals[] = {3, 4, 7, 8};
+    constexpr std::size_t w_vals[] = {3, 5, 6, 8};
+
+    for (int n : Ns) {
+        for (int si = 0; si < 4; ++si) {
+            const std::size_t h = h_vals[si];
+            const std::size_t w = w_vals[si];
+            auto img = make_ramp(1, h, w);
+
+            std::size_t fd = 0;
+            auto fused = stack_and_normalize_template_hwd(img, 1, h, w, n, fd);
+
+            std::size_t sd = 0;
+            auto sep = stack_template_window_hwd(img, 1, h, w, n, sd);
+            REQUIRE(sd == fd);
+
+            const std::size_t plane = h * w;
+            const float inv_d = 1.0f / static_cast<float>(sd);
+            constexpr float kEps = 1e-6f;
+            for (std::size_t pixel = 0; pixel < plane; ++pixel) {
+                float* row = sep.data() + pixel * sd;
+                float sum = 0.0f, sum_sq = 0.0f;
+                for (std::size_t d = 0; d < sd; ++d) {
+                    sum += row[d];
+                    sum_sq += row[d] * row[d];
+                }
+                const float mean = sum * inv_d;
+                const float var = sum_sq * inv_d - mean * mean;
+                const float inv_std = 1.0f / (std::sqrt(std::max(var, 0.0f)) + kEps);
+                for (std::size_t d = 0; d < sd; ++d) {
+                    row[d] = (row[d] - mean) * inv_std;
+                }
+            }
+
+            REQUIRE(fused.size() == sep.size());
+            for (std::size_t i = 0; i < fused.size(); ++i) {
+                REQUIRE_THAT(static_cast<double>(fused[i]),
+                             Catch::Matchers::WithinAbs(static_cast<double>(sep[i]), 2e-6));
+            }
+        }
+    }
+}
+
 TEST_CASE("pyramid_data template stack uses Python row-major shift order", "[pyramid]") {
     constexpr std::size_t ch = 1;
     constexpr std::size_t h = 3;

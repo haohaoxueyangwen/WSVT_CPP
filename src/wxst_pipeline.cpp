@@ -30,6 +30,12 @@
 
 namespace wsvt {
 
+namespace {
+// M2.3 A/B switch: set to true to use precomputed-plan wavelet path.
+// Keeps old wavelet_transform_hwd as default until benchmark confirms speedup.
+constexpr bool kUsePlannedWavelet = false;
+}  // namespace
+
 WXST::WXST(
     const std::vector<float>& img,
     const std::vector<float>& ref,
@@ -128,17 +134,42 @@ PyramidResult WXST::wavelet_data() {
         int coefs_level = wavelet_level_ + 1 - wavelet_level_cut_;
         wavelet_add_list_ = wavelet_add_list_for_depth(p.ref_levels[0].d0);
         const auto wavelet_t0 = std::chrono::steady_clock::now();
-        for (std::size_t lv = 0; lv < p.ref_levels.size(); ++lv) {
-            int wavelevel_add = (lv >= wavelet_add_list_.size() ? 2 : wavelet_add_list_[lv]);
-            auto img_wa = wavelet_transform_hwd(
-                as_span(p.img_levels[lv].data), p.img_levels[lv].d1, p.img_levels[lv].d2, p.img_levels[lv].d0,
-                wavelet_method, wavelet_level_, coefs_level + wavelevel_add);
-            auto ref_wa = wavelet_transform_hwd(
-                as_span(p.ref_levels[lv].data), p.ref_levels[lv].d1, p.ref_levels[lv].d2, p.ref_levels[lv].d0,
-                wavelet_method, wavelet_level_, coefs_level + wavelevel_add);
-            p.img_levels[lv] = PyramidLevel{std::move(img_wa.coeffs_filter), img_wa.out_depth, img_wa.out_h, img_wa.out_w};
-            p.ref_levels[lv] = PyramidLevel{std::move(ref_wa.coeffs_filter), ref_wa.out_depth, ref_wa.out_h, ref_wa.out_w};
-            prColor("pyramid level: " + std::to_string(lv) + "\nvector length: " + std::to_string(ref_wa.out_depth), "green");
+
+        if constexpr (kUsePlannedWavelet) {
+            // M2.3: Precompute DWT plans, then use single-OpenMP-region transform
+            std::vector<std::vector<DwtLevelPlan>> all_plans;
+            all_plans.reserve(p.ref_levels.size());
+            for (std::size_t lv = 0; lv < p.ref_levels.size(); ++lv) {
+                all_plans.push_back(compute_wavelet_plan(
+                    p.ref_levels[lv].d0, wavelet_level_, wavelet_method));
+            }
+            for (std::size_t lv = 0; lv < p.ref_levels.size(); ++lv) {
+                int wavelevel_add = (lv >= wavelet_add_list_.size() ? 2 : wavelet_add_list_[lv]);
+                auto img_wa = wavelet_transform_hwd_planned(
+                    as_span(p.img_levels[lv].data), p.img_levels[lv].d1, p.img_levels[lv].d2,
+                    p.img_levels[lv].d0, wavelet_method, wavelet_level_,
+                    coefs_level + wavelevel_add, all_plans[lv]);
+                auto ref_wa = wavelet_transform_hwd_planned(
+                    as_span(p.ref_levels[lv].data), p.ref_levels[lv].d1, p.ref_levels[lv].d2,
+                    p.ref_levels[lv].d0, wavelet_method, wavelet_level_,
+                    coefs_level + wavelevel_add, all_plans[lv]);
+                p.img_levels[lv] = PyramidLevel{std::move(img_wa.coeffs_filter), img_wa.out_depth, img_wa.out_h, img_wa.out_w};
+                p.ref_levels[lv] = PyramidLevel{std::move(ref_wa.coeffs_filter), ref_wa.out_depth, ref_wa.out_h, ref_wa.out_w};
+                prColor("pyramid level: " + std::to_string(lv) + "\nvector length: " + std::to_string(ref_wa.out_depth), "green");
+            }
+        } else {
+            for (std::size_t lv = 0; lv < p.ref_levels.size(); ++lv) {
+                int wavelevel_add = (lv >= wavelet_add_list_.size() ? 2 : wavelet_add_list_[lv]);
+                auto img_wa = wavelet_transform_hwd(
+                    as_span(p.img_levels[lv].data), p.img_levels[lv].d1, p.img_levels[lv].d2, p.img_levels[lv].d0,
+                    wavelet_method, wavelet_level_, coefs_level + wavelevel_add);
+                auto ref_wa = wavelet_transform_hwd(
+                    as_span(p.ref_levels[lv].data), p.ref_levels[lv].d1, p.ref_levels[lv].d2, p.ref_levels[lv].d0,
+                    wavelet_method, wavelet_level_, coefs_level + wavelevel_add);
+                p.img_levels[lv] = PyramidLevel{std::move(img_wa.coeffs_filter), img_wa.out_depth, img_wa.out_h, img_wa.out_w};
+                p.ref_levels[lv] = PyramidLevel{std::move(ref_wa.coeffs_filter), ref_wa.out_depth, ref_wa.out_h, ref_wa.out_w};
+                prColor("pyramid level: " + std::to_string(lv) + "\nvector length: " + std::to_string(ref_wa.out_depth), "green");
+            }
         }
         const auto wavelet_t1 = std::chrono::steady_clock::now();
         last_wavelet_time_s_ = std::chrono::duration<double>(wavelet_t1 - wavelet_t0).count();

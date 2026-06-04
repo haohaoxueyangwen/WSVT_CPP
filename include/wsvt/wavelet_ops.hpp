@@ -101,6 +101,39 @@ struct WaveletTaskResult {
                                           return_level);
 }
 
+/// Precomputed DWT tap for a single (input_channel, filter_coeff) pair.
+struct DwtTap {
+    std::size_t ic;   ///< source channel index (input depth dimension)
+    float lo;         ///< precomputed low-pass coefficient (already time-reversed)
+    float hi;         ///< precomputed high-pass coefficient (already time-reversed)
+};
+
+/// Precomputed DWT decomposition plan for a single level.
+/// Eliminates per-pixel boundary checks and filter-index reversals.
+struct DwtLevelPlan {
+    std::vector<std::vector<DwtTap>> oc_taps;  ///< oc_taps[oc] = list of non-zero taps
+};
+
+/// Build DWT decomposition plans for all levels.  The plan encodes the exact
+/// convolution pattern used by wavelet_transform_hwd, so applying a plan
+/// produces bitwise-identical results.
+[[nodiscard]] std::vector<DwtLevelPlan> compute_wavelet_plan(
+    std::size_t depth_in,
+    int w_level,
+    WaveletFamily wavelet);
+
+/// HWD-native wavelet transform using precomputed plans and a single OpenMP
+/// parallel region.  Mathematically identical to wavelet_transform_hwd.
+[[nodiscard]] WaveletResult wavelet_transform_hwd_planned(
+    std::span<const float> img_hwd,
+    std::size_t h,
+    std::size_t w,
+    std::size_t depth_in,
+    WaveletFamily wavelet,
+    int w_level,
+    int return_level,
+    const std::vector<DwtLevelPlan>& plans);
+
 /// HWD-native wavelet transform: input is [h, w, depth_in] with depth contiguous per pixel.
 /// Decomposes along the depth axis. Output is [h, w, out_depth] in HWD layout.
 [[nodiscard]] WaveletResult wavelet_transform_hwd(

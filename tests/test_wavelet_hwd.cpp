@@ -186,6 +186,65 @@ TEST_CASE("wavelet_transform_hwd_pair matches separate transforms", "[wavelet][h
     }
 }
 
+TEST_CASE("wavelet_transform_hwd_planned matches streamed bitwise", "[wavelet][hwd][planned]") {
+    // Verify that the precomputed-plan path produces bitwise-identical results
+    // to wavelet_transform_hwd (which delegates to wavelet_transform_hwd_streamed).
+    constexpr std::size_t depth = 33, h = 7, w = 5;
+    const auto signal_chw = make_signal_chw(depth, h, w);
+    const auto signal_hwd = chw_to_hwd(signal_chw, depth, h, w);
+
+    for (auto wavelet : {WaveletFamily::Db2, WaveletFamily::Db3, WaveletFamily::Db6}) {
+        DYNAMIC_SECTION("wavelet=" << static_cast<int>(wavelet)) {
+            for (int w_level = 1; w_level <= 3; ++w_level) {
+                for (int ret : {1, w_level + 1}) {
+                    DYNAMIC_SECTION("w_level=" << w_level << " ret=" << ret) {
+                        auto plans = compute_wavelet_plan(depth, w_level, wavelet);
+                        REQUIRE(plans.size() == static_cast<std::size_t>(w_level));
+
+                        auto ref = wavelet_transform_hwd(signal_hwd, h, w, depth,
+                                                         wavelet, w_level, ret);
+                        auto opt = wavelet_transform_hwd_planned(
+                            signal_hwd, h, w, depth, wavelet, w_level, ret, plans);
+
+                        REQUIRE(opt.out_h == ref.out_h);
+                        REQUIRE(opt.out_w == ref.out_w);
+                        REQUIRE(opt.out_depth == ref.out_depth);
+                        REQUIRE(opt.level_name == ref.level_name);
+                        REQUIRE(opt.coeffs_filter.size() == ref.coeffs_filter.size());
+
+                        for (std::size_t i = 0; i < ref.coeffs_filter.size(); ++i) {
+                            REQUIRE_THAT(
+                                static_cast<double>(opt.coeffs_filter[i]),
+                                Catch::Matchers::WithinAbs(
+                                    static_cast<double>(ref.coeffs_filter[i]), 1e-6));
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+TEST_CASE("wavelet_transform_hwd_planned w_level=0", "[wavelet][hwd][planned]") {
+    constexpr std::size_t depth = 9, h = 4, w = 3;
+    const auto signal_chw = make_signal_chw(depth, h, w);
+    const auto signal_hwd = chw_to_hwd(signal_chw, depth, h, w);
+
+    auto plans = compute_wavelet_plan(depth, 0, WaveletFamily::Db2);
+    REQUIRE(plans.empty());
+
+    auto ref = wavelet_transform_hwd(signal_hwd, h, w, depth, WaveletFamily::Db2, 0, 1);
+    auto opt = wavelet_transform_hwd_planned(signal_hwd, h, w, depth,
+                                             WaveletFamily::Db2, 0, 1, plans);
+
+    REQUIRE(opt.coeffs_filter.size() == ref.coeffs_filter.size());
+    for (std::size_t i = 0; i < ref.coeffs_filter.size(); ++i) {
+        REQUIRE_THAT(static_cast<double>(opt.coeffs_filter[i]),
+                     Catch::Matchers::WithinAbs(
+                         static_cast<double>(ref.coeffs_filter[i]), 1e-6));
+    }
+}
+
 TEST_CASE("wavelet_add_list_for_depth matches Python reference thresholds", "[wavelet]") {
     REQUIRE(wavelet_add_list_for_depth(49) == std::vector<int>{0, 2, 2, 2, 2, 2});
     REQUIRE(wavelet_add_list_for_depth(50) == std::vector<int>{0, 2, 2, 2, 2, 2});

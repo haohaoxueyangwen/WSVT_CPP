@@ -123,4 +123,33 @@ struct WaveletTaskResult {
     int w_level = 1,
     int return_level = 1);
 
+/// Holds two independent WaveletResult objects from a pair transform.
+struct WaveletPairResult {
+    WaveletResult img;
+    WaveletResult ref;
+};
+
+/// Pair wavelet transform: processes img and ref HWD stacks in a single
+/// OpenMP traversal, sharing filter coefficients and geometry iteration.
+/// Produces identical results to two separate wavelet_transform_hwd calls.
+[[nodiscard]] WaveletPairResult wavelet_transform_hwd_pair(
+    std::span<const float> img_hwd,
+    std::span<const float> ref_hwd,
+    std::size_t h,
+    std::size_t w,
+    std::size_t depth_in,
+    WaveletFamily wavelet = WaveletFamily::Db2,
+    int w_level = 1,
+    int return_level = 1);
+
+[[nodiscard]] WaveletPairResult wavelet_transform_hwd_pair_streamed(
+    std::span<const float> img_hwd,
+    std::span<const float> ref_hwd,
+    std::size_t h,
+    std::size_t w,
+    std::size_t depth_in,
+    WaveletFamily wavelet = WaveletFamily::Db2,
+    int w_level = 1,
+    int return_level = 1);
+
 }  // namespace wsvt

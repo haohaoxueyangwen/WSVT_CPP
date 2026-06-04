@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cctype>
 #include <cstdint>
+#include <cstring>
 #include <filesystem>
 #include <fstream>
 #include <stdexcept>
@@ -96,6 +97,41 @@ Image2D read_image_gray(const std::string& filename) {
     return out;
 #else
     throw std::runtime_error("read_image_gray requires OpenCV (WSVT_HAS_OPENCV)");
+#endif
+}
+
+void read_image_gray_into(const std::string& filename, float* dst, std::size_t h, std::size_t w) {
+#if defined(WSVT_HAS_OPENCV)
+    try {
+        cv::utils::logging::setLogLevel(cv::utils::logging::LOG_LEVEL_SILENT);
+    } catch (...) {}
+    const cv::Mat img = cv::imread(filename, cv::IMREAD_UNCHANGED);
+    if (img.empty()) {
+        throw std::runtime_error("failed to read image: " + filename);
+    }
+    if (static_cast<std::size_t>(img.rows) != h || static_cast<std::size_t>(img.cols) != w) {
+        throw std::runtime_error("image size mismatch in read_image_gray_into: " + filename);
+    }
+    cv::Mat gray;
+    if (img.channels() == 1) {
+        gray = img;
+    } else {
+        std::vector<cv::Mat> chs;
+        cv::split(img, chs);
+        gray = chs[0];
+    }
+    cv::Mat gray32;
+    gray.convertTo(gray32, CV_32F);
+    if (gray32.isContinuous()) {
+        std::memcpy(dst, gray32.ptr<float>(0), h * w * sizeof(float));
+    } else {
+        for (std::size_t y = 0; y < h; ++y) {
+            std::memcpy(dst + y * w, gray32.ptr<float>(static_cast<int>(y)), w * sizeof(float));
+        }
+    }
+#else
+    (void)dst; (void)h; (void)w;
+    throw std::runtime_error("read_image_gray_into requires OpenCV (WSVT_HAS_OPENCV)");
 #endif
 }
 

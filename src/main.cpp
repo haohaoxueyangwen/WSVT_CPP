@@ -85,6 +85,8 @@ int run_demo() {
 }
 
 int run_wxst_cmd(const std::string& img_h5, const std::string& img_key, const std::string& ref_h5, const std::string& ref_key, const std::string& out_dir, const OptMap& opts) {
+    const auto t_process_t0 = std::chrono::steady_clock::now();
+    const auto t_load_t0 = std::chrono::steady_clock::now();
     const auto img = wsvt::read_h5(img_h5, img_key, false);
     const auto ref = wsvt::read_h5(ref_h5, ref_key, false);
     if (img.shape.size() != 2 || ref.shape.size() != 2) {
@@ -93,6 +95,8 @@ int run_wxst_cmd(const std::string& img_h5, const std::string& img_key, const st
     if (img.shape != ref.shape) {
         throw std::invalid_argument("wxst img/ref shape mismatch");
     }
+    const auto t_load_t1 = std::chrono::steady_clock::now();
+    const double load_time_s = std::chrono::duration<double>(t_load_t1 - t_load_t0).count();
     const std::size_t h = img.shape[0];
     const std::size_t w = img.shape[1];
     const int m_image = opt_int(opts, "m_image", static_cast<int>(h));
@@ -111,13 +115,15 @@ int run_wxst_cmd(const std::string& img_h5, const std::string& img_key, const st
     const bool use_wavelet = opt_bool(opts, "use_wavelet", true);
     const int use_gpu = opt_bool(opts, "use_gpu", false) ? 1 : 0;
     const bool save_img = opt_bool(opts, "save_img", false);
+    const int h5_deflate = opt_int(opts, "h5_deflate", 9);
     std::filesystem::create_directories(out_dir);
     wsvt::WXST wxst(
         img.data, ref.data, h, w,
         m_image, n_s, cal_half_window, n_s_extend, n_cores, n_group,
         energy, p_x, z, wavelet_level_cut, pyramid_level, n_iter,
         use_estimate, use_wavelet, use_gpu);
-    const auto out = wxst.run(out_dir);
+    const auto out = wxst.run(out_dir, h5_deflate);
+    const auto t_save_t0 = std::chrono::steady_clock::now();
     if (save_img) {
         const std::filesystem::path od(out_dir);
         wsvt::save_img(out.displace_x, out.h, out.w, (od / "displace_x.tif").string());
@@ -128,11 +134,30 @@ int run_wxst_cmd(const std::string& img_h5, const std::string& img_key, const st
         wsvt::save_img(out.transmission, out.transmission_h, out.transmission_w, (od / "transmission_image.tif").string());
         wsvt::save_img(out.darkfield_nd, out.h, out.w, (od / "darkfield_nd.tif").string());
     }
+    const auto t_save_t1 = std::chrono::steady_clock::now();
+    const double save_time_s = std::chrono::duration<double>(t_save_t1 - t_save_t0).count();
+    const auto t_process_t1 = std::chrono::steady_clock::now();
+    const double process_wall_s = std::chrono::duration<double>(t_process_t1 - t_process_t0).count();
+    std::cout << "=== Timing Summary ===" << std::endl;
+    std::cout << "  load:             " << load_time_s << " s" << std::endl;
+    std::cout << "  pyramid:          " << out.pyramid_time_s << " s" << std::endl;
+    std::cout << "  template_window:  " << out.template_window_time_s << " s" << std::endl;
+    std::cout << "  wavelet:          " << out.wavelet_time_s << " s" << std::endl;
+    std::cout << "  displace:         " << out.displace_time_s << " s" << std::endl;
+    std::cout << "  post-proc:        " << out.postprocess_time_s << " s" << std::endl;
+    std::cout << "  result write:     " << out.result_write_time_s << " s"
+              << " (h5_deflate=" << h5_deflate << ")" << std::endl;
+    std::cout << "  optional_image_save: " << save_time_s << " s" << std::endl;
+    std::cout << "  solver:           " << out.time_cost_s << " s" << std::endl;
+    std::cout << "  wall total:       " << (load_time_s + out.time_cost_s + out.result_write_time_s + save_time_s) << " s" << std::endl;
+    std::cout << "  process wall:     " << process_wall_s << " s" << std::endl;
     std::cout << "wxst done: " << out.h << "x" << out.w << std::endl;
     return 0;
 }
 
 int run_wxst_dir_cmd(const std::string& img_dir, const std::string& ref_dir, const std::string& out_dir, const OptMap& opts) {
+    const auto t_process_t0 = std::chrono::steady_clock::now();
+    const auto t_load_t0 = std::chrono::steady_clock::now();
     const auto img_files = wsvt::list_image_files(img_dir);
     const auto ref_files = wsvt::list_image_files(ref_dir);
     if (img_files.size() != 1 || ref_files.size() != 1) {
@@ -143,6 +168,8 @@ int run_wxst_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
     if (img.h != ref.h || img.w != ref.w) {
         throw std::invalid_argument("wxst_dir img/ref shape mismatch");
     }
+    const auto t_load_t1 = std::chrono::steady_clock::now();
+    const double load_time_s = std::chrono::duration<double>(t_load_t1 - t_load_t0).count();
     const int m_image = opt_int(opts, "m_image", static_cast<int>(img.h));
     const int n_s = opt_int(opts, "n_s", 5);
     const int cal_half_window = opt_int(opts, "cal_half_window", 20);
@@ -159,13 +186,15 @@ int run_wxst_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
     const bool use_wavelet = opt_bool(opts, "use_wavelet", true);
     const int use_gpu = opt_bool(opts, "use_gpu", false) ? 1 : 0;
     const bool save_img = opt_bool(opts, "save_img", false);
+    const int h5_deflate = opt_int(opts, "h5_deflate", 9);
     std::filesystem::create_directories(out_dir);
     wsvt::WXST wxst(
         img.data, ref.data, img.h, img.w,
         m_image, n_s, cal_half_window, n_s_extend, n_cores, n_group,
         energy, p_x, z, wavelet_level_cut, pyramid_level, n_iter,
         use_estimate, use_wavelet, use_gpu);
-    const auto out = wxst.run(out_dir);
+    const auto out = wxst.run(out_dir, h5_deflate);
+    const auto t_save_t0 = std::chrono::steady_clock::now();
     if (save_img) {
         const std::filesystem::path od(out_dir);
         wsvt::save_img(out.displace_x, out.h, out.w, (od / "displace_x.tif").string());
@@ -176,11 +205,30 @@ int run_wxst_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
         wsvt::save_img(out.transmission, out.transmission_h, out.transmission_w, (od / "transmission_image.tif").string());
         wsvt::save_img(out.darkfield_nd, out.h, out.w, (od / "darkfield_nd.tif").string());
     }
+    const auto t_save_t1 = std::chrono::steady_clock::now();
+    const double save_time_s = std::chrono::duration<double>(t_save_t1 - t_save_t0).count();
+    const auto t_process_t1 = std::chrono::steady_clock::now();
+    const double process_wall_s = std::chrono::duration<double>(t_process_t1 - t_process_t0).count();
+    std::cout << "=== Timing Summary ===" << std::endl;
+    std::cout << "  load:             " << load_time_s << " s" << std::endl;
+    std::cout << "  pyramid:          " << out.pyramid_time_s << " s" << std::endl;
+    std::cout << "  template_window:  " << out.template_window_time_s << " s" << std::endl;
+    std::cout << "  wavelet:          " << out.wavelet_time_s << " s" << std::endl;
+    std::cout << "  displace:         " << out.displace_time_s << " s" << std::endl;
+    std::cout << "  post-proc:        " << out.postprocess_time_s << " s" << std::endl;
+    std::cout << "  result write:     " << out.result_write_time_s << " s"
+              << " (h5_deflate=" << h5_deflate << ")" << std::endl;
+    std::cout << "  optional_image_save: " << save_time_s << " s" << std::endl;
+    std::cout << "  solver:           " << out.time_cost_s << " s" << std::endl;
+    std::cout << "  wall total:       " << (load_time_s + out.time_cost_s + out.result_write_time_s + save_time_s) << " s" << std::endl;
+    std::cout << "  process wall:     " << process_wall_s << " s" << std::endl;
     std::cout << "wxst_dir done: " << out.h << "x" << out.w << std::endl;
     return 0;
 }
 
 int run_wsvt_cmd(const std::string& img_h5, const std::string& img_key, const std::string& ref_h5, const std::string& ref_key, const std::string& out_dir, const OptMap& opts) {
+    const auto t_process_t0 = std::chrono::steady_clock::now();
+    const auto t_load_t0 = std::chrono::steady_clock::now();
     const auto img = wsvt::read_h5(img_h5, img_key, false);
     const auto ref = wsvt::read_h5(ref_h5, ref_key, false);
     if (img.shape.size() != 3 || ref.shape.size() != 3) {
@@ -189,6 +237,8 @@ int run_wsvt_cmd(const std::string& img_h5, const std::string& img_key, const st
     if (img.shape != ref.shape) {
         throw std::invalid_argument("wsvt img/ref shape mismatch");
     }
+    const auto t_load_t1 = std::chrono::steady_clock::now();
+    const double load_time_s = std::chrono::duration<double>(t_load_t1 - t_load_t0).count();
     const std::size_t ch = img.shape[0];
     const std::size_t h = img.shape[1];
     const std::size_t w = img.shape[2];
@@ -211,13 +261,15 @@ int run_wsvt_cmd(const std::string& img_h5, const std::string& img_key, const st
     const bool calc_darkfield = opt_bool(opts, "calc_darkfield", true);
     const bool cleansave = opt_bool(opts, "cleansave", false);
     const bool save_img = opt_bool(opts, "save_img", false);
+    const int h5_deflate = opt_int(opts, "h5_deflate", 9);
     std::filesystem::create_directories(out_dir);
     wsvt::WSVT wsvt_solver(
         img.data, ref.data, ch, h, w,
         crop, cal_half_window, n_template, n_s_extend, n_cores, n_group,
         energy, p_x, mag_factor, z, wavelet_level_cut, pyramid_level, n_iter,
         use_estimate, use_wavelet, use_gpu, calc_darkfield);
-    const auto out = wsvt_solver.run(out_dir, cleansave);
+    const auto out = wsvt_solver.run(out_dir, cleansave, h5_deflate);
+    const auto t_save_t0 = std::chrono::steady_clock::now();
     if (save_img) {
         const std::filesystem::path od(out_dir);
         wsvt::save_img(out.displace_x, out.h, out.w, (od / "displace_x.tif").string());
@@ -231,13 +283,31 @@ int run_wsvt_cmd(const std::string& img_h5, const std::string& img_key, const st
             wsvt::save_img(out.darkfield, out.transmission_h, out.transmission_w, (od / "darkfield.tif").string());
         }
     }
-    std::cout << "raw darkfield: " << out.darkfield_time_s << " s"
+    const auto t_save_t1 = std::chrono::steady_clock::now();
+    const double save_time_s = std::chrono::duration<double>(t_save_t1 - t_save_t0).count();
+    const auto t_process_t1 = std::chrono::steady_clock::now();
+    const double process_wall_s = std::chrono::duration<double>(t_process_t1 - t_process_t0).count();
+    std::cout << "=== Timing Summary ===" << std::endl;
+    std::cout << "  load:             " << load_time_s << " s" << std::endl;
+    std::cout << "  pyramid:          " << out.pyramid_time_s << " s" << std::endl;
+    std::cout << "  template_window:  " << out.template_window_time_s << " s" << std::endl;
+    std::cout << "  wavelet:          " << out.wavelet_time_s << " s" << std::endl;
+    std::cout << "  raw darkfield:    " << out.darkfield_time_s << " s"
               << (calc_darkfield ? "" : " (disabled)") << std::endl;
+    std::cout << "  displace:         " << out.displace_time_s << " s" << std::endl;
+    std::cout << "  post-proc:        " << out.postprocess_time_s << " s" << std::endl;
+    std::cout << "  result write:     " << out.result_write_time_s << " s"
+              << " (h5_deflate=" << h5_deflate << ")" << std::endl;
+    std::cout << "  optional_image_save: " << save_time_s << " s" << std::endl;
+    std::cout << "  solver:           " << out.time_cost_s << " s" << std::endl;
+    std::cout << "  wall total:       " << (load_time_s + out.time_cost_s + out.result_write_time_s + save_time_s) << " s" << std::endl;
+    std::cout << "  process wall:     " << process_wall_s << " s" << std::endl;
     std::cout << "wsvt done: " << out.h << "x" << out.w << std::endl;
     return 0;
 }
 
 int run_wsvt_dir_cmd(const std::string& img_dir, const std::string& ref_dir, const std::string& out_dir, const OptMap& opts) {
+    const auto t_process_t0 = std::chrono::steady_clock::now();
     const auto t_load_t0 = std::chrono::steady_clock::now();
     const auto img_files = wsvt::list_image_files(img_dir);
     const auto ref_files = wsvt::list_image_files(ref_dir);
@@ -255,16 +325,17 @@ int run_wsvt_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
     std::vector<float> img_stack(ch * h * w, 0.0f);
     std::vector<float> ref_stack(ch * h * w, 0.0f);
     std::memcpy(img_stack.data(), first_img.data.data(), h * w * sizeof(float));
-    const auto first_ref = wsvt::read_image_gray(ref_files[0]);
-    std::memcpy(ref_stack.data(), first_ref.data.data(), h * w * sizeof(float));
+    wsvt::read_image_gray_into(ref_files[0], ref_stack.data(), h, w);
 
-    // Parallel read remaining frames
-    #pragma omp parallel for schedule(dynamic, 1)
-    for (std::size_t i = 1; i < ch; ++i) {
-        const auto img = wsvt::read_image_gray(img_files[i]);
-        const auto ref = wsvt::read_image_gray(ref_files[i]);
-        std::memcpy(img_stack.data() + i * h * w, img.data.data(), h * w * sizeof(float));
-        std::memcpy(ref_stack.data() + i * h * w, ref.data.data(), h * w * sizeof(float));
+    // Parallel read remaining frames: decode directly into pre-allocated stack.
+    // Cap I/O threads to avoid saturating disk/decoder with too many concurrent reads.
+    if (ch > 1) {
+        const int io_threads = std::min(static_cast<int>(ch) - 1, 32);
+        #pragma omp parallel for schedule(dynamic, 1) num_threads(io_threads)
+        for (std::size_t i = 1; i < ch; ++i) {
+            wsvt::read_image_gray_into(img_files[i], img_stack.data() + i * h * w, h, w);
+            wsvt::read_image_gray_into(ref_files[i], ref_stack.data() + i * h * w, h, w);
+        }
     }
     const auto t_load_t1 = std::chrono::steady_clock::now();
     const double load_time_s = std::chrono::duration<double>(t_load_t1 - t_load_t0).count();
@@ -297,7 +368,7 @@ int run_wsvt_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
         work_w = crop_sz;
     }
 
-    const bool align = opt_bool(opts, "align", true);
+    const bool align = opt_bool(opts, "align", false);
     double align_time_s = 0.0;
     if (align) {
         const auto t_align_t0 = std::chrono::steady_clock::now();
@@ -328,13 +399,14 @@ int run_wsvt_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
     const bool calc_darkfield = opt_bool(opts, "calc_darkfield", true);
     const bool cleansave = opt_bool(opts, "cleansave", false);
     const bool save_img = opt_bool(opts, "save_img", false);
+    const int h5_deflate = opt_int(opts, "h5_deflate", 9);
     std::filesystem::create_directories(out_dir);
     wsvt::WSVT wsvt_solver(
         img_stack, ref_stack, ch, work_h, work_w,
         0, cal_half_window, n_template, n_s_extend, n_cores, n_group,
         energy, p_x, mag_factor, z, wavelet_level_cut, pyramid_level, n_iter,
         use_estimate, use_wavelet, use_gpu, calc_darkfield);
-    const auto out = wsvt_solver.run(out_dir, cleansave);
+    const auto out = wsvt_solver.run(out_dir, cleansave, h5_deflate);
     const auto t_save_t0 = std::chrono::steady_clock::now();
     if (save_img) {
         const std::filesystem::path od(out_dir);
@@ -351,19 +423,24 @@ int run_wsvt_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
     }
     const auto t_save_t1 = std::chrono::steady_clock::now();
     const double save_time_s = std::chrono::duration<double>(t_save_t1 - t_save_t0).count();
-    std::cout << "save time: " << save_time_s << " s" << std::endl;
+    const auto t_process_t1 = std::chrono::steady_clock::now();
+    const double process_wall_s = std::chrono::duration<double>(t_process_t1 - t_process_t0).count();
     std::cout << "=== Timing Summary ===" << std::endl;
-    std::cout << "  load:       " << load_time_s << " s" << std::endl;
-    std::cout << "  align:      " << align_time_s << " s" << std::endl;
-    std::cout << "  pyramid:    " << out.pyramid_time_s << " s" << std::endl;
-    std::cout << "  wavelet:    " << out.wavelet_time_s << " s" << std::endl;
-    std::cout << "  raw darkfield: " << out.darkfield_time_s << " s"
+    std::cout << "  load:             " << load_time_s << " s" << std::endl;
+    std::cout << "  align:            " << align_time_s << " s" << std::endl;
+    std::cout << "  pyramid:          " << out.pyramid_time_s << " s" << std::endl;
+    std::cout << "  template_window:  " << out.template_window_time_s << " s" << std::endl;
+    std::cout << "  wavelet:          " << out.wavelet_time_s << " s" << std::endl;
+    std::cout << "  raw darkfield:    " << out.darkfield_time_s << " s"
               << (calc_darkfield ? "" : " (disabled)") << std::endl;
-    std::cout << "  displace:   " << out.displace_time_s << " s" << std::endl;
-    std::cout << "  post-proc:  " << out.postprocess_time_s << " s" << std::endl;
-    std::cout << "  save:       " << save_time_s << " s" << std::endl;
-    std::cout << "  solver:     " << out.time_cost_s << " s" << std::endl;
-    std::cout << "  wall total: " << (load_time_s + align_time_s + out.time_cost_s + save_time_s) << " s" << std::endl;
+    std::cout << "  displace:         " << out.displace_time_s << " s" << std::endl;
+    std::cout << "  post-proc:        " << out.postprocess_time_s << " s" << std::endl;
+    std::cout << "  result write:     " << out.result_write_time_s << " s"
+              << " (h5_deflate=" << h5_deflate << ")" << std::endl;
+    std::cout << "  optional_image_save: " << save_time_s << " s" << std::endl;
+    std::cout << "  solver:           " << out.time_cost_s << " s" << std::endl;
+    std::cout << "  wall total:       " << (load_time_s + align_time_s + out.time_cost_s + out.result_write_time_s + save_time_s) << " s" << std::endl;
+    std::cout << "  process wall:     " << process_wall_s << " s" << std::endl;
     std::cout << "wsvt_dir done: " << out.h << "x" << out.w << std::endl;
     return 0;
 }

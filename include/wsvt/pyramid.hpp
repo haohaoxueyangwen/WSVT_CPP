@@ -28,6 +28,9 @@ struct PyramidLevel {
 struct PyramidResult {
     std::vector<PyramidLevel> ref_levels;
     std::vector<PyramidLevel> img_levels;
+    double template_window_time_s = 0.0;
+    double downsample_time_s = 0.0;
+    double normalize_time_s = 0.0;
 };
 
 [[nodiscard]] PyramidResult pyramid_data(

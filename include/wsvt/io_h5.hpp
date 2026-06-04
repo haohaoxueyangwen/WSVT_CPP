@@ -19,7 +19,8 @@ struct H5ItemF32 {
 void write_h5(
     const std::string& result_path,
     const std::string& file_name,
-    const std::vector<H5ItemF32>& data_dict);
+    const std::vector<H5ItemF32>& data_dict,
+    int compress_level = 9);
 
 NdArrayF32 read_h5(
     const std::string& file_path,

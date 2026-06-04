@@ -137,6 +137,55 @@ TEST_CASE("wavelet_transform_hwd matches PyWavelets db3 zero-mode golden values"
     }
 }
 
+TEST_CASE("wavelet_transform_hwd_pair matches separate transforms", "[wavelet][hwd][pair]") {
+    constexpr std::size_t depth = 25, h = 64, w = 64;
+    std::vector<float> img_signal(h * w * depth);
+    std::vector<float> ref_signal(h * w * depth);
+    for (std::size_t i = 0; i < img_signal.size(); ++i) {
+        img_signal[i] = std::sin(static_cast<float>(i) * 0.07f) + 0.5f * std::cos(static_cast<float>(i) * 0.13f);
+        ref_signal[i] = std::cos(static_cast<float>(i) * 0.11f) - 0.3f * std::sin(static_cast<float>(i) * 0.05f);
+    }
+
+    for (auto wavelet : {WaveletFamily::Db2, WaveletFamily::Db3, WaveletFamily::Db6}) {
+        DYNAMIC_SECTION("wavelet=" << static_cast<int>(wavelet)) {
+            for (const int w_level : {1, 2, 3}) {
+                for (const int return_level : {1, 2}) {
+                    if (return_level > w_level + 1) continue;
+                    DYNAMIC_SECTION("level=" << w_level << "_return=" << return_level) {
+                        auto pair = wavelet_transform_hwd_pair(
+                            img_signal, ref_signal, h, w, depth, wavelet, w_level, return_level);
+                        auto img_sep = wavelet_transform_hwd(
+                            img_signal, h, w, depth, wavelet, w_level, return_level);
+                        auto ref_sep = wavelet_transform_hwd(
+                            ref_signal, h, w, depth, wavelet, w_level, return_level);
+
+                        REQUIRE(pair.img.out_h == img_sep.out_h);
+                        REQUIRE(pair.img.out_w == img_sep.out_w);
+                        REQUIRE(pair.img.out_depth == img_sep.out_depth);
+                        REQUIRE(pair.ref.out_h == ref_sep.out_h);
+                        REQUIRE(pair.ref.out_w == ref_sep.out_w);
+                        REQUIRE(pair.ref.out_depth == ref_sep.out_depth);
+                        REQUIRE(pair.img.level_name == img_sep.level_name);
+                        REQUIRE(pair.ref.level_name == ref_sep.level_name);
+
+                        REQUIRE(pair.img.coeffs_filter.size() == img_sep.coeffs_filter.size());
+                        REQUIRE(pair.ref.coeffs_filter.size() == ref_sep.coeffs_filter.size());
+
+                        for (std::size_t i = 0; i < img_sep.coeffs_filter.size(); ++i) {
+                            REQUIRE_THAT(static_cast<double>(pair.img.coeffs_filter[i]),
+                                         Catch::Matchers::WithinAbs(static_cast<double>(img_sep.coeffs_filter[i]), 1e-6));
+                        }
+                        for (std::size_t i = 0; i < ref_sep.coeffs_filter.size(); ++i) {
+                            REQUIRE_THAT(static_cast<double>(pair.ref.coeffs_filter[i]),
+                                         Catch::Matchers::WithinAbs(static_cast<double>(ref_sep.coeffs_filter[i]), 1e-6));
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 TEST_CASE("wavelet_add_list_for_depth matches Python reference thresholds", "[wavelet]") {
     REQUIRE(wavelet_add_list_for_depth(49) == std::vector<int>{0, 2, 2, 2, 2, 2});
     REQUIRE(wavelet_add_list_for_depth(50) == std::vector<int>{0, 2, 2, 2, 2, 2});

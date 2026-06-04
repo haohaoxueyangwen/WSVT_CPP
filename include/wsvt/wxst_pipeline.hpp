@@ -27,6 +27,13 @@ struct WXSTOutput {
     double wavelet_time_s = 0.0;
     double displace_time_s = 0.0;
     double postprocess_time_s = 0.0;
+    double template_window_time_s = 0.0;
+    double post_transmission_time_s = 0.0;
+    double post_crop_sign_time_s = 0.0;
+    double post_dpc_conv_time_s = 0.0;
+    double post_phase_recovery_time_s = 0.0;
+    double result_write_time_s = 0.0;
+    double process_wall_s = 0.0;
     double load_time_s = 0.0;
     double save_time_s = 0.0;
 };
@@ -57,7 +64,7 @@ public:
     PyramidResult pyramid_data();
     PyramidResult wavelet_data();
     WXSTOutput solver();
-    WXSTOutput run(const std::string& result_path = "");
+    WXSTOutput run(const std::string& result_path = "", int h5_deflate = 9);
 
 private:
     std::vector<float> resampling_spline(const std::vector<float>& img, std::size_t in_h, std::size_t in_w, std::size_t out_h, std::size_t out_w) const;
@@ -99,6 +106,7 @@ private:
     std::vector<float> displace_estimate_y_;
     std::vector<float> displace_estimate_x_;
     double last_pyramid_time_s_;
+    double last_template_window_time_s_ = 0.0;
     double last_wavelet_time_s_;
 };
 

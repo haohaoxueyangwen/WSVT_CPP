@@ -313,6 +313,175 @@ WaveletResult wavelet_transform_hwd_streamed(
     return result;
 }
 
+WaveletPairResult wavelet_transform_hwd_pair(
+    std::span<const float> img_hwd,
+    std::span<const float> ref_hwd,
+    std::size_t h, std::size_t w, std::size_t depth_in,
+    WaveletFamily wavelet, int w_level, int return_level) {
+    return wavelet_transform_hwd_pair_streamed(img_hwd, ref_hwd, h, w, depth_in,
+                                               wavelet, w_level, return_level);
+}
+
+WaveletPairResult wavelet_transform_hwd_pair_streamed(
+    std::span<const float> img_hwd,
+    std::span<const float> ref_hwd,
+    std::size_t h, std::size_t w, std::size_t depth_in,
+    WaveletFamily wavelet, int w_level, int return_level) {
+    if (img_hwd.size() != h * w * depth_in) {
+        throw std::invalid_argument("wavelet_transform_hwd_pair: img size mismatch");
+    }
+    if (ref_hwd.size() != h * w * depth_in) {
+        throw std::invalid_argument("wavelet_transform_hwd_pair: ref size mismatch");
+    }
+    if (w_level < 0) {
+        throw std::invalid_argument("wavelet_transform_hwd_pair: w_level must be non-negative");
+    }
+
+    std::vector<float> dec_lo, dec_hi;
+    get_wavelet_filters(wavelet, dec_lo, dec_hi);
+
+    const std::size_t filt_len = dec_lo.size();
+    const std::size_t plane = h * w;
+    std::vector<std::size_t> detail_depths(static_cast<std::size_t>(w_level));
+    std::size_t cur_depth_for_shape = depth_in;
+    for (int lv = 0; lv < w_level; ++lv) {
+        const std::size_t next_depth = (cur_depth_for_shape + filt_len - 1) / 2;
+        detail_depths[static_cast<std::size_t>(lv)] = next_depth;
+        cur_depth_for_shape = next_depth;
+    }
+
+    const int total_levels = w_level + 1;
+    const int effective_return_level = std::clamp(return_level, 1, total_levels);
+    const int start_idx = total_levels - effective_return_level;
+
+    std::size_t out_depth = 0;
+    std::vector<std::size_t> detail_offsets(static_cast<std::size_t>(w_level), 0);
+    std::vector<bool> keep_detail(static_cast<std::size_t>(w_level), false);
+    for (int lv = 0; lv < w_level; ++lv) {
+        if (lv >= start_idx) {
+            keep_detail[static_cast<std::size_t>(lv)] = true;
+            detail_offsets[static_cast<std::size_t>(lv)] = out_depth;
+            out_depth += detail_depths[static_cast<std::size_t>(lv)];
+        }
+    }
+    const std::size_t approx_offset = out_depth;
+    const std::size_t approx_depth = cur_depth_for_shape;
+    out_depth += approx_depth;
+
+    AlignedVector<float> img_out(plane * out_depth, 0.0f);
+    AlignedVector<float> ref_out(plane * out_depth, 0.0f);
+
+    if (w_level == 0) {
+#pragma omp parallel for schedule(static)
+        for (std::size_t pixel = 0; pixel < plane; ++pixel) {
+            const float* img_src = img_hwd.data() + pixel * depth_in;
+            const float* ref_src = ref_hwd.data() + pixel * depth_in;
+            float* img_dst = img_out.data() + pixel * out_depth + approx_offset;
+            float* ref_dst = ref_out.data() + pixel * out_depth + approx_offset;
+            std::memcpy(img_dst, img_src, depth_in * sizeof(float));
+            std::memcpy(ref_dst, ref_src, depth_in * sizeof(float));
+        }
+    } else {
+        const float* img_cur = img_hwd.data();
+        const float* ref_cur = ref_hwd.data();
+        std::size_t cur_depth = depth_in;
+        std::vector<float> img_approx_buf;
+        std::vector<float> ref_approx_buf;
+
+        for (int lv = 0; lv < w_level; ++lv) {
+            const std::size_t next_depth = detail_depths[static_cast<std::size_t>(lv)];
+            std::vector<float> img_approx(plane * next_depth);
+            std::vector<float> ref_approx(plane * next_depth);
+            const bool write_detail = keep_detail[static_cast<std::size_t>(lv)];
+            const std::size_t detail_offset = detail_offsets[static_cast<std::size_t>(lv)];
+
+#pragma omp parallel for schedule(static)
+            for (std::size_t pixel = 0; pixel < plane; ++pixel) {
+                const float* img_in = img_cur + pixel * cur_depth;
+                const float* ref_in = ref_cur + pixel * cur_depth;
+                float* img_a = img_approx.data() + pixel * next_depth;
+                float* ref_a = ref_approx.data() + pixel * next_depth;
+                const auto offset = static_cast<long long>(filt_len - 2);
+                if (write_detail) {
+                    float* img_d = img_out.data() + pixel * out_depth + detail_offset;
+                    float* ref_d = ref_out.data() + pixel * out_depth + detail_offset;
+                    for (std::size_t oc = 0; oc < next_depth; ++oc) {
+                        float img_acc = 0.0f, img_diff = 0.0f;
+                        float ref_acc = 0.0f, ref_diff = 0.0f;
+                        for (std::size_t k = 0; k < filt_len; ++k) {
+                            const auto ic_signed = static_cast<long long>(oc * 2 + k) - offset;
+                            if (ic_signed < 0 || ic_signed >= static_cast<long long>(cur_depth)) {
+                                continue;
+                            }
+                            const auto ic = static_cast<std::size_t>(ic_signed);
+                            const std::size_t fk = filt_len - 1 - k;
+                            const float lo = dec_lo[fk];
+                            const float hi = dec_hi[fk];
+                            img_acc += lo * img_in[ic];
+                            img_diff += hi * img_in[ic];
+                            ref_acc += lo * ref_in[ic];
+                            ref_diff += hi * ref_in[ic];
+                        }
+                        img_a[oc] = img_acc;
+                        img_d[oc] = img_diff;
+                        ref_a[oc] = ref_acc;
+                        ref_d[oc] = ref_diff;
+                    }
+                } else {
+                    for (std::size_t oc = 0; oc < next_depth; ++oc) {
+                        float img_acc = 0.0f;
+                        float ref_acc = 0.0f;
+                        for (std::size_t k = 0; k < filt_len; ++k) {
+                            const auto ic_signed = static_cast<long long>(oc * 2 + k) - offset;
+                            if (ic_signed < 0 || ic_signed >= static_cast<long long>(cur_depth)) {
+                                continue;
+                            }
+                            const auto ic = static_cast<std::size_t>(ic_signed);
+                            const std::size_t fk = filt_len - 1 - k;
+                            const float lo = dec_lo[fk];
+                            img_acc += lo * img_in[ic];
+                            ref_acc += lo * ref_in[ic];
+                        }
+                        img_a[oc] = img_acc;
+                        ref_a[oc] = ref_acc;
+                    }
+                }
+            }
+
+            img_approx_buf = std::move(img_approx);
+            ref_approx_buf = std::move(ref_approx);
+            img_cur = img_approx_buf.data();
+            ref_cur = ref_approx_buf.data();
+            cur_depth = next_depth;
+        }
+
+#pragma omp parallel for schedule(static)
+        for (std::size_t pixel = 0; pixel < plane; ++pixel) {
+            const float* img_src = img_approx_buf.data() + pixel * approx_depth;
+            const float* ref_src = ref_approx_buf.data() + pixel * approx_depth;
+            float* img_dst = img_out.data() + pixel * out_depth + approx_offset;
+            float* ref_dst = ref_out.data() + pixel * out_depth + approx_offset;
+            std::memcpy(img_dst, img_src, approx_depth * sizeof(float));
+            std::memcpy(ref_dst, ref_src, approx_depth * sizeof(float));
+        }
+    }
+
+    auto level_names = build_level_name(w_level, effective_return_level);
+
+    WaveletPairResult pair_result;
+    pair_result.img.coeffs_filter = std::move(img_out);
+    pair_result.img.out_h = h;
+    pair_result.img.out_w = w;
+    pair_result.img.out_depth = out_depth;
+    pair_result.img.level_name = level_names;
+    pair_result.ref.coeffs_filter = std::move(ref_out);
+    pair_result.ref.out_h = h;
+    pair_result.ref.out_w = w;
+    pair_result.ref.out_depth = out_depth;
+    pair_result.ref.level_name = level_names;
+    return pair_result;
+}
+
 WaveletTaskResult wavedec_func(std::span<const float> img, std::size_t ch, std::size_t h,
                                std::size_t w, const std::vector<std::size_t>& y_list,
                                WaveletFamily wavelet, int w_level, int return_level) {

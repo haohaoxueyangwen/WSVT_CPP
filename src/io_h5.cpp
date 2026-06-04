@@ -33,8 +33,13 @@ void check_shape_and_data(const NdArrayF32& arr) {
 void write_h5(
     const std::string& result_path,
     const std::string& file_name,
-    const std::vector<H5ItemF32>& data_dict) {
+    const std::vector<H5ItemF32>& data_dict,
+    int compress_level) {
 #if defined(WSVT_HAS_HDF5)
+    if (compress_level < 0 || compress_level > 9) {
+        throw std::invalid_argument("hdf5 deflate level must be in [0, 9]");
+    }
+
     std::filesystem::path out_dir(result_path);
     if (!std::filesystem::exists(out_dir)) {
         std::filesystem::create_directories(out_dir);
@@ -65,8 +70,20 @@ void write_h5(
             H5Fclose(file_id);
             throw std::runtime_error("failed to create property list");
         }
-        H5Pset_chunk(plist, static_cast<int>(dims.size()), dims.data());
-        H5Pset_deflate(plist, 9);
+        if (compress_level > 0) {
+            if (H5Pset_chunk(plist, static_cast<int>(dims.size()), dims.data()) < 0) {
+                H5Pclose(plist);
+                H5Sclose(space_id);
+                H5Fclose(file_id);
+                throw std::runtime_error("failed to set hdf5 chunk layout");
+            }
+            if (H5Pset_deflate(plist, static_cast<unsigned>(compress_level)) < 0) {
+                H5Pclose(plist);
+                H5Sclose(space_id);
+                H5Fclose(file_id);
+                throw std::runtime_error("failed to set hdf5 deflate filter");
+            }
+        }
 
         const hid_t dset_id = H5Dcreate2(
             file_id, item.key.c_str(), H5T_IEEE_F32LE, space_id,

@@ -346,6 +346,9 @@ PyramidResult build_pyramid_single(
     prColor("  pyramid detail: downsample=" + std::to_string(total_downsample_s) +
             "s tmpl_win=" + std::to_string(total_tmpl_s) +
             "s normalize=" + std::to_string(total_norm_s) + "s", "light_purple");
+    result.downsample_time_s = static_cast<double>(total_downsample_s);
+    result.template_window_time_s = static_cast<double>(total_tmpl_s);
+    result.normalize_time_s = static_cast<double>(total_norm_s);
     return result;
 }
 
@@ -403,6 +406,15 @@ PyramidResult pyramid_data(
     PyramidResult merged;
     merged.ref_levels = std::move(ref_result.ref_levels);
     merged.img_levels = std::move(img_result.ref_levels);
+    if (use_nested_sections) {
+        merged.downsample_time_s = std::max(ref_result.downsample_time_s, img_result.downsample_time_s);
+        merged.template_window_time_s = std::max(ref_result.template_window_time_s, img_result.template_window_time_s);
+        merged.normalize_time_s = std::max(ref_result.normalize_time_s, img_result.normalize_time_s);
+    } else {
+        merged.downsample_time_s = ref_result.downsample_time_s + img_result.downsample_time_s;
+        merged.template_window_time_s = ref_result.template_window_time_s + img_result.template_window_time_s;
+        merged.normalize_time_s = ref_result.normalize_time_s + img_result.normalize_time_s;
+    }
     return merged;
 }
 

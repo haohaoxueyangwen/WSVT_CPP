@@ -17,6 +17,7 @@
 #include <cmath>
 #include <iomanip>
 #include <limits>
+#include <memory>
 #include <numeric>
 #include <sstream>
 #include <span>
@@ -116,6 +117,7 @@ PyramidResult WXST::wavelet_data() {
     auto p = pyramid_data();
     const auto pyr_t1 = std::chrono::steady_clock::now();
     last_pyramid_time_s_ = std::chrono::duration<double>(pyr_t1 - pyr_t0).count();
+    last_template_window_time_s_ = p.template_window_time_s;
     prColor("pyramid time: " + std::to_string(last_pyramid_time_s_) + " s", "light_purple");
     last_wavelet_time_s_ = 0.0;
     if (use_wavelet_) {
@@ -395,6 +397,7 @@ WXSTOutput WXST::solver() {
         const double ratio = static_cast<double>(img_data_[i]) / ref_safe;
         transmission[i] = static_cast<float>(std::clamp(ratio, 0.01, 10.0));
     }
+    const auto t_xmsn1 = std::chrono::steady_clock::now();
     const std::size_t pad_crop = static_cast<std::size_t>(cal_half_window_);
     auto displace_y_crop_img = crop_2d(
         ImageView2D<const float>{displace_y.data(), {h_, w_}}, pad_crop);
@@ -411,6 +414,7 @@ WXSTOutput WXST::solver() {
     for (float& v : displace_x_crop) v = -v;
     const double mean_dy = mean_2d(displace_y_crop);
     const double mean_dx = mean_2d(displace_x_crop);
+    const auto t_dpc0 = std::chrono::steady_clock::now();
     std::vector<float> dpc_y(displace_y_crop.size(), 0.0f);
     std::vector<float> dpc_x(displace_x_crop.size(), 0.0f);
     const double scale = p_x_ / z_;
@@ -418,6 +422,7 @@ WXSTOutput WXST::solver() {
         dpc_y[i] = static_cast<float>((static_cast<double>(displace_y_crop[i]) - mean_dy) * scale);
         dpc_x[i] = static_cast<float>((static_cast<double>(displace_x_crop[i]) - mean_dx) * scale);
     }
+    const auto t_phase0 = std::chrono::steady_clock::now();
     auto phase = frankot_chellappa(
         ImageView2D<const float>{dpc_x.data(), {out_h, out_w}},
         ImageView2D<const float>{dpc_y.data(), {out_h, out_w}}).take();
@@ -425,7 +430,15 @@ WXSTOutput WXST::solver() {
     for (float& v : phase) v = static_cast<float>(-static_cast<double>(v) * phase_scale);
     const auto post_t1 = std::chrono::steady_clock::now();
     const double postprocess_time_s = std::chrono::duration<double>(post_t1 - post_t0).count();
+    const double transmission_time_s = std::chrono::duration<double>(t_xmsn1 - post_t0).count();
+    const double crop_sign_time_s = std::chrono::duration<double>(t_dpc0 - t_xmsn1).count();
+    const double dpc_conv_time_s = std::chrono::duration<double>(t_phase0 - t_dpc0).count();
+    const double phase_recovery_time_s = std::chrono::duration<double>(post_t1 - t_phase0).count();
     prColor("post-process time: " + std::to_string(postprocess_time_s) + " s", "light_purple");
+    prColor("  post detail: transmission=" + std::to_string(transmission_time_s) +
+            "s crop_sign=" + std::to_string(crop_sign_time_s) +
+            "s dpc_conv=" + std::to_string(dpc_conv_time_s) +
+            "s phase_recovery=" + std::to_string(phase_recovery_time_s) + "s", "light_purple");
 #ifdef _OPENMP
     omp_set_num_threads(solver_threads);
 #endif
@@ -433,6 +446,9 @@ WXSTOutput WXST::solver() {
     const double time_cost_s = std::chrono::duration<double>(processing_t1 - processing_t0).count();
     prColor("total time: " + std::to_string(time_cost_s) + " s", "light_purple");
     prColor("  pyramid:    " + std::to_string(pyramid_time) + " s", "light_purple");
+    if (last_template_window_time_s_ > 0.0) {
+        prColor("  tmpl_win:   " + std::to_string(last_template_window_time_s_) + " s", "light_purple");
+    }
     prColor("  wavelet:    " + std::to_string(wavelet_time) + " s", "light_purple");
     prColor("  displace:   " + std::to_string(displace_time_s) + " s", "light_purple");
     prColor("  post-proc:  " + std::to_string(postprocess_time_s) + " s", "light_purple");
@@ -453,15 +469,20 @@ WXSTOutput WXST::solver() {
         pyramid_time,
         wavelet_time,
         displace_time_s,
-        postprocess_time_s
+        postprocess_time_s,
+        last_template_window_time_s_,
+        transmission_time_s,
+        crop_sign_time_s,
+        dpc_conv_time_s,
+        phase_recovery_time_s
     };
 }
 
-WXSTOutput WXST::run(const std::string& result_path) {
+WXSTOutput WXST::run(const std::string& result_path, int h5_deflate) {
     const std::string started_at_utc = now_iso8601_utc();
     auto out = solver();
-    const std::string ended_at_utc = now_iso8601_utc();
     if (!result_path.empty()) {
+        const auto t_write_t0 = std::chrono::steady_clock::now();
         std::vector<H5ItemF32> items{
             H5ItemF32{"displace_x", NdArrayF32{{out.h, out.w}, out.displace_x}},
             H5ItemF32{"displace_y", NdArrayF32{{out.h, out.w}, out.displace_y}},
@@ -471,10 +492,12 @@ WXSTOutput WXST::run(const std::string& result_path) {
             H5ItemF32{"transmission_image", NdArrayF32{{out.transmission_h, out.transmission_w}, out.transmission}},
             H5ItemF32{"darkfield_nd", NdArrayF32{{out.h, out.w}, out.darkfield_nd}}
         };
-        write_h5(result_path, "WXST_result", items);
+        write_h5(result_path, "WXST_result", items, h5_deflate);
 
         const double phase_rms = stddev_2d(out.phase);
         const double phase_pv = pv_2d(out.phase);
+        const auto t_write_t1 = std::chrono::steady_clock::now();
+        out.result_write_time_s = std::chrono::duration<double>(t_write_t1 - t_write_t0).count();
 
         JsonObject parameter_dict;
         parameter_dict["half_window"] = static_cast<double>(cal_half_window_);
@@ -490,9 +513,16 @@ WXSTOutput WXST::run(const std::string& result_path) {
         parameter_dict["n_iter"] = static_cast<double>(n_iter_);
         parameter_dict["time_cost"] = out.time_cost_s;
         parameter_dict["pyramid_time"] = out.pyramid_time_s;
+        parameter_dict["template_window_time"] = out.template_window_time_s;
         parameter_dict["wavelet_time"] = out.wavelet_time_s;
         parameter_dict["displace_time"] = out.displace_time_s;
         parameter_dict["postprocess_time"] = out.postprocess_time_s;
+        parameter_dict["post_transmission_time"] = out.post_transmission_time_s;
+        parameter_dict["post_crop_sign_time"] = out.post_crop_sign_time_s;
+        parameter_dict["post_dpc_conv_time"] = out.post_dpc_conv_time_s;
+        parameter_dict["post_phase_recovery_time"] = out.post_phase_recovery_time_s;
+        parameter_dict["result_write_time"] = out.result_write_time_s;
+        parameter_dict["h5_deflate"] = static_cast<double>(h5_deflate);
         parameter_dict["use_wavelet"] = use_wavelet_;
         parameter_dict["use_GPU"] = use_gpu_;
         parameter_dict["wavelet_level_cut"] = static_cast<double>(wavelet_level_cut_);
@@ -511,9 +541,16 @@ WXSTOutput WXST::run(const std::string& result_path) {
         events["started_at_utc"] = started_at_utc;
         events["processing_time_s"] = out.time_cost_s;
         events["pyramid_time_s"] = out.pyramid_time_s;
+        events["template_window_time_s"] = out.template_window_time_s;
         events["wavelet_time_s"] = out.wavelet_time_s;
         events["displace_time_s"] = out.displace_time_s;
         events["postprocess_time_s"] = out.postprocess_time_s;
+        events["post_transmission_time_s"] = out.post_transmission_time_s;
+        events["post_crop_sign_time_s"] = out.post_crop_sign_time_s;
+        events["post_dpc_conv_time_s"] = out.post_dpc_conv_time_s;
+        events["post_phase_recovery_time_s"] = out.post_phase_recovery_time_s;
+        events["result_write_time_s"] = out.result_write_time_s;
+        events["h5_deflate"] = static_cast<double>(h5_deflate);
         JsonArray stage_records;
         JsonObject pyr_stage;
         pyr_stage["stage"] = "pyramid";
@@ -536,7 +573,7 @@ WXSTOutput WXST::run(const std::string& result_path) {
         solver_stage["elapsed_s"] = out.time_cost_s;
         stage_records.emplace_back(solver_stage);
         events["stages"] = stage_records;
-        events["ended_at_utc"] = ended_at_utc;
+        events["ended_at_utc"] = now_iso8601_utc();
         write_json(result_path, "WXST_events", events);
     }
     return out;

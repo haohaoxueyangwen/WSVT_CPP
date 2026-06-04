@@ -13,6 +13,8 @@ option(WSVT_WITH_FFTW   "Enable FFTW for fast Frankot-Chellappa recovery" ON)
 option(BUILD_SHARED_LIBS "Build wsvt_core as a shared library"            OFF)
 option(WSVT_BUILD_TESTS "Build unit tests (requires Catch2)"              OFF)
 option(WSVT_BUILD_BENCH "Build micro-benchmarks (requires nanobench)"     OFF)
+option(WSVT_DISABLE_AUTOVEC "Disable compiler auto-vectorization for SIMD ablation builds" OFF)
+option(WSVT_VEC_REPORT "Emit compiler vectorization diagnostics for wsvt_core" OFF)
 
 # ── Core library ──────────────────────────────────────────────
 add_library(wsvt_core
@@ -64,6 +66,31 @@ else()
         $<$<CONFIG:Release>:-O3 -march=native -funroll-loops>
         $<$<CONFIG:Release>:-fno-math-errno -ffinite-math-only -fno-signed-zeros -fno-trapping-math>
     )
+endif()
+
+if(WSVT_DISABLE_AUTOVEC)
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+        target_compile_options(wsvt_core PRIVATE -fno-tree-vectorize -fno-tree-slp-vectorize)
+    elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        target_compile_options(wsvt_core PRIVATE -fno-vectorize -fno-slp-vectorize)
+    else()
+        message(WARNING "WSVT_DISABLE_AUTOVEC is not configured for compiler ${CMAKE_CXX_COMPILER_ID}")
+    endif()
+endif()
+
+if(WSVT_VEC_REPORT)
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+        target_compile_options(wsvt_core PRIVATE
+            -fopt-info-vec-all=${CMAKE_BINARY_DIR}/vec-all.log
+        )
+    elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        target_compile_options(wsvt_core PRIVATE
+            -Rpass=loop-vectorize
+            -Rpass-missed=loop-vectorize
+        )
+    else()
+        message(WARNING "WSVT_VEC_REPORT is not configured for compiler ${CMAKE_CXX_COMPILER_ID}")
+    endif()
 endif()
 
 # ── OpenMP ────────────────────────────────────────────────────

@@ -4,6 +4,7 @@
 #include "wsvt/wxst_pipeline.hpp"
 
 #include <cstddef>
+#include <stdexcept>
 #include <vector>
 
 using namespace wsvt;
@@ -67,4 +68,78 @@ TEST_CASE("WXST preserves Python full-ROI transmission semantics", "[wxst][trans
     for (const float value : result.transmission) {
         REQUIRE_THAT(static_cast<double>(value), Catch::Matchers::WithinAbs(1.25, 1e-6));
     }
+}
+
+TEST_CASE("WXST wavelet_impl variants produce matching small-solver output", "[wxst][wavelet_impl]") {
+    constexpr std::size_t h = 32, w = 32;
+    std::vector<float> img(h * w);
+    std::vector<float> ref(h * w);
+    for (std::size_t y = 0; y < h; ++y) {
+        for (std::size_t x = 0; x < w; ++x) {
+            const std::size_t idx = y * w + x;
+            ref[idx] = 20.0f + static_cast<float>((y * 3 + x * 5) % 17);
+            img[idx] = ref[y * w + ((x + 1) % w)] + 0.01f * static_cast<float>(y);
+        }
+    }
+
+    auto run_impl = [&](int wavelet_impl) {
+        WXST wxst(img, ref, h, w,
+                  /*m_image=*/32, /*n_s=*/1, /*cal_half_window=*/2,
+                  /*n_s_extend=*/2, /*n_cores=*/2, /*n_group=*/2,
+                  /*energy=*/14000.0, /*p_x=*/0.65e-6, /*z=*/0.5,
+                  /*wavelet_level_cut=*/2, /*pyramid_level=*/1,
+                  /*n_iter=*/1, /*use_estimate=*/false, /*use_wavelet=*/true,
+                  /*use_gpu=*/0, wavelet_impl);
+        return wxst.solver();
+    };
+
+    const auto streamed = run_impl(0);
+    const auto planned = run_impl(1);
+    const auto pixelchain = run_impl(2);
+
+    REQUIRE(planned.h == streamed.h);
+    REQUIRE(planned.w == streamed.w);
+    REQUIRE(pixelchain.h == streamed.h);
+    REQUIRE(pixelchain.w == streamed.w);
+
+    auto require_close = [](const std::vector<float>& actual,
+                            const std::vector<float>& expected) {
+        REQUIRE(actual.size() == expected.size());
+        for (std::size_t i = 0; i < expected.size(); ++i) {
+            REQUIRE_THAT(static_cast<double>(actual[i]),
+                         Catch::Matchers::WithinAbs(static_cast<double>(expected[i]), 1e-5));
+        }
+    };
+
+    require_close(planned.displace_x, streamed.displace_x);
+    require_close(planned.displace_y, streamed.displace_y);
+    require_close(planned.dpc_x, streamed.dpc_x);
+    require_close(planned.dpc_y, streamed.dpc_y);
+    require_close(planned.phase, streamed.phase);
+    require_close(planned.transmission, streamed.transmission);
+    require_close(planned.darkfield_nd, streamed.darkfield_nd);
+
+    require_close(pixelchain.displace_x, streamed.displace_x);
+    require_close(pixelchain.displace_y, streamed.displace_y);
+    require_close(pixelchain.dpc_x, streamed.dpc_x);
+    require_close(pixelchain.dpc_y, streamed.dpc_y);
+    require_close(pixelchain.phase, streamed.phase);
+    require_close(pixelchain.transmission, streamed.transmission);
+    require_close(pixelchain.darkfield_nd, streamed.darkfield_nd);
+}
+
+TEST_CASE("WXST rejects invalid wavelet_impl", "[wxst][wavelet_impl]") {
+    constexpr std::size_t h = 8, w = 8;
+    const std::vector<float> img(h * w, 1.0f);
+    const std::vector<float> ref(h * w, 1.0f);
+
+    REQUIRE_THROWS_AS(
+        WXST(img, ref, h, w,
+             /*m_image=*/8, /*n_s=*/1, /*cal_half_window=*/1,
+             /*n_s_extend=*/1, /*n_cores=*/1, /*n_group=*/1,
+             /*energy=*/14000.0, /*p_x=*/0.65e-6, /*z=*/0.5,
+             /*wavelet_level_cut=*/1, /*pyramid_level=*/0,
+             /*n_iter=*/1, /*use_estimate=*/false, /*use_wavelet=*/true,
+             /*use_gpu=*/0, /*wavelet_impl=*/99),
+        std::invalid_argument);
 }

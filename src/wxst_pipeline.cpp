@@ -78,6 +78,9 @@ WXST::WXST(
     if (img_data_.size() != h_ * w_ || ref_data_.size() != h_ * w_) {
         throw std::invalid_argument("WXST init size mismatch");
     }
+    if (wavelet_impl_ < 0 || wavelet_impl_ > 2) {
+        throw std::invalid_argument("WXST wavelet_impl must be 0=streamed, 1=planned, or 2=pixelchain");
+    }
     if (use_gpu_) {
         prColor("Use GPU found. Enable multi-resolution", "cyan");
     } else {
@@ -586,6 +589,7 @@ WXSTOutput WXST::run(const std::string& result_path, int h5_deflate) {
         parameter_dict["cpu_cores"] = static_cast<double>(n_cores_);
         parameter_dict["n_group"] = static_cast<double>(n_group_);
         parameter_dict["wavelet_level"] = static_cast<double>(wavelet_level_);
+        parameter_dict["wavelet_impl"] = static_cast<double>(wavelet_impl_);
         parameter_dict["pyramid_level"] = static_cast<double>(pyramid_level_);
         parameter_dict["n_iter"] = static_cast<double>(n_iter_);
         parameter_dict["time_cost"] = out.time_cost_s;
@@ -620,6 +624,7 @@ WXSTOutput WXST::run(const std::string& result_path, int h5_deflate) {
         events["pyramid_time_s"] = out.pyramid_time_s;
         events["template_window_time_s"] = out.template_window_time_s;
         events["wavelet_time_s"] = out.wavelet_time_s;
+        events["wavelet_impl"] = static_cast<double>(wavelet_impl_);
         events["displace_time_s"] = out.displace_time_s;
         events["postprocess_time_s"] = out.postprocess_time_s;
         events["post_transmission_time_s"] = out.post_transmission_time_s;

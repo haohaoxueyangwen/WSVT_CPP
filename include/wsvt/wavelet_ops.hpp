@@ -122,6 +122,20 @@ struct DwtLevelPlan {
     int w_level,
     WaveletFamily wavelet);
 
+/// Pixelchain wavelet transform: each pixel's full DWT chain runs in
+/// thread-local scratch (~1 KB), eliminating all global intermediate
+/// approx buffers.  Single OpenMP parallel-for, no internal barriers.
+/// Mathematically identical to wavelet_transform_hwd_planned.
+[[nodiscard]] WaveletResult wavelet_transform_hwd_pixelchain(
+    std::span<const float> img_hwd,
+    std::size_t h,
+    std::size_t w,
+    std::size_t depth_in,
+    WaveletFamily wavelet,
+    int w_level,
+    int return_level,
+    const std::vector<DwtLevelPlan>& plans);
+
 /// HWD-native wavelet transform using precomputed plans and a single OpenMP
 /// parallel region.  Mathematically identical to wavelet_transform_hwd.
 [[nodiscard]] WaveletResult wavelet_transform_hwd_planned(

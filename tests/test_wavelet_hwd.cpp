@@ -245,6 +245,38 @@ TEST_CASE("wavelet_transform_hwd_planned w_level=0", "[wavelet][hwd][planned]") 
     }
 }
 
+TEST_CASE("wavelet_transform_hwd_pixelchain matches planned bitwise", "[wavelet][hwd][pixelchain]") {
+    constexpr std::size_t depth = 33, h = 7, w = 5;
+    const auto signal_chw = make_signal_chw(depth, h, w);
+    const auto signal_hwd = chw_to_hwd(signal_chw, depth, h, w);
+
+    for (auto wavelet : {WaveletFamily::Db2, WaveletFamily::Db3, WaveletFamily::Db6}) {
+        DYNAMIC_SECTION("wavelet=" << static_cast<int>(wavelet)) {
+            for (int w_level = 1; w_level <= 3; ++w_level) {
+                for (int ret : {1, w_level + 1}) {
+                    DYNAMIC_SECTION("w_level=" << w_level << " ret=" << ret) {
+                        auto plans = compute_wavelet_plan(depth, w_level, wavelet);
+                        auto planned = wavelet_transform_hwd_planned(
+                            signal_hwd, h, w, depth, wavelet, w_level, ret, plans);
+                        auto pixelchain = wavelet_transform_hwd_pixelchain(
+                            signal_hwd, h, w, depth, wavelet, w_level, ret, plans);
+
+                        REQUIRE(pixelchain.out_depth == planned.out_depth);
+                        REQUIRE(pixelchain.coeffs_filter.size() == planned.coeffs_filter.size());
+
+                        for (std::size_t i = 0; i < planned.coeffs_filter.size(); ++i) {
+                            REQUIRE_THAT(
+                                static_cast<double>(pixelchain.coeffs_filter[i]),
+                                Catch::Matchers::WithinAbs(
+                                    static_cast<double>(planned.coeffs_filter[i]), 1e-6));
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 TEST_CASE("wavelet_add_list_for_depth matches Python reference thresholds", "[wavelet]") {
     REQUIRE(wavelet_add_list_for_depth(49) == std::vector<int>{0, 2, 2, 2, 2, 2});
     REQUIRE(wavelet_add_list_for_depth(50) == std::vector<int>{0, 2, 2, 2, 2, 2});

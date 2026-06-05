@@ -482,6 +482,125 @@ WaveletResult wavelet_transform_hwd_planned(
     return result;
 }
 
+// ── Pixelchain wavelet transform ────────────────────────────────────────────
+// Each pixel's full DWT chain runs in thread-local scratch (~1 KB), removing
+// all global intermediate approx buffers.  Single OpenMP parallel-for with
+// no internal barriers.  Mathematically identical to wavelet_transform_hwd.
+
+WaveletResult wavelet_transform_hwd_pixelchain(
+    std::span<const float> img_hwd,
+    std::size_t h, std::size_t w, std::size_t depth_in,
+    WaveletFamily wavelet, int w_level, int return_level,
+    const std::vector<DwtLevelPlan>& plans)
+{
+    if (img_hwd.size() != h * w * depth_in) {
+        throw std::invalid_argument("wavelet_transform_hwd_pixelchain: size mismatch");
+    }
+    if (w_level < 0) {
+        throw std::invalid_argument("wavelet_transform_hwd_pixelchain: w_level >= 0 required");
+    }
+    if (static_cast<std::size_t>(w_level) != plans.size()) {
+        throw std::invalid_argument("wavelet_transform_hwd_pixelchain: plans.size() != w_level");
+    }
+
+    std::vector<float> dec_lo, dec_hi;
+    get_wavelet_filters(wavelet, dec_lo, dec_hi);
+    const std::size_t filt_len = dec_lo.size();
+
+    // ── Output layout (same as planned) ──
+    const std::size_t plane = h * w;
+    std::vector<std::size_t> detail_depths(static_cast<std::size_t>(w_level));
+    std::size_t cur_depth_for_shape = depth_in;
+    for (int lv = 0; lv < w_level; ++lv) {
+        const std::size_t next_depth = (cur_depth_for_shape + filt_len - 1) / 2;
+        detail_depths[static_cast<std::size_t>(lv)] = next_depth;
+        cur_depth_for_shape = next_depth;
+    }
+
+    const int total_levels = w_level + 1;
+    const int eff_ret = std::clamp(return_level, 1, total_levels);
+    const int start_idx = total_levels - eff_ret;
+
+    std::size_t out_depth = 0;
+    std::vector<std::size_t> detail_offsets(static_cast<std::size_t>(w_level));
+    std::vector<bool> keep_detail(static_cast<std::size_t>(w_level), false);
+    for (int lv = 0; lv < w_level; ++lv) {
+        if (lv >= start_idx) {
+            keep_detail[static_cast<std::size_t>(lv)] = true;
+            detail_offsets[static_cast<std::size_t>(lv)] = out_depth;
+            out_depth += detail_depths[static_cast<std::size_t>(lv)];
+        }
+    }
+    const std::size_t approx_offset = out_depth;
+    const std::size_t approx_depth = cur_depth_for_shape;
+    out_depth += approx_depth;
+
+    AlignedVector<float> out(plane * out_depth);
+
+    if (w_level == 0) {
+        #pragma omp parallel for schedule(static)
+        for (std::size_t pixel = 0; pixel < plane; ++pixel) {
+            const float* src = img_hwd.data() + pixel * depth_in;
+            float* dst = out.data() + pixel * out_depth + approx_offset;
+            std::memcpy(dst, src, depth_in * sizeof(float));
+        }
+    } else {
+        // Thread-local double buffer: ~1 KB per thread (depth_in ≤ 121 for WXST)
+        #pragma omp parallel
+        {
+            std::vector<float> buf_a(depth_in);
+            std::vector<float> buf_b(depth_in);
+
+            #pragma omp for schedule(static)
+            for (std::size_t pixel = 0; pixel < plane; ++pixel) {
+                const float* src = img_hwd.data() + pixel * depth_in;
+                float* cur = buf_a.data();
+                float* nxt = buf_b.data();
+
+                // Load input
+                std::memcpy(cur, src, depth_in * sizeof(float));
+                std::size_t cur_depth = depth_in;
+
+                for (int lv = 0; lv < w_level; ++lv) {
+                    const auto& plan = plans[static_cast<std::size_t>(lv)];
+                    const std::size_t next_depth = detail_depths[static_cast<std::size_t>(lv)];
+
+                    float* detail_out = keep_detail[static_cast<std::size_t>(lv)]
+                        ? out.data() + pixel * out_depth + detail_offsets[static_cast<std::size_t>(lv)]
+                        : nullptr;
+
+                    for (std::size_t oc = 0; oc < next_depth; ++oc) {
+                        float a = 0.0f, d = 0.0f;
+                        for (const auto& tap : plan.oc_taps[oc]) {
+                            const float v = cur[tap.ic];
+                            a += tap.lo * v;
+                            d += tap.hi * v;
+                        }
+                        nxt[oc] = a;
+                        if (detail_out) detail_out[oc] = d;
+                    }
+
+                    // Swap: nxt becomes cur for next level
+                    std::swap(cur, nxt);
+                    cur_depth = next_depth;
+                }
+
+                // Copy final approximation
+                float* dst = out.data() + pixel * out_depth + approx_offset;
+                std::memcpy(dst, cur, approx_depth * sizeof(float));
+            }
+        }
+    }
+
+    WaveletResult result;
+    result.coeffs_filter = std::move(out);
+    result.out_h = h;
+    result.out_w = w;
+    result.out_depth = out_depth;
+    result.level_name = build_level_name(w_level, eff_ret);
+    return result;
+}
+
 WaveletPairResult wavelet_transform_hwd_pair(
     std::span<const float> img_hwd,
     std::span<const float> ref_hwd,

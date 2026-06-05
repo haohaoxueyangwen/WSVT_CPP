@@ -59,7 +59,8 @@ public:
         int n_iter = 1,
         bool use_estimate = false,
         bool use_wavelet = true,
-        int use_gpu = 0);
+        int use_gpu = 0,
+        int wavelet_impl = 0);
 
     PyramidResult pyramid_data();
     PyramidResult wavelet_data();
@@ -101,6 +102,7 @@ private:
     bool use_estimate_;
     bool use_wavelet_;
     bool use_gpu_;
+    int wavelet_impl_;  // 0=streamed, 1=planned, 2=pixelchain (future)
     int wavelet_level_;
     std::vector<int> wavelet_add_list_;
     std::vector<float> displace_estimate_y_;

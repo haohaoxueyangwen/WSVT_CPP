@@ -114,6 +114,7 @@ int run_wxst_cmd(const std::string& img_h5, const std::string& img_key, const st
     const bool use_estimate = opt_bool(opts, "use_estimate", false);
     const bool use_wavelet = opt_bool(opts, "use_wavelet", true);
     const int use_gpu = opt_bool(opts, "use_gpu", false) ? 1 : 0;
+    const int wavelet_impl = opt_int(opts, "wavelet_impl", 0);
     const bool save_img = opt_bool(opts, "save_img", false);
     const int h5_deflate = opt_int(opts, "h5_deflate", 9);
     std::filesystem::create_directories(out_dir);
@@ -121,7 +122,7 @@ int run_wxst_cmd(const std::string& img_h5, const std::string& img_key, const st
         img.data, ref.data, h, w,
         m_image, n_s, cal_half_window, n_s_extend, n_cores, n_group,
         energy, p_x, z, wavelet_level_cut, pyramid_level, n_iter,
-        use_estimate, use_wavelet, use_gpu);
+        use_estimate, use_wavelet, use_gpu, wavelet_impl);
     const auto out = wxst.run(out_dir, h5_deflate);
     const auto t_save_t0 = std::chrono::steady_clock::now();
     if (save_img) {
@@ -185,6 +186,7 @@ int run_wxst_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
     const bool use_estimate = opt_bool(opts, "use_estimate", false);
     const bool use_wavelet = opt_bool(opts, "use_wavelet", true);
     const int use_gpu = opt_bool(opts, "use_gpu", false) ? 1 : 0;
+    const int wavelet_impl = opt_int(opts, "wavelet_impl", 0);
     const bool save_img = opt_bool(opts, "save_img", false);
     const int h5_deflate = opt_int(opts, "h5_deflate", 9);
     std::filesystem::create_directories(out_dir);
@@ -192,7 +194,7 @@ int run_wxst_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
         img.data, ref.data, img.h, img.w,
         m_image, n_s, cal_half_window, n_s_extend, n_cores, n_group,
         energy, p_x, z, wavelet_level_cut, pyramid_level, n_iter,
-        use_estimate, use_wavelet, use_gpu);
+        use_estimate, use_wavelet, use_gpu, wavelet_impl);
     const auto out = wxst.run(out_dir, h5_deflate);
     const auto t_save_t0 = std::chrono::steady_clock::now();
     if (save_img) {

@@ -30,12 +30,6 @@
 
 namespace wsvt {
 
-namespace {
-// M2.3 A/B switch: set to true to use precomputed-plan wavelet path.
-// Keeps old wavelet_transform_hwd as default until benchmark confirms speedup.
-constexpr bool kUsePlannedWavelet = false;
-}  // namespace
-
 WXST::WXST(
     const std::vector<float>& img,
     const std::vector<float>& ref,
@@ -55,7 +49,8 @@ WXST::WXST(
     int n_iter,
     bool use_estimate,
     bool use_wavelet,
-    int use_gpu)
+    int use_gpu,
+    int wavelet_impl)
     : img_data_(img),
       ref_data_(ref),
       h_(h),
@@ -76,6 +71,7 @@ WXST::WXST(
       use_estimate_(use_estimate),
       use_wavelet_(use_wavelet),
       use_gpu_(use_gpu == 1),
+    wavelet_impl_(wavelet_impl),
     wavelet_level_(0),
     last_pyramid_time_s_(0.0),
     last_wavelet_time_s_(0.0) {
@@ -135,7 +131,7 @@ PyramidResult WXST::wavelet_data() {
         wavelet_add_list_ = wavelet_add_list_for_depth(p.ref_levels[0].d0);
         const auto wavelet_t0 = std::chrono::steady_clock::now();
 
-        if constexpr (kUsePlannedWavelet) {
+        if (wavelet_impl_ == 1) {
             // M2.3: Precompute DWT plans, then use single-OpenMP-region transform
             std::vector<std::vector<DwtLevelPlan>> all_plans;
             all_plans.reserve(p.ref_levels.size());

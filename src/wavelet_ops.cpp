@@ -1,4 +1,5 @@
 #include "wsvt/wavelet_ops.hpp"
+#include "wsvt/aligned_alloc.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -242,11 +243,11 @@ WaveletResult wavelet_transform_hwd_streamed(
     } else {
         const float* current_ptr = img_hwd.data();
         std::size_t cur_depth = depth_in;
-        std::vector<float> approx_buf;
+        AlignedBuffer<float> approx_buf;
 
         for (int lv = 0; lv < w_level; ++lv) {
             const std::size_t next_depth = detail_depths[static_cast<std::size_t>(lv)];
-            std::vector<float> approx(plane * next_depth);
+            AlignedBuffer<float> approx(plane * next_depth);
             const bool write_detail = keep_detail[static_cast<std::size_t>(lv)];
             const std::size_t detail_offset = detail_offsets[static_cast<std::size_t>(lv)];
 
@@ -407,12 +408,14 @@ WaveletResult wavelet_transform_hwd_planned(
         }
     } else {
         // ── Single OpenMP region for all levels ──
-        // Double-buffer: buf_a / buf_b alternate as source / destination
+        // Double-buffer: buf_a / buf_b alternate as source / destination.
+        // AlignedBuffer: uninitialized — avoids GB-scale zeroing; OpenMP
+        // workers first-touch their own pages on first write.
         const std::size_t max_buf_depth = *std::max_element(detail_depths.begin(),
                                                              detail_depths.end());
         const std::size_t buf_elems = plane * std::max(max_buf_depth, approx_depth);
-        std::vector<float> buf_a(buf_elems);
-        std::vector<float> buf_b(buf_elems);
+        AlignedBuffer<float> buf_a(buf_elems);
+        AlignedBuffer<float> buf_b(buf_elems);
 
         #pragma omp parallel
         {
@@ -551,13 +554,13 @@ WaveletPairResult wavelet_transform_hwd_pair_streamed(
         const float* img_cur = img_hwd.data();
         const float* ref_cur = ref_hwd.data();
         std::size_t cur_depth = depth_in;
-        std::vector<float> img_approx_buf;
-        std::vector<float> ref_approx_buf;
+        AlignedBuffer<float> img_approx_buf;
+        AlignedBuffer<float> ref_approx_buf;
 
         for (int lv = 0; lv < w_level; ++lv) {
             const std::size_t next_depth = detail_depths[static_cast<std::size_t>(lv)];
-            std::vector<float> img_approx(plane * next_depth);
-            std::vector<float> ref_approx(plane * next_depth);
+            AlignedBuffer<float> img_approx(plane * next_depth);
+            AlignedBuffer<float> ref_approx(plane * next_depth);
             const bool write_detail = keep_detail[static_cast<std::size_t>(lv)];
             const std::size_t detail_offset = detail_offsets[static_cast<std::size_t>(lv)];
 

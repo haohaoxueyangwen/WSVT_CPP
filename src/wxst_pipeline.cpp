@@ -219,8 +219,7 @@ std::array<std::vector<float>, 3> WXST::displace_wavelet(
     std::size_t depth,
     const std::vector<float>& displace_y,
     const std::vector<float>& displace_x,
-    int cal_half_window,
-    int n_pad) const {
+    int cal_half_window) const {
     if (img_wa_stack.size() != img_h * img_w * depth || ref_wa_stack.size() != ref_h * ref_w * depth) {
         throw std::invalid_argument("displace_wavelet stack shape mismatch");
     }
@@ -245,10 +244,14 @@ std::array<std::vector<float>, 3> WXST::displace_wavelet(
     std::vector<float> disp_y(img_h * img_w, 0.0f);
     std::vector<float> disp_x(img_h * img_w, 0.0f);
     std::vector<float> darkfield_nd(img_h * img_w, 0.0f);
-    const std::size_t npad = static_cast<std::size_t>(n_pad);
 
     const float* __restrict__ img_ptr = std::assume_aligned<64>(img_wa_stack.data());
     const float* __restrict__ ref_ptr = std::assume_aligned<64>(ref_wa_stack.data());
+    const std::size_t ref_stride = ref_w * depth;
+    const long long ref_h_s = static_cast<long long>(ref_h);
+    const long long ref_w_s = static_cast<long long>(ref_w);
+    const int hw = cal_half_window;
+    const long long win_s = static_cast<long long>(window_size);
 
     #pragma omp parallel
     {
@@ -263,31 +266,79 @@ std::array<std::vector<float>, 3> WXST::displace_wavelet(
 
             const int dy_int = static_cast<int>(displace_y[pixel]);
             const int dx_int = static_cast<int>(displace_x[pixel]);
-            const std::size_t y0n = static_cast<std::size_t>(
-                static_cast<long long>(npad + yy) + static_cast<long long>(dy_int));
-            const std::size_t x0n = static_cast<std::size_t>(
-                static_cast<long long>(npad + xx) + static_cast<long long>(dx_int));
+
+            // Corner of search window in original reference coordinates
+            const long long ref_y0 = static_cast<long long>(yy) + dy_int - static_cast<long long>(hw);
+            const long long ref_x0 = static_cast<long long>(xx) + dx_int - static_cast<long long>(hw);
+
+            // Precompute img squared sum (used for OOB zero-padding positions)
+            float img_sq_sum = 0.0f;
+            #pragma omp simd reduction(+:img_sq_sum)
+            for (std::size_t k = 0; k < depth; ++k) {
+                img_sq_sum += img_line[k] * img_line[k];
+            }
+            const float corr_oob = -img_sq_sum;  // SSD with zero ref
+
+            // Interior: entire search window fits inside original reference bounds
+            const bool interior =
+                ref_y0 >= 0 && ref_y0 + win_s <= ref_h_s &&
+                ref_x0 >= 0 && ref_x0 + win_s <= ref_w_s;
 
             float corr_max = -std::numeric_limits<float>::infinity();
             std::size_t max_idx = 0;
             float sum_abs = 0.0f;
 
-            for (std::size_t wy = 0; wy < window_size; ++wy) {
-                for (std::size_t wx = 0; wx < window_size; ++wx) {
-                    const float* ref_row = ref_ptr + ((y0n + wy) * ref_w + (x0n + wx)) * depth;
-                    float s = 0.0f;
-                    #pragma omp simd reduction(+:s)
-                    for (std::size_t k = 0; k < depth; ++k) {
-                        const float diff = img_line[k] - ref_row[k];
-                        s += diff * diff;
+            if (interior) {
+                // Fast path: direct access, no bounds checks
+                const float* ref_base = ref_ptr + (static_cast<std::size_t>(ref_y0) * ref_w
+                                                   + static_cast<std::size_t>(ref_x0)) * depth;
+                for (std::size_t wy = 0; wy < window_size; ++wy) {
+                    for (std::size_t wx = 0; wx < window_size; ++wx) {
+                        const float* ref_row = ref_base + (wy * ref_w + wx) * depth;
+                        float s = 0.0f;
+                        #pragma omp simd reduction(+:s)
+                        for (std::size_t k = 0; k < depth; ++k) {
+                            const float diff = img_line[k] - ref_row[k];
+                            s += diff * diff;
+                        }
+                        const float val = -s;
+                        const std::size_t ci = wy * window_size + wx;
+                        corr_data[ci] = val;
+                        sum_abs += std::fabs(val);
+                        if (val > corr_max) { corr_max = val; max_idx = ci; }
                     }
-                    const float val = -s;
-                    const std::size_t ci = wy * window_size + wx;
-                    corr_data[ci] = val;
-                    sum_abs += std::fabs(val);
-                    if (val > corr_max) {
-                        corr_max = val;
-                        max_idx = ci;
+                }
+            } else {
+                // Boundary: bounds-checked access (zero-padding semantics).
+                // OOB reference values are treated as zero.
+                for (std::size_t wy = 0; wy < window_size; ++wy) {
+                    const long long ry = ref_y0 + static_cast<long long>(wy);
+                    for (std::size_t wx = 0; wx < window_size; ++wx) {
+                        const long long rx = ref_x0 + static_cast<long long>(wx);
+                        if (ry >= 0 && ry < ref_h_s && rx >= 0 && rx < ref_w_s) {
+                            const float* ref_row = ref_ptr
+                                + static_cast<std::size_t>(ry) * ref_stride
+                                + static_cast<std::size_t>(rx) * depth;
+                            float s = 0.0f;
+                            #pragma omp simd reduction(+:s)
+                            for (std::size_t k = 0; k < depth; ++k) {
+                                const float diff = img_line[k] - ref_row[k];
+                                s += diff * diff;
+                            }
+                            const float val = -s;
+                            const std::size_t ci = wy * window_size + wx;
+                            corr_data[ci] = val;
+                            sum_abs += std::fabs(val);
+                            if (val > corr_max) { corr_max = val; max_idx = ci; }
+                        } else {
+                            // OOB: reference is zero → SSD = sum(img²)
+                            corr_data[wy * window_size + wx] = corr_oob;
+                            sum_abs += img_sq_sum;  // |corr_oob| = img_sq_sum
+                            if (corr_oob > corr_max) {
+                                corr_max = corr_oob;
+                                max_idx = wy * window_size + wx;
+                            }
+                        }
                     }
                 }
             }
@@ -296,8 +347,8 @@ std::array<std::vector<float>, 3> WXST::displace_wavelet(
             const std::size_t max_x_idx = max_idx % window_size;
 
             const auto sample_corr = [&](long long r, long long c) -> float {
-                const auto rc = static_cast<std::size_t>(std::clamp<long long>(r, 0, static_cast<long long>(window_size - 1)));
-                const auto cc = static_cast<std::size_t>(std::clamp<long long>(c, 0, static_cast<long long>(window_size - 1)));
+                const auto rc = static_cast<std::size_t>(std::clamp<long long>(r, 0, win_s - 1));
+                const auto cc = static_cast<std::size_t>(std::clamp<long long>(c, 0, win_s - 1));
                 return corr_data[rc * window_size + cc];
             };
 
@@ -334,16 +385,10 @@ std::array<std::vector<float>, 3> WXST::displace_wavelet(
             const float max_axis_y = yy_axis[(window_size - 1) * window_size];
             const float min_axis_y = yy_axis[0];
 
-            if (result_disp_x > max_axis_x) {
-                result_disp_x = max_axis_x;
-            } else if (result_disp_x < min_axis_x) {
-                result_disp_x = min_axis_x;
-            }
-            if (result_disp_y > max_axis_y) {
-                result_disp_y = max_axis_y;
-            } else if (result_disp_y < min_axis_y) {
-                result_disp_y = min_axis_y;
-            }
+            if (result_disp_x > max_axis_x) result_disp_x = max_axis_x;
+            else if (result_disp_x < min_axis_x) result_disp_x = min_axis_x;
+            if (result_disp_y > max_axis_y) result_disp_y = max_axis_y;
+            else if (result_disp_y < min_axis_y) result_disp_y = min_axis_y;
 
             disp_y[pixel] = result_disp_y + displace_y[pixel];
             disp_x[pixel] = result_disp_x + displace_x[pixel];
@@ -403,21 +448,13 @@ WXSTOutput WXST::solver() {
             const float lim = static_cast<float>(cal_half_window_) / static_cast<float>(std::pow(2.0, static_cast<double>(p_level)));
             clamp_2d(displace_pyramid_y, -lim, lim);
             clamp_2d(displace_pyramid_x, -lim, lim);
-            const int n_pad = static_cast<int>(std::ceil(static_cast<double>(cal_half_window_) / std::pow(2.0, static_cast<double>(p_level))));
-            const std::size_t pad_all = static_cast<std::size_t>(n_pad + pyramid_seaching_window);
-            auto ref_wa_pad_t = pad_hwd_zero(
-                TensorView3D<const float, Layout::HWD>{p.ref_levels[lv].data.data(), {ph, pw, depth}},
-                pad_all, pad_all);
-            const std::size_t ref_pad_h = ref_wa_pad_t.shape().d0;
-            const std::size_t ref_pad_w = ref_wa_pad_t.shape().d1;
-            const auto ref_wa_pad = std::move(ref_wa_pad_t).take();
             prColor("pyramid level: " + std::to_string(p_level) + "\nImage size: (" + std::to_string(ph) + ", " + std::to_string(pw) + ", " + std::to_string(depth) + ")\nsearching window:" + std::to_string(pyramid_seaching_window), "cyan");
 
             auto result = displace_wavelet(
                 as_span(p.img_levels[lv].data), ph, pw,
-                ref_wa_pad, ref_pad_h, ref_pad_w, depth,
+                as_span(p.ref_levels[lv].data), ph, pw, depth,
                 displace_pyramid_y, displace_pyramid_x,
-                pyramid_seaching_window, n_pad);
+                pyramid_seaching_window);
 
             clamp_2d(result[0], -lim, lim);
             clamp_2d(result[1], -lim, lim);

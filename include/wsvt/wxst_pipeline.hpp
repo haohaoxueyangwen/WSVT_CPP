@@ -79,8 +79,7 @@ private:
         std::size_t depth,
         const std::vector<float>& displace_y,
         const std::vector<float>& displace_x,
-        int cal_half_window,
-        int n_pad) const;
+        int cal_half_window) const;
 
     std::vector<float> img_data_;
     std::vector<float> ref_data_;

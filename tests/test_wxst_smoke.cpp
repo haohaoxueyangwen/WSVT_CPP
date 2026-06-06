@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <chrono>
 #include <cstddef>
+#include <cstring>
 #include <iostream>
 #include <stdexcept>
 #include <vector>
@@ -44,27 +45,33 @@ TEST_CASE("tile streaming halo bound is sufficient", "[wxst][tile]") {
     SUCCEED("halo bounds verified");
 }
 
-// Microbenchmark: measure per-tile wavelet cost vs full-image wavelet.
+// Hidden microbenchmark: measure per-tile wavelet cost vs full-image wavelet.
 // This determines whether tile streaming can beat the current 4.0s solver.
-TEST_CASE("tile wavelet microbenchmark", "[wxst][tile][bench]") {
-    // Create synthetic HWD template data at 1024×1024 (simulating level-0)
-    constexpr std::size_t h = 1024, w = 1024, depth = 71;
+// Run explicitly with: ./wsvt_tests "[bench]"
+TEST_CASE("tile wavelet microbenchmark", "[.][wxst][tile][bench]") {
+    // Create synthetic HWD template data at 1024×1024.  For WXST N_s=5,
+    // the pre-wavelet template descriptor depth is (2*N_s+1)^2 = 121.
+    constexpr std::size_t h = 1024, w = 1024, depth = 121;
+    constexpr int w_level = 5;
+    constexpr int return_level = 5;
     AlignedVector<float> img_hwd(h * w * depth);
     for (std::size_t i = 0; i < img_hwd.size(); ++i) {
         img_hwd[i] = static_cast<float>(i % 7919) * 0.001f;
     }
     auto ref_hwd = img_hwd;  // identical for testing
 
-    auto plans = compute_wavelet_plan(depth, 5, WaveletFamily::Db2);
+    auto plans = compute_wavelet_plan(depth, w_level, WaveletFamily::Db2);
 
     // Full-image wavelet
     auto t0 = std::chrono::steady_clock::now();
     auto full_img = wavelet_transform_hwd_pixelchain(
-        as_span(img_hwd), h, w, depth, WaveletFamily::Db2, 5, 3, plans);
+        as_span(img_hwd), h, w, depth, WaveletFamily::Db2, w_level, return_level, plans);
     auto full_ref = wavelet_transform_hwd_pixelchain(
-        as_span(ref_hwd), h, w, depth, WaveletFamily::Db2, 5, 3, plans);
+        as_span(ref_hwd), h, w, depth, WaveletFamily::Db2, w_level, return_level, plans);
     auto t1 = std::chrono::steady_clock::now();
     double full_s = std::chrono::duration<double>(t1 - t0).count();
+    REQUIRE(full_img.out_depth == 71);
+    REQUIRE(full_ref.out_depth == full_img.out_depth);
 
     // Tile-based wavelet: 4 tiles (2×2), each 512×512 with halo=24
     constexpr std::size_t tile_h = 512, tile_w = 512;
@@ -97,12 +104,14 @@ TEST_CASE("tile wavelet microbenchmark", "[wxst][tile][bench]") {
                            ref_tw * depth * sizeof(float));
             }
 
-            wavelet_transform_hwd_pixelchain(
+            auto tile_img = wavelet_transform_hwd_pixelchain(
                 as_span(img_tile), tile_h, tile_w, depth,
-                WaveletFamily::Db2, 5, 3, plans);
-            wavelet_transform_hwd_pixelchain(
+                WaveletFamily::Db2, w_level, return_level, plans);
+            auto tile_ref = wavelet_transform_hwd_pixelchain(
                 as_span(ref_tile), ref_th, ref_tw, depth,
-                WaveletFamily::Db2, 5, 3, plans);
+                WaveletFamily::Db2, w_level, return_level, plans);
+            REQUIRE(tile_img.out_depth == full_img.out_depth);
+            REQUIRE(tile_ref.out_depth == full_img.out_depth);
         }
     }
     auto t3 = std::chrono::steady_clock::now();
@@ -111,7 +120,7 @@ TEST_CASE("tile wavelet microbenchmark", "[wxst][tile][bench]") {
     std::cout << "full wavelet: " << full_s << " s, tile wavelet: " << tile_s << " s"
               << " (ratio=" << (tile_s / full_s) << ")" << std::endl
               << "M2.5 tile streaming NOT viable at 1024x1024: "
-              << "ref halo copy + per-call overhead make it 5x slower."
+              << "ref halo copy + per-call overhead make it slower than full-image."
               << std::endl;
 
     // M2.5: tile streaming is NOT beneficial at current scale.

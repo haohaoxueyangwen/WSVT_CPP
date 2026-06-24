@@ -383,14 +383,10 @@ std::array<std::vector<float>, 3> WSVT::displace_wavelet(
         // Thread-local buffers — allocated once per thread
         std::vector<float> corr_data(ws2, 0.0f);
 
-        // Row-major traversal so consecutive pixels share ref search-window
-        // rows in L2 cache.  schedule(static) assigns whole rows to the
-        // same thread, maximising reuse of the 24/25 column overlap across
-        // adjacent pixels (x → x+1).
-        #pragma omp for schedule(static)
-        for (std::size_t yy = 0; yy < img_h; ++yy) {
-            for (std::size_t xx = 0; xx < img_w; ++xx) {
-                const std::size_t pixel = yy * img_w + xx;
+        #pragma omp for schedule(guided, 64)
+        for (std::size_t pixel = 0; pixel < img_h * img_w; ++pixel) {
+            const std::size_t yy = pixel / img_w;
+            const std::size_t xx = pixel % img_w;
 
             const float* img_line = img_ptr + pixel * depth;
 

@@ -1,12 +1,21 @@
 #pragma once
 
 #include <cstddef>
+#include <cstdint>
 #include <cstdlib>
 #include <new>
 #include <span>
 #include <vector>
 
 namespace wsvt {
+
+template<std::size_t Alignment, typename T>
+[[nodiscard]] bool is_pointer_aligned(const T* ptr) noexcept {
+    static_assert(Alignment > 0 && (Alignment & (Alignment - 1)) == 0,
+                  "Alignment must be a power of two");
+    return ptr == nullptr ||
+           (reinterpret_cast<std::uintptr_t>(ptr) & (Alignment - 1)) == 0;
+}
 
 template<typename T, std::size_t Alignment = 64>
 struct AlignedAllocator {

@@ -176,6 +176,68 @@ struct WaveletPairResult {
     WaveletResult ref;
 };
 
+/// Final-depth DWT basis used by the default-off B2 incremental-temporal
+/// prototype. The prefix descriptor uses retained coefficients of the final
+/// transform, with not-yet-observed frames set to zero. This makes every
+/// retained coefficient extendable without treating an independently
+/// normalized short-prefix DWT as a truncation of the final DWT.
+struct PrefixCompatibleWaveletBasis {
+    std::size_t final_depth{};
+    std::size_t out_depth{};
+    WaveletFamily wavelet{WaveletFamily::Db2};
+    int wavelet_level{};
+    int return_level{};
+    // Frame-major [final_depth, out_depth] linear weights.
+    std::vector<double> frame_coefficient_weights;
+    // [final_depth + 1, out_depth], including the zero-frame row.
+    std::vector<double> prefix_weight_sums;
+    std::vector<std::string> level_name;
+};
+
+/// Per-pixel raw sufficient statistics and final-basis weighted sums. Pixels
+/// may be extended to different frame counts so a later B2 stage can update
+/// only unresolved sample/reference support.
+struct PrefixCompatibleWaveletState {
+    std::size_t h{};
+    std::size_t w{};
+    std::size_t final_depth{};
+    std::size_t out_depth{};
+    std::vector<std::uint16_t> frames_accumulated;
+    std::vector<double> raw_sum;
+    std::vector<double> raw_sum_squares;
+    std::vector<double> weighted_raw_sum;
+    std::uint64_t raw_frame_pixel_terms_accumulated{};
+    std::uint64_t weighted_coefficient_terms_accumulated{};
+};
+
+[[nodiscard]] PrefixCompatibleWaveletBasis make_prefix_compatible_wavelet_basis(
+    std::size_t final_depth,
+    WaveletFamily wavelet,
+    int wavelet_level,
+    int return_level);
+
+[[nodiscard]] PrefixCompatibleWaveletState make_prefix_compatible_wavelet_state(
+    std::size_t h,
+    std::size_t w,
+    const PrefixCompatibleWaveletBasis& basis);
+
+/// Extend selected pixels from their current prefix to target_frames. Empty
+/// selected_mask means all pixels. Input remains the authoritative final-depth
+/// CHW stack; no raw frame is copied into the state.
+void extend_prefix_compatible_wavelet_state(
+    PrefixCompatibleWaveletState& state,
+    const PrefixCompatibleWaveletBasis& basis,
+    std::span<const float> data_chw,
+    std::size_t target_frames,
+    std::span<const std::uint8_t> selected_mask = {});
+
+/// Materialize normalized final-basis coefficients in HWD order. Unselected
+/// pixels are zero-filled, matching the sparse-descriptor convention.
+[[nodiscard]] WaveletResult materialize_prefix_compatible_wavelet(
+    const PrefixCompatibleWaveletState& state,
+    const PrefixCompatibleWaveletBasis& basis,
+    std::span<const std::uint8_t> selected_mask = {});
+
 /// Pair wavelet transform: processes img and ref HWD stacks in a single
 /// OpenMP traversal, sharing filter coefficients and geometry iteration.
 /// Produces identical results to two separate wavelet_transform_hwd calls.

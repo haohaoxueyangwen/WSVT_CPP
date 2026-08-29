@@ -1,5 +1,6 @@
 #pragma once
 
+#include "wsvt/aligned_alloc.hpp"
 #include "wsvt/image.hpp"
 
 #include <algorithm>
@@ -194,13 +195,28 @@ inline Image2D<float> std_depth_chw_per_pixel(
     return out;
 }
 
-/// Zero-pad an HWD tensor by (pad_y, pad_x); depth is preserved.
-inline Tensor3D<float, Layout::HWD> pad_hwd_zero(
+/// Owning HWD tensor whose base address satisfies the search kernel's SIMD
+/// alignment contract.
+struct AlignedHwdTensor {
+    AlignedVector<float> values;
+    Shape3D tensor_shape{};
+
+    [[nodiscard]] float* data() noexcept { return values.data(); }
+    [[nodiscard]] const float* data() const noexcept { return values.data(); }
+    [[nodiscard]] std::size_t size() const noexcept { return values.size(); }
+    [[nodiscard]] Shape3D shape() const noexcept { return tensor_shape; }
+    [[nodiscard]] std::span<float> flat() noexcept { return as_span(values); }
+    [[nodiscard]] std::span<const float> flat() const noexcept { return as_span(values); }
+};
+
+/// Zero-pad an HWD tensor by (pad_y, pad_x); depth is preserved. The returned
+/// storage is 64-byte aligned because displace_wavelet uses aligned SIMD loads.
+inline AlignedHwdTensor pad_hwd_zero_aligned(
     TensorView3D<const float, Layout::HWD> in,
     std::size_t pad_y, std::size_t pad_x) {
     const Shape3D s = in.shape();  // d0=h, d1=w, d2=depth
     const Shape3D out_shape{s.d0 + 2 * pad_y, s.d1 + 2 * pad_x, s.d2};
-    Tensor3D<float, Layout::HWD> out(out_shape, 0.0f);
+    AlignedHwdTensor out{AlignedVector<float>(out_shape.size(), 0.0f), out_shape};
     const std::size_t in_row_bytes = s.d1 * s.d2 * sizeof(float);
     const std::size_t out_stride = out_shape.d1 * out_shape.d2;
     const std::size_t in_stride = s.d1 * s.d2;

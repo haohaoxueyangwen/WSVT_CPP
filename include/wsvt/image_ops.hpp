@@ -14,4 +14,10 @@ Image2D<float> image_roi(ImageView2D<const float> img, std::size_t m);
 Tensor3D<float, Layout::CHW> image_roi(
     TensorView3D<const float, Layout::CHW> img, std::size_t m);
 
+// Tensor-product cubic interpolation with uniform-grid not-a-knot boundary
+// conditions, matching scipy.interpolate.RectBivariateSpline(kx=3, ky=3,
+// s=0) for the WSVT/WXST coarse-to-fine displacement path.
+Image2D<float> resample_rect_bivariate_spline(
+    ImageView2D<const float> img, Shape2D output_shape);
+
 }

@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cstring>
+#include <limits>
 #include <span>
 #include <stdexcept>
 #include <thread>
@@ -55,18 +56,18 @@ void get_wavelet_filters(WaveletFamily wavelet, std::vector<float>& dec_lo,
 std::vector<std::string> build_level_name(int w_level, int return_level) {
     std::vector<std::string> level_name;
     level_name.reserve(static_cast<std::size_t>(w_level + 1));
-    for (int kk = 0; kk < w_level; ++kk) {
-        std::string name = "D";
-        name += std::to_string(kk + 1);
-        level_name.push_back(std::move(name));
-    }
     std::string approx_name = "A";
     approx_name += std::to_string(w_level);
     level_name.push_back(std::move(approx_name));
+    for (int level = w_level; level >= 1; --level) {
+        std::string name = "D";
+        name += std::to_string(level);
+        level_name.push_back(std::move(name));
+    }
     if (return_level < 0 || return_level > static_cast<int>(level_name.size())) {
         throw std::invalid_argument("return_level out of range");
     }
-    return std::vector<std::string>(level_name.end() - return_level, level_name.end());
+    return std::vector<std::string>(level_name.begin(), level_name.begin() + return_level);
 }
 
 // Optimized wavedec_axis0: inline DWT + OpenMP parallel over (y, x) pixels
@@ -114,6 +115,8 @@ std::vector<std::vector<float>> wavedec_axis0(std::span<const float> img, std::s
         cur_ch = out_ch;
     }
     coeffs.push_back(std::move(current));
+    // PyWavelets wavedec order: [cA_n, cD_n, ..., cD1].
+    std::reverse(coeffs.begin(), coeffs.end());
     return coeffs;
 }
 
@@ -133,10 +136,8 @@ WaveletResult wavelet_transform(std::span<const float> img, std::size_t ch, std:
 
     const int total_levels = static_cast<int>(coeffs.size());
     const int effective_return_level = std::clamp(return_level, 1, total_levels);
-    const int start_idx = total_levels - effective_return_level;
-
     std::size_t out_depth = 0;
-    for (int i = start_idx; i < total_levels; ++i) {
+    for (int i = 0; i < effective_return_level; ++i) {
         const auto& c = coeffs[static_cast<std::size_t>(i)];
         out_depth += c.size() / (h * w);
     }
@@ -144,7 +145,7 @@ WaveletResult wavelet_transform(std::span<const float> img, std::size_t ch, std:
     AlignedVector<float> out(h * w * out_depth, 0.0f);
     std::size_t d_offset = 0;
 
-    for (int i = start_idx; i < total_levels; ++i) {
+    for (int i = 0; i < effective_return_level; ++i) {
         const auto& c = coeffs[static_cast<std::size_t>(i)];
         const std::size_t c_depth = c.size() / (h * w);
 
@@ -217,19 +218,18 @@ WaveletResult wavelet_transform_hwd_streamed(
     const int effective_return_level = std::clamp(return_level, 1, total_levels);
     const int start_idx = total_levels - effective_return_level;
 
-    std::size_t out_depth = 0;
+    const std::size_t approx_depth = cur_depth_for_shape;
+    const std::size_t approx_offset = 0;
+    std::size_t out_depth = approx_depth;
     std::vector<std::size_t> detail_offsets(static_cast<std::size_t>(w_level), 0);
     std::vector<bool> keep_detail(static_cast<std::size_t>(w_level), false);
-    for (int lv = 0; lv < w_level; ++lv) {
-        if (lv >= start_idx) {
-            keep_detail[static_cast<std::size_t>(lv)] = true;
-            detail_offsets[static_cast<std::size_t>(lv)] = out_depth;
-            out_depth += detail_depths[static_cast<std::size_t>(lv)];
-        }
+    // PyWavelets wavedec order: approximation first, then details from the
+    // coarsest retained level to the finest retained level.
+    for (int lv = w_level - 1; lv >= start_idx; --lv) {
+        keep_detail[static_cast<std::size_t>(lv)] = true;
+        detail_offsets[static_cast<std::size_t>(lv)] = out_depth;
+        out_depth += detail_depths[static_cast<std::size_t>(lv)];
     }
-    const std::size_t approx_offset = out_depth;
-    const std::size_t approx_depth = cur_depth_for_shape;
-    out_depth += approx_depth;
 
     AlignedVector<float> out(plane * out_depth, 0.0f);
 
@@ -383,19 +383,16 @@ WaveletResult wavelet_transform_hwd_planned(
     const int eff_ret = std::clamp(return_level, 1, total_levels);
     const int start_idx = total_levels - eff_ret;
 
-    std::size_t out_depth = 0;
+    const std::size_t approx_depth = cur_depth_for_shape;
+    const std::size_t approx_offset = 0;
+    std::size_t out_depth = approx_depth;
     std::vector<std::size_t> detail_offsets(static_cast<std::size_t>(w_level));
     std::vector<bool> keep_detail(static_cast<std::size_t>(w_level), false);
-    for (int lv = 0; lv < w_level; ++lv) {
-        if (lv >= start_idx) {
-            keep_detail[static_cast<std::size_t>(lv)] = true;
-            detail_offsets[static_cast<std::size_t>(lv)] = out_depth;
-            out_depth += detail_depths[static_cast<std::size_t>(lv)];
-        }
+    for (int lv = w_level - 1; lv >= start_idx; --lv) {
+        keep_detail[static_cast<std::size_t>(lv)] = true;
+        detail_offsets[static_cast<std::size_t>(lv)] = out_depth;
+        out_depth += detail_depths[static_cast<std::size_t>(lv)];
     }
-    const std::size_t approx_offset = out_depth;
-    const std::size_t approx_depth = cur_depth_for_shape;
-    out_depth += approx_depth;
 
     AlignedVector<float> out(plane * out_depth, 0.0f);
 
@@ -521,19 +518,16 @@ WaveletResult wavelet_transform_hwd_pixelchain(
     const int eff_ret = std::clamp(return_level, 1, total_levels);
     const int start_idx = total_levels - eff_ret;
 
-    std::size_t out_depth = 0;
+    const std::size_t approx_depth = cur_depth_for_shape;
+    const std::size_t approx_offset = 0;
+    std::size_t out_depth = approx_depth;
     std::vector<std::size_t> detail_offsets(static_cast<std::size_t>(w_level));
     std::vector<bool> keep_detail(static_cast<std::size_t>(w_level), false);
-    for (int lv = 0; lv < w_level; ++lv) {
-        if (lv >= start_idx) {
-            keep_detail[static_cast<std::size_t>(lv)] = true;
-            detail_offsets[static_cast<std::size_t>(lv)] = out_depth;
-            out_depth += detail_depths[static_cast<std::size_t>(lv)];
-        }
+    for (int lv = w_level - 1; lv >= start_idx; --lv) {
+        keep_detail[static_cast<std::size_t>(lv)] = true;
+        detail_offsets[static_cast<std::size_t>(lv)] = out_depth;
+        out_depth += detail_depths[static_cast<std::size_t>(lv)];
     }
-    const std::size_t approx_offset = out_depth;
-    const std::size_t approx_depth = cur_depth_for_shape;
-    out_depth += approx_depth;
 
     AlignedVector<float> out(plane * out_depth);
 
@@ -642,19 +636,16 @@ WaveletPairResult wavelet_transform_hwd_pair_streamed(
     const int effective_return_level = std::clamp(return_level, 1, total_levels);
     const int start_idx = total_levels - effective_return_level;
 
-    std::size_t out_depth = 0;
+    const std::size_t approx_depth = cur_depth_for_shape;
+    const std::size_t approx_offset = 0;
+    std::size_t out_depth = approx_depth;
     std::vector<std::size_t> detail_offsets(static_cast<std::size_t>(w_level), 0);
     std::vector<bool> keep_detail(static_cast<std::size_t>(w_level), false);
-    for (int lv = 0; lv < w_level; ++lv) {
-        if (lv >= start_idx) {
-            keep_detail[static_cast<std::size_t>(lv)] = true;
-            detail_offsets[static_cast<std::size_t>(lv)] = out_depth;
-            out_depth += detail_depths[static_cast<std::size_t>(lv)];
-        }
+    for (int lv = w_level - 1; lv >= start_idx; --lv) {
+        keep_detail[static_cast<std::size_t>(lv)] = true;
+        detail_offsets[static_cast<std::size_t>(lv)] = out_depth;
+        out_depth += detail_depths[static_cast<std::size_t>(lv)];
     }
-    const std::size_t approx_offset = out_depth;
-    const std::size_t approx_depth = cur_depth_for_shape;
-    out_depth += approx_depth;
 
     AlignedVector<float> img_out(plane * out_depth, 0.0f);
     AlignedVector<float> ref_out(plane * out_depth, 0.0f);
@@ -768,6 +759,223 @@ WaveletPairResult wavelet_transform_hwd_pair_streamed(
     pair_result.ref.out_depth = out_depth;
     pair_result.ref.level_name = level_names;
     return pair_result;
+}
+
+PrefixCompatibleWaveletBasis make_prefix_compatible_wavelet_basis(
+    std::size_t final_depth,
+    WaveletFamily wavelet,
+    int wavelet_level,
+    int return_level) {
+    if (final_depth == 0) {
+        throw std::invalid_argument(
+            "prefix-compatible wavelet final_depth must be positive");
+    }
+    if (final_depth > static_cast<std::size_t>(
+            std::numeric_limits<std::uint16_t>::max())) {
+        throw std::invalid_argument(
+            "prefix-compatible wavelet final_depth exceeds state counter range");
+    }
+
+    // Each HWD pixel is one input-frame basis vector. Transforming all basis
+    // pixels at once recovers the retained final-depth linear operator without
+    // duplicating the DWT boundary convention in this prototype.
+    AlignedVector<float> identity(final_depth * final_depth, 0.0f);
+    for (std::size_t frame = 0; frame < final_depth; ++frame) {
+        identity[frame * final_depth + frame] = 1.0f;
+    }
+    auto transformed = wavelet_transform_hwd(
+        as_span(identity), final_depth, 1, final_depth,
+        wavelet, wavelet_level, return_level);
+
+    PrefixCompatibleWaveletBasis basis;
+    basis.final_depth = final_depth;
+    basis.out_depth = transformed.out_depth;
+    basis.wavelet = wavelet;
+    basis.wavelet_level = wavelet_level;
+    basis.return_level = return_level;
+    basis.level_name = std::move(transformed.level_name);
+    basis.frame_coefficient_weights.resize(
+        final_depth * basis.out_depth, 0.0);
+    for (std::size_t frame = 0; frame < final_depth; ++frame) {
+        for (std::size_t coefficient = 0;
+             coefficient < basis.out_depth; ++coefficient) {
+            basis.frame_coefficient_weights[
+                frame * basis.out_depth + coefficient] =
+                static_cast<double>(transformed.coeffs_filter[
+                    frame * basis.out_depth + coefficient]);
+        }
+    }
+    basis.prefix_weight_sums.resize(
+        (final_depth + 1) * basis.out_depth, 0.0);
+    for (std::size_t frame = 0; frame < final_depth; ++frame) {
+        const double* previous = basis.prefix_weight_sums.data() +
+            frame * basis.out_depth;
+        double* next = basis.prefix_weight_sums.data() +
+            (frame + 1) * basis.out_depth;
+        const double* weights = basis.frame_coefficient_weights.data() +
+            frame * basis.out_depth;
+        for (std::size_t coefficient = 0;
+             coefficient < basis.out_depth; ++coefficient) {
+            next[coefficient] = previous[coefficient] + weights[coefficient];
+        }
+    }
+    return basis;
+}
+
+PrefixCompatibleWaveletState make_prefix_compatible_wavelet_state(
+    std::size_t h,
+    std::size_t w,
+    const PrefixCompatibleWaveletBasis& basis) {
+    if (h == 0 || w == 0 || basis.final_depth == 0 || basis.out_depth == 0) {
+        throw std::invalid_argument(
+            "prefix-compatible wavelet state requires non-zero dimensions");
+    }
+    const std::size_t plane = h * w;
+    PrefixCompatibleWaveletState state;
+    state.h = h;
+    state.w = w;
+    state.final_depth = basis.final_depth;
+    state.out_depth = basis.out_depth;
+    state.frames_accumulated.assign(plane, 0);
+    state.raw_sum.assign(plane, 0.0);
+    state.raw_sum_squares.assign(plane, 0.0);
+    state.weighted_raw_sum.assign(plane * basis.out_depth, 0.0);
+    return state;
+}
+
+void extend_prefix_compatible_wavelet_state(
+    PrefixCompatibleWaveletState& state,
+    const PrefixCompatibleWaveletBasis& basis,
+    std::span<const float> data_chw,
+    std::size_t target_frames,
+    std::span<const std::uint8_t> selected_mask) {
+    const std::size_t plane = state.h * state.w;
+    if (state.final_depth != basis.final_depth ||
+        state.out_depth != basis.out_depth ||
+        state.frames_accumulated.size() != plane ||
+        state.raw_sum.size() != plane ||
+        state.raw_sum_squares.size() != plane ||
+        state.weighted_raw_sum.size() != plane * state.out_depth) {
+        throw std::invalid_argument(
+            "prefix-compatible wavelet state/basis shape mismatch");
+    }
+    if (data_chw.size() != basis.final_depth * plane) {
+        throw std::invalid_argument(
+            "prefix-compatible wavelet input size mismatch");
+    }
+    if (target_frames == 0 || target_frames > basis.final_depth) {
+        throw std::invalid_argument(
+            "prefix-compatible wavelet target_frames out of range");
+    }
+    if (!selected_mask.empty() && selected_mask.size() != plane) {
+        throw std::invalid_argument(
+            "prefix-compatible wavelet selected mask size mismatch");
+    }
+    for (std::size_t pixel = 0; pixel < plane; ++pixel) {
+        if ((!selected_mask.empty() && selected_mask[pixel] == 0) ||
+            target_frames >= state.frames_accumulated[pixel]) {
+            continue;
+        }
+        throw std::invalid_argument(
+            "prefix-compatible wavelet state cannot move backward");
+    }
+
+    std::uint64_t raw_frame_terms = 0;
+    std::uint64_t coefficient_terms = 0;
+    #pragma omp parallel for schedule(static) reduction(+:raw_frame_terms, coefficient_terms)
+    for (std::size_t pixel = 0; pixel < plane; ++pixel) {
+        if (!selected_mask.empty() && selected_mask[pixel] == 0) {
+            continue;
+        }
+        const std::size_t begin = state.frames_accumulated[pixel];
+        const auto added_frames = static_cast<std::uint64_t>(
+            target_frames - begin);
+        raw_frame_terms += added_frames;
+        coefficient_terms += added_frames *
+            static_cast<std::uint64_t>(state.out_depth);
+        double sum = state.raw_sum[pixel];
+        double sum_squares = state.raw_sum_squares[pixel];
+        double* weighted = state.weighted_raw_sum.data() +
+            pixel * state.out_depth;
+        for (std::size_t frame = begin; frame < target_frames; ++frame) {
+            const double value = static_cast<double>(
+                data_chw[frame * plane + pixel]);
+            sum += value;
+            sum_squares += value * value;
+            const double* weights = basis.frame_coefficient_weights.data() +
+                frame * state.out_depth;
+            for (std::size_t coefficient = 0;
+                 coefficient < state.out_depth; ++coefficient) {
+                weighted[coefficient] += value * weights[coefficient];
+            }
+        }
+        state.raw_sum[pixel] = sum;
+        state.raw_sum_squares[pixel] = sum_squares;
+        state.frames_accumulated[pixel] =
+            static_cast<std::uint16_t>(target_frames);
+    }
+    state.raw_frame_pixel_terms_accumulated += raw_frame_terms;
+    state.weighted_coefficient_terms_accumulated += coefficient_terms;
+}
+
+WaveletResult materialize_prefix_compatible_wavelet(
+    const PrefixCompatibleWaveletState& state,
+    const PrefixCompatibleWaveletBasis& basis,
+    std::span<const std::uint8_t> selected_mask) {
+    const std::size_t plane = state.h * state.w;
+    if (state.final_depth != basis.final_depth ||
+        state.out_depth != basis.out_depth ||
+        state.frames_accumulated.size() != plane ||
+        state.raw_sum.size() != plane ||
+        state.raw_sum_squares.size() != plane ||
+        state.weighted_raw_sum.size() != plane * state.out_depth) {
+        throw std::invalid_argument(
+            "prefix-compatible wavelet state/basis shape mismatch");
+    }
+    if (!selected_mask.empty() && selected_mask.size() != plane) {
+        throw std::invalid_argument(
+            "prefix-compatible wavelet selected mask size mismatch");
+    }
+
+    AlignedVector<float> output(plane * state.out_depth, 0.0f);
+    #pragma omp parallel for schedule(static)
+    for (std::size_t pixel = 0; pixel < plane; ++pixel) {
+        if (!selected_mask.empty() && selected_mask[pixel] == 0) {
+            continue;
+        }
+        const std::size_t frames = state.frames_accumulated[pixel];
+        if (frames == 0) {
+            continue;
+        }
+        const double inv_frames = 1.0 / static_cast<double>(frames);
+        const double mean = state.raw_sum[pixel] * inv_frames;
+        const double variance = std::max(
+            0.0,
+            state.raw_sum_squares[pixel] * inv_frames - mean * mean);
+        const double stddev = std::sqrt(variance);
+        if (stddev == 0.0) {
+            continue;
+        }
+        const double* weighted = state.weighted_raw_sum.data() +
+            pixel * state.out_depth;
+        const double* prefix_weights = basis.prefix_weight_sums.data() +
+            frames * state.out_depth;
+        float* destination = output.data() + pixel * state.out_depth;
+        for (std::size_t coefficient = 0;
+             coefficient < state.out_depth; ++coefficient) {
+            destination[coefficient] = static_cast<float>(
+                (weighted[coefficient] - mean * prefix_weights[coefficient]) /
+                stddev);
+        }
+    }
+
+    WaveletResult result;
+    result.coeffs_filter = std::move(output);
+    result.level_name = basis.level_name;
+    result.out_h = state.h;
+    result.out_w = state.w;
+    result.out_depth = state.out_depth;
+    return result;
 }
 
 WaveletTaskResult wavedec_func(std::span<const float> img, std::size_t ch, std::size_t h,

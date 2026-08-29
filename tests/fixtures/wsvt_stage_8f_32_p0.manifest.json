@@ -1,0 +1,148 @@
+{
+  "environment": {
+    "numpy": "1.26.4",
+    "python": "3.11.7",
+    "pywavelets": "1.5.0",
+    "scipy": "1.11.4"
+  },
+  "fixture": {
+    "arrays": {
+      "descriptor_img_hwd_l0": {
+        "axis_order": "HWD",
+        "dtype": "float64",
+        "sha256_c_order": "b9da50cc4c332ccf4a3284c64f7f5cbccad87e59bd4c4cbaa8dc6092389af922",
+        "shape": [
+          32,
+          32,
+          10
+        ]
+      },
+      "descriptor_ref_hwd_l0": {
+        "axis_order": "HWD",
+        "dtype": "float64",
+        "sha256_c_order": "69a56c688d51287b9f93af9712a67f57c42bbd69171b2c95f2560f7044fe2856",
+        "shape": [
+          32,
+          32,
+          10
+        ]
+      },
+      "displace_x_hw": {
+        "axis_order": "HW",
+        "dtype": "float64",
+        "sha256_c_order": "74dd8d8f0f8b667a6dd9316ad19a526594cd3d228c048240f741403dff15bd87",
+        "shape": [
+          28,
+          28
+        ]
+      },
+      "displace_y_hw": {
+        "axis_order": "HW",
+        "dtype": "float64",
+        "sha256_c_order": "0bb2664c9feabcfd084717312c3ea6f48e05b840f0f89a4f3579de0c9a8ce471",
+        "shape": [
+          28,
+          28
+        ]
+      },
+      "dpc_x_hw": {
+        "axis_order": "HW",
+        "dtype": "float64",
+        "sha256_c_order": "5c08b6881ca58f626ef6c8ec463e403aedd7400a3fb7c3d3739e5dcc54c9bb16",
+        "shape": [
+          28,
+          28
+        ]
+      },
+      "dpc_y_hw": {
+        "axis_order": "HW",
+        "dtype": "float64",
+        "sha256_c_order": "36113bd4791455752082da4f116bc060792b3c407a4fe3b0e0870ea6dce1d203",
+        "shape": [
+          28,
+          28
+        ]
+      },
+      "input_img_chw": {
+        "axis_order": "CHW",
+        "dtype": "float64",
+        "sha256_c_order": "b7ce6e0288711c213b9e5ab47c4397c53ca996dc4847c98df073b58cd9b6af7a",
+        "shape": [
+          8,
+          32,
+          32
+        ]
+      },
+      "input_ref_chw": {
+        "axis_order": "CHW",
+        "dtype": "float64",
+        "sha256_c_order": "054c7bd67237386aa400195e5ca86bcdd8b36de25bab67bb4277302c170d2f26",
+        "shape": [
+          8,
+          32,
+          32
+        ]
+      },
+      "phase_hw": {
+        "axis_order": "HW",
+        "dtype": "float64",
+        "sha256_c_order": "c06a532b8080a20b77836faaafa7584725d7ff87d24779382b70a3baacccaca2",
+        "shape": [
+          28,
+          28
+        ]
+      },
+      "raw_img_chw_l0": {
+        "axis_order": "CHW",
+        "dtype": "float64",
+        "sha256_c_order": "2b0f760d59d63f2f5696f660e264cad6b4218816fefda7d914b1c2d28c21e957",
+        "shape": [
+          8,
+          32,
+          32
+        ]
+      },
+      "raw_ref_chw_l0": {
+        "axis_order": "CHW",
+        "dtype": "float64",
+        "sha256_c_order": "f0e2ea9db0fcccb8b28db6cd0eb9c992b3533fcf599c0317759d727e62ec1d0b",
+        "shape": [
+          8,
+          32,
+          32
+        ]
+      },
+      "transmission_hw": {
+        "axis_order": "HW",
+        "dtype": "float64",
+        "sha256_c_order": "77cee666e07d7402d7bc79b60de0348ee756042db9db498cc449d73e08560e0a",
+        "shape": [
+          32,
+          32
+        ]
+      }
+    },
+    "path": "wsvt_stage_8f_32_p0.npz",
+    "sha256": "d92be62d83534a7e14e96ffeb85835ccf7978d1241f525055e74c51db292e200"
+  },
+  "generated_at_utc": "2026-08-23T10:10:29.628639+00:00",
+  "generator_command": "python WSVT_CPP/tests/reference/generate_wsvt_reference.py --output WSVT_CPP/tests/fixtures/wsvt_stage_8f_32_p0.npz",
+  "parameters": {
+    "cal_half_window": 2,
+    "frames": 8,
+    "n_s_extend": 1,
+    "n_template": 0,
+    "pyramid_level": 0,
+    "seed": 20260823,
+    "size": 32,
+    "wavelet_level_cut": 1
+  },
+  "schema_version": 1,
+  "semantics_profile": "python_reference_v1",
+  "sources": {
+    "WSVT_CPP/tests/reference/generate_wsvt_reference.py": "8ff93b599bdd6d0876911ebad8504d51c64de2e62e942d0bb1e1d6e1ee6b3335",
+    "speckle_retriver/WSVT.py": "c5abf959d33c01940e2bc16306698fb18e3c6be7bb6402b317ce4578cc18c1a8",
+    "speckle_retriver/func.py": "d2cdce3b7d4236f15f059f381e3c25a8151b625ba84fa574747e1d527ad21029"
+  },
+  "window_policy": "manual_fixed"
+}

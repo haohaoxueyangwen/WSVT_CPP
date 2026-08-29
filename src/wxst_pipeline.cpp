@@ -50,7 +50,8 @@ WXST::WXST(
     bool use_estimate,
     bool use_wavelet,
     int use_gpu,
-    int wavelet_impl)
+    int wavelet_impl,
+    int phase_cores)
     : img_data_(img),
       ref_data_(ref),
       h_(h),
@@ -60,6 +61,7 @@ WXST::WXST(
       cal_half_window_(cal_half_window),
       n_s_extend_(n_s_extend),
       n_cores_(n_cores),
+      phase_cores_(phase_cores > 0 ? phase_cores : n_cores),
       n_group_(n_group),
       energy_(energy),
       wavelength_(1.2398419843320026e-6 / energy),
@@ -73,10 +75,18 @@ WXST::WXST(
       use_gpu_(use_gpu == 1),
     wavelet_impl_(wavelet_impl),
     wavelet_level_(0),
-    last_pyramid_time_s_(0.0),
-    last_wavelet_time_s_(0.0) {
+      last_pyramid_time_s_(0.0),
+      last_wavelet_time_s_(0.0) {
+    validate_manual_window_contract(
+        {cal_half_window_, n_s_extend_, n_s_}, h_, w_, 0, "WXST");
     if (img_data_.size() != h_ * w_ || ref_data_.size() != h_ * w_) {
         throw std::invalid_argument("WXST init size mismatch");
+    }
+    if (n_s_extend_ > cal_half_window_) {
+        prColor("WXST warning: n_s_extend exceeds cal_half_window; keeping the manual values unchanged", "yellow");
+    }
+    if (n_group_ != 1) {
+        prColor("WXST warning: n_group is compatibility metadata only and does not control C++ parallelism", "yellow");
     }
     if (wavelet_impl_ < 0 || wavelet_impl_ > 2) {
         throw std::invalid_argument("WXST wavelet_impl must be 0=streamed, 1=planned, or 2=pixelchain");
@@ -103,6 +113,14 @@ WXST::WXST(
 PyramidResult WXST::pyramid_data() {
     prColor("obtain pyramid image and stack the window with pyramid level: " + std::to_string(pyramid_level_), "green");
     if (m_image_ > 0 && static_cast<std::size_t>(m_image_) < std::min(h_, w_)) {
+        auto cropped_estimate_y = image_roi(
+            TensorView3D<const float, Layout::CHW>(
+                displace_estimate_y_.data(), Shape3D{1, h_, w_}),
+            static_cast<std::size_t>(m_image_));
+        auto cropped_estimate_x = image_roi(
+            TensorView3D<const float, Layout::CHW>(
+                displace_estimate_x_.data(), Shape3D{1, h_, w_}),
+            static_cast<std::size_t>(m_image_));
         auto cropped_ref = image_roi(
             TensorView3D<const float, Layout::CHW>(ref_data_.data(), Shape3D{1, h_, w_}),
             static_cast<std::size_t>(m_image_));
@@ -111,6 +129,8 @@ PyramidResult WXST::pyramid_data() {
             static_cast<std::size_t>(m_image_));
         ref_data_ = std::move(cropped_ref).take();
         img_data_ = std::move(cropped_img).take();
+        displace_estimate_y_ = std::move(cropped_estimate_y).take();
+        displace_estimate_x_ = std::move(cropped_estimate_x).take();
         h_ = static_cast<std::size_t>(m_image_);
         w_ = static_cast<std::size_t>(m_image_);
     }
@@ -194,22 +214,11 @@ PyramidResult WXST::wavelet_data() {
 }
 
 std::vector<float> WXST::resampling_spline(const std::vector<float>& img, std::size_t in_h, std::size_t in_w, std::size_t out_h, std::size_t out_w) const {
-    std::vector<float> out(out_h * out_w, 0.0f);
-    if (out_h == 0 || out_w == 0) return out;
-    if (in_h == 0 || in_w == 0) return out;
-    if (out_h == 1 && out_w == 1) { out[0] = img[0]; return out; }
-    const double x_scale = out_w == 1 ? 0.0 : static_cast<double>(in_w - 1) / static_cast<double>(out_w - 1);
-    const double y_scale = out_h == 1 ? 0.0 : static_cast<double>(in_h - 1) / static_cast<double>(out_h - 1);
-    #pragma omp parallel for schedule(static)
-    for (std::size_t y = 0; y < out_h; ++y) {
-        for (std::size_t x = 0; x < out_w; ++x) {
-            out[idx2(y, x, out_w)] = static_cast<float>(sample_bicubic(
-                ImageView2D<const float>{img.data(), {in_h, in_w}},
-                y_scale * static_cast<double>(y),
-                x_scale * static_cast<double>(x)));
-        }
+    if (img.size() != in_h * in_w) {
+        throw std::invalid_argument("resampling_spline input size mismatch");
     }
-    return out;
+    return std::move(resample_rect_bivariate_spline(
+        ImageView2D<const float>{img.data(), {in_h, in_w}}, {out_h, out_w})).take();
 }
 
 std::array<std::vector<float>, 3> WXST::displace_wavelet(
@@ -407,9 +416,8 @@ WXSTOutput WXST::solver() {
     auto p = wavelet_data();
     const double pyramid_time = last_pyramid_time_s_;
     const double wavelet_time = last_wavelet_time_s_;
-    const int max_pyramid_searching_window = static_cast<int>(std::ceil(static_cast<double>(cal_half_window_) / std::pow(2.0, static_cast<double>(pyramid_level_))));
-    std::vector<int> searching_window_pyramid_list(static_cast<std::size_t>(pyramid_level_), n_s_extend_);
-    searching_window_pyramid_list.push_back(max_pyramid_searching_window);
+    const auto searching_window_pyramid_list = derived_search_half_windows(
+        pyramid_level_, cal_half_window_, n_s_extend_);
     std::vector<float> displace_y = std::move(displace_estimate_y_);
     std::vector<float> displace_x = std::move(displace_estimate_x_);
     std::vector<float> darkfield_nd;
@@ -469,7 +477,7 @@ WXSTOutput WXST::solver() {
     const auto displace_t1 = std::chrono::steady_clock::now();
     const double displace_time_s = std::chrono::duration<double>(displace_t1 - displace_t0).count();
     prColor("displace time: " + std::to_string(displace_time_s) + " s", "light_purple");
-    (void)configure_openmp_threads(1, "post-process/FFTW phase recovery", 1);
+    (void)configure_openmp_threads(phase_cores_, "post-process/FFTW phase recovery", 1);
     const auto post_t0 = std::chrono::steady_clock::now();
     std::vector<float> transmission(h_ * w_, 0.0f);
     for (std::size_t i = 0; i < transmission.size(); ++i) {
@@ -507,7 +515,7 @@ WXSTOutput WXST::solver() {
         ImageView2D<const float>{dpc_x.data(), {out_h, out_w}},
         ImageView2D<const float>{dpc_y.data(), {out_h, out_w}}).take();
     const double phase_scale = p_x_ * 2.0 * 3.14159265358979323846 / wavelength_;
-    for (float& v : phase) v = static_cast<float>(-static_cast<double>(v) * phase_scale);
+    apply_python_reference_phase_scale(phase, phase_scale);
     const auto post_t1 = std::chrono::steady_clock::now();
     const double postprocess_time_s = std::chrono::duration<double>(post_t1 - post_t0).count();
     const double transmission_time_s = std::chrono::duration<double>(t_xmsn1 - post_t0).count();
@@ -582,11 +590,28 @@ WXSTOutput WXST::run(const std::string& result_path, int h5_deflate) {
         JsonObject parameter_dict;
         parameter_dict["half_window"] = static_cast<double>(cal_half_window_);
         parameter_dict["N_s extend"] = static_cast<double>(n_s_extend_);
+        parameter_dict["n_s"] = static_cast<double>(n_s_);
+        parameter_dict["window_policy"] = "manual_fixed";
+        parameter_dict["semantics_profile"] = std::string(kPythonReferenceSemantics);
+        parameter_dict["input_axis_order"] = "HW";
+        parameter_dict["descriptor_axis_order"] = "HWD";
+        parameter_dict["output_dtype"] = "float32";
+        parameter_dict["phase_convention"] = "-frankot_chellappa(DPC_x,DPC_y)*p_x*2pi/wavelength";
+        parameter_dict["valid_roi_margin_input_px"] =
+            static_cast<double>(n_s_ + cal_half_window_);
+        parameter_dict["n_group_effective"] = false;
+        JsonArray search_half_windows;
+        for (const int radius : derived_search_half_windows(
+                 pyramid_level_, cal_half_window_, n_s_extend_)) {
+            search_half_windows.emplace_back(radius);
+        }
+        parameter_dict["search_half_window_by_level"] = search_half_windows;
         parameter_dict["energy"] = energy_;
         parameter_dict["wavelength"] = wavelength_;
         parameter_dict["p_x"] = p_x_;
         parameter_dict["d"] = z_;
         parameter_dict["cpu_cores"] = static_cast<double>(n_cores_);
+        parameter_dict["phase_cores"] = static_cast<double>(phase_cores_);
         parameter_dict["n_group"] = static_cast<double>(n_group_);
         parameter_dict["wavelet_level"] = static_cast<double>(wavelet_level_);
         parameter_dict["wavelet_impl"] = static_cast<double>(wavelet_impl_);
@@ -633,6 +658,8 @@ WXSTOutput WXST::run(const std::string& result_path, int h5_deflate) {
         events["post_phase_recovery_time_s"] = out.post_phase_recovery_time_s;
         events["result_write_time_s"] = out.result_write_time_s;
         events["h5_deflate"] = static_cast<double>(h5_deflate);
+        events["cpu_cores"] = static_cast<double>(n_cores_);
+        events["phase_cores"] = static_cast<double>(phase_cores_);
         JsonArray stage_records;
         JsonObject pyr_stage;
         pyr_stage["stage"] = "pyramid";

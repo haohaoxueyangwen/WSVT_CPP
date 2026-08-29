@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(WSVT_CPP VERSION 0.1.0 LANGUAGES CXX)
+project(WSVT_CPP VERSION 0.1.0 LANGUAGES C CXX)
 
 # ── C++ standard ──────────────────────────────────────────────
 set(CMAKE_CXX_STANDARD 20)
@@ -15,6 +15,7 @@ option(WSVT_BUILD_TESTS "Build unit tests (requires Catch2)"              OFF)
 option(WSVT_BUILD_BENCH "Build micro-benchmarks (requires nanobench)"     OFF)
 option(WSVT_DISABLE_AUTOVEC "Disable compiler auto-vectorization for SIMD ablation builds" OFF)
 option(WSVT_VEC_REPORT "Emit compiler vectorization diagnostics for wsvt_core" OFF)
+option(WSVT_SEARCH_STATIC_SCHEDULE "Use static scheduling in the WSVT search ablation" OFF)
 
 # ── Core library ──────────────────────────────────────────────
 add_library(wsvt_core
@@ -33,11 +34,16 @@ add_library(wsvt_core
     src/crop_ops.cpp
     src/console_ops.cpp
     src/solver_utils.cpp
+    src/umpa_physical_fit.cpp
+    src/wsvt_umpa_refine.cpp
     src/wsvt_pipeline.cpp
     src/wxst_pipeline.cpp
 )
 
 target_compile_features(wsvt_core PUBLIC cxx_std_20)
+if(WSVT_SEARCH_STATIC_SCHEDULE)
+    target_compile_definitions(wsvt_core PRIVATE WSVT_SEARCH_STATIC_SCHEDULE)
+endif()
 
 target_include_directories(wsvt_core
     PUBLIC

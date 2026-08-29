@@ -60,7 +60,8 @@ public:
         bool use_estimate = false,
         bool use_wavelet = true,
         int use_gpu = 0,
-        int wavelet_impl = 2);
+        int wavelet_impl = 2,
+        int phase_cores = 0);
 
     PyramidResult pyramid_data();
     PyramidResult wavelet_data();
@@ -90,6 +91,7 @@ private:
     int cal_half_window_;
     int n_s_extend_;
     int n_cores_;
+    int phase_cores_;
     int n_group_;
     double energy_;
     double wavelength_;

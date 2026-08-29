@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <numeric>
 #include <sstream>
+#include <stdexcept>
 #include <thread>
 
 #ifdef _OPENMP
@@ -61,7 +62,65 @@ std::vector<int> wavelet_add_list_for_depth(std::size_t depth) {
     if (depth > 50) {
         return {0, 0, 1, 2, 2, 2};
     }
-    return {0, 2, 2, 2, 2, 2};
+    return {2, 2, 2, 2, 2, 2};
+}
+
+void validate_manual_window_contract(
+    ManualWindowContract window,
+    std::size_t input_h,
+    std::size_t input_w,
+    int crop,
+    std::string_view solver_name) {
+    const std::string prefix = std::string(solver_name) + ": ";
+    if (input_h == 0 || input_w == 0) {
+        throw std::invalid_argument(prefix + "input dimensions must be positive");
+    }
+    if (crop < 0) {
+        throw std::invalid_argument(prefix + "crop must be >= 0; automatic crop sentinels are not supported");
+    }
+    if (window.cal_half_window <= 0) {
+        throw std::invalid_argument(prefix + "cal_half_window must be > 0 and set manually");
+    }
+    if (window.n_s_extend <= 0) {
+        throw std::invalid_argument(prefix + "n_s_extend must be > 0 and set manually");
+    }
+    if (window.template_radius < 0) {
+        throw std::invalid_argument(prefix + "template radius must be >= 0 and set manually");
+    }
+
+    std::size_t effective_h = input_h;
+    std::size_t effective_w = input_w;
+    const std::size_t min_extent = std::min(input_h, input_w);
+    if (crop > 0 && static_cast<std::size_t>(crop) < min_extent) {
+        effective_h = static_cast<std::size_t>(crop);
+        effective_w = static_cast<std::size_t>(crop);
+    }
+    const std::size_t required_margin = static_cast<std::size_t>(
+        window.template_radius + window.cal_half_window);
+    if (effective_h <= 2 * required_margin || effective_w <= 2 * required_margin) {
+        throw std::invalid_argument(
+            prefix + "effective ROI must be larger than twice (template_radius + cal_half_window)");
+    }
+}
+
+std::vector<int> derived_search_half_windows(
+    int pyramid_level,
+    int cal_half_window,
+    int n_s_extend) {
+    if (pyramid_level < 0) {
+        throw std::invalid_argument("pyramid_level must be >= 0");
+    }
+    std::vector<int> windows(static_cast<std::size_t>(pyramid_level), n_s_extend);
+    windows.push_back(static_cast<int>(std::ceil(
+        static_cast<double>(cal_half_window) /
+        std::pow(2.0, static_cast<double>(pyramid_level)))));
+    return windows;
+}
+
+void apply_python_reference_phase_scale(std::span<float> phase, double scale) {
+    for (float& value : phase) {
+        value = static_cast<float>(-static_cast<double>(value) * scale);
+    }
 }
 
 double stddev_2d(const std::vector<float>& arr) {

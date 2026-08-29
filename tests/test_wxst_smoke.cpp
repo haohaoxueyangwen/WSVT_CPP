@@ -160,6 +160,33 @@ TEST_CASE("WXST solver smoke test", "[wxst][smoke]") {
     REQUIRE(result.dpc_x.size() == result.h * result.w);
 }
 
+TEST_CASE("WXST crops input and initial displacement to m_image together", "[wxst][crop]") {
+    constexpr std::size_t h = 40, w = 40;
+    std::vector<float> img(h * w);
+    std::vector<float> ref(h * w);
+    for (std::size_t y = 0; y < h; ++y) {
+        for (std::size_t x = 0; x < w; ++x) {
+            const std::size_t idx = y * w + x;
+            ref[idx] = 10.0f + static_cast<float>((3 * y + 5 * x) % 19);
+            img[idx] = ref[idx];
+        }
+    }
+
+    WXST wxst(img, ref, h, w,
+              /*m_image=*/32, /*n_s=*/0, /*cal_half_window=*/2,
+              /*n_s_extend=*/1, /*n_cores=*/1, /*n_group=*/1,
+              /*energy=*/14000.0, /*p_x=*/0.65e-6, /*z=*/0.5,
+              /*wavelet_level_cut=*/1, /*pyramid_level=*/0,
+              /*n_iter=*/1, /*use_estimate=*/false, /*use_wavelet=*/false,
+              /*use_gpu=*/0);
+
+    const auto result = wxst.solver();
+    REQUIRE(result.h == 28);
+    REQUIRE(result.w == 28);
+    REQUIRE(result.transmission_h == 32);
+    REQUIRE(result.transmission_w == 32);
+}
+
 TEST_CASE("WXST preserves Python full-ROI transmission semantics", "[wxst][transmission]") {
     constexpr std::size_t h = 16, w = 16;
     std::vector<float> img(h * w);

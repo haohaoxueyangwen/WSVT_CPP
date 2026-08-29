@@ -357,16 +357,14 @@ namespace {
     }
 }
 
-std::vector<float> normalize_stack_depth_chw(
-    const std::vector<float>& data,
+void normalize_stack_depth_chw_inplace(
+    std::vector<float>& data,
     std::size_t ch,
     std::size_t h,
     std::size_t w) {
     if (data.size() != ch * h * w) {
         throw std::invalid_argument("normalize_stack_depth_chw size mismatch");
     }
-    std::vector<float> out(data.size(), 0.0f);
-
     #pragma omp parallel for schedule(static)
     for (std::size_t pixel = 0; pixel < h * w; ++pixel) {
         double mean = 0.0;
@@ -383,16 +381,15 @@ std::vector<float> normalize_stack_depth_chw(
         const double stdv = std::sqrt(var / static_cast<double>(ch));
 
         for (std::size_t c = 0; c < ch; ++c) {
-            out[c * h * w + pixel] = stdv > 0.0
+            data[c * h * w + pixel] = stdv > 0.0
                 ? static_cast<float>((static_cast<double>(data[c * h * w + pixel]) - mean) / stdv)
                 : 0.0f;
         }
     }
-    return out;
 }
 
 PyramidResult build_pyramid_single(
-    const std::vector<float>& data,
+    std::vector<float>& data,
     std::size_t ch,
     std::size_t h,
     std::size_t w,
@@ -411,53 +408,57 @@ PyramidResult build_pyramid_single(
     double total_tmpl_s = 0.0;
     double total_norm_s = 0.0;
 
-    std::vector<std::vector<float>> raw_levels;
-    std::vector<std::array<std::size_t, 3>> raw_dims;
     if (normalization_mode == PyramidNormalizationMode::InitialStack) {
         auto t0 = std::chrono::steady_clock::now();
-        raw_levels.push_back(normalize_stack_depth_chw(data, ch, h, w));
+        normalize_stack_depth_chw_inplace(data, ch, h, w);
         auto t1 = std::chrono::steady_clock::now();
         total_norm_s += std::chrono::duration<double>(t1 - t0).count();
-    } else {
-        raw_levels.push_back(data);
     }
-    raw_dims.push_back({ch, h, w});
-
-    for (int lv = 0; lv < pyramid_level; ++lv) {
-        std::size_t nh = 0;
-        std::size_t nw = 0;
-        const auto& prev = raw_levels.back();
-        const auto dim = raw_dims.back();
-        auto t0 = std::chrono::steady_clock::now();
-        auto next = downsample_by_mode(prev, dim[0], dim[1], dim[2], nh, nw, mode);
-        auto t1 = std::chrono::steady_clock::now();
-        total_downsample_s += std::chrono::duration<double>(t1 - t0).count();
-        raw_levels.push_back(std::move(next));
-        raw_dims.push_back({dim[0], nh, nw});
-    }
+    std::vector<float> raw_level = std::move(data);
 
     PyramidResult result;
-    result.ref_levels.reserve(raw_levels.size());
+    result.ref_levels.reserve(static_cast<std::size_t>(pyramid_level + 1));
+    std::size_t level_h = h;
+    std::size_t level_w = w;
 
-    for (std::size_t lv = 0; lv < raw_levels.size(); ++lv) {
-        const auto dim = raw_dims[lv];
+    // Stream one raw pyramid level at a time. Once its HWD descriptor and the
+    // next raw level have been produced, the previous raw buffer is released.
+    // This preserves the arithmetic order within every stage while avoiding a
+    // simultaneous full set of CHW raw levels.
+    for (int lv = 0; lv <= pyramid_level; ++lv) {
         std::size_t out_d = 0;
         auto t0 = std::chrono::steady_clock::now();
 
         AlignedVector<float> feat;
         if (normalization_mode == PyramidNormalizationMode::PerLevelFeature) {
             // Fused: pixel-major template fill + normalization in one pass
-            feat = stack_and_normalize_template_hwd(raw_levels[lv], dim[0], dim[1], dim[2], n_template, out_d);
+            feat = stack_and_normalize_template_hwd(
+                raw_level, ch, level_h, level_w, n_template, out_d);
             auto t1 = std::chrono::steady_clock::now();
             total_tmpl_s += std::chrono::duration<double>(t1 - t0).count();
             // normalization is fused into template_window time
         } else {
-            feat = stack_template_window_hwd(raw_levels[lv], dim[0], dim[1], dim[2], n_template, out_d);
+            feat = stack_template_window_hwd(
+                raw_level, ch, level_h, level_w, n_template, out_d);
             auto t1 = std::chrono::steady_clock::now();
             total_tmpl_s += std::chrono::duration<double>(t1 - t0).count();
         }
 
-        result.ref_levels.push_back(PyramidLevel{std::move(feat), out_d, dim[1], dim[2]});
+        result.ref_levels.push_back(
+            PyramidLevel{std::move(feat), out_d, level_h, level_w});
+
+        if (lv < pyramid_level) {
+            std::size_t next_h = 0;
+            std::size_t next_w = 0;
+            t0 = std::chrono::steady_clock::now();
+            auto next = downsample_by_mode(
+                raw_level, ch, level_h, level_w, next_h, next_w, mode);
+            auto t1 = std::chrono::steady_clock::now();
+            total_downsample_s += std::chrono::duration<double>(t1 - t0).count();
+            raw_level = std::move(next);
+            level_h = next_h;
+            level_w = next_w;
+        }
     }
     prColor("  pyramid detail: downsample=" + std::to_string(total_downsample_s) +
             "s tmpl_win=" + std::to_string(total_tmpl_s) +
@@ -470,9 +471,9 @@ PyramidResult build_pyramid_single(
 
 }
 
-PyramidResult pyramid_data(
-    const std::vector<float>& ref_data,
-    const std::vector<float>& img_data,
+PyramidResult pyramid_data_consume(
+    std::vector<float>& ref_data,
+    std::vector<float>& img_data,
     std::size_t ch,
     std::size_t h,
     std::size_t w,
@@ -532,6 +533,124 @@ PyramidResult pyramid_data(
         merged.normalize_time_s = ref_result.normalize_time_s + img_result.normalize_time_s;
     }
     return merged;
+}
+
+RawPyramidResult normalized_raw_pyramid_data(
+    const std::vector<float>& data,
+    std::size_t ch,
+    std::size_t h,
+    std::size_t w,
+    int pyramid_level,
+    PyramidDownsampleMode mode) {
+    if (data.size() != ch * h * w) {
+        throw std::invalid_argument("normalized_raw_pyramid_data size mismatch");
+    }
+    if (pyramid_level < 0) {
+        throw std::invalid_argument(
+            "normalized_raw_pyramid_data pyramid_level must be >= 0");
+    }
+
+    RawPyramidResult result;
+    result.levels.reserve(static_cast<std::size_t>(pyramid_level + 1));
+    std::vector<float> current = data;
+    auto t0 = std::chrono::steady_clock::now();
+    normalize_stack_depth_chw_inplace(current, ch, h, w);
+    auto t1 = std::chrono::steady_clock::now();
+    result.normalize_time_s = std::chrono::duration<double>(t1 - t0).count();
+
+    std::size_t level_h = h;
+    std::size_t level_w = w;
+    for (int level = 0; level <= pyramid_level; ++level) {
+        std::vector<float> next;
+        std::size_t next_h = 0;
+        std::size_t next_w = 0;
+        if (level < pyramid_level) {
+            t0 = std::chrono::steady_clock::now();
+            next = downsample_by_mode(
+                current, ch, level_h, level_w, next_h, next_w, mode);
+            t1 = std::chrono::steady_clock::now();
+            result.downsample_time_s +=
+                std::chrono::duration<double>(t1 - t0).count();
+        }
+        result.levels.push_back(
+            RawPyramidLevel{std::move(current), ch, level_h, level_w});
+        current = std::move(next);
+        level_h = next_h;
+        level_w = next_w;
+    }
+    return result;
+}
+
+std::vector<PyramidLevel> descriptor_spatial_pyramid_hwd(
+    std::span<const float> descriptor_hwd,
+    std::size_t h,
+    std::size_t w,
+    std::size_t depth,
+    int pyramid_level,
+    PyramidDownsampleMode mode) {
+    if (descriptor_hwd.size() != h * w * depth) {
+        throw std::invalid_argument(
+            "descriptor_spatial_pyramid_hwd size mismatch");
+    }
+    if (h == 0 || w == 0 || depth == 0 || pyramid_level < 0) {
+        throw std::invalid_argument(
+            "descriptor_spatial_pyramid_hwd invalid dimensions");
+    }
+
+    std::vector<float> current(depth * h * w, 0.0f);
+    const std::size_t initial_plane = h * w;
+    #pragma omp parallel for schedule(static)
+    for (std::size_t pixel = 0; pixel < initial_plane; ++pixel) {
+        for (std::size_t coefficient = 0; coefficient < depth; ++coefficient) {
+            current[coefficient * initial_plane + pixel] =
+                descriptor_hwd[pixel * depth + coefficient];
+        }
+    }
+
+    std::vector<PyramidLevel> levels;
+    levels.reserve(static_cast<std::size_t>(pyramid_level + 1));
+    std::size_t level_h = h;
+    std::size_t level_w = w;
+    for (int level = 0; level <= pyramid_level; ++level) {
+        const std::size_t plane = level_h * level_w;
+        AlignedVector<float> hwd(plane * depth, 0.0f);
+        #pragma omp parallel for schedule(static)
+        for (std::size_t pixel = 0; pixel < plane; ++pixel) {
+            for (std::size_t coefficient = 0;
+                 coefficient < depth; ++coefficient) {
+                hwd[pixel * depth + coefficient] =
+                    current[coefficient * plane + pixel];
+            }
+        }
+        levels.push_back(PyramidLevel{
+            std::move(hwd), depth, level_h, level_w});
+        if (level == pyramid_level) {
+            break;
+        }
+        std::size_t next_h = 0;
+        std::size_t next_w = 0;
+        current = downsample_by_mode(
+            current, depth, level_h, level_w, next_h, next_w, mode);
+        level_h = next_h;
+        level_w = next_w;
+    }
+    return levels;
+}
+
+PyramidResult pyramid_data(
+    const std::vector<float>& ref_data,
+    const std::vector<float>& img_data,
+    std::size_t ch,
+    std::size_t h,
+    std::size_t w,
+    int pyramid_level,
+    int n_template,
+    PyramidDownsampleMode mode,
+    PyramidNormalizationMode normalization_mode) {
+    auto ref_copy = ref_data;
+    auto img_copy = img_data;
+    return pyramid_data_consume(
+        ref_copy, img_copy, ch, h, w, pyramid_level, n_template, mode, normalization_mode);
 }
 
 }

@@ -3,7 +3,9 @@
 #include <cctype>
 #include <filesystem>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
+#include <limits>
 #include <sstream>
 #include <stdexcept>
 
@@ -256,6 +258,7 @@ private:
 std::string json_dumps(const JsonValue& v, int indent) {
     (void)indent;
     std::ostringstream os;
+    os << std::setprecision(std::numeric_limits<double>::max_digits10);
     dumps_impl(v, os);
     return os.str();
 }

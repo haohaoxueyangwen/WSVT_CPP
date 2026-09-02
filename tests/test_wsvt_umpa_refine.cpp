@@ -24,8 +24,9 @@ struct Fixture {
     double visibility = 0.63;
 };
 
-Fixture make_fixture() {
+Fixture make_fixture(double visibility = 0.63) {
     Fixture fixture;
+    fixture.visibility = visibility;
     const std::size_t plane = fixture.height * fixture.width;
     fixture.reference.resize(fixture.frames * plane, 0.0f);
     fixture.sample.resize(fixture.frames * plane, 0.0f);
@@ -71,6 +72,10 @@ Fixture make_fixture() {
         }
     }
     return fixture;
+}
+
+std::vector<int> repeated_centres(int value) {
+    return std::vector<int>(4U, value);
 }
 
 }  // namespace
@@ -132,4 +137,101 @@ TEST_CASE("fixed WG-UMPA H1 keeps the proposal when no complete patch exists", "
     REQUIRE(output.displace_y[0] == Catch::Approx(0.0f));
     REQUIRE(output.displace_x[0] == Catch::Approx(0.0f));
     REQUIRE(output.numerical_valid[0] == Catch::Approx(0.0f));
+}
+
+TEST_CASE("SET4 raw objectives share one deduplicated candidate union", "[wsvt][umpa][set4][ablation]") {
+    const Fixture model_df_fixture = make_fixture();
+    const Fixture model_t_fixture = make_fixture(1.0);
+    const std::vector<int> centres_y = repeated_centres(model_df_fixture.truth_y);
+    const std::vector<int> centres_x = repeated_centres(model_df_fixture.truth_x);
+    const std::vector<float> fallback_y{0.25f};
+    const std::vector<float> fallback_x{-0.5f};
+
+    for (const auto objective : {
+             wsvt::SetTransportRawObjective::WindowedZncc,
+             wsvt::SetTransportRawObjective::ModelT,
+             wsvt::SetTransportRawObjective::ModelDF}) {
+        const Fixture& fixture = objective == wsvt::SetTransportRawObjective::ModelT
+            ? model_t_fixture : model_df_fixture;
+        wsvt::SetTransportRawRerankConfig config;
+        config.enabled = true;
+        config.objective = objective;
+        const auto output = wsvt::rerank_set_transport_raw(
+             fixture.sample, fixture.reference,
+             fixture.frames, fixture.height, fixture.width,
+             centres_y, centres_x,
+             std::span<const int>{}, std::span<const int>{},
+             fallback_y, fallback_x,
+            1U, 1U, fixture.sample_y, fixture.sample_x, config);
+
+        REQUIRE(output.raw_candidate_count == 81U);
+        REQUIRE(output.raw_observation_count == 81U * fixture.frames * 9U);
+        REQUIRE(output.numerical_valid_pixel_count == 1U);
+        REQUIRE(output.displace_y[0] == Catch::Approx(
+            static_cast<float>(fixture.truth_y)));
+        REQUIRE(output.displace_x[0] == Catch::Approx(
+            static_cast<float>(fixture.truth_x)));
+        REQUIRE(output.best_cost[0] < output.second_best_cost[0]);
+        REQUIRE(output.candidates_evaluated[0] == Catch::Approx(81.0f));
+        if (objective == wsvt::SetTransportRawObjective::ModelT) {
+            REQUIRE(output.transmission[0] == Catch::Approx(
+                fixture.transmission).margin(2.0e-5));
+            REQUIRE(output.visibility[0] == Catch::Approx(1.0f));
+            REQUIRE(output.physical_valid[0] == Catch::Approx(1.0f));
+        } else if (objective == wsvt::SetTransportRawObjective::ModelDF) {
+            REQUIRE(output.transmission[0] == Catch::Approx(
+                fixture.transmission).margin(2.0e-5));
+            REQUIRE(output.visibility[0] == Catch::Approx(
+                fixture.visibility).margin(2.0e-5));
+            REQUIRE(output.physical_valid[0] == Catch::Approx(1.0f));
+        } else {
+            REQUIRE(output.physical_valid[0] == Catch::Approx(0.0f));
+        }
+    }
+}
+
+TEST_CASE("SET4 raw rerank validates its frozen support", "[wsvt][umpa][set4][validation]") {
+    const Fixture fixture = make_fixture();
+    wsvt::SetTransportRawRerankConfig config;
+    config.enabled = true;
+    config.analysis_radius = 2U;
+    REQUIRE_THROWS_AS(
+        wsvt::rerank_set_transport_raw(
+            fixture.sample, fixture.reference,
+             fixture.frames, fixture.height, fixture.width,
+             repeated_centres(fixture.truth_y),
+             repeated_centres(fixture.truth_x),
+             std::span<const int>{}, std::span<const int>{},
+             std::vector<float>{0.0f}, std::vector<float>{0.0f},
+            1U, 1U, fixture.sample_y, fixture.sample_x, config),
+        std::invalid_argument);
+}
+
+TEST_CASE("SET4 REP4 raw rerank evaluates only deduplicated domain representatives",
+          "[wsvt][umpa][set4][rep4]") {
+    const Fixture fixture = make_fixture();
+    const std::vector<int> centres_y = repeated_centres(fixture.truth_y);
+    const std::vector<int> centres_x = repeated_centres(fixture.truth_x);
+    const std::vector<int> representatives_y{
+        fixture.truth_y, fixture.truth_y, fixture.truth_y + 1,
+        fixture.truth_y - 1};
+    const std::vector<int> representatives_x{
+        fixture.truth_x, fixture.truth_x + 1, fixture.truth_x,
+        fixture.truth_x - 1};
+    wsvt::SetTransportRawRerankConfig config;
+    config.enabled = true;
+    config.representatives_only = true;
+    config.objective = wsvt::SetTransportRawObjective::WindowedZncc;
+    const auto output = wsvt::rerank_set_transport_raw(
+        fixture.sample, fixture.reference,
+        fixture.frames, fixture.height, fixture.width,
+        centres_y, centres_x, representatives_y, representatives_x,
+        std::vector<float>{0.0f}, std::vector<float>{0.0f},
+        1U, 1U, fixture.sample_y, fixture.sample_x, config);
+    REQUIRE(output.raw_candidate_count == 4U);
+    REQUIRE(output.raw_observation_count == 4U * fixture.frames * 9U);
+    REQUIRE(output.displace_y[0] == Catch::Approx(
+        static_cast<float>(fixture.truth_y)));
+    REQUIRE(output.displace_x[0] == Catch::Approx(
+        static_cast<float>(fixture.truth_x)));
 }

@@ -22,6 +22,32 @@ struct WaveletGuidedUmpaConfig {
     double transmission_epsilon = 1.0e-12;
 };
 
+/// Objective used to score the same fixed SET4 raw-intensity candidate union.
+///
+/// This enum separates the effect of spatial support from the physical model:
+/// WindowedZncc is the XST-XSVT-style window control, ModelT fits only local
+/// transmission, and ModelDF fits transmission plus modulation visibility.
+enum class SetTransportRawObjective {
+    WindowedZncc,
+    ModelT,
+    ModelDF,
+};
+
+WSVT_API const char* set_transport_raw_objective_name(
+    SetTransportRawObjective objective) noexcept;
+
+/// Fixed, default-off raw rerank over the exact SET4 fine candidate union.
+struct SetTransportRawRerankConfig {
+    bool enabled = false;
+    bool representatives_only = false;
+    SetTransportRawObjective objective = SetTransportRawObjective::ModelDF;
+    int domain_half_window = 4;
+    std::size_t analysis_radius = 1;
+    double relative_delta_tolerance = 1.0e-12;
+    double transmission_epsilon = 1.0e-12;
+    double variance_epsilon = 1.0e-12;
+};
+
 /// Dense H1 maps on the saved sample-coordinate output grid.
 struct WaveletGuidedUmpaOutput {
     std::vector<float> proposal_y;
@@ -69,5 +95,31 @@ WSVT_API WaveletGuidedUmpaOutput refine_wavelet_guided_umpa(
     std::size_t sample_origin_y,
     std::size_t sample_origin_x,
     const WaveletGuidedUmpaConfig& config = {});
+
+/// Rerank the deduplicated union of four fixed SET4 displacement domains.
+///
+/// `set_center_y/x` are pixel-major arrays with four saved-convention integer
+/// centres per output pixel. `fallback_y/x` are the established SET4 result and
+/// are retained when no raw candidate is numerically valid. Every objective
+/// uses the same candidate union, frames, 3x3 normalized-Hamming support and
+/// row-major tie ordering. No adaptive routing or subpixel interpolation is
+/// applied by this bounded mechanism-ablation path.
+WSVT_API WaveletGuidedUmpaOutput rerank_set_transport_raw(
+    std::span<const float> sample_stack,
+    std::span<const float> reference_stack,
+    std::size_t frames,
+    std::size_t raw_height,
+    std::size_t raw_width,
+    std::span<const int> set_center_y,
+    std::span<const int> set_center_x,
+    std::span<const int> set_representative_y,
+    std::span<const int> set_representative_x,
+    std::span<const float> fallback_y,
+    std::span<const float> fallback_x,
+    std::size_t output_height,
+    std::size_t output_width,
+    std::size_t sample_origin_y,
+    std::size_t sample_origin_x,
+    const SetTransportRawRerankConfig& config = {});
 
 }  // namespace wsvt

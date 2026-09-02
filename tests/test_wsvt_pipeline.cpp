@@ -7,6 +7,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <cmath>
+#include <set>
 #include <vector>
 
 using namespace wsvt;
@@ -122,7 +123,7 @@ TEST_CASE("WSVT can skip raw darkfield while keeping core outputs", "[wsvt][dark
     REQUIRE(result.score_margin.size() == result.h * result.w);
 }
 
-TEST_CASE("WSVT captures exact Top-K only at requested exhaustive-search pixels", "[wsvt][search][diagnostic]") {
+TEST_CASE("WSVT captures an exact full rank surface only at requested selected-grid pixels", "[wsvt][search][diagnostic]") {
     constexpr std::size_t ch = 8;
     constexpr std::size_t h = 24;
     constexpr std::size_t w = 24;
@@ -139,30 +140,220 @@ TEST_CASE("WSVT captures exact Top-K only at requested exhaustive-search pixels"
         /*search_early_abandon=*/false, /*search_top_k=*/2,
         /*search_block_size=*/4);
     REQUIRE(solver.search_topk_diagnostics().empty());
-    solver.configure_search_topk_diagnostics({12 * w + 12}, 4);
+    REQUIRE_THROWS_AS(
+        solver.configure_search_topk_diagnostics({12 * w + 12}, 26),
+        std::invalid_argument);
+    solver.configure_search_topk_diagnostics({12 * w + 12}, 25);
 
     const auto result = solver.solver();
     const auto& diagnostics = solver.search_topk_diagnostics();
     REQUIRE(result.h == h - 4);
     REQUIRE(result.w == w - 4);
-    REQUIRE(diagnostics.size() == 4);
+    REQUIRE(diagnostics.size() == 25);
+    std::set<std::pair<int, int>> local_offsets;
     for (std::size_t rank = 0; rank < diagnostics.size(); ++rank) {
         const auto& value = diagnostics[rank];
         REQUIRE(value.request_index == 0);
+        REQUIRE(value.pyramid_level == 0);
         REQUIRE(value.raw_y == 12);
         REQUIRE(value.raw_x == 12);
         REQUIRE(value.rank == rank);
         REQUIRE(value.saved_candidate_y == -value.internal_candidate_y);
         REQUIRE(value.saved_candidate_x == -value.internal_candidate_x);
         REQUIRE(value.descriptor_cost_ssd == -value.descriptor_score_neg_ssd);
+        local_offsets.emplace(value.local_offset_y, value.local_offset_x);
         if (rank > 0) {
             REQUIRE(diagnostics[rank - 1].descriptor_cost_ssd <=
                     value.descriptor_cost_ssd);
         }
     }
+    REQUIRE(local_offsets.size() == 25);
     REQUIRE(diagnostics[0].saved_candidate_y == 0);
     REQUIRE(diagnostics[0].saved_candidate_x == 0);
     REQUIRE(diagnostics[0].descriptor_cost_ssd == Catch::Approx(0.0f));
+
+    WSVT pyramid_solver(
+        img, ref, ch, h, w,
+        /*crop=*/0, /*cal_half_window=*/2, /*n_template=*/0,
+        /*n_s_extend=*/1, /*n_cores=*/1, /*n_group=*/1,
+        14000.0, 0.65e-6, 1.0, 0.5,
+        /*wavelet_level_cut=*/1, /*pyramid_level=*/1, /*n_iter=*/1,
+        /*use_estimate=*/false, /*use_wavelet=*/false, /*use_gpu=*/0,
+        /*calc_darkfield=*/false, /*phase_cores=*/1,
+        /*search_early_abandon=*/false, /*search_top_k=*/2,
+        /*search_block_size=*/4);
+    constexpr std::size_t coarse_h = (h + 5U) / 2U;
+    constexpr std::size_t coarse_w = (w + 5U) / 2U;
+    REQUIRE_THROWS_AS(
+        pyramid_solver.configure_search_topk_diagnostics({7 * coarse_w + 7}, 10, 1),
+        std::invalid_argument);
+    REQUIRE_THROWS_AS(
+        pyramid_solver.configure_search_topk_diagnostics({7 * coarse_w + 7}, 9, -1),
+        std::invalid_argument);
+    REQUIRE_THROWS_AS(
+        pyramid_solver.configure_search_topk_diagnostics({7 * coarse_w + 7}, 9, 2),
+        std::invalid_argument);
+    REQUIRE_THROWS_AS(
+        pyramid_solver.configure_search_topk_diagnostics({coarse_h * coarse_w}, 9, 1),
+        std::out_of_range);
+    pyramid_solver.configure_search_topk_diagnostics({7 * coarse_w + 7}, 9, 1);
+    const auto pyramid_result = pyramid_solver.solver();
+    REQUIRE(pyramid_result.h == h - 4);
+    REQUIRE(pyramid_result.w == w - 4);
+    const auto& coarse_diagnostics = pyramid_solver.search_topk_diagnostics();
+    REQUIRE(coarse_diagnostics.size() == 9);
+    std::set<std::pair<int, int>> coarse_offsets;
+    for (std::size_t rank = 0; rank < coarse_diagnostics.size(); ++rank) {
+        const auto& value = coarse_diagnostics[rank];
+        REQUIRE(value.request_index == 0);
+        REQUIRE(value.pyramid_level == 1);
+        REQUIRE(value.raw_y == 7);
+        REQUIRE(value.raw_x == 7);
+        REQUIRE(value.rank == rank);
+        coarse_offsets.emplace(value.local_offset_y, value.local_offset_x);
+    }
+    REQUIRE(coarse_offsets.size() == 9);
+}
+
+TEST_CASE("WSVT fixed set transport keeps an unordered width-four coarse proposal set",
+          "[wsvt][set-transport]") {
+    constexpr std::size_t ch = 8;
+    constexpr std::size_t h = 64;
+    constexpr std::size_t w = 64;
+    const auto ref = make_textured_stack(ch, h, w, 10.0f);
+    const auto img = ref;
+    WSVT baseline(
+        img, ref, ch, h, w,
+        /*crop=*/0, /*cal_half_window=*/16, /*n_template=*/0,
+        /*n_s_extend=*/4, /*n_cores=*/1, /*n_group=*/1,
+        14000.0, 0.65e-6, 1.0, 0.5,
+        /*wavelet_level_cut=*/1, /*pyramid_level=*/1, /*n_iter=*/1,
+        /*use_estimate=*/false, /*use_wavelet=*/true, /*use_gpu=*/0,
+        /*calc_darkfield=*/false, /*phase_cores=*/1,
+        /*search_early_abandon=*/false, /*search_top_k=*/2,
+        /*search_block_size=*/4);
+    WSVT set_solver(
+        img, ref, ch, h, w,
+        /*crop=*/0, /*cal_half_window=*/16, /*n_template=*/0,
+        /*n_s_extend=*/4, /*n_cores=*/1, /*n_group=*/1,
+        14000.0, 0.65e-6, 1.0, 0.5,
+        /*wavelet_level_cut=*/1, /*pyramid_level=*/1, /*n_iter=*/1,
+        /*use_estimate=*/false, /*use_wavelet=*/true, /*use_gpu=*/0,
+        /*calc_darkfield=*/false, /*phase_cores=*/1,
+        /*search_early_abandon=*/false, /*search_top_k=*/2,
+        /*search_block_size=*/4);
+    set_solver.configure_fixed_set_transport();
+
+    const auto expected = baseline.solver();
+    const auto actual = set_solver.solver();
+    REQUIRE(expected.set_transport_center_y.empty());
+    REQUIRE(expected.set_transport_integer_winner_y.empty());
+    REQUIRE(expected.set_transport_candidates_evaluated.empty());
+    REQUIRE(expected.set_transport_unique_candidate_count == 0);
+    REQUIRE(actual.h == 32);
+    REQUIRE(actual.w == 32);
+    REQUIRE(actual.set_transport_center_y.size() == 4 * actual.h * actual.w);
+    REQUIRE(actual.set_transport_center_x.size() == 4 * actual.h * actual.w);
+    REQUIRE(actual.set_transport_integer_winner_y.size() == actual.h * actual.w);
+    REQUIRE(actual.set_transport_integer_winner_x.size() == actual.h * actual.w);
+    REQUIRE(actual.set_transport_representative_y.size() == 4 * actual.h * actual.w);
+    REQUIRE(actual.set_transport_representative_x.size() == 4 * actual.h * actual.w);
+    REQUIRE(actual.set_transport_candidates_evaluated.size() == actual.h * actual.w);
+    REQUIRE(actual.set_transport_nominal_candidate_count ==
+            4ULL * 81ULL * h * w);
+    REQUIRE(actual.set_transport_unique_candidate_count > 81ULL * h * w);
+    REQUIRE(actual.set_transport_unique_candidate_count <=
+            actual.set_transport_nominal_candidate_count);
+    REQUIRE(actual.set_transport_duplicate_candidate_count ==
+            actual.set_transport_nominal_candidate_count -
+            actual.set_transport_unique_candidate_count);
+    REQUIRE(std::all_of(
+        actual.set_transport_candidates_evaluated.begin(),
+        actual.set_transport_candidates_evaluated.end(),
+        [](float value) { return value >= 81.0f && value <= 324.0f; }));
+    REQUIRE(std::all_of(
+        actual.displace_x.begin(), actual.displace_x.end(),
+        [](float value) { return std::isfinite(value) && std::abs(value) <= 16.0f; }));
+    REQUIRE(std::all_of(
+        actual.displace_y.begin(), actual.displace_y.end(),
+        [](float value) { return std::isfinite(value) && std::abs(value) <= 16.0f; }));
+
+    WSVT raw_solver(
+        img, ref, ch, h, w,
+        /*crop=*/0, /*cal_half_window=*/16, /*n_template=*/0,
+        /*n_s_extend=*/4, /*n_cores=*/1, /*n_group=*/1,
+        14000.0, 0.65e-6, 1.0, 0.5,
+        /*wavelet_level_cut=*/1, /*pyramid_level=*/1, /*n_iter=*/1,
+        /*use_estimate=*/false, /*use_wavelet=*/true, /*use_gpu=*/0,
+        /*calc_darkfield=*/false, /*phase_cores=*/1,
+        /*search_early_abandon=*/false, /*search_top_k=*/2,
+        /*search_block_size=*/4);
+    raw_solver.configure_fixed_set_transport();
+    wsvt::SetTransportRawRerankConfig raw_config;
+    raw_config.enabled = true;
+    raw_config.objective = wsvt::SetTransportRawObjective::WindowedZncc;
+    raw_solver.configure_set_transport_raw_rerank(raw_config);
+    const auto raw = raw_solver.solver();
+    REQUIRE(raw.umpa_best_cost.size() == raw.h * raw.w);
+    REQUIRE(raw.set_transport_integer_winner_y.size() == raw.h * raw.w);
+    REQUIRE(raw.set_transport_integer_winner_x.size() == raw.h * raw.w);
+    REQUIRE(raw.set_transport_representative_y.size() == 4 * raw.h * raw.w);
+    REQUIRE(raw.set_transport_representative_x.size() == 4 * raw.h * raw.w);
+    REQUIRE(raw.umpa_candidates_evaluated.size() == raw.h * raw.w);
+    REQUIRE(raw.umpa_raw_candidate_count > 0U);
+    REQUIRE(raw.umpa_raw_observation_count ==
+            raw.umpa_raw_candidate_count * ch * 9U);
+    REQUIRE(raw.umpa_numerical_valid_pixel_count == raw.h * raw.w);
+    REQUIRE(raw.umpa_physical_valid_pixel_count == 0U);
+    const std::size_t raw_pixels = raw.h * raw.w;
+    for (std::size_t pixel = 0; pixel < raw_pixels; ++pixel) {
+        bool belongs_to_fixed_union = false;
+        for (std::size_t hypothesis = 0; hypothesis < 4; ++hypothesis) {
+            const std::size_t source = hypothesis * raw_pixels + pixel;
+            const float delta_y = raw.displace_y[pixel] -
+                                  raw.set_transport_center_y[source];
+            const float delta_x = raw.displace_x[pixel] -
+                                  raw.set_transport_center_x[source];
+            belongs_to_fixed_union = belongs_to_fixed_union ||
+                (std::abs(delta_y) <= 4.0f && std::abs(delta_x) <= 4.0f);
+        }
+        REQUIRE(belongs_to_fixed_union);
+    }
+
+    WSVT rep_solver(
+        img, ref, ch, h, w,
+        /*crop=*/0, /*cal_half_window=*/16, /*n_template=*/0,
+        /*n_s_extend=*/4, /*n_cores=*/1, /*n_group=*/1,
+        14000.0, 0.65e-6, 1.0, 0.5,
+        /*wavelet_level_cut=*/1, /*pyramid_level=*/1, /*n_iter=*/1,
+        /*use_estimate=*/false, /*use_wavelet=*/true, /*use_gpu=*/0,
+        /*calc_darkfield=*/false, /*phase_cores=*/1,
+        /*search_early_abandon=*/false, /*search_top_k=*/2,
+        /*search_block_size=*/4);
+    rep_solver.configure_fixed_set_transport();
+    raw_config.representatives_only = true;
+    rep_solver.configure_set_transport_raw_rerank(raw_config);
+    const auto rep = rep_solver.solver();
+    REQUIRE(rep.umpa_raw_candidate_count <= 4U * rep.h * rep.w);
+    REQUIRE(rep.umpa_raw_observation_count ==
+            rep.umpa_raw_candidate_count * ch * 9U);
+    for (std::size_t pixel = 0; pixel < rep.h * rep.w; ++pixel) {
+        bool selected_representative = false;
+        for (std::size_t hypothesis = 0; hypothesis < 4; ++hypothesis) {
+            const std::size_t source = hypothesis * rep.h * rep.w + pixel;
+            selected_representative = selected_representative ||
+                (rep.displace_y[pixel] == rep.set_transport_representative_y[source] &&
+                 rep.displace_x[pixel] == rep.set_transport_representative_x[source]);
+        }
+        REQUIRE(selected_representative);
+    }
+
+    WSVT invalid(
+        img, ref, ch, h, w,
+        0, 8, 0, 4, 1, 1, 14000.0, 0.65e-6, 1.0, 0.5,
+        1, 1, 1, false, true, 0, false, 1);
+    REQUIRE_THROWS_AS(
+        invalid.configure_fixed_set_transport(), std::invalid_argument);
 }
 
 TEST_CASE("WSVT rejects invalid manual windows before allocating solver stages", "[wsvt][window]") {

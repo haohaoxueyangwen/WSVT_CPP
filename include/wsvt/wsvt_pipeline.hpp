@@ -123,6 +123,22 @@ struct SolverOutput {
     std::uint64_t umpa_numerical_valid_pixel_count = 0;
     std::uint64_t umpa_physical_valid_pixel_count = 0;
     std::uint64_t umpa_retained_raw_bytes = 0;
+    // Default-off fixed width-four nearest-parent set-transport diagnostics.
+    // Center arrays are stored as [hypothesis,h,w] in the saved displacement
+    // sign convention.  They are empty for the established B0 solver.
+    std::vector<float> set_transport_center_y;
+    std::vector<float> set_transport_center_x;
+    // Exact integer descriptor winner before the existing Hessian subpixel fit.
+    // Saved only for fixed SET4 so raw integer objectives have a matched control.
+    std::vector<float> set_transport_integer_winner_y;
+    std::vector<float> set_transport_integer_winner_x;
+    // One exact descriptor winner per transported domain, [hypothesis,h,w].
+    std::vector<float> set_transport_representative_y;
+    std::vector<float> set_transport_representative_x;
+    std::vector<float> set_transport_candidates_evaluated;
+    std::uint64_t set_transport_unique_candidate_count = 0;
+    std::uint64_t set_transport_nominal_candidate_count = 0;
+    std::uint64_t set_transport_duplicate_candidate_count = 0;
 };
 
 struct DisplaceWaveletOutput {
@@ -155,6 +171,14 @@ struct DisplaceWaveletOutput {
     std::uint64_t easy_path_accepted_pixel_count = 0;
     std::uint64_t easy_path_fallback_pixel_count = 0;
     std::uint64_t inactive_pixel_count = 0;
+    std::vector<float> coarse_set_hypothesis_y;
+    std::vector<float> coarse_set_hypothesis_x;
+    std::vector<int> set_transport_representative_y;
+    std::vector<int> set_transport_representative_x;
+    std::vector<float> set_transport_candidates_evaluated;
+    std::uint64_t set_transport_unique_candidate_count = 0;
+    std::uint64_t set_transport_nominal_candidate_count = 0;
+    std::uint64_t set_transport_duplicate_candidate_count = 0;
 };
 
 /// One exact descriptor candidate retained only for an explicitly requested
@@ -162,6 +186,7 @@ struct DisplaceWaveletOutput {
 /// (y+dy,x+dx); the saved project convention is its sign inverse.
 struct SearchTopKDiagnostic {
     std::size_t request_index = 0;
+    int pyramid_level = 0;
     std::size_t raw_y = 0;
     std::size_t raw_x = 0;
     std::size_t rank = 0;
@@ -248,13 +273,16 @@ public:
     SolverOutput solver();
     SolverOutput run(const std::string& result_path = "", bool cleansave = false, int h5_deflate = 9);
 
-    /// Enable exact Top-K capture at a small set of raw-grid pixels.  This is
-    /// a diagnostic side channel; it is empty and has no hot-loop cost in the
-    /// default solver.  The current diagnostic is deliberately restricted to
-    /// exhaustive search so every ranked score is an exact full SSD.
+    /// Enable exact ranked-candidate capture at a small set of pixels on one
+    /// pyramid grid.  pyramid_level=0 preserves the established raw-grid audit.
+    /// This is a diagnostic side channel; it is empty and has no hot-loop cost
+    /// in the default solver.  It is deliberately restricted to exhaustive
+    /// search so every retained score is an exact full SSD.  top_k may span the
+    /// complete selected-level search surface for bounded truth-rank audits.
     void configure_search_topk_diagnostics(
         std::vector<std::size_t> raw_linear_pixels,
-        std::size_t top_k);
+        std::size_t top_k,
+        int pyramid_level = 0);
     [[nodiscard]] const std::vector<SearchTopKDiagnostic>&
     search_topk_diagnostics() const noexcept;
 
@@ -266,6 +294,19 @@ public:
     /// H1 is deliberately incompatible with the closed easy-to-hard profiles
     /// and exact-pruning diagnostics in its first integration version.
     void configure_wavelet_guided_umpa(WaveletGuidedUmpaConfig config);
+
+    /// Enable the fixed width-four nearest-parent unordered coarse-hypothesis
+    /// transport research profile.  The profile is deliberately parameter-
+    /// free in v1 and is restricted to the frozen exhaustive two-level WSVT
+    /// configuration used by its development/calibration experiment.
+    void configure_fixed_set_transport(bool enabled = true);
+
+    /// Rerank the exact SET4 fine candidate union using one fixed raw objective.
+    /// This default-off mechanism-ablation path requires fixed set transport
+    /// and keeps the candidate domain, frame count and 3x3 Hamming support
+    /// identical across windowed ZNCC, ModelT and ModelDF.
+    void configure_set_transport_raw_rerank(
+        SetTransportRawRerankConfig config);
 
 private:
     void crop_inputs_if_requested();
@@ -284,7 +325,10 @@ private:
         int n_pad,
         std::span<const std::uint8_t> active_mask = {},
         std::span<const std::uint8_t> easy_mask = {},
-        std::span<const float> temporal_contrast = {}) const;
+        std::span<const float> temporal_contrast = {},
+        std::span<const int> set_hypothesis_y = {},
+        std::span<const int> set_hypothesis_x = {},
+        int current_pyramid_level = 0) const;
     PyramidResult wavelet_data_for_frame_prefix(
         std::size_t frame_count,
         double& pyramid_time_s,
@@ -334,9 +378,12 @@ private:
     double last_wavelet_time_s_;
     std::vector<std::size_t> diagnostic_pixels_;
     std::size_t diagnostic_top_k_ = 0;
+    int diagnostic_pyramid_level_ = 0;
     mutable std::vector<SearchTopKDiagnostic> search_topk_diagnostics_;
     EasyToHardConfig easy_to_hard_;
     WaveletGuidedUmpaConfig wavelet_guided_umpa_;
+    bool fixed_set_transport_ = false;
+    SetTransportRawRerankConfig set_transport_raw_rerank_;
 };
 
 }

@@ -631,7 +631,10 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
     int n_pad,
     std::span<const std::uint8_t> active_mask,
     std::span<const std::uint8_t> easy_mask,
-    std::span<const float> temporal_contrast) const {
+    std::span<const float> temporal_contrast,
+    std::span<const int> set_hypothesis_y,
+    std::span<const int> set_hypothesis_x,
+    int current_pyramid_level) const {
     if (img_wa_stack.size() != img_h * img_w * depth || ref_wa_stack.size() != ref_h * ref_w * depth) {
         throw std::invalid_argument("displace_wavelet stack shape mismatch");
     }
@@ -647,6 +650,19 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
     }
     if (!temporal_contrast.empty() && temporal_contrast.size() != pixel_count) {
         throw std::invalid_argument("displace_wavelet contrast shape mismatch");
+    }
+    constexpr std::size_t kSetWidth = 4;
+    const bool use_set_transport = !set_hypothesis_y.empty();
+    if (set_hypothesis_y.empty() != set_hypothesis_x.empty() ||
+        (use_set_transport &&
+         (set_hypothesis_y.size() != pixel_count * kSetWidth ||
+          set_hypothesis_x.size() != pixel_count * kSetWidth))) {
+        throw std::invalid_argument(
+            "displace_wavelet fixed set hypothesis shape mismatch");
+    }
+    if (use_set_transport && (!fixed_set_transport_ || current_pyramid_level != 0)) {
+        throw std::invalid_argument(
+            "fixed set hypotheses are valid only at the final pyramid level");
     }
     const std::size_t window_size = static_cast<std::size_t>(2 * cal_half_window + 1);
     const std::size_t ws2 = window_size * window_size;
@@ -682,11 +698,24 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
     std::vector<float> effective_search_half_window(
         img_h * img_w, static_cast<float>(cal_half_window));
     std::vector<float> confidence_path(img_h * img_w, 0.0f);
-    const bool capture_integer_proposal = wavelet_guided_umpa_.enabled;
+    const bool capture_integer_proposal =
+        wavelet_guided_umpa_.enabled || use_set_transport;
     std::vector<int> integer_displace_y(
         capture_integer_proposal ? img_h * img_w : 0U, 0);
     std::vector<int> integer_displace_x(
         capture_integer_proposal ? img_h * img_w : 0U, 0);
+    const bool capture_coarse_set = fixed_set_transport_ &&
+        current_pyramid_level == pyramid_level_;
+    std::vector<float> coarse_set_hypothesis_y(
+        capture_coarse_set ? pixel_count * kSetWidth : 0U, 0.0f);
+    std::vector<float> coarse_set_hypothesis_x(
+        capture_coarse_set ? pixel_count * kSetWidth : 0U, 0.0f);
+    std::vector<float> set_transport_candidates_evaluated(
+        use_set_transport ? pixel_count : 0U, 0.0f);
+    std::vector<int> set_transport_representative_y(
+        use_set_transport ? pixel_count * kSetWidth : 0U, 0);
+    std::vector<int> set_transport_representative_x(
+        use_set_transport ? pixel_count * kSetWidth : 0U, 0);
     const std::size_t npad = static_cast<std::size_t>(n_pad);
 
     if (!is_pointer_aligned<64>(img_wa_stack.data()) ||
@@ -713,19 +742,26 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
     std::uint64_t easy_path_accepted_pixel_count = 0;
     std::uint64_t easy_path_fallback_pixel_count = 0;
     std::uint64_t inactive_pixel_count = 0;
+    std::uint64_t set_transport_unique_candidate_count = 0;
+    std::uint64_t set_transport_nominal_candidate_count = 0;
+    std::uint64_t set_transport_duplicate_candidate_count = 0;
     const std::size_t two_pass_prefix_terms = std::min(
         depth, static_cast<std::size_t>(search_prefix_size_));
     const ConservativePrefixSsdGuard cached_prefix_guard(
         two_pass_prefix_terms, depth);
     const bool capture_topk = diagnostic_top_k_ > 0 &&
-        img_h == h_ && img_w == w_;
+        current_pyramid_level == diagnostic_pyramid_level_;
     if (capture_topk) {
+        if (diagnostic_pixels_.back() >= pixel_count) {
+            throw std::logic_error(
+                "Top-K diagnostic pixel is outside the selected pyramid grid");
+        }
         search_topk_diagnostics_.assign(
             diagnostic_pixels_.size() * diagnostic_top_k_,
             SearchTopKDiagnostic{});
     }
 
-    #pragma omp parallel reduction(+:search_candidate_count,search_abandoned_candidate_count,search_distance_terms_evaluated,search_distance_terms_possible,search_refine_terms_evaluated,search_prefix_terms_evaluated,search_full_candidate_count,search_guard_check_count,search_guard_refresh_count,search_dense_baseline_candidate_count,easy_path_eligible_pixel_count,easy_path_accepted_pixel_count,easy_path_fallback_pixel_count,inactive_pixel_count)
+    #pragma omp parallel reduction(+:search_candidate_count,search_abandoned_candidate_count,search_distance_terms_evaluated,search_distance_terms_possible,search_refine_terms_evaluated,search_prefix_terms_evaluated,search_full_candidate_count,search_guard_check_count,search_guard_refresh_count,search_dense_baseline_candidate_count,easy_path_eligible_pixel_count,easy_path_accepted_pixel_count,easy_path_fallback_pixel_count,inactive_pixel_count,set_transport_unique_candidate_count,set_transport_nominal_candidate_count,set_transport_duplicate_candidate_count)
     {
         // Thread-local buffers — allocated once per thread
         std::vector<float> corr_data(ws2, 0.0f);
@@ -734,6 +770,14 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
         ExactTopK top_k(static_cast<std::size_t>(search_top_k_));
         ExactTopK prefix_top_k(static_cast<std::size_t>(search_top_k_));
         ExactTopK exact_top_k(static_cast<std::size_t>(search_top_k_));
+        const int set_coordinate_limit = cal_half_window_ + cal_half_window;
+        const std::size_t set_coordinate_side = static_cast<std::size_t>(
+            2 * set_coordinate_limit + 1);
+        std::vector<float> set_corr(
+            use_set_transport ? set_coordinate_side * set_coordinate_side : 0U,
+            -std::numeric_limits<float>::infinity());
+        std::vector<std::uint32_t> set_epoch(set_corr.size(), 0U);
+        std::uint32_t current_set_epoch = 0;
 
         #if defined(WSVT_SEARCH_STATIC_SCHEDULE)
         #pragma omp for schedule(static)
@@ -776,6 +820,8 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
 
             const int dy_int = static_cast<int>(dy_in[pixel]);
             const int dx_int = static_cast<int>(dx_in[pixel]);
+            int fit_center_y = dy_int;
+            int fit_center_x = dx_int;
             const std::size_t y0n = static_cast<std::size_t>(
                 static_cast<long long>(npad + yy) + static_cast<long long>(dy_int));
             const std::size_t x0n = static_cast<std::size_t>(
@@ -796,7 +842,176 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
                 }
             }
 
-            if (easy_to_hard_.confidence_aware_refinement) {
+            if (use_set_transport) {
+                ++current_set_epoch;
+                if (current_set_epoch == 0) {
+                    std::fill(set_epoch.begin(), set_epoch.end(), 0U);
+                    current_set_epoch = 1;
+                }
+                std::size_t best_key = set_corr.size();
+                std::size_t second_key = set_corr.size();
+                std::uint64_t unique_candidates = 0;
+                const std::uint64_t nominal_candidates =
+                    static_cast<std::uint64_t>(kSetWidth * ws2);
+                const std::size_t hypothesis_base = pixel * kSetWidth;
+                const std::size_t pad_origin = static_cast<std::size_t>(
+                    n_pad + cal_half_window);
+                for (std::size_t hypothesis = 0; hypothesis < kSetWidth;
+                     ++hypothesis) {
+                    const int center_y = set_hypothesis_y[
+                        hypothesis_base + hypothesis];
+                    const int center_x = set_hypothesis_x[
+                        hypothesis_base + hypothesis];
+                    for (int local_y = -cal_half_window;
+                         local_y <= cal_half_window; ++local_y) {
+                        for (int local_x = -cal_half_window;
+                             local_x <= cal_half_window; ++local_x) {
+                            const int candidate_y = center_y + local_y;
+                            const int candidate_x = center_x + local_x;
+                            if (std::abs(candidate_y) > set_coordinate_limit ||
+                                std::abs(candidate_x) > set_coordinate_limit) {
+                                throw std::logic_error(
+                                    "fixed set candidate exceeds padded coordinate range");
+                            }
+                            const std::size_t key = static_cast<std::size_t>(
+                                candidate_y + set_coordinate_limit) *
+                                set_coordinate_side + static_cast<std::size_t>(
+                                candidate_x + set_coordinate_limit);
+                            if (set_epoch[key] == current_set_epoch) {
+                                continue;
+                            }
+                            const std::size_t ref_y = static_cast<std::size_t>(
+                                static_cast<long long>(pad_origin + yy) +
+                                static_cast<long long>(candidate_y));
+                            const std::size_t ref_x = static_cast<std::size_t>(
+                                static_cast<long long>(pad_origin + xx) +
+                                static_cast<long long>(candidate_x));
+                            const float* ref_row = ref_ptr +
+                                (ref_y * ref_w + ref_x) * depth;
+                            const float value = -squared_distance_full_simd(
+                                img_line, ref_row, depth);
+                            set_corr[key] = value;
+                            set_epoch[key] = current_set_epoch;
+                            ++unique_candidates;
+                            ++search_candidate_count;
+                            ++search_full_candidate_count;
+                            search_distance_terms_possible +=
+                                static_cast<std::uint64_t>(depth);
+                            search_distance_terms_evaluated +=
+                                static_cast<std::uint64_t>(depth);
+                            const auto better_key = [&](std::size_t lhs,
+                                                        std::size_t rhs) {
+                                return rhs == set_corr.size() ||
+                                    set_corr[lhs] > set_corr[rhs] ||
+                                    (set_corr[lhs] == set_corr[rhs] && lhs < rhs);
+                            };
+                            if (better_key(key, best_key)) {
+                                second_key = best_key;
+                                best_key = key;
+                            } else if (key != best_key &&
+                                       better_key(key, second_key)) {
+                                second_key = key;
+                            }
+                        }
+                    }
+                }
+                const auto better_set_key = [&](std::size_t lhs,
+                                                std::size_t rhs) {
+                    return rhs == set_corr.size() ||
+                        set_corr[lhs] > set_corr[rhs] ||
+                        (set_corr[lhs] == set_corr[rhs] && lhs < rhs);
+                };
+                for (std::size_t hypothesis = 0; hypothesis < kSetWidth;
+                     ++hypothesis) {
+                    const int center_y = set_hypothesis_y[
+                        hypothesis_base + hypothesis];
+                    const int center_x = set_hypothesis_x[
+                        hypothesis_base + hypothesis];
+                    std::size_t representative_key = set_corr.size();
+                    for (int local_y = -cal_half_window;
+                         local_y <= cal_half_window; ++local_y) {
+                        for (int local_x = -cal_half_window;
+                             local_x <= cal_half_window; ++local_x) {
+                            const int candidate_y = center_y + local_y;
+                            const int candidate_x = center_x + local_x;
+                            const std::size_t key = static_cast<std::size_t>(
+                                candidate_y + set_coordinate_limit) *
+                                set_coordinate_side + static_cast<std::size_t>(
+                                candidate_x + set_coordinate_limit);
+                            if (set_epoch[key] != current_set_epoch) {
+                                throw std::logic_error(
+                                    "SET4 representative domain was not evaluated");
+                            }
+                            if (better_set_key(key, representative_key)) {
+                                representative_key = key;
+                            }
+                        }
+                    }
+                    const std::size_t output_index =
+                        hypothesis_base + hypothesis;
+                    set_transport_representative_y[output_index] =
+                        static_cast<int>(representative_key / set_coordinate_side) -
+                        set_coordinate_limit;
+                    set_transport_representative_x[output_index] =
+                        static_cast<int>(representative_key % set_coordinate_side) -
+                        set_coordinate_limit;
+                }
+                if (best_key == set_corr.size() || second_key == set_corr.size()) {
+                    throw std::logic_error(
+                        "fixed set transport produced fewer than two candidates");
+                }
+                const int winner_y = static_cast<int>(
+                    best_key / set_coordinate_side) - set_coordinate_limit;
+                const int winner_x = static_cast<int>(
+                    best_key % set_coordinate_side) - set_coordinate_limit;
+                std::size_t owner = 0;
+                for (; owner < kSetWidth; ++owner) {
+                    const int center_y = set_hypothesis_y[hypothesis_base + owner];
+                    const int center_x = set_hypothesis_x[hypothesis_base + owner];
+                    if (std::abs(winner_y - center_y) <= cal_half_window &&
+                        std::abs(winner_x - center_x) <= cal_half_window) {
+                        fit_center_y = center_y;
+                        fit_center_x = center_x;
+                        break;
+                    }
+                }
+                if (owner == kSetWidth) {
+                    throw std::logic_error(
+                        "fixed set winner has no contributing hypothesis domain");
+                }
+                for (int local_y = -cal_half_window;
+                     local_y <= cal_half_window; ++local_y) {
+                    for (int local_x = -cal_half_window;
+                         local_x <= cal_half_window; ++local_x) {
+                        const int candidate_y = fit_center_y + local_y;
+                        const int candidate_x = fit_center_x + local_x;
+                        const std::size_t key = static_cast<std::size_t>(
+                            candidate_y + set_coordinate_limit) *
+                            set_coordinate_side + static_cast<std::size_t>(
+                            candidate_x + set_coordinate_limit);
+                        if (set_epoch[key] != current_set_epoch) {
+                            throw std::logic_error(
+                                "fixed set winning domain was not fully evaluated");
+                        }
+                        const std::size_t local_index = static_cast<std::size_t>(
+                            local_y + cal_half_window) * window_size +
+                            static_cast<std::size_t>(local_x + cal_half_window);
+                        corr_data[local_index] = set_corr[key];
+                    }
+                }
+                max_idx = static_cast<std::size_t>(
+                    winner_y - fit_center_y + cal_half_window) * window_size +
+                    static_cast<std::size_t>(
+                    winner_x - fit_center_x + cal_half_window);
+                corr_max = set_corr[best_key];
+                corr_second = set_corr[second_key];
+                set_transport_candidates_evaluated[pixel] =
+                    static_cast<float>(unique_candidates);
+                set_transport_unique_candidate_count += unique_candidates;
+                set_transport_nominal_candidate_count += nominal_candidates;
+                set_transport_duplicate_candidate_count +=
+                    nominal_candidates - unique_candidates;
+            } else if (easy_to_hard_.confidence_aware_refinement) {
                 const auto evaluate_candidate = [&](std::size_t wy, std::size_t wx) {
                     const std::size_t ci = wy * window_size + wx;
                     if (exact_epoch[ci] == current_exact_epoch) {
@@ -1153,6 +1368,7 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
                         cal_half_window;
                     SearchTopKDiagnostic diagnostic;
                     diagnostic.request_index = diagnostic_request;
+                    diagnostic.pyramid_level = current_pyramid_level;
                     diagnostic.raw_y = yy;
                     diagnostic.raw_x = xx;
                     diagnostic.rank = rank;
@@ -1226,15 +1442,93 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
                 result_disp_y = min_axis_y;
             }
 
-            disp_y[pixel] = result_disp_y + dy_in[pixel];
-            disp_x[pixel] = result_disp_x + dx_in[pixel];
+            disp_y[pixel] = result_disp_y + static_cast<float>(fit_center_y);
+            disp_x[pixel] = result_disp_x + static_cast<float>(fit_center_x);
             const int winner_local_y =
                 static_cast<int>(max_y_idx) - cal_half_window;
             const int winner_local_x =
                 static_cast<int>(max_x_idx) - cal_half_window;
             if (capture_integer_proposal) {
-                integer_displace_y[pixel] = dy_int + winner_local_y;
-                integer_displace_x[pixel] = dx_int + winner_local_x;
+                integer_displace_y[pixel] = fit_center_y + winner_local_y;
+                integer_displace_x[pixel] = fit_center_x + winner_local_x;
+            }
+            if (capture_coarse_set) {
+                std::vector<int> roots(ws2, -1);
+                std::vector<std::size_t> path;
+                path.reserve(ws2);
+                const auto better_surface = [&](std::size_t lhs,
+                                                std::size_t rhs) {
+                    return corr_data[lhs] > corr_data[rhs] ||
+                        (corr_data[lhs] == corr_data[rhs] && lhs < rhs);
+                };
+                for (std::size_t start = 0; start < ws2; ++start) {
+                    if (roots[start] >= 0) continue;
+                    path.clear();
+                    std::size_t current = start;
+                    while (roots[current] < 0) {
+                        path.push_back(current);
+                        const std::size_t cy = current / window_size;
+                        const std::size_t cx = current % window_size;
+                        std::size_t best = current;
+                        for (int oy = -1; oy <= 1; ++oy) {
+                            for (int ox = -1; ox <= 1; ++ox) {
+                                const long long ny = static_cast<long long>(cy) + oy;
+                                const long long nx = static_cast<long long>(cx) + ox;
+                                if (ny < 0 || nx < 0 ||
+                                    ny >= static_cast<long long>(window_size) ||
+                                    nx >= static_cast<long long>(window_size)) {
+                                    continue;
+                                }
+                                const std::size_t neighbour =
+                                    static_cast<std::size_t>(ny) * window_size +
+                                    static_cast<std::size_t>(nx);
+                                if (better_surface(neighbour, best)) best = neighbour;
+                            }
+                        }
+                        if (best == current) {
+                            roots[current] = static_cast<int>(current);
+                            break;
+                        }
+                        current = best;
+                    }
+                    const int root = roots[current];
+                    for (auto it = path.rbegin(); it != path.rend(); ++it) {
+                        roots[*it] = root;
+                    }
+                }
+                std::vector<std::size_t> ordered_roots;
+                ordered_roots.reserve(ws2);
+                for (const int root : roots) {
+                    const std::size_t value = static_cast<std::size_t>(root);
+                    if (std::find(ordered_roots.begin(), ordered_roots.end(),
+                                  value) == ordered_roots.end()) {
+                        ordered_roots.push_back(value);
+                    }
+                }
+                std::sort(ordered_roots.begin(), ordered_roots.end(),
+                          better_surface);
+                const std::size_t output_base = pixel * kSetWidth;
+                coarse_set_hypothesis_y[output_base] = disp_y[pixel];
+                coarse_set_hypothesis_x[output_base] = disp_x[pixel];
+                for (std::size_t hypothesis = 1; hypothesis < kSetWidth;
+                     ++hypothesis) {
+                    if (hypothesis < ordered_roots.size()) {
+                        const std::size_t root = ordered_roots[hypothesis];
+                        coarse_set_hypothesis_y[output_base + hypothesis] =
+                            static_cast<float>(dy_int +
+                            static_cast<int>(root / window_size) -
+                            cal_half_window);
+                        coarse_set_hypothesis_x[output_base + hypothesis] =
+                            static_cast<float>(dx_int +
+                            static_cast<int>(root % window_size) -
+                            cal_half_window);
+                    } else {
+                        coarse_set_hypothesis_y[output_base + hypothesis] =
+                            disp_y[pixel];
+                        coarse_set_hypothesis_x[output_base + hypothesis] =
+                            disp_x[pixel];
+                    }
+                }
             }
             const bool boundary_hit =
                 std::abs(winner_local_y) == effective_half_window ||
@@ -1304,7 +1598,15 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
         easy_path_eligible_pixel_count,
         easy_path_accepted_pixel_count,
         easy_path_fallback_pixel_count,
-        inactive_pixel_count};
+        inactive_pixel_count,
+        std::move(coarse_set_hypothesis_y),
+        std::move(coarse_set_hypothesis_x),
+        std::move(set_transport_representative_y),
+        std::move(set_transport_representative_x),
+        std::move(set_transport_candidates_evaluated),
+        set_transport_unique_candidate_count,
+        set_transport_nominal_candidate_count,
+        set_transport_duplicate_candidate_count};
 }
 
 
@@ -1315,7 +1617,9 @@ SolverOutput WSVT::solver() {
     std::vector<float> umpa_sample_raw;
     std::vector<float> umpa_reference_raw;
     std::uint64_t umpa_retained_raw_bytes = 0;
-    if (wavelet_guided_umpa_.enabled) {
+    const bool raw_rerank_enabled = wavelet_guided_umpa_.enabled ||
+        set_transport_raw_rerank_.enabled;
+    if (raw_rerank_enabled) {
         umpa_sample_raw = img_data_;
         umpa_reference_raw = ref_data_;
         umpa_retained_raw_bytes = static_cast<std::uint64_t>(
@@ -1399,6 +1703,11 @@ SolverOutput WSVT::solver() {
     std::vector<float> base_displace_x;
     std::vector<int> merged_integer_proposal_y;
     std::vector<int> merged_integer_proposal_x;
+    std::vector<float> merged_set_transport_center_y;
+    std::vector<float> merged_set_transport_center_x;
+    std::vector<int> merged_set_transport_representative_y;
+    std::vector<int> merged_set_transport_representative_x;
+    std::vector<float> merged_set_transport_candidates_evaluated;
     std::vector<float> darkfield_nd;
     std::vector<float> second_best_score_neg_ssd;
     std::vector<float> score_margin;
@@ -1434,6 +1743,9 @@ SolverOutput WSVT::solver() {
     std::uint64_t total_easy_path_accepted_pixel_count = 0;
     std::uint64_t total_easy_path_fallback_pixel_count = 0;
     std::uint64_t total_inactive_pixel_count = 0;
+    std::uint64_t total_set_transport_unique_candidate_count = 0;
+    std::uint64_t total_set_transport_nominal_candidate_count = 0;
+    std::uint64_t total_set_transport_duplicate_candidate_count = 0;
     std::uint64_t temporal_frame_candidate_terms_actual = 0;
     std::uint64_t temporal_descriptor_pixel_count_actual = 0;
     std::uint64_t temporal_descriptor_pixel_count_dense_stage_baseline = 0;
@@ -1569,7 +1881,7 @@ SolverOutput WSVT::solver() {
             effective_search_half_window.assign(pixels, 0.0f);
             temporal_frames_used.assign(pixels, 0.0f);
             confidence_path.assign(pixels, 0.0f);
-            if (wavelet_guided_umpa_.enabled) {
+            if (wavelet_guided_umpa_.enabled || fixed_set_transport_) {
                 merged_integer_proposal_y.assign(pixels, 0);
                 merged_integer_proposal_x.assign(pixels, 0);
             }
@@ -1634,6 +1946,10 @@ SolverOutput WSVT::solver() {
             std::vector<float> prior_level_confidence;
             std::size_t prior_h = 0;
             std::size_t prior_w = 0;
+            std::vector<float> coarse_set_hypothesis_y;
+            std::vector<float> coarse_set_hypothesis_x;
+            std::size_t coarse_set_h = 0;
+            std::size_t coarse_set_w = 0;
 
             for (int p_level = pyramid_level_; p_level >= 0; --p_level) {
                 const int configured_search_half_window =
@@ -1653,6 +1969,8 @@ SolverOutput WSVT::solver() {
                 std::size_t depth = p.img_levels[lv].d0;
                 std::vector<float> displace_pyramid_y(ph * pw, 0.0f);
                 std::vector<float> displace_pyramid_x(ph * pw, 0.0f);
+                std::vector<int> set_level_hypothesis_y;
+                std::vector<int> set_level_hypothesis_x;
                 if (p_level == pyramid_level_) {
                     for (std::size_t i = 0; i < ph * pw; ++i) {
                         displace_pyramid_y[i] = static_cast<float>(
@@ -1683,6 +2001,70 @@ SolverOutput WSVT::solver() {
                         2.0, static_cast<double>(p_level)));
                 clamp_2d(displace_pyramid_y, -lim, lim);
                 clamp_2d(displace_pyramid_x, -lim, lim);
+                if (fixed_set_transport_ && p_level == 0) {
+                    constexpr std::size_t kSetWidth = 4;
+                    if (coarse_set_hypothesis_y.size() !=
+                            coarse_set_h * coarse_set_w * kSetWidth ||
+                        coarse_set_hypothesis_x.size() !=
+                            coarse_set_h * coarse_set_w * kSetWidth ||
+                        coarse_set_h < 2 || coarse_set_w < 2) {
+                        throw std::logic_error(
+                            "coarse fixed set hypotheses are unavailable");
+                    }
+                    set_level_hypothesis_y.resize(ph * pw * kSetWidth);
+                    set_level_hypothesis_x.resize(ph * pw * kSetWidth);
+                    merged_set_transport_center_y.resize(ph * pw * kSetWidth);
+                    merged_set_transport_center_x.resize(ph * pw * kSetWidth);
+                    for (std::size_t y = 0; y < ph; ++y) {
+                        const std::size_t parent_y = static_cast<std::size_t>(
+                            round_half_to_even(
+                                static_cast<double>(y) *
+                                static_cast<double>(coarse_set_h - 1) /
+                                static_cast<double>(ph - 1)));
+                        for (std::size_t x = 0; x < pw; ++x) {
+                            const std::size_t parent_x = static_cast<std::size_t>(
+                                round_half_to_even(
+                                    static_cast<double>(x) *
+                                    static_cast<double>(coarse_set_w - 1) /
+                                    static_cast<double>(pw - 1)));
+                            const std::size_t parent_base =
+                                (parent_y * coarse_set_w + parent_x) * kSetWidth;
+                            const std::size_t fine_base =
+                                (y * pw + x) * kSetWidth;
+                            for (std::size_t hypothesis = 0;
+                                 hypothesis < kSetWidth; ++hypothesis) {
+                                const int center_y = std::clamp(
+                                    static_cast<int>(round_half_to_even(
+                                        static_cast<double>(
+                                            coarse_set_hypothesis_y[
+                                                parent_base + hypothesis]) *
+                                        2.0)),
+                                    -cal_half_window_, cal_half_window_);
+                                const int center_x = std::clamp(
+                                    static_cast<int>(round_half_to_even(
+                                        static_cast<double>(
+                                            coarse_set_hypothesis_x[
+                                                parent_base + hypothesis]) *
+                                        2.0)),
+                                    -cal_half_window_, cal_half_window_);
+                                set_level_hypothesis_y[fine_base + hypothesis] =
+                                    center_y;
+                                set_level_hypothesis_x[fine_base + hypothesis] =
+                                    center_x;
+                                merged_set_transport_center_y[
+                                    fine_base + hypothesis] =
+                                    static_cast<float>(center_y);
+                                merged_set_transport_center_x[
+                                    fine_base + hypothesis] =
+                                    static_cast<float>(center_x);
+                            }
+                            displace_pyramid_y[y * pw + x] = static_cast<float>(
+                                set_level_hypothesis_y[fine_base]);
+                            displace_pyramid_x[y * pw + x] = static_cast<float>(
+                                set_level_hypothesis_x[fine_base]);
+                        }
+                    }
+                }
                 const int n_pad = static_cast<int>(std::ceil(
                     static_cast<double>(cal_half_window_) /
                     std::pow(2.0, static_cast<double>(p_level))));
@@ -1777,7 +2159,8 @@ SolverOutput WSVT::solver() {
                     ref_wa_pad.flat(), ref_pad_h, ref_pad_w, depth,
                     displace_pyramid_y, displace_pyramid_x,
                     search_half_window, n_pad,
-                    active_level, easy_level, contrast_level);
+                    active_level, easy_level, contrast_level,
+                    set_level_hypothesis_y, set_level_hypothesis_x, p_level);
                 auto t_search1 = std::chrono::steady_clock::now();
                 total_displace_search_s +=
                     std::chrono::duration<double>(t_search1 - t_search0).count();
@@ -1804,6 +2187,12 @@ SolverOutput WSVT::solver() {
                 total_easy_path_fallback_pixel_count +=
                     result.easy_path_fallback_pixel_count;
                 total_inactive_pixel_count += result.inactive_pixel_count;
+                total_set_transport_unique_candidate_count +=
+                    result.set_transport_unique_candidate_count;
+                total_set_transport_nominal_candidate_count +=
+                    result.set_transport_nominal_candidate_count;
+                total_set_transport_duplicate_candidate_count +=
+                    result.set_transport_duplicate_candidate_count;
                 temporal_frame_candidate_terms_actual +=
                     result.search_candidate_count *
                     static_cast<std::uint64_t>(stage_frames);
@@ -1819,7 +2208,23 @@ SolverOutput WSVT::solver() {
                 prior_level_confidence = result.confidence_accept;
                 prior_h = ph;
                 prior_w = pw;
+                if (fixed_set_transport_ && p_level == pyramid_level_) {
+                    coarse_set_hypothesis_y =
+                        std::move(result.coarse_set_hypothesis_y);
+                    coarse_set_hypothesis_x =
+                        std::move(result.coarse_set_hypothesis_x);
+                    coarse_set_h = ph;
+                    coarse_set_w = pw;
+                }
                 if (p_level == 0) {
+                    if (fixed_set_transport_) {
+                        merged_set_transport_candidates_evaluated =
+                            result.set_transport_candidates_evaluated;
+                        merged_set_transport_representative_y =
+                            result.set_transport_representative_y;
+                        merged_set_transport_representative_x =
+                            result.set_transport_representative_x;
+                    }
                     final_level_result = std::move(result);
                 }
             }
@@ -1873,7 +2278,7 @@ SolverOutput WSVT::solver() {
             effective_search_half_window[pixel] =
                 final_level_result.effective_search_half_window[pixel];
             confidence_path[pixel] = final_level_result.confidence_path[pixel];
-            if (wavelet_guided_umpa_.enabled) {
+            if (wavelet_guided_umpa_.enabled || fixed_set_transport_) {
                 merged_integer_proposal_y[pixel] =
                     final_level_result.integer_displace_y[pixel];
                 merged_integer_proposal_x[pixel] =
@@ -2007,37 +2412,123 @@ SolverOutput WSVT::solver() {
     auto temporal_frames_used_crop =
         std::move(temporal_frames_used_crop_img).take();
     auto confidence_path_crop = std::move(confidence_path_crop_img).take();
+    std::vector<float> set_transport_center_y_crop;
+    std::vector<float> set_transport_center_x_crop;
+    std::vector<float> set_transport_representative_y_crop;
+    std::vector<float> set_transport_representative_x_crop;
+    std::vector<float> set_transport_candidates_evaluated_crop;
+    if (fixed_set_transport_) {
+        constexpr std::size_t kSetWidth = 4;
+        if (merged_set_transport_center_y.size() != disp_h * disp_w * kSetWidth ||
+            merged_set_transport_center_x.size() != disp_h * disp_w * kSetWidth ||
+            merged_set_transport_representative_y.size() !=
+                disp_h * disp_w * kSetWidth ||
+            merged_set_transport_representative_x.size() !=
+                disp_h * disp_w * kSetWidth ||
+            merged_set_transport_candidates_evaluated.size() != disp_h * disp_w) {
+            throw std::logic_error(
+                "fixed set transport final diagnostics are incomplete");
+        }
+        set_transport_center_y_crop.resize(
+            kSetWidth * cropped_h * cropped_w);
+        set_transport_center_x_crop.resize(
+            kSetWidth * cropped_h * cropped_w);
+        set_transport_representative_y_crop.resize(
+            kSetWidth * cropped_h * cropped_w);
+        set_transport_representative_x_crop.resize(
+            kSetWidth * cropped_h * cropped_w);
+        for (std::size_t hypothesis = 0; hypothesis < kSetWidth; ++hypothesis) {
+            std::vector<float> full_y(disp_h * disp_w);
+            std::vector<float> full_x(disp_h * disp_w);
+            for (std::size_t pixel = 0; pixel < disp_h * disp_w; ++pixel) {
+                full_y[pixel] = merged_set_transport_center_y[
+                    pixel * kSetWidth + hypothesis];
+                full_x[pixel] = merged_set_transport_center_x[
+                    pixel * kSetWidth + hypothesis];
+            }
+            auto cropped_y = crop_2d(
+                ImageView2D<const float>{full_y.data(), {disp_h, disp_w}},
+                pad_crop).take();
+            auto cropped_x = crop_2d(
+                ImageView2D<const float>{full_x.data(), {disp_h, disp_w}},
+                pad_crop).take();
+            const std::size_t output_base = hypothesis * cropped_h * cropped_w;
+            for (std::size_t pixel = 0; pixel < cropped_y.size(); ++pixel) {
+                set_transport_center_y_crop[output_base + pixel] =
+                    -cropped_y[pixel];
+                set_transport_center_x_crop[output_base + pixel] =
+                    -cropped_x[pixel];
+            }
+            std::vector<float> full_representative_y(disp_h * disp_w);
+            std::vector<float> full_representative_x(disp_h * disp_w);
+            for (std::size_t pixel = 0; pixel < disp_h * disp_w; ++pixel) {
+                full_representative_y[pixel] = static_cast<float>(
+                    merged_set_transport_representative_y[
+                        pixel * kSetWidth + hypothesis]);
+                full_representative_x[pixel] = static_cast<float>(
+                    merged_set_transport_representative_x[
+                        pixel * kSetWidth + hypothesis]);
+            }
+            auto cropped_representative_y = crop_2d(
+                ImageView2D<const float>{
+                    full_representative_y.data(), {disp_h, disp_w}},
+                pad_crop).take();
+            auto cropped_representative_x = crop_2d(
+                ImageView2D<const float>{
+                    full_representative_x.data(), {disp_h, disp_w}},
+                pad_crop).take();
+            for (std::size_t pixel = 0;
+                 pixel < cropped_representative_y.size(); ++pixel) {
+                set_transport_representative_y_crop[output_base + pixel] =
+                    -cropped_representative_y[pixel];
+                set_transport_representative_x_crop[output_base + pixel] =
+                    -cropped_representative_x[pixel];
+            }
+        }
+        set_transport_candidates_evaluated_crop = crop_2d(
+            ImageView2D<const float>{
+                merged_set_transport_candidates_evaluated.data(),
+                {disp_h, disp_w}},
+            pad_crop).take();
+    }
     for (float& v : displace_y_crop) v = -v;
     for (float& v : displace_x_crop) v = -v;
+    std::vector<float> integer_winner_y_crop;
+    std::vector<float> integer_winner_x_crop;
+    if (wavelet_guided_umpa_.enabled || fixed_set_transport_) {
+        if (merged_integer_proposal_y.size() != disp_h * disp_w ||
+            merged_integer_proposal_x.size() != disp_h * disp_w) {
+            throw std::logic_error(
+                "integer descriptor winner diagnostics are incomplete");
+        }
+        std::vector<float> integer_winner_y_full(
+            merged_integer_proposal_y.begin(), merged_integer_proposal_y.end());
+        std::vector<float> integer_winner_x_full(
+            merged_integer_proposal_x.begin(), merged_integer_proposal_x.end());
+        integer_winner_y_crop = crop_2d(
+            ImageView2D<const float>{
+                integer_winner_y_full.data(), {disp_h, disp_w}},
+            pad_crop).take();
+        integer_winner_x_crop = crop_2d(
+            ImageView2D<const float>{
+                integer_winner_x_full.data(), {disp_h, disp_w}},
+            pad_crop).take();
+        for (float& value : integer_winner_y_crop) value = -value;
+        for (float& value : integer_winner_x_crop) value = -value;
+    }
     WaveletGuidedUmpaOutput umpa_output;
     double umpa_refine_time_s = 0.0;
     if (wavelet_guided_umpa_.enabled) {
-        std::vector<float> integer_proposal_y_float(
-            merged_integer_proposal_y.begin(), merged_integer_proposal_y.end());
-        std::vector<float> integer_proposal_x_float(
-            merged_integer_proposal_x.begin(), merged_integer_proposal_x.end());
-        auto integer_proposal_y_crop_img = crop_2d(
-            ImageView2D<const float>{
-                integer_proposal_y_float.data(), {disp_h, disp_w}},
-            pad_crop);
-        auto integer_proposal_x_crop_img = crop_2d(
-            ImageView2D<const float>{
-                integer_proposal_x_float.data(), {disp_h, disp_w}},
-            pad_crop);
-        auto integer_proposal_y_crop_float =
-            std::move(integer_proposal_y_crop_img).take();
-        auto integer_proposal_x_crop_float =
-            std::move(integer_proposal_x_crop_img).take();
         std::vector<int> integer_proposal_y_crop(
-            integer_proposal_y_crop_float.size());
+            integer_winner_y_crop.size());
         std::vector<int> integer_proposal_x_crop(
-            integer_proposal_x_crop_float.size());
+            integer_winner_x_crop.size());
         for (std::size_t pixel = 0;
-             pixel < integer_proposal_y_crop.size(); ++pixel) {
-            integer_proposal_y_crop[pixel] = -static_cast<int>(
-                integer_proposal_y_crop_float[pixel]);
-            integer_proposal_x_crop[pixel] = -static_cast<int>(
-                integer_proposal_x_crop_float[pixel]);
+              pixel < integer_proposal_y_crop.size(); ++pixel) {
+            integer_proposal_y_crop[pixel] = static_cast<int>(
+                integer_winner_y_crop[pixel]);
+            integer_proposal_x_crop[pixel] = static_cast<int>(
+                integer_winner_x_crop[pixel]);
         }
         const auto umpa_t0 = std::chrono::steady_clock::now();
         umpa_output = refine_wavelet_guided_umpa(
@@ -2046,6 +2537,54 @@ SolverOutput WSVT::solver() {
             integer_proposal_y_crop, integer_proposal_x_crop,
             cropped_h, cropped_w, pad_crop, pad_crop,
             wavelet_guided_umpa_);
+        const auto umpa_t1 = std::chrono::steady_clock::now();
+        umpa_refine_time_s = std::chrono::duration<double>(
+            umpa_t1 - umpa_t0).count();
+        displace_y_crop = umpa_output.displace_y;
+        displace_x_crop = umpa_output.displace_x;
+        std::vector<float>().swap(umpa_sample_raw);
+        std::vector<float>().swap(umpa_reference_raw);
+    } else if (set_transport_raw_rerank_.enabled) {
+        constexpr std::size_t kSetWidth = 4U;
+        const std::size_t output_pixels = cropped_h * cropped_w;
+        if (set_transport_center_y_crop.size() != output_pixels * kSetWidth ||
+            set_transport_center_x_crop.size() != output_pixels * kSetWidth) {
+            throw std::logic_error(
+                "SET4 raw rerank requires complete cropped hypothesis centres");
+        }
+        std::vector<int> set_center_y(output_pixels * kSetWidth);
+        std::vector<int> set_center_x(output_pixels * kSetWidth);
+        std::vector<int> set_representative_y(output_pixels * kSetWidth);
+        std::vector<int> set_representative_x(output_pixels * kSetWidth);
+        for (std::size_t pixel = 0; pixel < output_pixels; ++pixel) {
+            for (std::size_t hypothesis = 0; hypothesis < kSetWidth; ++hypothesis) {
+                const std::size_t source = hypothesis * output_pixels + pixel;
+                const std::size_t target = pixel * kSetWidth + hypothesis;
+                const float center_y = set_transport_center_y_crop[source];
+                const float center_x = set_transport_center_x_crop[source];
+                const int integer_y = static_cast<int>(center_y);
+                const int integer_x = static_cast<int>(center_x);
+                if (center_y != static_cast<float>(integer_y) ||
+                    center_x != static_cast<float>(integer_x)) {
+                    throw std::logic_error(
+                        "SET4 raw rerank centres must be exact integers");
+                }
+                set_center_y[target] = integer_y;
+                set_center_x[target] = integer_x;
+                set_representative_y[target] = static_cast<int>(
+                    set_transport_representative_y_crop[source]);
+                set_representative_x[target] = static_cast<int>(
+                    set_transport_representative_x_crop[source]);
+            }
+        }
+        const auto umpa_t0 = std::chrono::steady_clock::now();
+        umpa_output = rerank_set_transport_raw(
+            umpa_sample_raw, umpa_reference_raw, ch_, h_, w_,
+            set_center_y, set_center_x,
+            set_representative_y, set_representative_x,
+            displace_y_crop, displace_x_crop,
+            cropped_h, cropped_w, pad_crop, pad_crop,
+            set_transport_raw_rerank_);
         const auto umpa_t1 = std::chrono::steady_clock::now();
         umpa_refine_time_s = std::chrono::duration<double>(
             umpa_t1 - umpa_t0).count();
@@ -2140,6 +2679,26 @@ SolverOutput WSVT::solver() {
     output.search_guard_refresh_count = total_search_guard_refresh_count;
     output.search_dense_baseline_candidate_count =
         dense_baseline_candidate_count;
+    output.set_transport_center_y = std::move(set_transport_center_y_crop);
+    output.set_transport_center_x = std::move(set_transport_center_x_crop);
+    if (fixed_set_transport_) {
+        output.set_transport_integer_winner_y =
+            std::move(integer_winner_y_crop);
+        output.set_transport_integer_winner_x =
+            std::move(integer_winner_x_crop);
+        output.set_transport_representative_y =
+            std::move(set_transport_representative_y_crop);
+        output.set_transport_representative_x =
+            std::move(set_transport_representative_x_crop);
+    }
+    output.set_transport_candidates_evaluated =
+        std::move(set_transport_candidates_evaluated_crop);
+    output.set_transport_unique_candidate_count =
+        total_set_transport_unique_candidate_count;
+    output.set_transport_nominal_candidate_count =
+        total_set_transport_nominal_candidate_count;
+    output.set_transport_duplicate_candidate_count =
+        total_set_transport_duplicate_candidate_count;
     output.easy_path_eligible_pixel_count =
         total_easy_path_eligible_pixel_count;
     output.easy_path_accepted_pixel_count =
@@ -2182,7 +2741,7 @@ SolverOutput WSVT::solver() {
         std::move(temporal_stage_sample_descriptor_pixel_counts);
     output.temporal_stage_reference_descriptor_pixel_counts =
         std::move(temporal_stage_reference_descriptor_pixel_counts);
-    if (wavelet_guided_umpa_.enabled) {
+    if (raw_rerank_enabled) {
         output.umpa_proposal_y = std::move(umpa_output.proposal_y);
         output.umpa_proposal_x = std::move(umpa_output.proposal_x);
         output.umpa_relative_offset_y = std::move(umpa_output.relative_offset_y);
@@ -2266,7 +2825,35 @@ SolverOutput WSVT::run(const std::string& result_path, bool cleansave, int h5_de
                 items.push_back(H5ItemF32{"confidence_path", NdArrayF32{{out.h, out.w}, out.confidence_path}});
             }
         }
-        if (wavelet_guided_umpa_.enabled) {
+        if (fixed_set_transport_) {
+            items.push_back(H5ItemF32{
+                "set_transport_center_y",
+                NdArrayF32{{4U, out.h, out.w}, out.set_transport_center_y}});
+            items.push_back(H5ItemF32{
+                "set_transport_center_x",
+                NdArrayF32{{4U, out.h, out.w}, out.set_transport_center_x}});
+            items.push_back(H5ItemF32{
+                "set_transport_integer_winner_y",
+                NdArrayF32{{out.h, out.w},
+                           out.set_transport_integer_winner_y}});
+            items.push_back(H5ItemF32{
+                "set_transport_integer_winner_x",
+                NdArrayF32{{out.h, out.w},
+                           out.set_transport_integer_winner_x}});
+            items.push_back(H5ItemF32{
+                "set_transport_representative_y",
+                NdArrayF32{{4U, out.h, out.w},
+                           out.set_transport_representative_y}});
+            items.push_back(H5ItemF32{
+                "set_transport_representative_x",
+                NdArrayF32{{4U, out.h, out.w},
+                           out.set_transport_representative_x}});
+            items.push_back(H5ItemF32{
+                "set_transport_candidates_evaluated",
+                NdArrayF32{{out.h, out.w},
+                           out.set_transport_candidates_evaluated}});
+        }
+        if (wavelet_guided_umpa_.enabled || set_transport_raw_rerank_.enabled) {
             items.push_back(H5ItemF32{"umpa_proposal_x", NdArrayF32{{out.h, out.w}, out.umpa_proposal_x}});
             items.push_back(H5ItemF32{"umpa_proposal_y", NdArrayF32{{out.h, out.w}, out.umpa_proposal_y}});
             items.push_back(H5ItemF32{"umpa_relative_offset_x", NdArrayF32{{out.h, out.w}, out.umpa_relative_offset_x}});
@@ -2299,7 +2886,14 @@ SolverOutput WSVT::run(const std::string& result_path, bool cleansave, int h5_de
         parameter_dict["semantics_profile"] = std::string(kPythonReferenceSemantics);
         parameter_dict["search_profile"] = std::string(search_profile_name(
             search_early_abandon_, search_two_pass_, search_guard_cache_));
-        parameter_dict["algorithm_profile"] = wavelet_guided_umpa_.enabled
+        parameter_dict["algorithm_profile"] =
+            (fixed_set_transport_ && set_transport_raw_rerank_.enabled)
+            ? (set_transport_raw_rerank_.representatives_only
+                ? "pyramid_wsvt_set4_raw_rep4_v1"
+                : "pyramid_wsvt_set4_raw_rerank_v1")
+            : fixed_set_transport_
+            ? "pyramid_wsvt_fixed_set_transport_v1"
+            : (wavelet_guided_umpa_.enabled
             ? "wavelet_guided_umpa_h1_n1"
             : (easy_to_hard_.adaptive_frames
             ? (easy_to_hard_.prefix_compatible_temporal_wavelet
@@ -2311,15 +2905,37 @@ SolverOutput WSVT::run(const std::string& result_path, bool cleansave, int h5_de
                     : "pyramid_easy_to_hard_b2_v1"))
             : (easy_to_hard_.confidence_aware_refinement
                 ? "pyramid_easy_to_hard_b1_v1"
-                : "pyramid_wsvt_b0"));
+                : "pyramid_wsvt_b0")));
+        parameter_dict["fixed_set_transport"] = fixed_set_transport_;
+        parameter_dict["set_transport_hypothesis_width"] = 4.0;
+        parameter_dict["set_transport_parent_mapping"] =
+            "endpoint-aligned nearest parent with round-half-to-even";
+        parameter_dict["set_transport_basin_definition"] =
+            "deterministic 8-neighbour steepest descent; roots ordered by exact descriptor SSD then linear index";
+        parameter_dict["set_transport_subpixel_definition"] =
+            "existing float32 Hessian fit inside the lowest-index transported domain containing the global union winner";
         parameter_dict["wavelet_guided_umpa"] =
             wavelet_guided_umpa_.enabled;
-        parameter_dict["umpa_model"] = "ModelDF";
+        parameter_dict["set_transport_raw_rerank"] =
+            set_transport_raw_rerank_.enabled;
+        parameter_dict["set_transport_raw_representatives"] =
+            set_transport_raw_rerank_.enabled &&
+            set_transport_raw_rerank_.representatives_only;
+        parameter_dict["raw_rerank_objective"] = set_transport_raw_rerank_.enabled
+            ? set_transport_raw_objective_name(set_transport_raw_rerank_.objective)
+            : (wavelet_guided_umpa_.enabled ? "ModelDF" : "disabled");
+        parameter_dict["umpa_model"] = set_transport_raw_rerank_.enabled
+            ? set_transport_raw_objective_name(set_transport_raw_rerank_.objective)
+            : "ModelDF";
         parameter_dict["umpa_coordinate_assignment"] = "sample";
         parameter_dict["umpa_local_half_window"] =
-            static_cast<double>(wavelet_guided_umpa_.local_half_window);
+            static_cast<double>(set_transport_raw_rerank_.enabled
+                ? set_transport_raw_rerank_.domain_half_window
+                : wavelet_guided_umpa_.local_half_window);
         parameter_dict["umpa_analysis_radius"] =
-            static_cast<double>(wavelet_guided_umpa_.analysis_radius);
+            static_cast<double>(set_transport_raw_rerank_.enabled
+                ? set_transport_raw_rerank_.analysis_radius
+                : wavelet_guided_umpa_.analysis_radius);
         parameter_dict["umpa_weighting"] = "fixed_normalized_hamming";
         parameter_dict["umpa_subpixel"] = false;
         parameter_dict["umpa_reference_self"] = false;
@@ -2419,6 +3035,12 @@ SolverOutput WSVT::run(const std::string& result_path, bool cleansave, int h5_de
             static_cast<double>(out.search_guard_refresh_count);
         parameter_dict["search_dense_baseline_candidate_count"] =
             static_cast<double>(out.search_dense_baseline_candidate_count);
+        parameter_dict["set_transport_unique_candidate_count"] =
+            static_cast<double>(out.set_transport_unique_candidate_count);
+        parameter_dict["set_transport_nominal_candidate_count"] =
+            static_cast<double>(out.set_transport_nominal_candidate_count);
+        parameter_dict["set_transport_duplicate_candidate_count"] =
+            static_cast<double>(out.set_transport_duplicate_candidate_count);
         parameter_dict["umpa_raw_candidate_count"] =
             static_cast<double>(out.umpa_raw_candidate_count);
         parameter_dict["umpa_raw_observation_count"] =
@@ -2523,7 +3145,14 @@ SolverOutput WSVT::run(const std::string& result_path, bool cleansave, int h5_de
         events["calc_darkfield"] = calc_darkfield_;
         events["search_profile"] = std::string(search_profile_name(
             search_early_abandon_, search_two_pass_, search_guard_cache_));
-        events["algorithm_profile"] = wavelet_guided_umpa_.enabled
+        events["algorithm_profile"] =
+            (fixed_set_transport_ && set_transport_raw_rerank_.enabled)
+            ? (set_transport_raw_rerank_.representatives_only
+                ? "pyramid_wsvt_set4_raw_rep4_v1"
+                : "pyramid_wsvt_set4_raw_rerank_v1")
+            : fixed_set_transport_
+            ? "pyramid_wsvt_fixed_set_transport_v1"
+            : (wavelet_guided_umpa_.enabled
             ? "wavelet_guided_umpa_h1_n1"
             : (easy_to_hard_.adaptive_frames
             ? (easy_to_hard_.prefix_compatible_temporal_wavelet
@@ -2535,14 +3164,30 @@ SolverOutput WSVT::run(const std::string& result_path, bool cleansave, int h5_de
                     : "pyramid_easy_to_hard_b2_v1"))
             : (easy_to_hard_.confidence_aware_refinement
                 ? "pyramid_easy_to_hard_b1_v1"
-                : "pyramid_wsvt_b0"));
+                : "pyramid_wsvt_b0")));
+        events["fixed_set_transport"] = fixed_set_transport_;
+        events["set_transport_hypothesis_width"] = 4.0;
         events["wavelet_guided_umpa"] = wavelet_guided_umpa_.enabled;
-        events["umpa_model"] = "ModelDF";
+        events["set_transport_raw_rerank"] =
+            set_transport_raw_rerank_.enabled;
+        events["set_transport_raw_representatives"] =
+            set_transport_raw_rerank_.enabled &&
+            set_transport_raw_rerank_.representatives_only;
+        events["raw_rerank_objective"] = set_transport_raw_rerank_.enabled
+            ? set_transport_raw_objective_name(set_transport_raw_rerank_.objective)
+            : (wavelet_guided_umpa_.enabled ? "ModelDF" : "disabled");
+        events["umpa_model"] = set_transport_raw_rerank_.enabled
+            ? set_transport_raw_objective_name(set_transport_raw_rerank_.objective)
+            : "ModelDF";
         events["umpa_coordinate_assignment"] = "sample";
         events["umpa_local_half_window"] =
-            static_cast<double>(wavelet_guided_umpa_.local_half_window);
+            static_cast<double>(set_transport_raw_rerank_.enabled
+                ? set_transport_raw_rerank_.domain_half_window
+                : wavelet_guided_umpa_.local_half_window);
         events["umpa_analysis_radius"] =
-            static_cast<double>(wavelet_guided_umpa_.analysis_radius);
+            static_cast<double>(set_transport_raw_rerank_.enabled
+                ? set_transport_raw_rerank_.analysis_radius
+                : wavelet_guided_umpa_.analysis_radius);
         events["confidence_aware_refinement"] =
             easy_to_hard_.confidence_aware_refinement;
         events["adaptive_frames"] = easy_to_hard_.adaptive_frames;
@@ -2579,6 +3224,12 @@ SolverOutput WSVT::run(const std::string& result_path, bool cleansave, int h5_de
             static_cast<double>(out.search_guard_refresh_count);
         events["search_dense_baseline_candidate_count"] =
             static_cast<double>(out.search_dense_baseline_candidate_count);
+        events["set_transport_unique_candidate_count"] =
+            static_cast<double>(out.set_transport_unique_candidate_count);
+        events["set_transport_nominal_candidate_count"] =
+            static_cast<double>(out.set_transport_nominal_candidate_count);
+        events["set_transport_duplicate_candidate_count"] =
+            static_cast<double>(out.set_transport_duplicate_candidate_count);
         events["umpa_raw_candidate_count"] =
             static_cast<double>(out.umpa_raw_candidate_count);
         events["umpa_raw_observation_count"] =
@@ -2690,7 +3341,12 @@ SolverOutput WSVT::run(const std::string& result_path, bool cleansave, int h5_de
 
 void WSVT::configure_search_topk_diagnostics(
     std::vector<std::size_t> raw_linear_pixels,
-    std::size_t top_k) {
+    std::size_t top_k,
+    int pyramid_level) {
+    if (fixed_set_transport_) {
+        throw std::invalid_argument(
+            "Top-K diagnostics cannot be combined with fixed set transport");
+    }
     if (wavelet_guided_umpa_.enabled) {
         throw std::invalid_argument(
             "Top-K diagnostics cannot be combined with WG-UMPA H1");
@@ -2703,8 +3359,21 @@ void WSVT::configure_search_topk_diagnostics(
         throw std::invalid_argument(
             "Top-K diagnostics currently require exhaustive WSVT search");
     }
-    if (top_k < 2 || top_k > kMaxExactTopK) {
-        throw std::invalid_argument("diagnostic Top-K must be in [2, 4]");
+    if (pyramid_level < 0 || pyramid_level > pyramid_level_) {
+        throw std::invalid_argument(
+            "diagnostic pyramid level must be within the configured pyramid");
+    }
+    const auto diagnostic_half_windows = derived_search_half_windows(
+        pyramid_level_, cal_half_window_, n_s_extend_);
+    const int diagnostic_half_window = diagnostic_half_windows[
+        static_cast<std::size_t>(pyramid_level)];
+    const std::size_t diagnostic_window = static_cast<std::size_t>(
+        2 * diagnostic_half_window + 1);
+    const std::size_t diagnostic_candidate_count =
+        diagnostic_window * diagnostic_window;
+    if (top_k < 2 || top_k > diagnostic_candidate_count) {
+        throw std::invalid_argument(
+            "diagnostic rank count must be in [2, search-window candidate count]");
     }
     if (raw_linear_pixels.empty()) {
         throw std::invalid_argument("Top-K diagnostics require at least one pixel");
@@ -2714,12 +3383,20 @@ void WSVT::configure_search_topk_diagnostics(
         raw_linear_pixels.end()) {
         throw std::invalid_argument("Top-K diagnostic pixels must be unique");
     }
-    const std::size_t pixel_count = h_ * w_;
+    std::size_t diagnostic_h = h_;
+    std::size_t diagnostic_w = w_;
+    for (int level = 0; level < pyramid_level; ++level) {
+        diagnostic_h = (diagnostic_h + 5U) / 2U;
+        diagnostic_w = (diagnostic_w + 5U) / 2U;
+    }
+    const std::size_t pixel_count = diagnostic_h * diagnostic_w;
     if (raw_linear_pixels.back() >= pixel_count) {
-        throw std::out_of_range("Top-K diagnostic pixel is outside the raw image grid");
+        throw std::out_of_range(
+            "Top-K diagnostic pixel is outside the selected pyramid grid");
     }
     diagnostic_pixels_ = std::move(raw_linear_pixels);
     diagnostic_top_k_ = top_k;
+    diagnostic_pyramid_level_ = pyramid_level;
     search_topk_diagnostics_.clear();
 }
 
@@ -2729,6 +3406,11 @@ WSVT::search_topk_diagnostics() const noexcept {
 }
 
 void WSVT::configure_easy_to_hard(EasyToHardConfig config) {
+    if (fixed_set_transport_ &&
+        (config.confidence_aware_refinement || config.adaptive_frames)) {
+        throw std::invalid_argument(
+            "fixed set transport cannot be combined with easy-to-hard B1/B2");
+    }
     if (wavelet_guided_umpa_.enabled &&
         (config.confidence_aware_refinement || config.adaptive_frames)) {
         throw std::invalid_argument(
@@ -2849,6 +3531,10 @@ void WSVT::configure_wavelet_guided_umpa(WaveletGuidedUmpaConfig config) {
         wavelet_guided_umpa_ = std::move(config);
         return;
     }
+    if (fixed_set_transport_) {
+        throw std::invalid_argument(
+            "fixed set transport cannot be combined with WG-UMPA H1");
+    }
     if (easy_to_hard_.confidence_aware_refinement ||
         easy_to_hard_.adaptive_frames) {
         throw std::invalid_argument(
@@ -2878,6 +3564,72 @@ void WSVT::configure_wavelet_guided_umpa(WaveletGuidedUmpaConfig config) {
             "WG-UMPA H1 tolerances must be finite and non-negative");
     }
     wavelet_guided_umpa_ = std::move(config);
+}
+
+void WSVT::configure_fixed_set_transport(bool enabled) {
+    if (!enabled) {
+        if (set_transport_raw_rerank_.enabled) {
+            throw std::invalid_argument(
+                "cannot disable fixed set transport while raw rerank is enabled");
+        }
+        fixed_set_transport_ = false;
+        return;
+    }
+    if (easy_to_hard_.confidence_aware_refinement ||
+        easy_to_hard_.adaptive_frames || wavelet_guided_umpa_.enabled) {
+        throw std::invalid_argument(
+            "fixed set transport cannot be combined with adaptive or raw-UMPA profiles");
+    }
+    if (diagnostic_top_k_ != 0U || search_early_abandon_ || search_two_pass_) {
+        throw std::invalid_argument(
+            "fixed set transport v1 requires exhaustive WSVT without diagnostics");
+    }
+    if (cal_half_window_ != 16 || n_s_extend_ != 4 || pyramid_level_ != 1 ||
+        n_template_ != 0 || n_iter_ != 1 || use_estimate_ || use_gpu_ ||
+        !use_wavelet_) {
+        throw std::invalid_argument(
+            "fixed set transport v1 freezes half-window=16, residual=4, pyramid=1, n_template=0, n_iter=1, wavelet CPU, no estimate");
+    }
+    fixed_set_transport_ = true;
+}
+
+void WSVT::configure_set_transport_raw_rerank(
+    SetTransportRawRerankConfig config) {
+    if (!config.enabled) {
+        set_transport_raw_rerank_ = std::move(config);
+        return;
+    }
+    if (!fixed_set_transport_) {
+        throw std::invalid_argument(
+            "SET4 raw rerank requires fixed set transport");
+    }
+    if (wavelet_guided_umpa_.enabled ||
+        easy_to_hard_.confidence_aware_refinement ||
+        easy_to_hard_.adaptive_frames || diagnostic_top_k_ != 0U ||
+        search_early_abandon_ || search_two_pass_) {
+        throw std::invalid_argument(
+            "SET4 raw rerank cannot be combined with H1, adaptive, pruning, or diagnostics");
+    }
+    if (config.domain_half_window != n_s_extend_ ||
+        config.domain_half_window != 4 || config.analysis_radius != 1U) {
+        throw std::invalid_argument(
+            "SET4 raw rerank v1 freezes the raw domain at +/-4 and Hamming radius N=1");
+    }
+    if (config.representatives_only &&
+        config.objective != SetTransportRawObjective::WindowedZncc) {
+        throw std::invalid_argument(
+            "SET4 REP4 v1 freezes the raw objective to windowed ZNCC");
+    }
+    if (!std::isfinite(config.relative_delta_tolerance) ||
+        !std::isfinite(config.transmission_epsilon) ||
+        !std::isfinite(config.variance_epsilon) ||
+        config.relative_delta_tolerance < 0.0 ||
+        config.transmission_epsilon < 0.0 ||
+        config.variance_epsilon < 0.0) {
+        throw std::invalid_argument(
+            "SET4 raw rerank tolerances must be finite and non-negative");
+    }
+    set_transport_raw_rerank_ = std::move(config);
 }
 
 } // namespace wsvt

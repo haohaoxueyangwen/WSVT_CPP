@@ -165,6 +165,55 @@ void configure_wavelet_guided_umpa_from_options(
     solver.configure_wavelet_guided_umpa(std::move(config));
 }
 
+void configure_fixed_set_transport_from_options(
+    const OptMap& opts,
+    wsvt::WSVT& solver) {
+    if (opt_bool(opts, "fixed_set_transport", false)) {
+        solver.configure_fixed_set_transport(true);
+    }
+}
+
+wsvt::SetTransportRawObjective parse_set_transport_raw_objective(
+    std::string value) {
+    for (char& c : value) {
+        c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+    }
+    if (value == "windowed_zncc" || value == "zncc") {
+        return wsvt::SetTransportRawObjective::WindowedZncc;
+    }
+    if (value == "modelt" || value == "model_t") {
+        return wsvt::SetTransportRawObjective::ModelT;
+    }
+    if (value == "modeldf" || value == "model_df") {
+        return wsvt::SetTransportRawObjective::ModelDF;
+    }
+    throw std::invalid_argument(
+        "raw_rerank_objective must be windowed_zncc, ModelT, or ModelDF");
+}
+
+void configure_set_transport_raw_rerank_from_options(
+    const OptMap& opts,
+    wsvt::WSVT& solver) {
+    if (!opt_bool(opts, "set_transport_raw_rerank", false)) {
+        return;
+    }
+    wsvt::SetTransportRawRerankConfig config;
+    config.enabled = true;
+    config.representatives_only = opt_bool(
+        opts, "set_transport_raw_representatives", false);
+    config.objective = parse_set_transport_raw_objective(
+        opt_string(opts, "raw_rerank_objective", "ModelDF"));
+    config.domain_half_window = 4;
+    config.analysis_radius = 1;
+    config.relative_delta_tolerance = opt_double(
+        opts, "umpa_relative_delta_tolerance", 1.0e-12);
+    config.transmission_epsilon = opt_double(
+        opts, "umpa_transmission_epsilon", 1.0e-12);
+    config.variance_epsilon = opt_double(
+        opts, "raw_rerank_variance_epsilon", 1.0e-12);
+    solver.configure_set_transport_raw_rerank(std::move(config));
+}
+
 struct DiagnosticPointSpec {
     std::string point_id;
     std::string roi_id;
@@ -217,7 +266,7 @@ void write_topk_diagnostics(
     if (!output) {
         throw std::runtime_error("cannot write Top-K diagnostic CSV: " + path.string());
     }
-    output << "point_id,roi_id,raw_y,raw_x,rank,initial_guess_y,initial_guess_x,"
+    output << "point_id,roi_id,pyramid_level,raw_y,raw_x,rank,initial_guess_y,initial_guess_x,"
               "local_offset_y,local_offset_x,internal_candidate_y,internal_candidate_x,"
               "saved_candidate_y,saved_candidate_x,descriptor_score_neg_ssd,"
               "descriptor_cost_ssd\n";
@@ -230,7 +279,8 @@ void write_topk_diagnostics(
         }
         const auto& point = *found->second;
         output << point.point_id << ',' << point.roi_id << ','
-               << diagnostic.raw_y << ',' << diagnostic.raw_x << ','
+               << diagnostic.pyramid_level << ',' << diagnostic.raw_y << ','
+               << diagnostic.raw_x << ','
                << diagnostic.rank << ',' << diagnostic.initial_guess_y << ','
                << diagnostic.initial_guess_x << ',' << diagnostic.local_offset_y << ','
                << diagnostic.local_offset_x << ',' << diagnostic.internal_candidate_y << ','
@@ -455,6 +505,8 @@ int run_wsvt_cmd(const std::string& img_h5, const std::string& img_key, const st
         search_two_pass, search_prefix_size, search_guard_cache);
     configure_easy_to_hard_from_options(opts, ch, wsvt_solver);
     configure_wavelet_guided_umpa_from_options(opts, wsvt_solver);
+    configure_fixed_set_transport_from_options(opts, wsvt_solver);
+    configure_set_transport_raw_rerank_from_options(opts, wsvt_solver);
     const auto out = wsvt_solver.run(out_dir, cleansave, h5_deflate);
     const auto t_save_t0 = std::chrono::steady_clock::now();
     if (save_img) {
@@ -716,24 +768,40 @@ int run_wsvt_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
         search_two_pass, search_prefix_size, search_guard_cache);
     configure_easy_to_hard_from_options(opts, ch, wsvt_solver);
     configure_wavelet_guided_umpa_from_options(opts, wsvt_solver);
+    configure_fixed_set_transport_from_options(opts, wsvt_solver);
+    configure_set_transport_raw_rerank_from_options(opts, wsvt_solver);
     const std::string diagnostic_points_path = opt_string(opts, "diagnostic_points");
     std::vector<DiagnosticPointSpec> diagnostic_points;
+    std::size_t diagnostic_grid_w = work_w;
     if (!diagnostic_points_path.empty()) {
         if (crop > 0 && static_cast<std::size_t>(crop) < std::min(h, w)) {
             throw std::invalid_argument("Top-K diagnostic points require --crop 0");
         }
         diagnostic_points = read_diagnostic_points(diagnostic_points_path);
+        const int diagnostic_pyramid_level = opt_int(
+            opts, "diagnostic_pyramid_level", 0);
+        if (diagnostic_pyramid_level < 0 || diagnostic_pyramid_level > pyramid_level) {
+            throw std::invalid_argument(
+                "diagnostic_pyramid_level must be within the configured pyramid");
+        }
+        std::size_t diagnostic_grid_h = work_h;
+        for (int level = 0; level < diagnostic_pyramid_level; ++level) {
+            diagnostic_grid_h = (diagnostic_grid_h + 5U) / 2U;
+            diagnostic_grid_w = (diagnostic_grid_w + 5U) / 2U;
+        }
         std::vector<std::size_t> pixels;
         pixels.reserve(diagnostic_points.size());
         for (const auto& point : diagnostic_points) {
-            if (point.raw_y >= work_h || point.raw_x >= work_w) {
-                throw std::out_of_range("diagnostic point is outside the working image");
+            if (point.raw_y >= diagnostic_grid_h || point.raw_x >= diagnostic_grid_w) {
+                throw std::out_of_range(
+                    "diagnostic point is outside the selected pyramid grid");
             }
-            pixels.push_back(point.raw_y * work_w + point.raw_x);
+            pixels.push_back(point.raw_y * diagnostic_grid_w + point.raw_x);
         }
         wsvt_solver.configure_search_topk_diagnostics(
             std::move(pixels),
-            static_cast<std::size_t>(opt_int(opts, "diagnostic_top_k", 4)));
+            static_cast<std::size_t>(opt_int(opts, "diagnostic_top_k", 4)),
+            diagnostic_pyramid_level);
     }
     const auto out = diagnostic_points.empty()
         ? wsvt_solver.run(out_dir, cleansave, h5_deflate)
@@ -746,7 +814,7 @@ int run_wsvt_dir_cmd(const std::string& img_dir, const std::string& ref_dir, con
             diagnostic_csv,
             diagnostic_points,
             wsvt_solver.search_topk_diagnostics(),
-            work_w);
+            diagnostic_grid_w);
         std::cout << "diagnostic Top-K CSV: " << diagnostic_csv << std::endl;
     }
     const auto t_save_t0 = std::chrono::steady_clock::now();

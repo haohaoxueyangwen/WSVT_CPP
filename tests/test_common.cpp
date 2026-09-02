@@ -3,12 +3,19 @@
 
 #include "wsvt/common.hpp"
 #include "wsvt/image_ops.hpp"
+#include "wsvt/io_json.hpp"
 
 #include <cstddef>
 #include <cstdint>
 #include <vector>
 
 using namespace wsvt;
+
+TEST_CASE("JSON serialization preserves exact large integer-valued counters",
+          "[common][json]") {
+    REQUIRE(json_dumps(JsonValue(1327104.0)) == "1327104");
+    REQUIRE(json_dumps(JsonValue(7962624.0)) == "7962624");
+}
 
 TEST_CASE("std_depth_chw_per_pixel matches HWD standard deviation", "[common][stats]") {
     constexpr std::size_t ch = 5;

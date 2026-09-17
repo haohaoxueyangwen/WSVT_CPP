@@ -153,6 +153,124 @@ TEST_CASE("UMPA integer image sampling rejects incomplete patches", "[umpa][imag
         std::out_of_range);
 }
 
+TEST_CASE("UMPA official integer wrapper matches sign assignment and open bounds", "[umpa][official-parity]") {
+    constexpr std::size_t frames = 4U;
+    constexpr std::size_t height = 32U;
+    constexpr std::size_t width = 34U;
+    constexpr std::size_t sample_y = 15U;
+    constexpr std::size_t sample_x = 16U;
+    constexpr std::ptrdiff_t official_shift_y = 2;
+    constexpr std::ptrdiff_t official_shift_x = -3;
+    constexpr std::size_t reference_y = 17U;
+    constexpr std::size_t reference_x = 13U;
+    constexpr std::size_t radius = 1U;
+    constexpr std::ptrdiff_t max_shift = 4;
+    constexpr double expected_t = 0.83;
+    constexpr double expected_d = 0.61;
+    std::vector<double> reference(frames * height * width, 0.0);
+    std::vector<double> sample(frames * height * width, 0.0);
+    for (std::size_t frame = 0; frame < frames; ++frame) {
+        for (std::size_t y = 0; y < height; ++y) {
+            for (std::size_t x = 0; x < width; ++x) {
+                const std::size_t pattern =
+                    (11U * y + 19U * x + 7U * frame + 3U * x * y) % 31U;
+                reference[(frame * height + y) * width + x] =
+                    70.0 + 2.0 * static_cast<double>(frame) +
+                    static_cast<double>(pattern) +
+                    0.125 * static_cast<double>(y) +
+                    0.0625 * static_cast<double>(x);
+            }
+        }
+    }
+    const std::vector<double> window = normalized_hamming_window_2d(radius);
+    for (std::size_t frame = 0; frame < frames; ++frame) {
+        double mean = 0.0;
+        for (std::size_t wy = 0; wy < 3U; ++wy) {
+            for (std::size_t wx = 0; wx < 3U; ++wx) {
+                const std::size_t ry = reference_y + wy - radius;
+                const std::size_t rx = reference_x + wx - radius;
+                mean += window[wy * 3U + wx] *
+                    reference[(frame * height + ry) * width + rx];
+            }
+        }
+        for (std::size_t wy = 0; wy < 3U; ++wy) {
+            for (std::size_t wx = 0; wx < 3U; ++wx) {
+                const std::size_t sy = sample_y + wy - radius;
+                const std::size_t sx = sample_x + wx - radius;
+                const std::size_t ry = reference_y + wy - radius;
+                const std::size_t rx = reference_x + wx - radius;
+                const double value =
+                    reference[(frame * height + ry) * width + rx];
+                sample[(frame * height + sy) * width + sx] =
+                    expected_t * (expected_d * value + (1.0 - expected_d) * mean);
+            }
+        }
+    }
+
+    const UmpaPhysicalFit sample_assigned =
+        fit_umpa_physical_official_integer_at(
+            sample, reference, frames, height, width,
+            sample_y, sample_x, official_shift_y, official_shift_x,
+            radius, max_shift, UmpaAssignCoordinates::Sample);
+    const UmpaPhysicalFit reference_assigned =
+        fit_umpa_physical_official_integer_at(
+            sample, reference, frames, height, width,
+            reference_y, reference_x, official_shift_y, official_shift_x,
+            radius, max_shift, UmpaAssignCoordinates::Reference);
+    for (const UmpaPhysicalFit* fit : {&sample_assigned, &reference_assigned}) {
+        REQUIRE(fit->numerical_valid);
+        REQUIRE(fit->physical_valid);
+        REQUIRE(fit->transmission == Catch::Approx(expected_t).margin(1.0e-11));
+        REQUIRE(fit->visibility == Catch::Approx(expected_d).margin(1.0e-11));
+        REQUIRE(std::abs(fit->cost) <= 1.0e-10);
+    }
+    REQUIRE(sample_assigned.cost == Catch::Approx(reference_assigned.cost).margin(1.0e-12));
+    REQUIRE(sample_assigned.transmission == Catch::Approx(reference_assigned.transmission).margin(1.0e-12));
+    REQUIRE(sample_assigned.visibility == Catch::Approx(reference_assigned.visibility).margin(1.0e-12));
+
+    const std::vector<float> sample_float(sample.begin(), sample.end());
+    const std::vector<float> reference_float(reference.begin(), reference.end());
+    const std::vector<double> sample_quantized(
+        sample_float.begin(), sample_float.end());
+    const std::vector<double> reference_quantized(
+        reference_float.begin(), reference_float.end());
+    const UmpaPhysicalFit official_quantized =
+        fit_umpa_physical_official_integer_at(
+            sample_quantized, reference_quantized, frames, height, width,
+            sample_y, sample_x, official_shift_y, official_shift_x,
+            radius, max_shift, UmpaAssignCoordinates::Sample);
+    const UmpaPhysicalFit production_residual =
+        fit_umpa_physical_float_candidate_at(
+            sample_float, reference_float, frames, height, width,
+            sample_y, sample_x, reference_y, reference_x,
+            radius, window, 0.0, 0.0);
+    const UmpaPhysicalFit production_expanded = solve_umpa_physical_fit(
+        production_residual.statistics, 0.0, 0.0);
+    REQUIRE(production_expanded.cost ==
+        Catch::Approx(official_quantized.cost).margin(1.0e-9));
+    REQUIRE(production_expanded.transmission ==
+        Catch::Approx(official_quantized.transmission).margin(1.0e-10));
+    REQUIRE(production_expanded.visibility ==
+        Catch::Approx(official_quantized.visibility).margin(1.0e-10));
+
+    REQUIRE_THROWS_AS(
+        fit_umpa_physical_official_integer_at(
+            sample, reference, frames, height, width,
+            sample_y, sample_x, -max_shift, 0, radius, max_shift),
+        std::out_of_range);
+    REQUIRE_THROWS_AS(
+        fit_umpa_physical_official_integer_at(
+            sample, reference, frames, height, width,
+            sample_y, sample_x, 0, max_shift, radius, max_shift),
+        std::out_of_range);
+    REQUIRE_THROWS_AS(
+        fit_umpa_physical_official_integer_at(
+            sample, reference, frames, height, width,
+            radius + static_cast<std::size_t>(max_shift) - 1U,
+            sample_x, 0, 0, radius, max_shift),
+        std::out_of_range);
+}
+
 TEST_CASE("UMPA N zero ModelDF is structurally rank deficient", "[umpa][N0][rank]") {
     constexpr std::size_t frames = 8U;
     constexpr std::size_t height = 8U;

@@ -52,93 +52,11 @@ UmpaPhysicalFit fit_candidate(
     std::span<const double> window,
     double relative_delta_tolerance,
     double transmission_epsilon) {
-    const std::size_t plane = height * width;
-    const std::size_t analysis_width = radius * 2U + 1U;
-    UmpaSufficientStatistics statistics;
-
-    for (std::size_t frame = 0; frame < frames; ++frame) {
-        const std::size_t frame_offset = frame * plane;
-        double reference_mean = 0.0;
-        for (std::size_t wy = 0; wy < analysis_width; ++wy) {
-            const std::size_t ry = reference_y + wy - radius;
-            for (std::size_t wx = 0; wx < analysis_width; ++wx) {
-                const std::size_t rx = reference_x + wx - radius;
-                const std::size_t wi = wy * analysis_width + wx;
-                reference_mean += window[wi] * static_cast<double>(
-                    reference_stack[frame_offset + ry * width + rx]);
-            }
-        }
-        for (std::size_t wy = 0; wy < analysis_width; ++wy) {
-            const std::size_t sy = sample_y + wy - radius;
-            const std::size_t ry = reference_y + wy - radius;
-            for (std::size_t wx = 0; wx < analysis_width; ++wx) {
-                const std::size_t sx = sample_x + wx - radius;
-                const std::size_t rx = reference_x + wx - radius;
-                const std::size_t wi = wy * analysis_width + wx;
-                const double weight = window[wi];
-                const double sample = static_cast<double>(
-                    sample_stack[frame_offset + sy * width + sx]);
-                const double reference = static_cast<double>(
-                    reference_stack[frame_offset + ry * width + rx]);
-                if (!is_finite_value(sample) || !is_finite_value(reference) ||
-                    !is_finite_value(reference_mean)) {
-                    throw std::invalid_argument(
-                        "WG-UMPA raw stacks must contain finite values");
-                }
-                statistics.l1 += weight * sample * sample;
-                statistics.l2 += weight * reference_mean * reference_mean;
-                statistics.l3 += weight * reference * reference;
-                statistics.l4 += weight * reference_mean * sample;
-                statistics.l5 += weight * reference * sample;
-                statistics.l6 += weight * reference * reference_mean;
-                statistics.weight_sum += weight;
-                ++statistics.observation_count;
-            }
-        }
-    }
-
-    UmpaPhysicalFit fit = solve_umpa_physical_fit(
-        statistics, relative_delta_tolerance, transmission_epsilon);
-    if (!fit.numerical_valid) {
-        return fit;
-    }
-
-    double residual_sum = 0.0;
-    for (std::size_t frame = 0; frame < frames; ++frame) {
-        const std::size_t frame_offset = frame * plane;
-        double reference_mean = 0.0;
-        for (std::size_t wy = 0; wy < analysis_width; ++wy) {
-            const std::size_t ry = reference_y + wy - radius;
-            for (std::size_t wx = 0; wx < analysis_width; ++wx) {
-                const std::size_t rx = reference_x + wx - radius;
-                const std::size_t wi = wy * analysis_width + wx;
-                reference_mean += window[wi] * static_cast<double>(
-                    reference_stack[frame_offset + ry * width + rx]);
-            }
-        }
-        for (std::size_t wy = 0; wy < analysis_width; ++wy) {
-            const std::size_t sy = sample_y + wy - radius;
-            const std::size_t ry = reference_y + wy - radius;
-            for (std::size_t wx = 0; wx < analysis_width; ++wx) {
-                const std::size_t sx = sample_x + wx - radius;
-                const std::size_t rx = reference_x + wx - radius;
-                const std::size_t wi = wy * analysis_width + wx;
-                const double sample = static_cast<double>(
-                    sample_stack[frame_offset + sy * width + sx]);
-                const double reference = static_cast<double>(
-                    reference_stack[frame_offset + ry * width + rx]);
-                const double residual = sample -
-                    fit.alpha * reference - fit.beta * reference_mean;
-                residual_sum += window[wi] * residual * residual;
-            }
-        }
-    }
-    fit.cost = residual_sum / statistics.weight_sum;
-    fit.numerical_valid = fit.numerical_valid && is_finite_value(fit.cost);
-    fit.physical_valid = fit.physical_valid && fit.numerical_valid;
-    return fit;
+    return fit_umpa_physical_float_candidate_at(
+        sample_stack, reference_stack, frames, height, width,
+        sample_y, sample_x, reference_y, reference_x, radius, window,
+        relative_delta_tolerance, transmission_epsilon);
 }
-
 UmpaPhysicalFit fit_model_t_candidate(
     std::span<const float> sample_stack,
     std::span<const float> reference_stack,
@@ -354,6 +272,34 @@ const char* set_transport_raw_objective_name(
         return "ModelDF";
     }
     return "unknown";
+}
+
+UmpaPhysicalFit evaluate_set_transport_raw_candidate(
+    SetTransportRawObjective objective,
+    std::span<const float> sample_stack,
+    std::span<const float> reference_stack,
+    std::size_t frames,
+    std::size_t height,
+    std::size_t width,
+    std::size_t sample_y,
+    std::size_t sample_x,
+    std::size_t reference_y,
+    std::size_t reference_x,
+    std::size_t analysis_radius,
+    std::span<const double> normalized_window,
+    double relative_delta_tolerance,
+    double transmission_epsilon,
+    double variance_epsilon) {
+    SetTransportRawRerankConfig config;
+    config.objective = objective;
+    config.analysis_radius = analysis_radius;
+    config.relative_delta_tolerance = relative_delta_tolerance;
+    config.transmission_epsilon = transmission_epsilon;
+    config.variance_epsilon = variance_epsilon;
+    return score_raw_candidate(
+        objective, sample_stack, reference_stack, frames, height, width,
+        sample_y, sample_x, reference_y, reference_x, analysis_radius,
+        normalized_window, config);
 }
 
 WaveletGuidedUmpaOutput refine_wavelet_guided_umpa(

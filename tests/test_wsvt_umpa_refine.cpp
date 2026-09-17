@@ -106,6 +106,45 @@ TEST_CASE("fixed WG-UMPA H1 recovers an integer neighbour and T D", "[wsvt][umpa
     REQUIRE(output.best_cost[0] < output.second_best_cost[0]);
 }
 
+TEST_CASE("objective-rank diagnostic calls the production raw scorers directly",
+          "[wsvt][umpa][objective-rank]") {
+    const auto window = wsvt::normalized_hamming_window_2d(1U);
+    for (const auto objective : {
+             wsvt::SetTransportRawObjective::WindowedZncc,
+             wsvt::SetTransportRawObjective::ModelT,
+             wsvt::SetTransportRawObjective::ModelDF}) {
+        const Fixture fixture = make_fixture(
+            objective == wsvt::SetTransportRawObjective::ModelT ? 1.0 : 0.63);
+        const std::size_t reference_y = static_cast<std::size_t>(
+            static_cast<int>(fixture.sample_y) - fixture.truth_y);
+        const std::size_t reference_x = static_cast<std::size_t>(
+            static_cast<int>(fixture.sample_x) - fixture.truth_x);
+        const auto fit = wsvt::evaluate_set_transport_raw_candidate(
+            objective, fixture.sample, fixture.reference,
+            fixture.frames, fixture.height, fixture.width,
+            fixture.sample_y, fixture.sample_x,
+            reference_y, reference_x, 1U, window);
+        REQUIRE(fit.numerical_valid);
+        if (objective == wsvt::SetTransportRawObjective::ModelDF) {
+            REQUIRE(fit.cost == Catch::Approx(0.0).margin(2.0e-5));
+            REQUIRE(fit.transmission == Catch::Approx(
+                fixture.transmission).margin(2.0e-5));
+            REQUIRE(fit.visibility == Catch::Approx(
+                fixture.visibility).margin(2.0e-5));
+            REQUIRE(fit.physical_valid);
+        } else if (objective == wsvt::SetTransportRawObjective::ModelT) {
+            REQUIRE(fit.cost == Catch::Approx(0.0).margin(2.0e-5));
+            REQUIRE(fit.transmission == Catch::Approx(
+                fixture.transmission).margin(2.0e-5));
+            REQUIRE(fit.visibility == Catch::Approx(1.0));
+            REQUIRE(fit.physical_valid);
+        } else {
+            REQUIRE(fit.cost >= 0.0);
+            REQUIRE(fit.cost <= 2.0);
+        }
+    }
+}
+
 TEST_CASE("fixed WG-UMPA H1 rejects the structurally singular N zero profile", "[wsvt][umpa][H1][N0]") {
     const Fixture fixture = make_fixture();
     const std::vector<int> proposal_y{fixture.truth_y};

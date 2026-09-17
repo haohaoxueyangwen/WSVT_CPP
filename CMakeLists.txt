@@ -16,6 +16,7 @@ option(WSVT_BUILD_BENCH "Build micro-benchmarks (requires nanobench)"     OFF)
 option(WSVT_DISABLE_AUTOVEC "Disable compiler auto-vectorization for SIMD ablation builds" OFF)
 option(WSVT_VEC_REPORT "Emit compiler vectorization diagnostics for wsvt_core" OFF)
 option(WSVT_SEARCH_STATIC_SCHEDULE "Use static scheduling in the WSVT search ablation" OFF)
+option(WSVT_NATIVE_ARCH "Enable -march=native in Release builds (non-portable)" OFF)
 
 # ── Core library ──────────────────────────────────────────────
 add_library(wsvt_core
@@ -35,12 +36,18 @@ add_library(wsvt_core
     src/console_ops.cpp
     src/solver_utils.cpp
     src/umpa_physical_fit.cpp
+    src/umpa_ddf_kernel.cpp
+    src/umpa_ddf_kernel_optimizer.cpp
+    src/umpa_ddf_author_fit.cpp
+    src/directional_darkfield.cpp
     src/wsvt_umpa_refine.cpp
     src/wsvt_pipeline.cpp
     src/wxst_pipeline.cpp
 )
 
 target_compile_features(wsvt_core PUBLIC cxx_std_20)
+add_library(wsvt_ddf_author SHARED src/umpa_ddf_author_c_api.cpp)
+target_link_libraries(wsvt_ddf_author PRIVATE wsvt_core)
 if(WSVT_SEARCH_STATIC_SCHEDULE)
     target_compile_definitions(wsvt_core PRIVATE WSVT_SEARCH_STATIC_SCHEDULE)
 endif()
@@ -69,9 +76,12 @@ if(MSVC)
 else()
     target_compile_options(wsvt_core PRIVATE
         -Wall -Wextra -Wpedantic -Wconversion -Wshadow
-        $<$<CONFIG:Release>:-O3 -march=native -funroll-loops>
+        $<$<CONFIG:Release>:-O3 -funroll-loops>
         $<$<CONFIG:Release>:-fno-math-errno -ffinite-math-only -fno-signed-zeros -fno-trapping-math>
     )
+    if(WSVT_NATIVE_ARCH)
+        target_compile_options(wsvt_core PRIVATE $<$<CONFIG:Release>:-march=native>)
+    endif()
 endif()
 
 if(WSVT_DISABLE_AUTOVEC)
@@ -82,6 +92,15 @@ if(WSVT_DISABLE_AUTOVEC)
     else()
         message(WARNING "WSVT_DISABLE_AUTOVEC is not configured for compiler ${CMAKE_CXX_COMPILER_ID}")
     endif()
+endif()
+
+# DDF uses NaNs as undefined physical outputs and validates non-finite inputs.
+# These overrides are source-local; existing WSVT/WXST kernel flags stay intact.
+if(NOT MSVC)
+    set_source_files_properties(src/umpa_ddf_author_fit.cpp PROPERTIES
+        COMPILE_OPTIONS "-fno-finite-math-only;-fsigned-zeros;-ffp-contract=off")
+    set_source_files_properties(src/directional_darkfield.cpp PROPERTIES
+        COMPILE_OPTIONS "-fno-finite-math-only;-fsigned-zeros;-ffp-contract=off")
 endif()
 
 if(WSVT_VEC_REPORT)
@@ -189,11 +208,13 @@ endif()
 # ── CLI executable ────────────────────────────────────────────
 add_executable(wsvt_cli src/main.cpp)
 target_link_libraries(wsvt_cli PRIVATE wsvt_core)
+add_executable(wsvt_ddf_cli src/directional_darkfield_main.cpp)
+target_link_libraries(wsvt_ddf_cli PRIVATE wsvt_core)
 
 # ── Install / Export ──────────────────────────────────────────
 include(GNUInstallDirs)
 
-install(TARGETS wsvt_core wsvt_cli
+install(TARGETS wsvt_core wsvt_cli wsvt_ddf_cli wsvt_ddf_author
     EXPORT wsvtTargets
     LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}

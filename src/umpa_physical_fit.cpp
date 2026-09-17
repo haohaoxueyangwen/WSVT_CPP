@@ -77,6 +77,35 @@ void validate_patch_center(
     }
 }
 
+void validate_official_shift(
+    std::ptrdiff_t shift, std::ptrdiff_t max_shift) {
+    if (max_shift <= 0) {
+        throw std::invalid_argument("official UMPA max_shift must be positive");
+    }
+    if (shift <= -max_shift || shift >= max_shift) {
+        throw std::out_of_range(
+            "official UMPA candidate lies outside the open shift interval");
+    }
+}
+
+void validate_official_coordinate(
+    std::size_t coordinate,
+    std::size_t extent,
+    std::size_t analysis_radius,
+    std::ptrdiff_t max_shift) {
+    const std::size_t shift_padding = static_cast<std::size_t>(max_shift);
+    if (analysis_radius >
+        std::numeric_limits<std::size_t>::max() - shift_padding) {
+        throw std::overflow_error("official UMPA padding overflows");
+    }
+    const std::size_t padding = analysis_radius + shift_padding;
+    if (padding > extent || coordinate < padding ||
+        coordinate >= extent - padding) {
+        throw std::out_of_range(
+            "official UMPA coordinate lies outside the reconstructible domain");
+    }
+}
+
 }  // namespace
 
 std::vector<double> normalized_hamming_window_2d(std::size_t radius) {
@@ -255,6 +284,146 @@ UmpaPhysicalFit fit_umpa_physical(
     return fit;
 }
 
+UmpaPhysicalFit fit_umpa_physical_float_candidate_at(
+    std::span<const float> sample_stack,
+    std::span<const float> reference_stack,
+    std::size_t frames,
+    std::size_t height,
+    std::size_t width,
+    std::size_t sample_y,
+    std::size_t sample_x,
+    std::size_t reference_y,
+    std::size_t reference_x,
+    std::size_t analysis_radius,
+    std::span<const double> normalized_window,
+    double relative_delta_tolerance,
+    double transmission_epsilon) {
+    validate_tolerances(relative_delta_tolerance, transmission_epsilon);
+    if (frames == 0U) {
+        throw std::invalid_argument("UMPA float image fit requires at least one frame");
+    }
+    const std::size_t plane = checked_product(height, width);
+    const std::size_t stack_size = checked_product(frames, plane);
+    if (sample_stack.size() != stack_size || reference_stack.size() != stack_size) {
+        throw std::invalid_argument("UMPA float stack size does not match dimensions");
+    }
+    validate_patch_center(
+        sample_y, height, analysis_radius,
+        "UMPA float sample analysis patch is out of bounds");
+    validate_patch_center(
+        sample_x, width, analysis_radius,
+        "UMPA float sample analysis patch is out of bounds");
+    validate_patch_center(
+        reference_y, height, analysis_radius,
+        "UMPA float reference analysis patch is out of bounds");
+    validate_patch_center(
+        reference_x, width, analysis_radius,
+        "UMPA float reference analysis patch is out of bounds");
+    if (analysis_radius > (std::numeric_limits<std::size_t>::max() - 1U) / 2U) {
+        throw std::overflow_error("UMPA float analysis radius is too large");
+    }
+    const std::size_t analysis_width = analysis_radius * 2U + 1U;
+    const std::size_t patch_size = checked_product(analysis_width, analysis_width);
+    if (normalized_window.size() != patch_size) {
+        throw std::invalid_argument("UMPA float analysis window size mismatch");
+    }
+    double window_sum = 0.0;
+    for (double weight : normalized_window) {
+        if (!is_finite_value(weight) || weight < 0.0) {
+            throw std::invalid_argument(
+                "UMPA float analysis weights must be finite and non-negative");
+        }
+        window_sum += weight;
+    }
+    if (!(window_sum > 0.0) || !is_finite_value(window_sum)) {
+        throw std::invalid_argument("UMPA float analysis window must have positive weight");
+    }
+
+    UmpaSufficientStatistics statistics;
+    for (std::size_t frame = 0; frame < frames; ++frame) {
+        const std::size_t frame_offset = frame * plane;
+        double reference_mean = 0.0;
+        for (std::size_t wy = 0; wy < analysis_width; ++wy) {
+            const std::size_t ry = reference_y + wy - analysis_radius;
+            for (std::size_t wx = 0; wx < analysis_width; ++wx) {
+                const std::size_t rx = reference_x + wx - analysis_radius;
+                const std::size_t wi = wy * analysis_width + wx;
+                reference_mean += normalized_window[wi] * static_cast<double>(
+                    reference_stack[frame_offset + ry * width + rx]);
+            }
+        }
+        reference_mean /= window_sum;
+        for (std::size_t wy = 0; wy < analysis_width; ++wy) {
+            const std::size_t sy = sample_y + wy - analysis_radius;
+            const std::size_t ry = reference_y + wy - analysis_radius;
+            for (std::size_t wx = 0; wx < analysis_width; ++wx) {
+                const std::size_t sx = sample_x + wx - analysis_radius;
+                const std::size_t rx = reference_x + wx - analysis_radius;
+                const std::size_t wi = wy * analysis_width + wx;
+                const double weight = normalized_window[wi];
+                const double sample = static_cast<double>(
+                    sample_stack[frame_offset + sy * width + sx]);
+                const double reference = static_cast<double>(
+                    reference_stack[frame_offset + ry * width + rx]);
+                if (!is_finite_value(sample) || !is_finite_value(reference) ||
+                    !is_finite_value(reference_mean)) {
+                    throw std::invalid_argument(
+                        "WG-UMPA raw stacks must contain finite values");
+                }
+                statistics.l1 += weight * sample * sample;
+                statistics.l2 += weight * reference_mean * reference_mean;
+                statistics.l3 += weight * reference * reference;
+                statistics.l4 += weight * reference_mean * sample;
+                statistics.l5 += weight * reference * sample;
+                statistics.l6 += weight * reference * reference_mean;
+                statistics.weight_sum += weight;
+                ++statistics.observation_count;
+            }
+        }
+    }
+
+    UmpaPhysicalFit fit = solve_umpa_physical_fit(
+        statistics, relative_delta_tolerance, transmission_epsilon);
+    if (!fit.numerical_valid) {
+        return fit;
+    }
+    double residual_sum = 0.0;
+    for (std::size_t frame = 0; frame < frames; ++frame) {
+        const std::size_t frame_offset = frame * plane;
+        double reference_mean = 0.0;
+        for (std::size_t wy = 0; wy < analysis_width; ++wy) {
+            const std::size_t ry = reference_y + wy - analysis_radius;
+            for (std::size_t wx = 0; wx < analysis_width; ++wx) {
+                const std::size_t rx = reference_x + wx - analysis_radius;
+                const std::size_t wi = wy * analysis_width + wx;
+                reference_mean += normalized_window[wi] * static_cast<double>(
+                    reference_stack[frame_offset + ry * width + rx]);
+            }
+        }
+        reference_mean /= window_sum;
+        for (std::size_t wy = 0; wy < analysis_width; ++wy) {
+            const std::size_t sy = sample_y + wy - analysis_radius;
+            const std::size_t ry = reference_y + wy - analysis_radius;
+            for (std::size_t wx = 0; wx < analysis_width; ++wx) {
+                const std::size_t sx = sample_x + wx - analysis_radius;
+                const std::size_t rx = reference_x + wx - analysis_radius;
+                const std::size_t wi = wy * analysis_width + wx;
+                const double sample = static_cast<double>(
+                    sample_stack[frame_offset + sy * width + sx]);
+                const double reference = static_cast<double>(
+                    reference_stack[frame_offset + ry * width + rx]);
+                const double residual = sample -
+                    fit.alpha * reference - fit.beta * reference_mean;
+                residual_sum += normalized_window[wi] * residual * residual;
+            }
+        }
+    }
+    fit.cost = residual_sum / statistics.weight_sum;
+    fit.numerical_valid = fit.numerical_valid && is_finite_value(fit.cost);
+    fit.physical_valid = fit.physical_valid && fit.numerical_valid;
+    return fit;
+}
+
 UmpaPhysicalFit fit_umpa_physical_integer_at(
     std::span<const double> sample_stack,
     std::span<const double> reference_stack,
@@ -337,6 +506,55 @@ UmpaPhysicalFit fit_umpa_physical_integer_at(
     return fit_umpa_physical(
         sample, reference, reference_mean, weights,
         relative_delta_tolerance, transmission_epsilon);
+}
+
+UmpaPhysicalFit fit_umpa_physical_official_integer_at(
+    std::span<const double> sample_stack,
+    std::span<const double> reference_stack,
+    std::size_t frames,
+    std::size_t height,
+    std::size_t width,
+    std::size_t coordinate_y,
+    std::size_t coordinate_x,
+    std::ptrdiff_t official_shift_y,
+    std::ptrdiff_t official_shift_x,
+    std::size_t analysis_radius,
+    std::ptrdiff_t max_shift,
+    UmpaAssignCoordinates assign_coordinates,
+    double relative_delta_tolerance,
+    double transmission_epsilon) {
+    validate_tolerances(relative_delta_tolerance, transmission_epsilon);
+    validate_official_shift(official_shift_y, max_shift);
+    validate_official_shift(official_shift_x, max_shift);
+    validate_official_coordinate(
+        coordinate_y, height, analysis_radius, max_shift);
+    validate_official_coordinate(
+        coordinate_x, width, analysis_radius, max_shift);
+
+    std::size_t sample_y = coordinate_y;
+    std::size_t sample_x = coordinate_x;
+    switch (assign_coordinates) {
+    case UmpaAssignCoordinates::Sample:
+        break;
+    case UmpaAssignCoordinates::Reference:
+        sample_y = shifted_center(coordinate_y, official_shift_y, height);
+        sample_x = shifted_center(coordinate_x, official_shift_x, width);
+        break;
+    default:
+        throw std::invalid_argument("unknown official UMPA coordinate assignment");
+    }
+
+    const UmpaPhysicalFit extracted = fit_umpa_physical_integer_at(
+        sample_stack, reference_stack, frames, height, width,
+        sample_y, sample_x, -official_shift_y, -official_shift_x,
+        analysis_radius, relative_delta_tolerance, transmission_epsilon);
+    // The general project helper recomputes the residual to make the reported
+    // cost manifestly non-negative.  Official UMPA++ reports the algebraically
+    // expanded quadratic, so recompute from the shared sufficient statistics.
+    return solve_umpa_physical_fit(
+        extracted.statistics,
+        relative_delta_tolerance,
+        transmission_epsilon);
 }
 
 }  // namespace wsvt

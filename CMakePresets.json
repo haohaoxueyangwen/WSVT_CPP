@@ -27,6 +27,34 @@
       }
     },
     {
+      "name": "dev",
+      "inherits": "debug",
+      "displayName": "Debug with tests",
+      "cacheVariables": {
+        "WSVT_BUILD_TESTS": "ON"
+      }
+    },
+    {
+      "name": "ci",
+      "inherits": "release",
+      "displayName": "CI Release with tests (portable, no optional IO)",
+      "cacheVariables": {
+        "WSVT_BUILD_TESTS": "ON",
+        "WSVT_NATIVE_ARCH": "OFF",
+        "WSVT_WITH_HDF5": "OFF",
+        "WSVT_WITH_OPENCV": "OFF",
+        "WSVT_WITH_FFTW": "OFF"
+      }
+    },
+    {
+      "name": "release-native",
+      "inherits": "release",
+      "displayName": "Release + native CPU arch",
+      "cacheVariables": {
+        "WSVT_NATIVE_ARCH": "ON"
+      }
+    },
+    {
       "name": "release-lto",
       "inherits": "base",
       "displayName": "Release + LTO",
@@ -62,12 +90,17 @@
     { "name": "debug",       "configurePreset": "debug" },
     { "name": "release",     "configurePreset": "release" },
     { "name": "release-lto", "configurePreset": "release-lto" },
+    { "name": "release-native", "configurePreset": "release-native" },
+    { "name": "dev",         "configurePreset": "dev" },
+    { "name": "ci",          "configurePreset": "ci" },
     { "name": "asan",        "configurePreset": "asan" },
     { "name": "tsan",        "configurePreset": "tsan" }
   ],
   "testPresets": [
     { "name": "debug",   "configurePreset": "debug",   "output": { "outputOnFailure": true } },
     { "name": "release", "configurePreset": "release", "output": { "outputOnFailure": true } },
+    { "name": "dev",     "configurePreset": "dev",     "output": { "outputOnFailure": true } },
+    { "name": "ci",      "configurePreset": "ci",      "output": { "outputOnFailure": true } },
     { "name": "asan",    "configurePreset": "asan",    "output": { "outputOnFailure": true } }
   ]
 }

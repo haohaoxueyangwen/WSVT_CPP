@@ -21,6 +21,8 @@
 #include <limits>
 #include <memory>
 #include <numeric>
+#include <optional>
+#include "wsvt/guarded_subpixel.hpp"
 #include <sstream>
 #include <span>
 #include <stdexcept>
@@ -642,6 +644,23 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
         throw std::invalid_argument("displace_wavelet displacement shape mismatch");
     }
     const std::size_t pixel_count = img_h * img_w;
+    const bool use_spatial_cost =
+        fixed_spatial_support_ != FixedSpatialSupport::Point &&
+        current_pyramid_level == 0;
+    std::optional<SpatialFeatureView> spatial_sample, spatial_ref;
+    const FixedSpatialCost spatial_cost(fixed_spatial_support_);
+    const bool use_spatial_reuse=use_spatial_cost&&fixed_spatial_reuse_;
+    if(use_spatial_reuse) spatial_reuse_stats_={};
+    const bool use_guarded_subpixel = guarded_subpixel_ && current_pyramid_level == 0;
+    if(use_guarded_subpixel) {
+        guarded_subpixel_reasons_.assign(pixel_count,1);
+        guarded_subpixel_offsets_.assign(2*pixel_count,0.0);
+    }
+    if (use_spatial_cost) {
+        // Validate once outside the OpenMP region. Existing B0 has no new scan.
+        spatial_sample.emplace(img_wa_stack, img_h, img_w, depth);
+        spatial_ref.emplace(ref_wa_stack, ref_h, ref_w, depth);
+    }
     if (!active_mask.empty() && active_mask.size() != pixel_count) {
         throw std::invalid_argument("displace_wavelet active mask shape mismatch");
     }
@@ -778,6 +797,8 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
             -std::numeric_limits<float>::infinity());
         std::vector<std::uint32_t> set_epoch(set_corr.size(), 0U);
         std::uint32_t current_set_epoch = 0;
+        std::optional<SpatialPointCache> spatial_cache;
+        if(use_spatial_reuse) spatial_cache.emplace();
 
         #if defined(WSVT_SEARCH_STATIC_SCHEDULE)
         #pragma omp for schedule(static)
@@ -787,6 +808,9 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
         for (std::size_t pixel = 0; pixel < img_h * img_w; ++pixel) {
             const std::size_t yy = pixel / img_w;
             const std::size_t xx = pixel % img_w;
+            if(spatial_cache) spatial_cache->select_tile(
+                yy*((img_w+spatial_reuse_tile_width_-1)/spatial_reuse_tile_width_)+
+                xx/spatial_reuse_tile_width_);
 
             search_dense_baseline_candidate_count +=
                 static_cast<std::uint64_t>(ws2);
@@ -842,7 +866,34 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
                 }
             }
 
-            if (use_set_transport) {
+            if (use_spatial_cost) {
+                // The original absolute candidate locations and row-major tie
+                // order are unchanged. Only the finest-level objective differs.
+                for (std::size_t wy=0; wy<window_size; ++wy) {
+                    for (std::size_t wx=0; wx<window_size; ++wx) {
+                        const std::size_t ci=wy*window_size+wx;
+                        const auto misses_before=spatial_cache ? spatial_cache->stats().misses : 0;
+                        const float value=spatial_cache ? -spatial_cost.evaluate(
+                            *spatial_sample,*spatial_ref,yy,xx,y0n+wy,x0n+wx,*spatial_cache) : -spatial_cost(
+                            *spatial_sample, *spatial_ref,
+                            static_cast<std::int64_t>(yy),
+                            static_cast<std::int64_t>(xx),
+                            static_cast<std::int64_t>(y0n+wy),
+                            static_cast<std::int64_t>(x0n+wx));
+                        corr_data[ci]=value;
+                        ++search_candidate_count;
+                        ++search_full_candidate_count;
+                        search_distance_terms_possible += 9U*depth;
+                        search_distance_terms_evaluated += spatial_cache ?
+                            (spatial_cache->stats().misses-misses_before)*depth : 9U*depth;
+                        if (value > corr_max) {
+                            corr_second=corr_max; corr_max=value; max_idx=ci;
+                        } else if (value > corr_second) {
+                            corr_second=value;
+                        }
+                    }
+                }
+            } else if (use_set_transport) {
                 ++current_set_epoch;
                 if (current_set_epoch == 0) {
                     std::fill(set_epoch.begin(), set_epoch.end(), 0U);
@@ -1425,6 +1476,29 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
 
             float result_disp_x = xx_axis[max_idx] + minor_disp_x;
             float result_disp_y = yy_axis[max_idx] + minor_disp_y;
+            if(use_guarded_subpixel) {
+                const long long support_radius=use_spatial_cost ? 1 : 0;
+                const long long reference_y=static_cast<long long>(yy)+fit_center_y+
+                    static_cast<long long>(max_y_idx)-cal_half_window;
+                const long long reference_x=static_cast<long long>(xx)+fit_center_x+
+                    static_cast<long long>(max_x_idx)-cal_half_window;
+                const bool complete = max_y_idx>0 && max_x_idx>0 &&
+                    max_y_idx+1<window_size && max_x_idx+1<window_size &&
+                    static_cast<long long>(yy)>=support_radius &&
+                    static_cast<long long>(xx)>=support_radius &&
+                    yy+support_radius<img_h && xx+support_radius<img_w &&
+                    reference_y-1-support_radius>=0 && reference_x-1-support_radius>=0 &&
+                    reference_y+1+support_radius<static_cast<long long>(img_h) &&
+                    reference_x+1+support_radius<static_cast<long long>(img_w);
+                const std::array<float,9> costs{
+                    -c_mm,-c_m10,-c_mp,-c_0m1,-c_00,-c_0p1,-c_pm,-c_p10,-c_pp};
+                const auto fit=guarded_subpixel(costs,complete,depth,constrained_subpixel_);
+                guarded_subpixel_reasons_[pixel]=static_cast<unsigned char>(fit.reason);
+                guarded_subpixel_offsets_[2*pixel]=fit.dx;
+                guarded_subpixel_offsets_[2*pixel+1]=fit.dy;
+                result_disp_x=xx_axis[max_idx]+static_cast<float>(fit.dx);
+                result_disp_y=yy_axis[max_idx]+static_cast<float>(fit.dy);
+            }
 
             const float max_axis_x = xx_axis[window_size - 1];
             const float min_axis_x = xx_axis[0];
@@ -1533,7 +1607,18 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
             const bool boundary_hit =
                 std::abs(winner_local_y) == effective_half_window ||
                 std::abs(winner_local_x) == effective_half_window;
-            const bool geometry_valid = !boundary_hit && std::isfinite(denom) &&
+            const bool complete_spatial_domain = !use_spatial_cost ||
+                (yy >= 1 && xx >= 1 && yy+1 < img_h && xx+1 < img_w &&
+                 static_cast<long long>(yy)+dy_int-cal_half_window >= 1 &&
+                 static_cast<long long>(xx)+dx_int-cal_half_window >= 1 &&
+                 static_cast<long long>(yy)+dy_int+cal_half_window+1 <
+                     static_cast<long long>(img_h) &&
+                 static_cast<long long>(xx)+dx_int+cal_half_window+1 <
+                     static_cast<long long>(img_w));
+            const bool geometry_valid = complete_spatial_domain &&
+                (!use_guarded_subpixel || guarded_subpixel_reasons_[pixel]==0 ||
+                 guarded_subpixel_reasons_[pixel]==6) &&
+                !boundary_hit && std::isfinite(denom) &&
                 denom > 0.0f && std::isfinite(corr_max) && std::isfinite(corr_second);
             const float normalized_curvature = geometry_valid
                 ? std::sqrt(denom) /
@@ -1567,6 +1652,18 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
                 path_code = 4.0f;
             }
             confidence_path[pixel] = path_code;
+        }
+        if(spatial_cache) {
+            const auto s=spatial_cache->stats();
+            #pragma omp critical(wsvt_spatial_reuse_stats)
+            {
+                spatial_reuse_stats_.hits+=s.hits;
+                spatial_reuse_stats_.misses+=s.misses;
+                spatial_reuse_stats_.resets+=s.resets;
+                spatial_reuse_stats_.overflows+=s.overflows;
+                spatial_reuse_stats_.allocated_bytes+=s.allocated_bytes;
+                spatial_reuse_stats_.peak_entries=std::max(spatial_reuse_stats_.peak_entries,s.peak_entries);
+            }
         }
     }
     return DisplaceWaveletOutput{
@@ -1612,6 +1709,17 @@ DisplaceWaveletOutput WSVT::displace_wavelet(
 
 SolverOutput WSVT::solver() {
     const auto processing_t0 = std::chrono::steady_clock::now();
+    // Revalidate at use time: setter order must not bypass profile exclusions.
+    configure_fixed_spatial_support(fixed_spatial_support_);
+    configure_fixed_spatial_reuse(fixed_spatial_reuse_,spatial_reuse_tile_width_);
+    if(constrained_subpixel_) configure_constrained_subpixel(true);
+    else configure_guarded_subpixel(guarded_subpixel_);
+    if (fixed_spatial_support_ != FixedSpatialSupport::Point || guarded_subpixel_) {
+        for (float v : img_data_) if (!finite_descriptor_value(v))
+            throw std::invalid_argument("nonfinite fixed-support sample input");
+        for (float v : ref_data_) if (!finite_descriptor_value(v))
+            throw std::invalid_argument("nonfinite fixed-support reference input");
+    }
     const int solver_threads = configure_openmp_threads(n_cores_, "pyramid/wavelet/displace", 2);
     crop_inputs_if_requested();
     std::vector<float> umpa_sample_raw;
@@ -2882,6 +2990,15 @@ SolverOutput WSVT::run(const std::string& result_path, bool cleansave, int h5_de
         parameter_dict["N_s extend"] = static_cast<double>(n_s_extend_);
         parameter_dict["half_window"] = static_cast<double>(cal_half_window_);
         parameter_dict["n_template"] = static_cast<double>(n_template_);
+        parameter_dict["fixed_spatial_support"] =
+            std::string(fixed_spatial_support_name(fixed_spatial_support_));
+        parameter_dict["fixed_spatial_reuse"]=fixed_spatial_reuse_;
+        parameter_dict["spatial_reuse_tile_width"]=static_cast<double>(spatial_reuse_tile_width_);
+        parameter_dict["spatial_cost_radius"] =
+            fixed_spatial_support_ == FixedSpatialSupport::Point ? 0.0 : 1.0;
+        parameter_dict["spatial_cost_boundary"] = "zero_extension";
+        parameter_dict["subpixel_policy"] = constrained_subpixel_ ? "box_finest_v2" :
+            (guarded_subpixel_ ? "guarded_finest_v1" : "legacy");
         parameter_dict["window_policy"] = "manual_fixed";
         parameter_dict["semantics_profile"] = std::string(kPythonReferenceSemantics);
         parameter_dict["search_profile"] = std::string(search_profile_name(
@@ -3524,6 +3641,56 @@ void WSVT::configure_easy_to_hard(EasyToHardConfig config) {
         config.frame_stages.clear();
     }
     easy_to_hard_ = std::move(config);
+}
+
+void WSVT::configure_fixed_spatial_support(FixedSpatialSupport support) {
+    (void)fixed_spatial_support_name(support);
+    if (support != FixedSpatialSupport::Point &&
+        (cal_half_window_ != 16 || n_s_extend_ != 4 || pyramid_level_ != 1 ||
+         n_template_ != 0 || wavelet_level_cut_ != 1 || n_iter_ != 1 ||
+         use_estimate_ || use_gpu_ || !use_wavelet_ ||
+         search_early_abandon_ || search_two_pass_ ||
+         easy_to_hard_.confidence_aware_refinement || easy_to_hard_.adaptive_frames ||
+         fixed_set_transport_ || wavelet_guided_umpa_.enabled ||
+         set_transport_raw_rerank_.enabled)) {
+        throw std::invalid_argument(
+            "WSVT-FS-v1 requires fixed window16/residual4/pyramid1/cut1, "
+            "n_template=0, one iteration, CPU wavelets, no other research/pruning");
+    }
+    fixed_spatial_support_ = support;
+}
+
+void WSVT::configure_guarded_subpixel(bool enabled) {
+    if(enabled) {
+        // Share the frozen CPU/profile exclusions without changing the support.
+        const auto previous=fixed_spatial_support_;
+        configure_fixed_spatial_support(FixedSpatialSupport::Hamming3);
+        fixed_spatial_support_=previous;
+    }
+    guarded_subpixel_=enabled;
+    constrained_subpixel_=false;
+    if(!enabled) {
+        guarded_subpixel_reasons_.clear();
+        guarded_subpixel_offsets_.clear();
+    }
+}
+
+void WSVT::configure_fixed_spatial_reuse(bool enabled,int tile_width) {
+    if(tile_width!=8&&tile_width!=16&&tile_width!=32)
+        throw std::invalid_argument("fixed reuse tile width must be 8/16/32");
+    if(enabled) {
+        if(fixed_spatial_support_==FixedSpatialSupport::Point)
+            throw std::invalid_argument("spatial reuse requires nonpoint support");
+        configure_fixed_spatial_support(fixed_spatial_support_);
+    }
+    fixed_spatial_reuse_=enabled;
+    spatial_reuse_tile_width_=tile_width;
+    spatial_reuse_stats_={};
+}
+
+void WSVT::configure_constrained_subpixel(bool enabled) {
+    configure_guarded_subpixel(enabled);
+    constrained_subpixel_=enabled;
 }
 
 void WSVT::configure_wavelet_guided_umpa(WaveletGuidedUmpaConfig config) {

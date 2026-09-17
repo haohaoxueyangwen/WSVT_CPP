@@ -1,6 +1,7 @@
 #pragma once
 
 #include "wsvt/export.hpp"
+#include "wsvt/umpa_physical_fit.hpp"
 
 #include <cstddef>
 #include <cstdint>
@@ -35,6 +36,27 @@ enum class SetTransportRawObjective {
 
 WSVT_API const char* set_transport_raw_objective_name(
     SetTransportRawObjective objective) noexcept;
+
+/// Evaluate one fixed raw-intensity candidate with the exact production
+/// SET4-rerank objective implementation.  This is a diagnostic entry point:
+/// it does not search, route, interpolate, or alter the WSVT displacement.
+/// Both sample/reference analysis patches must be complete.
+WSVT_API UmpaPhysicalFit evaluate_set_transport_raw_candidate(
+    SetTransportRawObjective objective,
+    std::span<const float> sample_stack,
+    std::span<const float> reference_stack,
+    std::size_t frames,
+    std::size_t height,
+    std::size_t width,
+    std::size_t sample_y,
+    std::size_t sample_x,
+    std::size_t reference_y,
+    std::size_t reference_x,
+    std::size_t analysis_radius,
+    std::span<const double> normalized_window,
+    double relative_delta_tolerance = 1.0e-12,
+    double transmission_epsilon = 1.0e-12,
+    double variance_epsilon = 1.0e-12);
 
 /// Fixed, default-off raw rerank over the exact SET4 fine candidate union.
 struct SetTransportRawRerankConfig {

@@ -38,6 +38,12 @@ struct UmpaPhysicalFit {
     bool physical_valid = false;
 };
 
+/// Coordinate assignment used by the official UMPA++ ModelDF interface.
+enum class UmpaAssignCoordinates {
+    Sample,
+    Reference,
+};
+
 /// NumPy-compatible separable Hamming window, flattened row-major and
 /// normalized to unit sum. Radius two yields the frozen 5x5 analysis window.
 WSVT_API std::vector<double> normalized_hamming_window_2d(std::size_t radius);
@@ -83,5 +89,48 @@ WSVT_API UmpaPhysicalFit fit_umpa_physical_integer_at(
     std::size_t analysis_radius,
     double relative_delta_tolerance = 1.0e-12,
     double transmission_epsilon = 1.0e-12);
+
+/// Evaluate the float32 raw-stack ModelDF candidate used by the production
+/// SET4/WG-UMPA path. Centers are explicit and the caller supplies the frozen
+/// normalized analysis window so a full-image loop can reuse it.
+WSVT_API UmpaPhysicalFit fit_umpa_physical_float_candidate_at(
+    std::span<const float> sample_stack,
+    std::span<const float> reference_stack,
+    std::size_t frames,
+    std::size_t height,
+    std::size_t width,
+    std::size_t sample_y,
+    std::size_t sample_x,
+    std::size_t reference_y,
+    std::size_t reference_x,
+    std::size_t analysis_radius,
+    std::span<const double> normalized_window,
+    double relative_delta_tolerance = 1.0e-12,
+    double transmission_epsilon = 1.0e-12);
+
+/// Evaluate one integer candidate with the official UMPA++ ModelDF coordinate,
+/// sign, search-bound, analysis-window, and expanded-cost semantics.
+///
+/// The public UMPA++ shift is the vector from the sample-window center to the
+/// reference-window center.  It is therefore the negative of the native WSVT
+/// displacement convention used by `fit_umpa_physical_integer_at`.  Candidate
+/// components must lie strictly inside (-max_shift, max_shift), and the
+/// supplied coordinate must be inside the official reconstructible domain
+/// after padding by max_shift + analysis_radius.
+WSVT_API UmpaPhysicalFit fit_umpa_physical_official_integer_at(
+    std::span<const double> sample_stack,
+    std::span<const double> reference_stack,
+    std::size_t frames,
+    std::size_t height,
+    std::size_t width,
+    std::size_t coordinate_y,
+    std::size_t coordinate_x,
+    std::ptrdiff_t official_shift_y,
+    std::ptrdiff_t official_shift_x,
+    std::size_t analysis_radius,
+    std::ptrdiff_t max_shift,
+    UmpaAssignCoordinates assign_coordinates = UmpaAssignCoordinates::Sample,
+    double relative_delta_tolerance = 0.0,
+    double transmission_epsilon = 0.0);
 
 }  // namespace wsvt

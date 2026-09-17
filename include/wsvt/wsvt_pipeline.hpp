@@ -1,6 +1,7 @@
 #pragma once
 
 #include "wsvt/pyramid.hpp"
+#include "wsvt/fixed_spatial_cost.hpp"
 #include "wsvt/wsvt_umpa_refine.hpp"
 
 #include <cstddef>
@@ -273,6 +274,24 @@ public:
     SolverOutput solver();
     SolverOutput run(const std::string& result_path = "", bool cleansave = false, int h5_deflate = 9);
 
+    /// Default-off WSVT-FS-v1: fixed spatial aggregation of temporal descriptor
+    /// SSD, only at the finest level. Point disables it and preserves B0.
+    /// Direct exhaustive evaluator; no adaptive/SET4/raw/pruning combinations.
+    void configure_fixed_spatial_support(FixedSpatialSupport support);
+    void configure_fixed_spatial_reuse(bool enabled,int tile_width=16);
+    const SpatialReuseStats& spatial_reuse_stats() const { return spatial_reuse_stats_; }
+    /// SP1 research mode, finest level only. Legacy remains the default.
+    void configure_guarded_subpixel(bool enabled);
+    /// SP2: minimize a valid quadratic in the fixed half-pixel cell.
+    void configure_constrained_subpixel(bool enabled);
+    const std::vector<unsigned char>& guarded_subpixel_reasons() const {
+        return guarded_subpixel_reasons_;
+    }
+    /// Raw-grid interleaved dx,dy offsets, before the legacy output clamp.
+    const std::vector<double>& guarded_subpixel_offsets() const {
+        return guarded_subpixel_offsets_;
+    }
+
     /// Enable exact ranked-candidate capture at a small set of pixels on one
     /// pyramid grid.  pyramid_level=0 preserves the established raw-grid audit.
     /// This is a diagnostic side channel; it is empty and has no hot-loop cost
@@ -384,6 +403,14 @@ private:
     WaveletGuidedUmpaConfig wavelet_guided_umpa_;
     bool fixed_set_transport_ = false;
     SetTransportRawRerankConfig set_transport_raw_rerank_;
+    FixedSpatialSupport fixed_spatial_support_ = FixedSpatialSupport::Point;
+    bool fixed_spatial_reuse_=false;
+    int spatial_reuse_tile_width_=16;
+    mutable SpatialReuseStats spatial_reuse_stats_;
+    bool guarded_subpixel_ = false;
+    bool constrained_subpixel_ = false;
+    mutable std::vector<unsigned char> guarded_subpixel_reasons_;
+    mutable std::vector<double> guarded_subpixel_offsets_;
 };
 
 }

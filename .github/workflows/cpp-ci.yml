@@ -1,0 +1,22 @@
+name: cpp-ci
+
+on:
+  push:
+    branches: [master, "codex/**"]
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake g++ libomp-dev
+      - name: Configure
+        run: cmake --preset ci
+      - name: Build tests
+        run: cmake --build --preset ci --parallel 2
+      - name: CTest
+        run: ctest --preset ci

@@ -1,0 +1,15 @@
+{
+  "python": "3.8.10 (default, May 26 2023, 14:05:08) \n[GCC 9.4.0]",
+  "platform": "Linux-5.10.104-tegra-aarch64-with-glibc2.29",
+  "numpy": "1.19.3",
+  "native_libraries": {
+    "libedge_kernels.so": true,
+    "libedge_spline.so": true
+  },
+  "torch": "2.0.0+nv23.05",
+  "cuda_available": true,
+  "cuda": "11.4",
+  "devices": [
+    "Orin"
+  ]
+}

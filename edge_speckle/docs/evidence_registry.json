@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "purpose": "previous full-size WXST GPU variant comparison",
+      "packaged": "docs\\evidence\\edge_adaptation_20261011\\evidence_02\\edge_bench_02\\report.json",
+      "original": "D:\\Yangrc\\code\\WSVT_project\\scratch\\orin_cuda_20261010\\edge_adaptation_20261011\\evidence_02\\edge_bench_02\\report.json",
+      "sha256": "610c3133d2b01a6d090bbf45432953c203adbc66a7a26dbbd366342307c36971"
+    },
+    {
+      "purpose": "previous full-size WSVT float32/uint16 comparison",
+      "packaged": "docs\\evidence\\edge_adaptation_20261011\\evidence_02\\wsvt_input_01\\report.json",
+      "original": "D:\\Yangrc\\code\\WSVT_project\\scratch\\orin_cuda_20261010\\edge_adaptation_20261011\\evidence_02\\wsvt_input_01\\report.json",
+      "sha256": "ffcb073bca838095c22eb59af14adbbaaa625ddd857ca6e431f9aba1af3e0a25"
+    },
+    {
+      "purpose": "WSVT reordering rejected candidate",
+      "packaged": "docs\\evidence\\edge_adaptation_20261011\\evidence_02\\wsvt_baseline_full_01\\diagnostics.json",
+      "original": "D:\\Yangrc\\code\\WSVT_project\\scratch\\orin_cuda_20261010\\edge_adaptation_20261011\\evidence_02\\wsvt_baseline_full_01\\diagnostics.json",
+      "sha256": "a0a3bcde96666fb7994cb25656074d63f2f55d7af34d8d7567b2a8ebf27cbabb"
+    },
+    {
+      "purpose": "same-host CPU/GPU summary with numerical boundaries",
+      "packaged": "docs\\evidence\\cpu_compare_20261011\\evidence\\final_summary.json",
+      "original": "D:\\Yangrc\\code\\WSVT_project\\scratch\\orin_cuda_20261010\\cpu_compare_20261011\\evidence\\final_summary.json",
+      "sha256": "96b1a0a5d5141c219a5750646c638e405e843339b3f970dcfd8aae22f4ccd95b"
+    },
+    {
+      "purpose": "one traced WXST boundary/Hessian outlier",
+      "packaged": "docs\\evidence\\cpu_compare_20261011\\visual_review_20261011\\diagnosis_summary.json",
+      "original": "D:\\Yangrc\\code\\WSVT_project\\scratch\\orin_cuda_20261010\\cpu_compare_20261011\\visual_review_20261011\\diagnosis_summary.json",
+      "sha256": "2e034bce40c5a5fd4120ac9782eff6aac77eae6ea69208fa8f5b8327b5e7d947"
+    },
+    {
+      "purpose": "actual GPU coarse buffer diagnostic",
+      "packaged": "docs\\evidence\\cpu_compare_20261011\\visual_review_20261011\\gpu_coarse_actual.json",
+      "original": "D:\\Yangrc\\code\\WSVT_project\\scratch\\orin_cuda_20261010\\cpu_compare_20261011\\visual_review_20261011\\gpu_coarse_actual.json",
+      "sha256": "cd55ca3ee6a13b8812d8f20e10fa62134a3d4c41590841f43df41de22e639bad"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "scope": "Proven chain at one worst WXST point; other outliers not yet individually attributed",
+  "original_cpu_reproduced": true,
+  "original_gpu_reproduced": true,
+  "coarse_coordinate_yx": [
+    306,
+    759
+  ],
+  "coarse_integer_winner_cpu_gpu": [
+    [
+      5,
+      5
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "cpu_minor_yx": [
+    -5668.771,
+    -653.933777
+  ],
+  "gpu_minor_yx_from_float32_patch": [
+    398062.875,
+    45956.59765625
+  ],
+  "cpu_hessian_det": -0.00374935661,
+  "gpu_hessian_det_float32": 5.340576171875e-05,
+  "coarse_clamped_cpu_gpu_yx": [
+    [
+      -5.0,
+      -5.0
+    ],
+    [
+      5.0,
+      5.0
+    ]
+  ],
+  "fine_center_cpu_gpu_yx": [
+    [
+      -9,
+      -9
+    ],
+    [
+      10.0,
+      10.0
+    ]
+  ],
+  "fixed_cpu_center_integer_winner_cpu_gpu": [
+    0,
+    0
+  ],
+  "fixed_center_cost_max_diff": 0.00067138671875,
+  "coarse_max_corr_diff": 0.00247955322265625,
+  "diagnosis": "Boundary integer winner with duplicated 3x3 correlation edge samples yields nearly singular curvature; small coefficient differences reverse determinant sign, subpixel correction explodes, local clipping flips coarse displacement, spline propagates different fine centers."
+}

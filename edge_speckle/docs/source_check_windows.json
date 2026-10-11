@@ -1,0 +1,80 @@
+{
+  "pass_check": true,
+  "files": [
+    {
+      "file": "native/primitives.cuh",
+      "original_unchanged": true,
+      "packaged_matches_documented_transform": true
+    },
+    {
+      "file": "native/features.cuh",
+      "original_unchanged": true,
+      "packaged_matches_documented_transform": true
+    },
+    {
+      "file": "native/cached_match.cuh",
+      "original_unchanged": true,
+      "packaged_matches_documented_transform": true
+    },
+    {
+      "file": "native/edge_kernels.cu",
+      "original_unchanged": true,
+      "packaged_matches_documented_transform": true
+    },
+    {
+      "file": "native/edge_spline.cpp",
+      "original_unchanged": true,
+      "packaged_matches_documented_transform": true
+    },
+    {
+      "file": "speckle_edge/runtime.py",
+      "original_unchanged": true,
+      "packaged_matches_documented_transform": true
+    },
+    {
+      "file": "baselines/legacy_wxst/wxst_orin.py",
+      "original_unchanged": true,
+      "packaged_matches_documented_transform": true
+    },
+    {
+      "file": "baselines/legacy_wxst/wxst_orin_v2.py",
+      "original_unchanged": true,
+      "packaged_matches_documented_transform": true
+    },
+    {
+      "file": "baselines/legacy_wxst/wxst_orin_v3.py",
+      "original_unchanged": true,
+      "packaged_matches_documented_transform": true
+    },
+    {
+      "file": "baselines/legacy_wxst/legacy_complete.py",
+      "original_unchanged": true,
+      "packaged_matches_documented_transform": true
+    },
+    {
+      "file": "baselines/cpu/cpp_original_snapshot.tgz",
+      "original_unchanged": true,
+      "packaged_matches_documented_transform": true
+    },
+    {
+      "file": "baselines/cpu/cpp_source_manifest.json",
+      "original_unchanged": true,
+      "packaged_matches_documented_transform": true
+    },
+    {
+      "file": "baselines/cpu/cpu_driver.cpp",
+      "original_unchanged": true,
+      "packaged_matches_documented_transform": true
+    },
+    {
+      "file": "baselines/cpu/CMakeLists.txt",
+      "original_unchanged": true,
+      "packaged_matches_documented_transform": true
+    },
+    {
+      "file": "baselines/cpu/wsvtConfig.cmake.in",
+      "original_unchanged": true,
+      "packaged_matches_documented_transform": true
+    }
+  ]
+}

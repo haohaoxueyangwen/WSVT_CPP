@@ -1,0 +1,23 @@
+{
+  "coarse_coordinate_yx": [
+    306,
+    759
+  ],
+  "actual_coarse_yx": [
+    5.0,
+    5.0
+  ],
+  "actual_fine_center_yx": [
+    10.0,
+    10.0
+  ],
+  "outputs_equal_previous": {
+    "displace_y": true,
+    "displace_x": true,
+    "DPC_y": true,
+    "DPC_x": true,
+    "phase": true,
+    "transmission": true,
+    "match_score_neg_ssd": true
+  }
+}

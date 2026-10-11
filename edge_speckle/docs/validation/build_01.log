@@ -1,0 +1,46 @@
+-- The CXX compiler identification is GNU 9.4.0
+-- The CUDA compiler identification is NVIDIA 11.4.315
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc
+-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc -- works
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Found OpenMP_CXX: -fopenmp (found version "4.5") 
+-- Found OpenMP: TRUE (found version "4.5") found components: CXX 
+-- Configuring done
+CMake Error in CMakeLists.txt:
+  Target "wxst_cached" requires the language dialect "CUDA17" (with compiler
+  extensions), but CMake does not know the compile flags to use to enable it.
+
+
+CMake Error in CMakeLists.txt:
+  Target "wxst_optimized" requires the language dialect "CUDA17" (with
+  compiler extensions), but CMake does not know the compile flags to use to
+  enable it.
+
+
+CMake Error in CMakeLists.txt:
+  Target "wxst_match" requires the language dialect "CUDA17" (with compiler
+  extensions), but CMake does not know the compile flags to use to enable it.
+
+
+CMake Error in CMakeLists.txt:
+  Target "edge_kernels" requires the language dialect "CUDA17" (with compiler
+  extensions), but CMake does not know the compile flags to use to enable it.
+
+
+-- Generating done
+CMake Generate step failed.  Build files cannot be regenerated correctly.
+Traceback (most recent call last):
+  File "tools/build.py", line 46, in <module>
+    main()
+  File "tools/build.py", line 24, in main
+    subprocess.run(configure, check=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['cmake', '-S', '/home/xray/Documents/WSVT_GPU_orin_20261010/edge_speckle', '-B', '/home/xray/Documents/WSVT_GPU_orin_20261010/edge_speckle/build', '-DCMAKE_BUILD_TYPE=Release', '-DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc', '-DEDGE_CUDA_ARCH=87']' returned non-zero exit status 1.

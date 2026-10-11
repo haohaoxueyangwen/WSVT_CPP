@@ -1,0 +1,12 @@
+Scanning dependencies of target wxst_match
+[ 50%] Building CUDA object CMakeFiles/wxst_match.dir/native/legacy_match.cu.o
+[100%] Linking CUDA shared library ../baselines/legacy_wxst/libwxst_match.so
+[100%] Built target wxst_match
+Scanning dependencies of target wxst_optimized
+[ 50%] Building CUDA object CMakeFiles/wxst_optimized.dir/native/legacy_optimized.cu.o
+[100%] Linking CUDA shared library ../baselines/legacy_wxst/libwxst_optimized.so
+[100%] Built target wxst_optimized
+Scanning dependencies of target wxst_cached
+[ 50%] Building CUDA object CMakeFiles/wxst_cached.dir/native/legacy_cached.cu.o
+[100%] Linking CUDA shared library ../baselines/legacy_wxst/libwxst_cached.so
+[100%] Built target wxst_cached

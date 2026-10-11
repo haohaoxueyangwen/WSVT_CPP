@@ -1,0 +1,14 @@
+-- Found OpenMP_CXX: -fopenmp  
+-- Found OpenMP: TRUE  found components: CXX 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/xray/Documents/WSVT_GPU_orin_20261010/edge_speckle/build
+Scanning dependencies of target edge_kernels
+[ 50%] Building CUDA object CMakeFiles/edge_kernels.dir/native/edge_kernels.cu.o
+[100%] Linking CUDA shared library ../speckle_edge/_native/libedge_kernels.so
+[100%] Built target edge_kernels
+Scanning dependencies of target edge_spline
+[ 50%] Building CXX object CMakeFiles/edge_spline.dir/native/edge_spline.cpp.o
+[100%] Linking CXX shared library ../speckle_edge/_native/libedge_spline.so
+[100%] Built target edge_spline
+Built and recorded native libraries in speckle_edge/_native

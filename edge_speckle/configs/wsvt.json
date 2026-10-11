@@ -1,0 +1,13 @@
+{
+  "mode": "wsvt",
+  "pixel_m": null,
+  "distance_m": null,
+  "energy_ev": null,
+  "front": "baseline",
+  "spline": "gpu",
+  "input_dtype": "auto",
+  "reference_policy": "each-pair",
+  "cpu_threads": 2,
+  "warmup": 1,
+  "repeats": 1
+}

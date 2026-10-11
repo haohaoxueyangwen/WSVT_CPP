@@ -1,0 +1,188 @@
+{
+  "environment": {
+    "numpy": "1.26.4",
+    "python": "3.11.7",
+    "pywavelets": "1.5.0",
+    "scipy": "1.11.4"
+  },
+  "fixture": {
+    "arrays": {
+      "descriptor_img_hwd_l0": {
+        "axis_order": "HWD",
+        "dtype": "float64",
+        "sha256_c_order": "b9da50cc4c332ccf4a3284c64f7f5cbccad87e59bd4c4cbaa8dc6092389af922",
+        "shape": [
+          32,
+          32,
+          10
+        ]
+      },
+      "descriptor_img_hwd_l1": {
+        "axis_order": "HWD",
+        "dtype": "float64",
+        "sha256_c_order": "ffefc058756f3750e1b619506dfbab884922a2fa98eb8d2bc4bae91ee7745cb0",
+        "shape": [
+          18,
+          18,
+          10
+        ]
+      },
+      "descriptor_ref_hwd_l0": {
+        "axis_order": "HWD",
+        "dtype": "float64",
+        "sha256_c_order": "69a56c688d51287b9f93af9712a67f57c42bbd69171b2c95f2560f7044fe2856",
+        "shape": [
+          32,
+          32,
+          10
+        ]
+      },
+      "descriptor_ref_hwd_l1": {
+        "axis_order": "HWD",
+        "dtype": "float64",
+        "sha256_c_order": "5aca2f26907b8bb792f65e7673bfd4cd5db656170e623c3d80a4d50050a55a79",
+        "shape": [
+          18,
+          18,
+          10
+        ]
+      },
+      "displace_x_hw": {
+        "axis_order": "HW",
+        "dtype": "float64",
+        "sha256_c_order": "12435d8f41741663f8b042442ec2bd2260b55a5ca4d63f13d75388fb4927cd81",
+        "shape": [
+          28,
+          28
+        ]
+      },
+      "displace_y_hw": {
+        "axis_order": "HW",
+        "dtype": "float64",
+        "sha256_c_order": "7b39bc2c1b971c0be39928d8aeee9afbfe6830f171efae953bf96e481375803e",
+        "shape": [
+          28,
+          28
+        ]
+      },
+      "dpc_x_hw": {
+        "axis_order": "HW",
+        "dtype": "float64",
+        "sha256_c_order": "d1bce9044c2db2ec471bd48fe6f3547455ec081ada6b7caebd7af63c674800b9",
+        "shape": [
+          28,
+          28
+        ]
+      },
+      "dpc_y_hw": {
+        "axis_order": "HW",
+        "dtype": "float64",
+        "sha256_c_order": "657ea543842cfc1349680f767818727a07c006b573a68e30e50973b715048c5c",
+        "shape": [
+          28,
+          28
+        ]
+      },
+      "input_img_chw": {
+        "axis_order": "CHW",
+        "dtype": "float64",
+        "sha256_c_order": "b7ce6e0288711c213b9e5ab47c4397c53ca996dc4847c98df073b58cd9b6af7a",
+        "shape": [
+          8,
+          32,
+          32
+        ]
+      },
+      "input_ref_chw": {
+        "axis_order": "CHW",
+        "dtype": "float64",
+        "sha256_c_order": "054c7bd67237386aa400195e5ca86bcdd8b36de25bab67bb4277302c170d2f26",
+        "shape": [
+          8,
+          32,
+          32
+        ]
+      },
+      "phase_hw": {
+        "axis_order": "HW",
+        "dtype": "float64",
+        "sha256_c_order": "979aee6c2091aa3e5e4d2cbaf0581cfed6910dcf41b90727dd032f0f0fe581b1",
+        "shape": [
+          28,
+          28
+        ]
+      },
+      "raw_img_chw_l0": {
+        "axis_order": "CHW",
+        "dtype": "float64",
+        "sha256_c_order": "2b0f760d59d63f2f5696f660e264cad6b4218816fefda7d914b1c2d28c21e957",
+        "shape": [
+          8,
+          32,
+          32
+        ]
+      },
+      "raw_img_chw_l1": {
+        "axis_order": "CHW",
+        "dtype": "float64",
+        "sha256_c_order": "a703f3d21c38cbd3514ffe5f0d7db49b8ff700049f0b3a27d2e71738dceb39bf",
+        "shape": [
+          8,
+          18,
+          18
+        ]
+      },
+      "raw_ref_chw_l0": {
+        "axis_order": "CHW",
+        "dtype": "float64",
+        "sha256_c_order": "f0e2ea9db0fcccb8b28db6cd0eb9c992b3533fcf599c0317759d727e62ec1d0b",
+        "shape": [
+          8,
+          32,
+          32
+        ]
+      },
+      "raw_ref_chw_l1": {
+        "axis_order": "CHW",
+        "dtype": "float64",
+        "sha256_c_order": "faa9ddb567795d33134e4ede0b559885b41248e7b0c173f7bb96986c1be7ed0d",
+        "shape": [
+          8,
+          18,
+          18
+        ]
+      },
+      "transmission_hw": {
+        "axis_order": "HW",
+        "dtype": "float64",
+        "sha256_c_order": "77cee666e07d7402d7bc79b60de0348ee756042db9db498cc449d73e08560e0a",
+        "shape": [
+          32,
+          32
+        ]
+      }
+    },
+    "path": "wsvt_stage_8f_32.npz",
+    "sha256": "7ace63dad02a2e727572d6f6bb244795cd1bdab8050dfd0c01b2ff7973fb6e88"
+  },
+  "generated_at_utc": "2026-08-23T10:09:10.031674+00:00",
+  "generator_command": "python WSVT_CPP/tests/reference/generate_wsvt_reference.py --output WSVT_CPP/tests/fixtures/wsvt_stage_8f_32.npz",
+  "parameters": {
+    "cal_half_window": 2,
+    "frames": 8,
+    "n_s_extend": 1,
+    "n_template": 0,
+    "pyramid_level": 1,
+    "seed": 20260823,
+    "size": 32,
+    "wavelet_level_cut": 1
+  },
+  "schema_version": 1,
+  "semantics_profile": "python_reference_v1",
+  "sources": {
+    "WSVT_CPP/tests/reference/generate_wsvt_reference.py": "8ff93b599bdd6d0876911ebad8504d51c64de2e62e942d0bb1e1d6e1ee6b3335",
+    "speckle_retriver/WSVT.py": "c5abf959d33c01940e2bc16306698fb18e3c6be7bb6402b317ce4578cc18c1a8",
+    "speckle_retriver/func.py": "d2cdce3b7d4236f15f059f381e3c25a8151b625ba84fa574747e1d527ad21029"
+  },
+  "window_policy": "manual_fixed"
+}

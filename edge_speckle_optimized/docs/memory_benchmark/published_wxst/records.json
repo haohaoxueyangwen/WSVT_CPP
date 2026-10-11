@@ -1,0 +1,687 @@
+[
+  {
+    "solver_s": 0.04719737404957414,
+    "api_s": 0.06604959908872843,
+    "reference_s": 0.004714037757366896,
+    "sample_s": 0.04248333629220724,
+    "download_s": 0.016673994716256857,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.04248333629220724,
+      "call_with_download_s": 0.0591573310084641,
+      "reference_prepare_s": 0.004714037757366896,
+      "gpu_event_s": {
+        "input": 0.0009006400108337402,
+        "transmission": 0.00015161600708961487,
+        "sample_front": 2.6847999542951584e-05,
+        "coarse_match": 0.00900812816619873,
+        "spline": 0.00253439998626709,
+        "fine_match": 0.02829324722290039,
+        "DPC": 0.00032153600454330446,
+        "phase": 0.0011601920127868653
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 4.3569132685661316e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": {
+      "utc": "2026-10-11T14:58:48Z",
+      "load": [
+        0.5458984375,
+        0.232421875,
+        0.212890625
+      ],
+      "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 0 %, 5709 MiB, 2460 MHz, 9501 MHz, 73.31 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.59 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.50 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.37 W",
+      "processes": "4129357, /home/yrc/vscodespace/anaconda3/bin/python3"
+    },
+    "variant": "original",
+    "repeat": 0
+  },
+  {
+    "solver_s": 0.0466045755892992,
+    "api_s": 0.0569286709651351,
+    "reference_s": 0.004706408828496933,
+    "sample_s": 0.04189816676080227,
+    "download_s": 0.008227027021348476,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.04189816676080227,
+      "call_with_download_s": 0.050125193782150745,
+      "reference_prepare_s": 0.004706408828496933,
+      "gpu_event_s": {
+        "input": 0.0008675519824028015,
+        "transmission": 0.00015001599490642548,
+        "sample_front": 2.764800004661083e-05,
+        "coarse_match": 0.00894156837463379,
+        "spline": 0.0025231359004974367,
+        "fine_match": 0.02772275161743164,
+        "DPC": 0.00037990400195121764,
+        "phase": 0.001210368037223816
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 4.327995702624321e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "numpy_output_copy": false,
+      "wsvt_workspace": "materialized",
+      "spatial_chunk": 16,
+      "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": {
+      "utc": "2026-10-11T14:58:48Z",
+      "load": [
+        0.5458984375,
+        0.232421875,
+        0.212890625
+      ],
+      "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 0 %, 5709 MiB, 2460 MHz, 9501 MHz, 73.31 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.59 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.50 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.37 W",
+      "processes": "4129357, /home/yrc/vscodespace/anaconda3/bin/python3"
+    },
+    "variant": "copy_only",
+    "repeat": 0
+  },
+  {
+    "solver_s": 0.04512661462649703,
+    "api_s": 0.05545042175799608,
+    "reference_s": 0.004657107871025801,
+    "sample_s": 0.04046950675547123,
+    "download_s": 0.008188787382096052,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.04046950675547123,
+      "call_with_download_s": 0.04865829413756728,
+      "reference_prepare_s": 0.004657107871025801,
+      "gpu_event_s": {
+        "input": 0.0008988159894943237,
+        "transmission": 0.00015276800096035003,
+        "sample_front": 2.6623999699950218e-05,
+        "coarse_match": 0.008934399604797364,
+        "spline": 0.002527231931686401,
+        "fine_match": 0.026442911148071287,
+        "DPC": 0.00028569599986076356,
+        "phase": 0.0011223039627075194
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 4.3079257011413574e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "numpy_output_copy": false,
+      "wsvt_workspace": "streamed",
+      "spatial_chunk": 16,
+      "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": {
+      "utc": "2026-10-11T14:58:48Z",
+      "load": [
+        0.5458984375,
+        0.232421875,
+        0.212890625
+      ],
+      "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 0 %, 5709 MiB, 2460 MHz, 9501 MHz, 73.31 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.59 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.55 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.33 W",
+      "processes": "4129357, /home/yrc/vscodespace/anaconda3/bin/python3"
+    },
+    "variant": "streamed",
+    "repeat": 0
+  },
+  {
+    "solver_s": 0.04666912415996194,
+    "api_s": 0.05894348118454218,
+    "reference_s": 0.004786448087543249,
+    "sample_s": 0.04188267607241869,
+    "download_s": 0.009926546830683947,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.04188267607241869,
+      "call_with_download_s": 0.051809222903102636,
+      "reference_prepare_s": 0.004786448087543249,
+      "gpu_event_s": {
+        "input": 0.0009647039771080017,
+        "transmission": 0.00015910400450229646,
+        "sample_front": 2.764800004661083e-05,
+        "coarse_match": 0.009066495895385742,
+        "spline": 0.0025323519706726074,
+        "fine_match": 0.027436031341552734,
+        "DPC": 0.0003860479891300201,
+        "phase": 0.0012195839881896972
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 6.0490332543849945e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "numpy_output_copy": false,
+      "wsvt_workspace": "materialized",
+      "spatial_chunk": 16,
+      "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": {
+      "utc": "2026-10-11T14:58:49Z",
+      "load": [
+        0.5458984375,
+        0.232421875,
+        0.212890625
+      ],
+      "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 0 %, 5709 MiB, 2460 MHz, 9501 MHz, 95.79 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.59 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.55 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.33 W",
+      "processes": "4129357, /home/yrc/vscodespace/anaconda3/bin/python3"
+    },
+    "variant": "copy_only",
+    "repeat": 1
+  },
+  {
+    "solver_s": 0.04714712547138333,
+    "api_s": 0.06232692999765277,
+    "reference_s": 0.004865588620305061,
+    "sample_s": 0.04228153685107827,
+    "download_s": 0.012593476101756096,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.04228153685107827,
+      "call_with_download_s": 0.05487501295283437,
+      "reference_prepare_s": 0.004865588620305061,
+      "gpu_event_s": {
+        "input": 0.0011895040273666381,
+        "transmission": 0.00016169600188732148,
+        "sample_front": 2.5599999353289605e-05,
+        "coarse_match": 0.008911871910095214,
+        "spline": 0.0025232961177825927,
+        "fine_match": 0.02777907180786133,
+        "DPC": 0.00037068799138069154,
+        "phase": 0.0012154879570007325
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 6.99399970471859e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "numpy_output_copy": false,
+      "wsvt_workspace": "streamed",
+      "spatial_chunk": 16,
+      "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": {
+      "utc": "2026-10-11T14:58:49Z",
+      "load": [
+        0.5458984375,
+        0.232421875,
+        0.212890625
+      ],
+      "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 0 %, 5709 MiB, 2460 MHz, 9501 MHz, 95.79 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.57 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.55 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.33 W",
+      "processes": "4129357, /home/yrc/vscodespace/anaconda3/bin/python3"
+    },
+    "variant": "streamed",
+    "repeat": 1
+  },
+  {
+    "solver_s": 0.049083573278039694,
+    "api_s": 0.06940604792907834,
+    "reference_s": 0.004963268060237169,
+    "sample_s": 0.044120305217802525,
+    "download_s": 0.01767880516126752,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.044120305217802525,
+      "call_with_download_s": 0.061799110379070044,
+      "reference_prepare_s": 0.004963268060237169,
+      "gpu_event_s": {
+        "input": 0.0010525120496749879,
+        "transmission": 0.00016086399555206298,
+        "sample_front": 2.6623999699950218e-05,
+        "coarse_match": 0.009010175704956054,
+        "spline": 0.0025346879959106446,
+        "fine_match": 0.02965216064453125,
+        "DPC": 0.00036556801199913024,
+        "phase": 0.0012052479982376098
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 7.255980744957924e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": {
+      "utc": "2026-10-11T14:58:49Z",
+      "load": [
+        0.5458984375,
+        0.232421875,
+        0.212890625
+      ],
+      "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 0 %, 5709 MiB, 2460 MHz, 9501 MHz, 95.79 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.57 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.55 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.33 W",
+      "processes": "4129357, /home/yrc/vscodespace/anaconda3/bin/python3"
+    },
+    "variant": "original",
+    "repeat": 1
+  },
+  {
+    "solver_s": 0.04648818401619792,
+    "api_s": 0.06420228909701109,
+    "reference_s": 0.0048021478578448296,
+    "sample_s": 0.04168603615835309,
+    "download_s": 0.015321054961532354,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.04168603615835309,
+      "call_with_download_s": 0.057007091119885445,
+      "reference_prepare_s": 0.0048021478578448296,
+      "gpu_event_s": {
+        "input": 0.000954688012599945,
+        "transmission": 0.00015590399503707887,
+        "sample_front": 2.6623999699950218e-05,
+        "coarse_match": 0.008927231788635253,
+        "spline": 0.0025231359004974367,
+        "fine_match": 0.027415552139282227,
+        "DPC": 0.000374783992767334,
+        "phase": 0.0012165119647979737
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 6.962008774280548e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "numpy_output_copy": false,
+      "wsvt_workspace": "streamed",
+      "spatial_chunk": 16,
+      "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": {
+      "utc": "2026-10-11T14:58:49Z",
+      "load": [
+        0.5458984375,
+        0.232421875,
+        0.212890625
+      ],
+      "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 38 %, 5709 MiB, 2460 MHz, 9501 MHz, 113.71 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.57 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.55 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.33 W",
+      "processes": "4129357, /home/yrc/vscodespace/anaconda3/bin/python3"
+    },
+    "variant": "streamed",
+    "repeat": 2
+  },
+  {
+    "solver_s": 0.047260724008083344,
+    "api_s": 0.06704779900610447,
+    "reference_s": 0.004858037922531366,
+    "sample_s": 0.04240268608555198,
+    "download_s": 0.01714014494791627,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.04240268608555198,
+      "call_with_download_s": 0.059542831033468246,
+      "reference_prepare_s": 0.004858037922531366,
+      "gpu_event_s": {
+        "input": 0.001058303952217102,
+        "transmission": 0.00015936000645160674,
+        "sample_front": 2.6623999699950218e-05,
+        "coarse_match": 0.00893337631225586,
+        "spline": 0.0025241599082946775,
+        "fine_match": 0.028120063781738282,
+        "DPC": 0.0003215999901294708,
+        "phase": 0.001159168004989624
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 6.968993693590164e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": {
+      "utc": "2026-10-11T14:58:49Z",
+      "load": [
+        0.5458984375,
+        0.232421875,
+        0.212890625
+      ],
+      "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 38 %, 5709 MiB, 2460 MHz, 9501 MHz, 113.71 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.57 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.55 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.33 W",
+      "processes": "4129357, /home/yrc/vscodespace/anaconda3/bin/python3"
+    },
+    "variant": "original",
+    "repeat": 2
+  },
+  {
+    "solver_s": 0.04706163378432393,
+    "api_s": 0.06539530912414193,
+    "reference_s": 0.004901357926428318,
+    "sample_s": 0.04216027585789561,
+    "download_s": 0.015866404864937067,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.04216027585789561,
+      "call_with_download_s": 0.05802668072283268,
+      "reference_prepare_s": 0.004901357926428318,
+      "gpu_event_s": {
+        "input": 0.001053760051727295,
+        "transmission": 0.00016201600432395934,
+        "sample_front": 2.764800004661083e-05,
+        "coarse_match": 0.008920063972473144,
+        "spline": 0.0025210878849029543,
+        "fine_match": 0.027768831253051757,
+        "DPC": 0.00038092800974845887,
+        "phase": 0.0012144639492034912
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 7.14501366019249e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "numpy_output_copy": false,
+      "wsvt_workspace": "materialized",
+      "spatial_chunk": 16,
+      "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": {
+      "utc": "2026-10-11T14:58:49Z",
+      "load": [
+        0.5458984375,
+        0.232421875,
+        0.212890625
+      ],
+      "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 38 %, 5709 MiB, 2460 MHz, 9501 MHz, 113.71 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.57 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.54 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.13 W",
+      "processes": "4129357, /home/yrc/vscodespace/anaconda3/bin/python3"
+    },
+    "variant": "copy_only",
+    "repeat": 2
+  },
+  {
+    "solver_s": 0.04719408368691802,
+    "api_s": 0.06692371889948845,
+    "reference_s": 0.004890957847237587,
+    "sample_s": 0.04230312583968043,
+    "download_s": 0.016944405157119036,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.04230312583968043,
+      "call_with_download_s": 0.05924753099679947,
+      "reference_prepare_s": 0.004890957847237587,
+      "gpu_event_s": {
+        "input": 0.0010497920513153076,
+        "transmission": 0.0001584320068359375,
+        "sample_front": 2.6623999699950218e-05,
+        "coarse_match": 0.008934399604797364,
+        "spline": 0.002527231931686401,
+        "fine_match": 0.028039199829101562,
+        "DPC": 0.000317440003156662,
+        "phase": 0.0011519999504089355
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 6.962986662983894e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": {
+      "utc": "2026-10-11T14:58:50Z",
+      "load": [
+        0.5458984375,
+        0.232421875,
+        0.212890625
+      ],
+      "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 38 %, 5709 MiB, 2460 MHz, 9501 MHz, 160.99 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.57 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.54 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.13 W",
+      "processes": "4129357, /home/yrc/vscodespace/anaconda3/bin/python3"
+    },
+    "variant": "original",
+    "repeat": 3
+  },
+  {
+    "solver_s": 0.04556957399472594,
+    "api_s": 0.056675401981920004,
+    "reference_s": 0.0048979478888213634,
+    "sample_s": 0.04067162610590458,
+    "download_s": 0.008290957659482956,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.04067162610590458,
+      "call_with_download_s": 0.048962583765387535,
+      "reference_prepare_s": 0.0048979478888213634,
+      "gpu_event_s": {
+        "input": 0.0010557119846343994,
+        "transmission": 0.00016047999262809752,
+        "sample_front": 2.764800004661083e-05,
+        "coarse_match": 0.008923135757446288,
+        "spline": 0.0025251839160919188,
+        "fine_match": 0.026455039978027343,
+        "DPC": 0.0002979840040206909,
+        "phase": 0.0011212799549102782
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 6.927968934178352e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "numpy_output_copy": false,
+      "wsvt_workspace": "materialized",
+      "spatial_chunk": 16,
+      "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": {
+      "utc": "2026-10-11T14:58:50Z",
+      "load": [
+        0.5458984375,
+        0.232421875,
+        0.212890625
+      ],
+      "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 38 %, 5709 MiB, 2460 MHz, 9501 MHz, 160.99 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.35 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.54 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.13 W",
+      "processes": "4129357, /home/yrc/vscodespace/anaconda3/bin/python3"
+    },
+    "variant": "copy_only",
+    "repeat": 3
+  },
+  {
+    "solver_s": 0.048992895521223545,
+    "api_s": 0.059907631017267704,
+    "reference_s": 0.004884409252554178,
+    "sample_s": 0.04410848626866937,
+    "download_s": 0.008304657880216837,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.04410848626866937,
+      "call_with_download_s": 0.052413144148886204,
+      "reference_prepare_s": 0.004884409252554178,
+      "gpu_event_s": {
+        "input": 0.0012056959867477418,
+        "transmission": 0.0001602240055799484,
+        "sample_front": 2.6655999943614006e-05,
+        "coarse_match": 0.008962047576904298,
+        "spline": 0.0025292799472808837,
+        "fine_match": 0.02954547119140625,
+        "DPC": 0.0003648320138454437,
+        "phase": 0.00121343994140625
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 6.720004603266716e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "numpy_output_copy": false,
+      "wsvt_workspace": "streamed",
+      "spatial_chunk": 16,
+      "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": {
+      "utc": "2026-10-11T14:58:50Z",
+      "load": [
+        0.5458984375,
+        0.232421875,
+        0.212890625
+      ],
+      "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 38 %, 5709 MiB, 2460 MHz, 9501 MHz, 160.99 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.35 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.54 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.13 W",
+      "processes": "4129357, /home/yrc/vscodespace/anaconda3/bin/python3"
+    },
+    "variant": "streamed",
+    "repeat": 3
+  },
+  {
+    "solver_s": 0.04716712376102805,
+    "api_s": 0.057938620913773775,
+    "reference_s": 0.004686197731643915,
+    "sample_s": 0.042480926029384136,
+    "download_s": 0.0084266671910882,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.042480926029384136,
+      "call_with_download_s": 0.050907593220472336,
+      "reference_prepare_s": 0.004686197731643915,
+      "gpu_event_s": {
+        "input": 0.0008903359770774842,
+        "transmission": 0.00015411199629306794,
+        "sample_front": 2.6784000918269156e-05,
+        "coarse_match": 0.008929280281066895,
+        "spline": 0.0025252799987792967,
+        "fine_match": 0.028382207870483397,
+        "DPC": 0.00033689600229263304,
+        "phase": 0.001154047966003418
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 4.41097654402256e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "numpy_output_copy": false,
+      "wsvt_workspace": "materialized",
+      "spatial_chunk": 16,
+      "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": {
+      "utc": "2026-10-11T14:58:50Z",
+      "load": [
+        0.5458984375,
+        0.232421875,
+        0.212890625
+      ],
+      "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 49 %, 5709 MiB, 2370 MHz, 9501 MHz, 159.06 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.35 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.54 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.13 W",
+      "processes": "4129357, /home/yrc/vscodespace/anaconda3/bin/python3"
+    },
+    "variant": "copy_only",
+    "repeat": 4
+  },
+  {
+    "solver_s": 0.04510107450187206,
+    "api_s": 0.055624512024223804,
+    "reference_s": 0.004627717658877373,
+    "sample_s": 0.04047335684299469,
+    "download_s": 0.008200956974178553,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.04047335684299469,
+      "call_with_download_s": 0.04867431381717324,
+      "reference_prepare_s": 0.004627717658877373,
+      "gpu_event_s": {
+        "input": 0.0009041919708251953,
+        "transmission": 0.00015007999539375306,
+        "sample_front": 2.764800004661083e-05,
+        "coarse_match": 0.008922240257263184,
+        "spline": 0.0025221118927001955,
+        "fine_match": 0.02646227264404297,
+        "DPC": 0.00028380799293518065,
+        "phase": 0.0011253759860992431
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 4.007015377283096e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "numpy_output_copy": false,
+      "wsvt_workspace": "streamed",
+      "spatial_chunk": 16,
+      "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": {
+      "utc": "2026-10-11T14:58:50Z",
+      "load": [
+        0.5458984375,
+        0.232421875,
+        0.212890625
+      ],
+      "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 49 %, 5709 MiB, 2370 MHz, 9501 MHz, 159.06 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.35 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.54 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.13 W",
+      "processes": "4129357, /home/yrc/vscodespace/anaconda3/bin/python3"
+    },
+    "variant": "streamed",
+    "repeat": 4
+  },
+  {
+    "solver_s": 0.04551610583439469,
+    "api_s": 0.06511264899745584,
+    "reference_s": 0.004755788948386908,
+    "sample_s": 0.040760316886007786,
+    "download_s": 0.01711853500455618,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.040760316886007786,
+      "call_with_download_s": 0.057878851890563965,
+      "reference_prepare_s": 0.004755788948386908,
+      "gpu_event_s": {
+        "input": 0.00103331196308136,
+        "transmission": 0.0001547199934720993,
+        "sample_front": 2.764800004661083e-05,
+        "coarse_match": 0.008935423851013183,
+        "spline": 0.0025241599082946775,
+        "fine_match": 0.026435583114624024,
+        "DPC": 0.0002938880026340485,
+        "phase": 0.0012687360048294067
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 6.229011341929436e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": {
+      "utc": "2026-10-11T14:58:50Z",
+      "load": [
+        0.5458984375,
+        0.232421875,
+        0.212890625
+      ],
+      "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 49 %, 5709 MiB, 2370 MHz, 9501 MHz, 159.06 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.35 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.42 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 31.95 W",
+      "processes": "4129357, /home/yrc/vscodespace/anaconda3/bin/python3"
+    },
+    "variant": "original",
+    "repeat": 4
+  }
+]

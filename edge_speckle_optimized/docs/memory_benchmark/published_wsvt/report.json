@@ -1,0 +1,2071 @@
+{
+  "mode": "wsvt",
+  "shape": [
+    100,
+    2048,
+    2048
+  ],
+  "selected_chunk": 16,
+  "chunks_exploratory": [],
+  "warmup": 1,
+  "repeats": 5,
+  "summary": {
+    "original": {
+      "solver_s": {
+        "mean": 0.20023468490689994,
+        "sample_sd": 0.0013848143109669515
+      },
+      "api_s": {
+        "mean": 0.21770734302699565,
+        "sample_sd": 0.0016151918893797174
+      },
+      "reference_s": {
+        "mean": 0.07755249086767435,
+        "sample_sd": 0.000985298338169442
+      },
+      "sample_s": {
+        "mean": 0.12268219403922558,
+        "sample_sd": 0.0018760442839759635
+      },
+      "download_s": {
+        "mean": 0.01738608442246914,
+        "sample_sd": 0.0003356235337786081
+      },
+      "persistent_device_bytes": 6955128752,
+      "stages_s": {
+        "input": 0.05236245727539062,
+        "transmission": 0.00016033920049667358,
+        "sample_front": 0.024320000076293945,
+        "coarse_match": 0.009855615997314453,
+        "spline": 0.002383916807174683,
+        "fine_match": 0.03201767654418945,
+        "DPC": 0.0003275135934352875,
+        "phase": 0.001154252815246582
+      }
+    },
+    "copy_only": {
+      "solver_s": {
+        "mean": 0.20041484711691737,
+        "sample_sd": 0.0010281259821364164
+      },
+      "api_s": {
+        "mean": 0.20881338817998768,
+        "sample_sd": 0.0010690038217695376
+      },
+      "reference_s": {
+        "mean": 0.07710774932056666,
+        "sample_sd": 0.0004739119745697108
+      },
+      "sample_s": {
+        "mean": 0.12330709779635071,
+        "sample_sd": 0.0005622322829487262
+      },
+      "download_s": {
+        "mean": 0.00831801127642393,
+        "sample_sd": 5.305080195166531e-05
+      },
+      "persistent_device_bytes": 6955128752,
+      "stages_s": {
+        "input": 0.052543404388427736,
+        "transmission": 0.0001532287985086441,
+        "sample_front": 0.023810047912597655,
+        "coarse_match": 0.009774764823913575,
+        "spline": 0.0024242688179016113,
+        "fine_match": 0.03293143081665039,
+        "DPC": 0.000371916800737381,
+        "phase": 0.0012003328084945679
+      }
+    },
+    "streamed": {
+      "solver_s": {
+        "mean": 0.2058067752048373,
+        "sample_sd": 0.0024711291192132953
+      },
+      "api_s": {
+        "mean": 0.21419789008796214,
+        "sample_sd": 0.002495801965302123
+      },
+      "reference_s": {
+        "mean": 0.08161382749676704,
+        "sample_sd": 0.0012624003723754906
+      },
+      "sample_s": {
+        "mean": 0.12419294770807028,
+        "sample_sd": 0.0017999793069890038
+      },
+      "download_s": {
+        "mean": 0.008312237076461315,
+        "sample_sd": 6.312301315760662e-05
+      },
+      "persistent_device_bytes": 4571387824,
+      "stages_s": {
+        "input": 0.052054803466796876,
+        "transmission": 0.00015731199979782104,
+        "sample_front": 0.028769689559936522,
+        "coarse_match": 0.009779679870605469,
+        "spline": 0.0023508992195129396,
+        "fine_match": 0.02956371192932129,
+        "DPC": 0.0002932735979557037,
+        "phase": 0.0011243776082992553
+      }
+    }
+  },
+  "checks": {
+    "copy_only": {
+      "outputs": {
+        "displace_y": {
+          "exact": true,
+          "max_abs": 0.0,
+          "sha256": "884dcd96d9f4a493228b04b378e2e716c3ddcd2a93d52154175904c8151ee92b"
+        },
+        "displace_x": {
+          "exact": true,
+          "max_abs": 0.0,
+          "sha256": "20b811aa410105c37796256001e12eca1f1ee91cf976e9bf4320bb51e8c97119"
+        },
+        "DPC_y": {
+          "exact": true,
+          "max_abs": 0.0,
+          "sha256": "54f4ef25233d3ff6808f14f03635dd8637fc5d6c59aad7ce2ce7f3d560a64cb1"
+        },
+        "DPC_x": {
+          "exact": true,
+          "max_abs": 0.0,
+          "sha256": "1d0178051b178900f7c6702b86d39fce0093fb1656d4423660bba0b5d6de9cfa"
+        },
+        "phase": {
+          "exact": true,
+          "max_abs": 0.0,
+          "sha256": "ee5c516d4cbd1fa450081633482b2f18404ed2b72b48af238b301820eff54366"
+        },
+        "transmission": {
+          "exact": true,
+          "max_abs": 0.0,
+          "sha256": "721e11cb029f57732fd53d1dfdcba7f414c64d8af2a69987ca69c531bb9fcc01"
+        },
+        "match_score_neg_ssd": {
+          "exact": true,
+          "max_abs": 0.0,
+          "sha256": "7fe2fd3843ae578b82193e123f96eccbdad1ab403922701e98eace5b2b60aadc"
+        }
+      },
+      "features": {
+        "ref_fine": true,
+        "ref_coarse": true,
+        "sample_fine": true,
+        "sample_coarse": true
+      }
+    },
+    "streamed": {
+      "outputs": {
+        "displace_y": {
+          "exact": true,
+          "max_abs": 0.0,
+          "sha256": "884dcd96d9f4a493228b04b378e2e716c3ddcd2a93d52154175904c8151ee92b"
+        },
+        "displace_x": {
+          "exact": true,
+          "max_abs": 0.0,
+          "sha256": "20b811aa410105c37796256001e12eca1f1ee91cf976e9bf4320bb51e8c97119"
+        },
+        "DPC_y": {
+          "exact": true,
+          "max_abs": 0.0,
+          "sha256": "54f4ef25233d3ff6808f14f03635dd8637fc5d6c59aad7ce2ce7f3d560a64cb1"
+        },
+        "DPC_x": {
+          "exact": true,
+          "max_abs": 0.0,
+          "sha256": "1d0178051b178900f7c6702b86d39fce0093fb1656d4423660bba0b5d6de9cfa"
+        },
+        "phase": {
+          "exact": true,
+          "max_abs": 0.0,
+          "sha256": "ee5c516d4cbd1fa450081633482b2f18404ed2b72b48af238b301820eff54366"
+        },
+        "transmission": {
+          "exact": true,
+          "max_abs": 0.0,
+          "sha256": "721e11cb029f57732fd53d1dfdcba7f414c64d8af2a69987ca69c531bb9fcc01"
+        },
+        "match_score_neg_ssd": {
+          "exact": true,
+          "max_abs": 0.0,
+          "sha256": "7fe2fd3843ae578b82193e123f96eccbdad1ab403922701e98eace5b2b60aadc"
+        }
+      },
+      "features": {
+        "ref_fine": true,
+        "ref_coarse": true,
+        "sample_fine": true,
+        "sample_coarse": true
+      }
+    }
+  },
+  "records": [
+    {
+      "solver_s": 0.20045056520029902,
+      "api_s": 0.21769885998219252,
+      "reference_s": 0.07872688490897417,
+      "sample_s": 0.12172368029132485,
+      "download_s": 0.017164854798465967,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.12172368029132485,
+        "call_with_download_s": 0.13888853508979082,
+        "reference_prepare_s": 0.07872688490897417,
+        "gpu_event_s": {
+          "input": 0.052302143096923825,
+          "transmission": 0.00016921600699424744,
+          "sample_front": 0.025742336273193358,
+          "coarse_match": 0.010214400291442872,
+          "spline": 0.002540544033050537,
+          "fine_match": 0.029234304428100585,
+          "DPC": 0.0002938880026340485,
+          "phase": 0.0011192320585250856
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 4.791002720594406e-05,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:30Z",
+        "load": [
+          0.36474609375,
+          0.1787109375,
+          0.1953125
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 0 %, 18455 MiB, 2460 MHz, 9501 MHz, 71.68 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.45 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.62 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.01 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      },
+      "variant": "original",
+      "repeat": 0
+    },
+    {
+      "solver_s": 0.19863925641402602,
+      "api_s": 0.20695352321490645,
+      "reference_s": 0.07629181630909443,
+      "sample_s": 0.12234744010493159,
+      "download_s": 0.008233617059886456,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.12234744010493159,
+        "call_with_download_s": 0.13058105716481805,
+        "reference_prepare_s": 0.07629181630909443,
+        "gpu_event_s": {
+          "input": 0.05182291030883789,
+          "transmission": 0.00015491199493408204,
+          "sample_front": 0.02392064094543457,
+          "coarse_match": 0.009790464401245117,
+          "spline": 0.002558016061782837,
+          "fine_match": 0.03245363235473633,
+          "DPC": 0.0003624959886074066,
+          "phase": 0.0011898880004882813
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 4.7649722546339035e-05,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "numpy_output_copy": false,
+        "wsvt_workspace": "materialized",
+        "spatial_chunk": 16,
+        "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:30Z",
+        "load": [
+          0.36474609375,
+          0.1787109375,
+          0.1953125
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 0 %, 18455 MiB, 2460 MHz, 9501 MHz, 71.68 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.45 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.68 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.01 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      },
+      "variant": "copy_only",
+      "repeat": 0
+    },
+    {
+      "solver_s": 0.2092753523029387,
+      "api_s": 0.21775091858580709,
+      "reference_s": 0.08368188329041004,
+      "sample_s": 0.12559346901252866,
+      "download_s": 0.008389507420361042,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.12559346901252866,
+        "call_with_download_s": 0.1339829764328897,
+        "reference_prepare_s": 0.08368188329041004,
+        "gpu_event_s": {
+          "input": 0.052421985626220705,
+          "transmission": 0.0001674879938364029,
+          "sample_front": 0.03039232063293457,
+          "coarse_match": 0.009905152320861817,
+          "spline": 0.0024576001167297364,
+          "fine_match": 0.02876108741760254,
+          "DPC": 0.00028774398565292356,
+          "phase": 0.0011028480529785157
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 6.029009819030762e-05,
+        "persistent_device_bytes": 4571387824,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "numpy_output_copy": false,
+        "wsvt_workspace": "streamed",
+        "spatial_chunk": 16,
+        "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:30Z",
+        "load": [
+          0.36474609375,
+          0.1787109375,
+          0.1953125
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 9 %, 18455 MiB, 2745 MHz, 9501 MHz, 92.94 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.45 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.68 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.09 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      },
+      "variant": "streamed",
+      "repeat": 0
+    },
+    {
+      "solver_s": 0.20070790499448776,
+      "api_s": 0.2091127121821046,
+      "reference_s": 0.0773163354024291,
+      "sample_s": 0.12339156959205866,
+      "download_s": 0.0083254873752594,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.12339156959205866,
+        "call_with_download_s": 0.13171705696731806,
+        "reference_prepare_s": 0.0773163354024291,
+        "gpu_event_s": {
+          "input": 0.052829471588134766,
+          "transmission": 0.00015372799336910248,
+          "sample_front": 0.023771135330200196,
+          "coarse_match": 0.009729023933410644,
+          "spline": 0.0023296000957489012,
+          "fine_match": 0.0329431037902832,
+          "DPC": 0.00035635200142860414,
+          "phase": 0.0011806720495223999
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 4.3939799070358276e-05,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "numpy_output_copy": false,
+        "wsvt_workspace": "materialized",
+        "spatial_chunk": 16,
+        "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:31Z",
+        "load": [
+          0.36474609375,
+          0.1787109375,
+          0.1953125
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 9 %, 18455 MiB, 2535 MHz, 9501 MHz, 119.07 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.67 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.68 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.09 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      },
+      "variant": "copy_only",
+      "repeat": 1
+    },
+    {
+      "solver_s": 0.2044721134006977,
+      "api_s": 0.21283467998728156,
+      "reference_s": 0.08141913311555982,
+      "sample_s": 0.12305298028513789,
+      "download_s": 0.008281206712126732,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.12305298028513789,
+        "call_with_download_s": 0.13133418699726462,
+        "reference_prepare_s": 0.08141913311555982,
+        "gpu_event_s": {
+          "input": 0.052322944641113284,
+          "transmission": 0.00015331199765205382,
+          "sample_front": 0.02835558319091797,
+          "coarse_match": 0.009736191749572755,
+          "spline": 0.002284543991088867,
+          "fine_match": 0.028735551834106445,
+          "DPC": 0.00027340799570083616,
+          "phase": 0.0010886399745941163
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 4.2640138417482376e-05,
+        "persistent_device_bytes": 4571387824,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "numpy_output_copy": false,
+        "wsvt_workspace": "streamed",
+        "spatial_chunk": 16,
+        "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:31Z",
+        "load": [
+          0.36474609375,
+          0.1787109375,
+          0.1953125
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 9 %, 18455 MiB, 2535 MHz, 9501 MHz, 119.07 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.61 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.68 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.09 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      },
+      "variant": "streamed",
+      "repeat": 1
+    },
+    {
+      "solver_s": 0.2023845538496971,
+      "api_s": 0.22037344798445702,
+      "reference_s": 0.07724248478189111,
+      "sample_s": 0.125142069067806,
+      "download_s": 0.017901863902807236,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.125142069067806,
+        "call_with_download_s": 0.14304393297061324,
+        "reference_prepare_s": 0.07724248478189111,
+        "gpu_event_s": {
+          "input": 0.052865089416503905,
+          "transmission": 0.00015324799716472627,
+          "sample_front": 0.023790592193603514,
+          "coarse_match": 0.009735199928283691,
+          "spline": 0.002284543991088867,
+          "fine_match": 0.034661376953125,
+          "DPC": 0.0003624959886074066,
+          "phase": 0.0011929600238800048
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 4.671001806855202e-05,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:31Z",
+        "load": [
+          0.36474609375,
+          0.1787109375,
+          0.1953125
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 44 %, 18455 MiB, 2745 MHz, 9501 MHz, 159.88 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.61 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.63 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.09 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      },
+      "variant": "original",
+      "repeat": 1
+    },
+    {
+      "solver_s": 0.20712628308683634,
+      "api_s": 0.21543344017118216,
+      "reference_s": 0.08058893401175737,
+      "sample_s": 0.12653734907507896,
+      "download_s": 0.008229476865381002,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.12653734907507896,
+        "call_with_download_s": 0.13476682594045997,
+        "reference_prepare_s": 0.08058893401175737,
+        "gpu_event_s": {
+          "input": 0.05144812774658203,
+          "transmission": 0.0001610880047082901,
+          "sample_front": 0.02836070442199707,
+          "coarse_match": 0.00975171184539795,
+          "spline": 0.0023859200477600096,
+          "fine_match": 0.03273625564575195,
+          "DPC": 0.00035225600004196167,
+          "phase": 0.0012410880327224732
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 4.254002124071121e-05,
+        "persistent_device_bytes": 4571387824,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "numpy_output_copy": false,
+        "wsvt_workspace": "streamed",
+        "spatial_chunk": 16,
+        "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:31Z",
+        "load": [
+          0.36474609375,
+          0.1787109375,
+          0.1953125
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 44 %, 18455 MiB, 2505 MHz, 9501 MHz, 171.75 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.47 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.63 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.04 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      },
+      "variant": "streamed",
+      "repeat": 2
+    },
+    {
+      "solver_s": 0.19857918471097946,
+      "api_s": 0.21608186978846788,
+      "reference_s": 0.07845496479421854,
+      "sample_s": 0.12012421991676092,
+      "download_s": 0.017407785169780254,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.12012421991676092,
+        "call_with_download_s": 0.13753200508654118,
+        "reference_prepare_s": 0.07845496479421854,
+        "gpu_event_s": {
+          "input": 0.05243695831298828,
+          "transmission": 0.00016713599860668183,
+          "sample_front": 0.0245032958984375,
+          "coarse_match": 0.009837568283081055,
+          "spline": 0.002528480052947998,
+          "fine_match": 0.029149183273315428,
+          "DPC": 0.00029183998703956603,
+          "phase": 0.0011100159883499145
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 4.765018820762634e-05,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:32Z",
+        "load": [
+          0.36474609375,
+          0.1787109375,
+          0.1953125
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 44 %, 18455 MiB, 2505 MHz, 9501 MHz, 171.75 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.47 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.63 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.04 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      },
+      "variant": "original",
+      "repeat": 2
+    },
+    {
+      "solver_s": 0.2008066545240581,
+      "api_s": 0.20924948202446103,
+      "reference_s": 0.07718632463365793,
+      "sample_s": 0.12362032989040017,
+      "download_s": 0.00835294695571065,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.12362032989040017,
+        "call_with_download_s": 0.13197327684611082,
+        "reference_prepare_s": 0.07718632463365793,
+        "gpu_event_s": {
+          "input": 0.052842750549316406,
+          "transmission": 0.00015356799960136413,
+          "sample_front": 0.023774208068847655,
+          "coarse_match": 0.009860095977783203,
+          "spline": 0.0025735039710998537,
+          "fine_match": 0.03277414321899414,
+          "DPC": 0.0003604480028152466,
+          "phase": 0.0011857919692993164
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 4.5389868319034576e-05,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "numpy_output_copy": false,
+        "wsvt_workspace": "materialized",
+        "spatial_chunk": 16,
+        "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:32Z",
+        "load": [
+          0.36474609375,
+          0.1787109375,
+          0.1953125
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 68 %, 18455 MiB, 2610 MHz, 9501 MHz, 162.00 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.47 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.58 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 31.99 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      },
+      "variant": "copy_only",
+      "repeat": 2
+    },
+    {
+      "solver_s": 0.19994809571653605,
+      "api_s": 0.2174672787077725,
+      "reference_s": 0.07679670490324497,
+      "sample_s": 0.12315139081329107,
+      "download_s": 0.017434264067560434,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.12315139081329107,
+        "call_with_download_s": 0.1405856548808515,
+        "reference_prepare_s": 0.07679670490324497,
+        "gpu_event_s": {
+          "input": 0.05239936065673828,
+          "transmission": 0.00015740799903869629,
+          "sample_front": 0.023775232315063476,
+          "coarse_match": 0.009742431640625,
+          "spline": 0.0022824959754943848,
+          "fine_match": 0.03321158218383789,
+          "DPC": 0.0003299199938774109,
+          "phase": 0.0011581439971923829
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 4.599010571837425e-05,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:32Z",
+        "load": [
+          0.36474609375,
+          0.1787109375,
+          0.1953125
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 68 %, 18455 MiB, 2610 MHz, 9501 MHz, 162.00 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.35 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.59 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.02 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      },
+      "variant": "original",
+      "repeat": 3
+    },
+    {
+      "solver_s": 0.20061292545869946,
+      "api_s": 0.20905937161296606,
+      "reference_s": 0.07722526509314775,
+      "sample_s": 0.12338766036555171,
+      "download_s": 0.008370446972548962,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.12338766036555171,
+        "call_with_download_s": 0.13175810733810067,
+        "reference_prepare_s": 0.07722526509314775,
+        "gpu_event_s": {
+          "input": 0.05273302459716797,
+          "transmission": 0.0001504960060119629,
+          "sample_front": 0.023786495208740235,
+          "coarse_match": 0.009742655754089356,
+          "spline": 0.0022906880378723146,
+          "fine_match": 0.03303833770751953,
+          "DPC": 0.0003614720106124878,
+          "phase": 0.0011878399848937989
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 4.2140018194913864e-05,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "numpy_output_copy": false,
+        "wsvt_workspace": "materialized",
+        "spatial_chunk": 16,
+        "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:33Z",
+        "load": [
+          0.36474609375,
+          0.1787109375,
+          0.1953125
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 68 %, 18455 MiB, 2745 MHz, 9501 MHz, 168.08 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.35 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.59 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.02 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      },
+      "variant": "copy_only",
+      "repeat": 3
+    },
+    {
+      "solver_s": 0.2028739540837705,
+      "api_s": 0.21125220181420445,
+      "reference_s": 0.08061972400173545,
+      "sample_s": 0.12225423008203506,
+      "download_s": 0.008303217589855194,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.12225423008203506,
+        "call_with_download_s": 0.13055744767189026,
+        "reference_prepare_s": 0.08061972400173545,
+        "gpu_event_s": {
+          "input": 0.05145248031616211,
+          "transmission": 0.0001505279988050461,
+          "sample_front": 0.028366847991943358,
+          "coarse_match": 0.009751551628112793,
+          "spline": 0.002284543991088867,
+          "fine_match": 0.0287825927734375,
+          "DPC": 0.0002744320034980774,
+          "phase": 0.0010915839672088624
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 4.1519757360219955e-05,
+        "persistent_device_bytes": 4571387824,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "numpy_output_copy": false,
+        "wsvt_workspace": "streamed",
+        "spatial_chunk": 16,
+        "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:33Z",
+        "load": [
+          0.416015625,
+          0.1923828125,
+          0.19970703125
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 74 %, 18455 MiB, 2745 MHz, 9501 MHz, 160.46 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.35 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.63 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.02 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      },
+      "variant": "streamed",
+      "repeat": 3
+    },
+    {
+      "solver_s": 0.2013074941933155,
+      "api_s": 0.2096918518655002,
+      "reference_s": 0.07751900516450405,
+      "sample_s": 0.12378848902881145,
+      "download_s": 0.00830755801871419,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.12378848902881145,
+        "call_with_download_s": 0.13209604704752564,
+        "reference_prepare_s": 0.07751900516450405,
+        "gpu_event_s": {
+          "input": 0.05248886489868164,
+          "transmission": 0.00015343999862670897,
+          "sample_front": 0.023797760009765623,
+          "coarse_match": 0.00975158405303955,
+          "spline": 0.0023695359230041504,
+          "fine_match": 0.03344793701171875,
+          "DPC": 0.0004188160002231598,
+          "phase": 0.001257472038269043
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 4.1919760406017303e-05,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "numpy_output_copy": false,
+        "wsvt_workspace": "materialized",
+        "spatial_chunk": 16,
+        "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:33Z",
+        "load": [
+          0.416015625,
+          0.1923828125,
+          0.19970703125
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 74 %, 18455 MiB, 2745 MHz, 9501 MHz, 160.46 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.37 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.63 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.13 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      },
+      "variant": "copy_only",
+      "repeat": 4
+    },
+    {
+      "solver_s": 0.20528617314994335,
+      "api_s": 0.2137182098813355,
+      "reference_s": 0.08175946306437254,
+      "sample_s": 0.12352671008557081,
+      "download_s": 0.008357776794582605,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.12352671008557081,
+        "call_with_download_s": 0.13188448688015342,
+        "reference_prepare_s": 0.08175946306437254,
+        "gpu_event_s": {
+          "input": 0.05262847900390625,
+          "transmission": 0.00015414400398731232,
+          "sample_front": 0.02837299156188965,
+          "coarse_match": 0.009753791809082032,
+          "spline": 0.002341887950897217,
+          "fine_match": 0.028803071975708007,
+          "DPC": 0.00027852800488471985,
+          "phase": 0.0010977280139923096
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 4.292000085115433e-05,
+        "persistent_device_bytes": 4571387824,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "numpy_output_copy": false,
+        "wsvt_workspace": "streamed",
+        "spatial_chunk": 16,
+        "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:34Z",
+        "load": [
+          0.416015625,
+          0.1923828125,
+          0.19970703125
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 74 %, 18455 MiB, 2745 MHz, 9501 MHz, 163.62 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.37 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.63 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.13 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      },
+      "variant": "streamed",
+      "repeat": 4
+    },
+    {
+      "solver_s": 0.199811025056988,
+      "api_s": 0.21691525867208838,
+      "reference_s": 0.07654141495004296,
+      "sample_s": 0.12326961010694504,
+      "download_s": 0.017021654173731804,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.12326961010694504,
+        "call_with_download_s": 0.14029126428067684,
+        "reference_prepare_s": 0.07654141495004296,
+        "gpu_event_s": {
+          "input": 0.05180873489379883,
+          "transmission": 0.0001546880006790161,
+          "sample_front": 0.023788543701171876,
+          "coarse_match": 0.00974847984313965,
+          "spline": 0.002283519983291626,
+          "fine_match": 0.03383193588256836,
+          "DPC": 0.00035942399501800537,
+          "phase": 0.0011909120082855224
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 4.621036350727081e-05,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:34Z",
+        "load": [
+          0.416015625,
+          0.1923828125,
+          0.19970703125
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 86 %, 18455 MiB, 2685 MHz, 9501 MHz, 183.31 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.37 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.66 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.13 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      },
+      "variant": "original",
+      "repeat": 4
+    }
+  ],
+  "warmup_records": {
+    "original": {
+      "solver_s": 0.22462649689987302,
+      "api_s": 0.3021578621119261,
+      "reference_s": 0.08590046223253012,
+      "sample_s": 0.1387260346673429,
+      "download_s": 0.07742898492142558,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.1387260346673429,
+        "call_with_download_s": 0.21615501958876848,
+        "reference_prepare_s": 0.08590046223253012,
+        "gpu_event_s": {
+          "input": 0.05279865646362305,
+          "transmission": 0.0002250239998102188,
+          "sample_front": 0.024187904357910156,
+          "coarse_match": 0.009704447746276856,
+          "spline": 0.002333695888519287,
+          "fine_match": 0.03447296142578125,
+          "DPC": 0.00035225600004196167,
+          "phase": 0.014498815536499024
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 0.00011409958824515343,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:16Z",
+        "load": [
+          0.18310546875,
+          0.1357421875,
+          0.18212890625
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 0 %, 18103 MiB, 210 MHz, 405 MHz, 35.49 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.48 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.65 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.23 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      }
+    },
+    "copy_only": {
+      "solver_s": 0.20625238306820393,
+      "api_s": 0.26291447412222624,
+      "reference_s": 0.08320452319458127,
+      "sample_s": 0.12304785987362266,
+      "download_s": 0.05656882096081972,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.12304785987362266,
+        "call_with_download_s": 0.17961668083444238,
+        "reference_prepare_s": 0.08320452319458127,
+        "gpu_event_s": {
+          "input": 0.0526321907043457,
+          "transmission": 0.00020611199736595152,
+          "sample_front": 0.023759872436523437,
+          "coarse_match": 0.009714688301086426,
+          "spline": 0.0023398399353027344,
+          "fine_match": 0.032718849182128903,
+          "DPC": 0.00036556801199913024,
+          "phase": 0.0011888639926910401
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 9.350012987852097e-05,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "numpy_output_copy": false,
+        "wsvt_workspace": "materialized",
+        "spatial_chunk": 16,
+        "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:17Z",
+        "load": [
+          0.18310546875,
+          0.1357421875,
+          0.18212890625
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 0 %, 18203 MiB, 2460 MHz, 9501 MHz, 42.59 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.59 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.66 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.23 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      }
+    },
+    "streamed": {
+      "solver_s": 0.2108281720429659,
+      "api_s": 0.27400347124785185,
+      "reference_s": 0.08497311314567924,
+      "sample_s": 0.12585505889728665,
+      "download_s": 0.06309347925707698,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 0.12585505889728665,
+        "call_with_download_s": 0.18894853815436363,
+        "reference_prepare_s": 0.08497311314567924,
+        "gpu_event_s": {
+          "input": 0.052682559967041014,
+          "transmission": 0.0001664000004529953,
+          "sample_front": 0.030870527267456056,
+          "coarse_match": 0.00971059226989746,
+          "spline": 0.002303999900817871,
+          "fine_match": 0.028641599655151367,
+          "DPC": 0.0002746559977531433,
+          "phase": 0.0010824960470199585
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 4.542013630270958e-05,
+        "persistent_device_bytes": 4571387824,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "numpy_output_copy": false,
+        "wsvt_workspace": "streamed",
+        "spatial_chunk": 16,
+        "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": {
+        "utc": "2026-10-11T14:58:17Z",
+        "load": [
+          0.18310546875,
+          0.1357421875,
+          0.18212890625
+        ],
+        "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 15 %, 18203 MiB, 2700 MHz, 9501 MHz, 68.25 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.59 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.66 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.27 W",
+        "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+      }
+    }
+  },
+  "input_manifest": [
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00001.tif",
+      "sha256": "b269ed5982d60339f61d46a6d8c9b4aec35a5ec433234989e908b6d1bf67003d",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00002.tif",
+      "sha256": "07487eaa995b6f7140763cd87e4623ebd677c2b4e8609b16ddcc38f6efedd2a1",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00003.tif",
+      "sha256": "93265486f18bc527d0d79e6d65f411cdbf19a8f5e74f6f2f67560945d995c2b0",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00004.tif",
+      "sha256": "fec630fc8b6be6f227a630a87338bb745ae9e8d39de6a21a41f417a524137f30",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00005.tif",
+      "sha256": "8581f8f96aa20352ae11a8bfcb7beaff79b6fe3b15dfbd01dfb688060cbb2b91",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00006.tif",
+      "sha256": "9de773980fea68ad1b03172ad33e5b468aea3b64bc5a6c530ec6c02709677f6a",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00007.tif",
+      "sha256": "af56ef01818d4abb274d2bb5a9f2ff6452c854ed60abfbad67fd95965388ec58",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00008.tif",
+      "sha256": "72b2918817bf8d90910b4452347eb2e6e4dae29b755db582b7fcf93f9ae34845",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00009.tif",
+      "sha256": "929811eb3ec5591622dd3b145bf342b6a316af721be907818253a60311e3d6ec",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00010.tif",
+      "sha256": "7aa4cdfd81f57df2fd0f43afdc6785f9411496beac27e5f8f9d89318df378d45",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00011.tif",
+      "sha256": "f507373de02e450672c2e395f190d952494bab9baedd371ad3ab14bc6863829a",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00012.tif",
+      "sha256": "620650943e9008df5d7511e36d74fc689e65043317d0310c7b8ed6a6075b07c6",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00013.tif",
+      "sha256": "e192e2986c6158be64e5cb19ede8efcd6f810f8a08002d8f028fb02a58cf3210",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00014.tif",
+      "sha256": "7ba6578f792b6b308f2534abfdd470ff2603efbe600862277545aa0a02e206d9",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00015.tif",
+      "sha256": "51dc60da6003a39f8beb5623de03fe6eb588460a3efa0593c9a3a563bdc15f49",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00016.tif",
+      "sha256": "fa67dae9c67c3afff45bfe923efce6c55ad598757450e9839edf1617a641506c",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00017.tif",
+      "sha256": "e847661e7326f0377560eb781b3f959fc519cbbb720bd63390db04f9e058f10e",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00018.tif",
+      "sha256": "6056449c3e738407a34b26c25113401321269ca4832b56af9dfa2e202aedf7bc",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00019.tif",
+      "sha256": "a2aea320e358455bfddccddfed74245284571246fed458115d5fbb86e2e12e6e",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00020.tif",
+      "sha256": "d61c38ed9f4f272e4673d3a9a9044ee95abfdbf40ab36b344ff89b8c982ab5a1",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00021.tif",
+      "sha256": "7b723f6a349a5f498aa1132e48d98141547c44d35ca6f5d8a10ccf04dbb6dfdb",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00022.tif",
+      "sha256": "068ec35a04a77a1d01a220f50eb03b735193834ddd854e719573b916dfaec8a4",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00023.tif",
+      "sha256": "d1f3b1ccdc8679034ab4be6604d4fda23a3064f37bc4bf536c87b105f521b9c2",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00024.tif",
+      "sha256": "09bdf720df34d3e8ca0b784d45f96108ce3d52109c939d1ff3ae5eecbf21bd65",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00025.tif",
+      "sha256": "78a420defd1141dcd9934732d78304667cf09a37f4a32af72dc5a68357eeffe8",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00026.tif",
+      "sha256": "e3b06bfc3d2d996d033507ab5707120240eb9de8ed29c073d748ca26022dea38",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00027.tif",
+      "sha256": "de060c376304e1d4b08ab93de755819d3485a8e18cc72a858be52820612ff004",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00028.tif",
+      "sha256": "f9a9765940536e5767e95f6871f84463c91539a263bc9d791ab661bbd6fbfcbd",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00029.tif",
+      "sha256": "36a8b7c8ef1f728ba753e8682ac04c5dc98fda1925101eb5d96f040d2309ed53",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00030.tif",
+      "sha256": "8a18fa3e180d4791b6cfc3fa6a7a852ab02ebf2da840a230de705954665e9ef8",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00031.tif",
+      "sha256": "b428164a34c7ec48b8d4ebd9f89764e325a87f2135d6a316668929f6caebd241",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00032.tif",
+      "sha256": "fb21fa6e6fa73521b609e990c05ed1cf2e78eb87fd52984ae7dd1de8bcc328b9",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00033.tif",
+      "sha256": "bec7547423ce9f038f1df40dc9971d707eb45f768403e3bb8f812753612e7340",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00034.tif",
+      "sha256": "eec29b894413adfda43b8579ec7fee538ff7e1d17aa1cd91ccb349a8392789e0",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00035.tif",
+      "sha256": "9696fc770156ad499b4258ff9b7b538813fe1b30e241e9a21ad842dad8c8c693",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00036.tif",
+      "sha256": "04bf2d75a15b9db2715e9d4c70476ed3540af45048a4ddfa94af866e8855b9b7",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00037.tif",
+      "sha256": "75a77a09440bb54676f4bfc25d70517d2c62f060e21cf21868cdd7f999095c20",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00038.tif",
+      "sha256": "12a4af11159fc5336c9c3c7cbc3a1143d139e19267a7bdea9f9eee0c35357472",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00039.tif",
+      "sha256": "ffec4f05b4f45512eb7f8b42802d6b6ea51bd6b3715e935332c29cf7e2327420",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00040.tif",
+      "sha256": "4637b768531d53394210f44ea73baf9937e0cb106a44c1be9e55047d68ad3a7a",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00041.tif",
+      "sha256": "2afa11650f0ec7f3cb5a94201ba8e53bf4740374e21ca9bbdded6f9546ce5398",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00042.tif",
+      "sha256": "b53c64930dfe73bfc02520b4094e8d51173e9a6cbd7f8173900ef31a77fccef7",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00043.tif",
+      "sha256": "9dfc9160f7205dc2a2d7b930314ee55fa39fe7740c7ccbff24ba4621a4aa0705",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00044.tif",
+      "sha256": "78ff742f2df95a557c9db02621a68822d3a067d6cd4129f7732300d85428ea12",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00045.tif",
+      "sha256": "337b79781e66815c1c2ad1cf4dd4b2bcc2afceef5d219b49698dec484c85d0f7",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00046.tif",
+      "sha256": "7688a402270310aed255f83eb519efc4902ff5f5be7c498c406cccd4383c16ef",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00047.tif",
+      "sha256": "ac34ef548f749dc4c076b4894161989d7fbef2d43ffa1ef3e1379b6e422e1091",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00048.tif",
+      "sha256": "e3a965d0090a39a57afd5e17fecdb57a1f8906192c7f060eefbe52c2e830d9f7",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00049.tif",
+      "sha256": "6280bc6c26d7e5099e89dce5e98d1a73d6ad9014f47c9e256eec9a141ecbb54e",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00050.tif",
+      "sha256": "f7dc6d19c971ee6fb3b43f9b0360547f3afd5500aeebecbd9344a2889b38eb64",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00051.tif",
+      "sha256": "8738b65caf188b43e91427747fe3caab07b8ae064ab929cb7ce9581c8602f3a7",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00052.tif",
+      "sha256": "bf19de1cb73916290975e9b191ee731b8003bb6d39eef3875cce0f5334a332a3",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00053.tif",
+      "sha256": "1d251217d64b5b1d65ace6504d1e8a3a90df8de4534d58ebf1cb1e1b0cb5f86c",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00054.tif",
+      "sha256": "a081a96266847713b82091571766f0364c728621d92fe9dbcb61078e20341cdb",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00055.tif",
+      "sha256": "9650ccdfd9723465b9ed35aadcc69352fbba104bcefb96157c773e1b4c807fed",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00056.tif",
+      "sha256": "8b16128f0cf284307bac0bf898fdd63934e9c612ac73b793a793a2e9f1b8fe25",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00057.tif",
+      "sha256": "85073ddafd5cae377d9828123b05b43bf1e0591a3b14579f9a381277e185158e",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00058.tif",
+      "sha256": "4654b4b3b3a9e14c77b019f0bd598d0c1840157875bc62af243ccd68e76fc787",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00059.tif",
+      "sha256": "e78d71c95a81c49107f5950ae9acf79c295ca5bb4715841aaf89a8a05849d847",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00060.tif",
+      "sha256": "a3cb7ac2b0efbc7b42cb6cc2ac53b2491e61360174827193f4d7c56d3ccebef6",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00061.tif",
+      "sha256": "b53aec6ff2bef08b99c58f42a92d9fe13bf683e2f07230965fe16ce0b909b642",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00062.tif",
+      "sha256": "003caca5ec047191427589910b2046a3dfcd2a4d971353e75fd936051ab1f002",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00063.tif",
+      "sha256": "5d9fe780a81f93c727e7acc950857a130d2c55e87d993b7f057f100f6098b8a9",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00064.tif",
+      "sha256": "d4d0d733f0d0b970b1f740a26260593c3719161abaeb4fe6773ece1543d1a519",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00065.tif",
+      "sha256": "679ec3502f6750dd91141c7561c985ba433c282d8b5a9bfd42dd40076606ca0f",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00066.tif",
+      "sha256": "13c53a710ca22602378758c9cb5426fe53cf2fa3f6b6273bb32af46148c837d0",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00067.tif",
+      "sha256": "ea43167928eeaaec43dce312e7fac904c26158713c0ab6acad85828b796a3e46",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00068.tif",
+      "sha256": "08dfd212f5ad4fde3bee975f2dd98c72343cf16d8653c72751e4214cca77f1c4",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00069.tif",
+      "sha256": "66fd934c268c153267883db26a5ac7b262eb7871316f624c1e6d3421d623ff6d",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00070.tif",
+      "sha256": "987a1287d0402b90b4e93a6bebeb09a6833f60038513d35edc788ed8b6f841c8",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00071.tif",
+      "sha256": "0524b57911c35b25f2c5ab2bd1b58f0eb126059e55ad2010c06e1085f33341b9",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00072.tif",
+      "sha256": "2abed5b06e008c7e864eedd3b60bfefe8b2c5dfbf0341791bfbe74e08e5b3363",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00073.tif",
+      "sha256": "3574f713eff468fe8b7fbc9eddc54a752f76257f6e1123f172b2b00cdf71852d",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00074.tif",
+      "sha256": "5d45fc1d831c6031827535e406ea357c062c405bfc87c83fd5ba29f6d3c431ed",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00075.tif",
+      "sha256": "be3b7d07e5ce56431ba00e5d65d503b1532bf5e292fd576b4e335f7d1ce23623",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00076.tif",
+      "sha256": "b14013f856c99f6ea0e92d7f0bed92c8a4160db1bdb2189fbcfef4f623a095e1",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00077.tif",
+      "sha256": "f2a47bfee00da07be1a1eadf776cb1d41edca4c6c2667be61289665148418d64",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00078.tif",
+      "sha256": "abcf7573be12e2b0a36c01f1d564699656d6b2c3ebbfcfc00245da7cb6dbf442",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00079.tif",
+      "sha256": "15ad2929a685dcea3dac244e0ceae9a85aabd6653108dea86c77379e0fe870e4",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00080.tif",
+      "sha256": "b712424650bc9fbc05fa2000b3e535ca15905619a12b7bd871006b654116e33b",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00081.tif",
+      "sha256": "84ea5ff91309465da375898eef158b53fbac7e9ac76934350558859e4be88dbe",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00082.tif",
+      "sha256": "c0f4815327d45c920b5959f9dc5c6ddb668f98499ade75793174a97996c52809",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00083.tif",
+      "sha256": "ff5f1993c20448556a0f96a2e572a0e63c0d12d9c7b4a6747baf0bb62f5cd1aa",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00084.tif",
+      "sha256": "533d671a858b69b9e82ace77870d899d4f07436048fea979eb34142756a8e48c",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00085.tif",
+      "sha256": "e9619709218a7614047dbd7d1bec53f90e6814afaa9babf2230678abce6fcc5b",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00086.tif",
+      "sha256": "488e527924eb7320a6d2d4360eff98b57c160a72573e5485052a000ad7fc6f4f",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00087.tif",
+      "sha256": "47416cf7821dbe88d197a588cd0c9ee1ec39f48aa9621ac282dcd2f3fbbd8707",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00088.tif",
+      "sha256": "e1e824db16ad2b4c325baf1bc4acde96f96a9ac4b8a5968c263bf0864d995173",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00089.tif",
+      "sha256": "d2091e8e0c26c2584b971f054ef752951a7e3d9d43505656661df81caf161d7c",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00090.tif",
+      "sha256": "bd50907c055fb79a5ab85f95c13e7039c0bc67564eb4f5e41947e9e1857856f9",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00091.tif",
+      "sha256": "4025f8cdc0984069ab69474a1a64bd69c56341837992cdf5a1fc5e2c3f67032b",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00092.tif",
+      "sha256": "947b25d2c6d71f9fed2a12e160c24d608ae597a849e427d84287d0b454e1b980",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00093.tif",
+      "sha256": "e251fb78ceb7945fd6fd41d520292f6f1d0d4fc4e19ee87baa051e8400b3ab28",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00094.tif",
+      "sha256": "b16dd6f81fa628408cc50b7b16c92cba92bf94350ebf1cae5a5fd7d834c7c1cb",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00095.tif",
+      "sha256": "43029e5879c4437a51ab92360ca0736fb77752e7e1cc8102f9b390534b022251",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00096.tif",
+      "sha256": "c9b1f8b31fe9b27f73740d97b7b14a4f1caa06c08503d4976e90a62fcdfb5f75",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00097.tif",
+      "sha256": "18e9060e0b7d8d335605f48553e3d702bea1177c165c2a747cd5a7133b185ea0",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00098.tif",
+      "sha256": "9a4fbfaef670621645dc88b43696f7e93d3be1a1974a52c432481482026f683d",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00099.tif",
+      "sha256": "0466f713662a953dc51224208fdca8312e973fc07a01e44e5c3d5af272e58b79",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/sample_1_00100.tif",
+      "sha256": "c475ac2f6c6da634c3173f460f9256fbd05693dcb112040c64b2b5ae92a97382",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00001.tif",
+      "sha256": "c317963e02fd94ef43d9967354f10739a69377fdb9b661a2e0a7b2b0aa6c1bd0",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00002.tif",
+      "sha256": "c7a5bb1e7ed77a09305b730bcbb4bd21203598514d764c298835341a350a13f2",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00003.tif",
+      "sha256": "7b17d8647efe9f4f6f1dc17b2d1cd3de05f094877816cb20e9af7e647340ae75",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00004.tif",
+      "sha256": "da886406766eb66a81435899710b09662965f6217d5fc768947a099f80ce26d6",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00005.tif",
+      "sha256": "5e0594506ffa4011a593af9c2f4d9dd4c786363ad4445a1f54cf08bd2caeb5a8",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00006.tif",
+      "sha256": "625d4db4e08385cc7d36c48e6b20c0223fa3884f54a257249dd38f7696957888",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00007.tif",
+      "sha256": "dd3045eaae4c6a26f53e49807487372d55cf87cbddeeccea00cc69345b73f112",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00008.tif",
+      "sha256": "2435df54fba09282b80dd447436273d3542452c5c323ed71a919d119f2d8a3e4",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00009.tif",
+      "sha256": "f22675521ac5b45dff0b371b0ffef631b07795f94dfe6463bb89c4afb34fcad6",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00010.tif",
+      "sha256": "085a6a9b095f9f2549702433522db966bbf3b01666904a28631988d0f53e4125",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00011.tif",
+      "sha256": "0185659dd41f10ba1ca940a5ce2598bfc885c3890913cd4b13e80eebfe13cd42",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00012.tif",
+      "sha256": "fd7910dcf5c9546f519a2fa7ddb976965ad7fa9de97e5e132266d7387f0874ed",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00013.tif",
+      "sha256": "228b8657ce30852c035d494a82819e23427a4641759bd9e2b29cc8063ba2a8e3",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00014.tif",
+      "sha256": "809026deff01fcdcedc973c245a39bde93be404cb253e047c26ba86302fe1d66",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00015.tif",
+      "sha256": "3ccfb0fac74778b7aaded4edaa6e2d19a003c91e576070d1105621ec7d185cc9",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00016.tif",
+      "sha256": "06027352a7777ebcde519c772c5bf44ecb34a10f35ed263b52a9a4f621cc8593",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00017.tif",
+      "sha256": "7b4dcf482c65031392609275448243405bf93071ea55bfbdb7b8055dd159f9d7",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00018.tif",
+      "sha256": "c9764668a3855c6760bd2720cc7c36bbafdec91f0929eed640703208e39de239",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00019.tif",
+      "sha256": "aa2c301a0b9ea5299fa61a90d2e868f1e8956ab43d637b170fbf004fe139a485",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00020.tif",
+      "sha256": "d4bc0e8a0ed05ed79c4eedf8333d87c2a8a87b664320c93f6181700113909180",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00021.tif",
+      "sha256": "85984eac2db59fba4757d09d59083f142b2fa5e1b173e2a2d6e756618efeba1b",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00022.tif",
+      "sha256": "be7df5c5aaceff44cd74d434b82174ecb4774acc287a7a4898908eff32730473",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00023.tif",
+      "sha256": "30e41ef0ec70e3b7c910ca72a4067d14c407e7019507c99a78f98cd32aca5df1",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00024.tif",
+      "sha256": "b2a19b29f8084dc64dbe8f1178809bc60cb7859376a372530a701dc02a2bbde0",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00025.tif",
+      "sha256": "3f5d2ab024a22af879d65e8a03598fb50041a6747632781ba82a1086cf777b95",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00026.tif",
+      "sha256": "5ae40714889aa0caf20b859f5c716be05af7d8ba1cff3413d89c92d06d5cef4d",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00027.tif",
+      "sha256": "b991db8589898eb9065398c8a45505db20b7d9aa7d12e48bdfbe4f00fc669c2f",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00028.tif",
+      "sha256": "7ebc5632b442737c198b9557919e3d426826c2deb58b6e6967af86e440bc5173",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00029.tif",
+      "sha256": "5ae3fd8f8ce5db01601e39a54053c261426129f18517341558fb946621b16173",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00030.tif",
+      "sha256": "9c1bdce701b68ee9de3d11a07d93972751cdc92ddbbccdc5b39c3da508367a0f",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00031.tif",
+      "sha256": "dd5e5a167b7dcc8c2c277bb44cd1a5b90b98badc0a6cbab87a86a1bc76a81219",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00032.tif",
+      "sha256": "498d275e6d96c130ae127f6e069a71fe4590019579a387f281a54f04153375c9",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00033.tif",
+      "sha256": "544e925491532be6b7eb525eb45d1204ab2c8b947275901daf91259b501684d5",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00034.tif",
+      "sha256": "47a8b832340745a54e047ffad656debb9aa7f95a3b43338f8e6ad1d2d432661d",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00035.tif",
+      "sha256": "fa0f63b9cdc6ed60170c8cad8e0ccbf074f4aea41da8980425623916cee11f12",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00036.tif",
+      "sha256": "88db0cf78ca4bad4e0ef1c144c2703ec5efa3e398ddd77243900fbbabc2cf997",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00037.tif",
+      "sha256": "b5a923378033c6f78133ea129f22bf5b5e097a6092c346e3b1f925eb8ff2a98d",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00038.tif",
+      "sha256": "9da10af4405f2301d9f58b6e7d588c7e18440513f0c3267afbded1aa5ef169ff",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00039.tif",
+      "sha256": "c8dc162273fb2b65a32f90ee85a259d54d943eef5a9105af0719d2f87663d32e",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00040.tif",
+      "sha256": "7d005faed83517bcc66d0806ab31c0410832ae9e2a66d2be669aeac93c2f52ef",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00041.tif",
+      "sha256": "276989b6b2e63316f2980060e573fc8b315dd6ab0c7cc96767916b85bfe259b3",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00042.tif",
+      "sha256": "d386fbbe35b939c78588036674dee71a66b26b110978f4d6791b288e13176f4a",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00043.tif",
+      "sha256": "772dc1005d0a73436e98fd75146fd8f7a8f8f5168ae71cb86b91903775c1cd05",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00044.tif",
+      "sha256": "7fb54588fc0fc114204b815de17836a8e7dfe741016e24b20c9a80669fb35770",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00045.tif",
+      "sha256": "1a8e9f1ec3303cf91cf7e767970fc400c3658885730bdfddff7e094cae2d3047",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00046.tif",
+      "sha256": "ec14bddcf176150954acb8a4a5d722f3712de562303cfd37e8f058eb06541358",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00047.tif",
+      "sha256": "f2a170e3b93329dcaac7c647fed22f0cd851982c1df92b3318e8b4d9a000b7b3",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00048.tif",
+      "sha256": "00c6cc11d0d2c041cbd9e05c58627f3c93f9c915862a82f81419644ae431cad9",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00049.tif",
+      "sha256": "20a92a4f2f03bc1362f10f8d4834514dafd524a8e86ee179dab0b62c074b7296",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00050.tif",
+      "sha256": "07fca1021cca3e37d00cadc3767cbf5e3f1d1089de2ccdaa1761b1d966a3b7ab",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00051.tif",
+      "sha256": "7473d6428161c51d10e333b5968a16f2bfb2557496cd0067bae869b667dfd882",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00052.tif",
+      "sha256": "40c326d4a1d473c3e48acee153ece4ca3bca0657a2e11e0d92fd33d41a4265e0",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00053.tif",
+      "sha256": "7b1498565c05bdac70b9894d15a3dcd7527a9896a6b8f00b9b30fbc1724eec3d",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00054.tif",
+      "sha256": "a49488a7bae6f970f52fcd38affae919c19bd978b970dc5e5bac147bc6687ba1",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00055.tif",
+      "sha256": "1d3544f2e55f83be8a3a5f54caa594ef6f2c04e1914e0df7accc10366dfc1193",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00056.tif",
+      "sha256": "a71d7f9f704a5ce14ca35f2d820b8ac846b274c644bd26247057560b55dc84e2",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00057.tif",
+      "sha256": "dd06010bd4a0932bb1690ff8b02dd22583155405725676f882c186b4fbfedd18",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00058.tif",
+      "sha256": "a12f72e2fcf122b0bface83cf164ba7ba612e8160df3045137f29248c350c6ad",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00059.tif",
+      "sha256": "e9e5e091c0c962bd16ef2dc254cb2cd801091a3f3944830dd93baba7e0e60cb2",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00060.tif",
+      "sha256": "aa7efd3fb45f960fb2dbb4ee21cf4d37dd04ff52815c6f96a0c096d213e075aa",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00061.tif",
+      "sha256": "1b8386600b273aceca460a0061063fdfc520ca95734d3d950756d09defa38b7b",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00062.tif",
+      "sha256": "f5b5f24c5fb175614e9f15d980d040f975aa0672cfbf102d8393ad23419aa630",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00063.tif",
+      "sha256": "da66ab1bb0922f07a23a54b80800ed8395e3940e833723ba5d6a80873c9375e5",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00064.tif",
+      "sha256": "522b2a7a9a15fa4d0e69fd21252f0d64158ada684db48497ab631ec4b9641931",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00065.tif",
+      "sha256": "437022fa162cca62a4f3fbe83db4cb51c6b1b88428682679206d959251f9cf1d",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00066.tif",
+      "sha256": "d563e12a5ac4dc13f58828ca97e9d47bc8642175897d59004021a57ac8f52093",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00067.tif",
+      "sha256": "e49189e96f4fa3bdec4c68a90921765aef8e08c8508595a77410b03df13e1a60",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00068.tif",
+      "sha256": "7885f76537e18192b7c7051f00f28ae3e2d1e7c9595570da9ab3ff1a64e4b402",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00069.tif",
+      "sha256": "8fc27ebffd8cde5a7acdf04dcec72295a28827791cdec9aee25aa1e0d806be48",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00070.tif",
+      "sha256": "4d938b305d8a8ee9b65bdaa66400e93157e9ce4436e171153aab405524b5724f",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00071.tif",
+      "sha256": "25bd3463a166e67a8a69944c74591ef79b2cc93b6e5c1059c9a957a041f529ed",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00072.tif",
+      "sha256": "723c12bdb5a3f319ce68a674b4b946d362b8d738f18035d12c9fb306662207ea",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00073.tif",
+      "sha256": "92e5a2fd705e68b7e613c7df2365df23f889010b6b095c77d7c4bd46b7899760",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00074.tif",
+      "sha256": "4f194492f023ddf37b956e1846b0e005477904fed649e3f36285cbc15b454832",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00075.tif",
+      "sha256": "dba632a12692bfdafd8aa0a5de28fd81ada19064de0eb7deea03e6975f519939",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00076.tif",
+      "sha256": "def2cd6f90b3770e569fa72af2c375d68882015935462d4dbfb5e2220cbb57da",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00077.tif",
+      "sha256": "f85b811386cb767303d811387d34e7769538a4989e7dd17a1c0d103e535d2b5d",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00078.tif",
+      "sha256": "bd6e07f0b45a22a26b37b1fc0ee3e2a886f63c0f84f3481ff9de6c1fb7c5622d",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00079.tif",
+      "sha256": "b4d995adb4b277a6e3c5e3387b7601184635cfc144616e437c3b7ef9e89645e0",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00080.tif",
+      "sha256": "293d7cace12b2a13f7522517bca61f0c2f638463e3db6a9aa6574596f46d5ec0",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00081.tif",
+      "sha256": "20b440603991b4bf1acc5e797d75aa51219aedeb814e35a2abdb7383e289fa2f",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00082.tif",
+      "sha256": "73df098ae85efcf8f4c35de94a840e06f428cb219eef802349aac6dbc2843610",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00083.tif",
+      "sha256": "e70306e53c456b34bbeb85ca2f7bdbb7d9a700b57c82c6facf45fa36c779f6f1",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00084.tif",
+      "sha256": "b4079ca4a1aeb8ad1e6a213c6d3cdb7ad7913adfde7a974e0d92f3d46881dcb1",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00085.tif",
+      "sha256": "27c24d6989823fb82371cbfb21f4c1e9729d17561be4c484bd0b808da0661a95",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00086.tif",
+      "sha256": "d60855257dc537b8b8b64a926aacea6b82a31c361f8a6c4c5ae6695d61301335",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00087.tif",
+      "sha256": "bd8695294597041fb5d4f185cc078b718d5d7f09b5b18c7d4a8a318a44bcab07",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00088.tif",
+      "sha256": "27573e7baf56bb8511eaa8eabc6fef66beaf5b7dbb4d3a25f527939ead5e1e55",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00089.tif",
+      "sha256": "b114d143de50fdd1b3b2c05ba9fe58e5212d64007bb221f473fe898ba2b211c6",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00090.tif",
+      "sha256": "28690c57e2970cd841dfd3fe442e38f5ebbd059d47cbf669d4b1ff5984208db6",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00091.tif",
+      "sha256": "c3a22f83e9c3616d7ff34d20c554e445819bccbefc527df3f2f36e73851a560b",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00092.tif",
+      "sha256": "d344b377fd4843d67d65d851a71384cf0fe183d28a55cd0105985468a49714fd",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00093.tif",
+      "sha256": "25533bc0b24aafcad8a621dcb601679fc7a5a893774aeffb6a2196faf26a0ec3",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00094.tif",
+      "sha256": "69b02c2762a1b5e964b99653dc6c93b77b54e00a77697e506bc1aaf5f599cd9f",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00095.tif",
+      "sha256": "b8c106bb641578e22121889cd2e19e6fb87762e1a998d65e63cb0ffbb51ea017",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00096.tif",
+      "sha256": "f0f8ef86897b8790ebb849425b22e6ae4cff44cedabda6e14ea8821afd581651",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00097.tif",
+      "sha256": "e1786f060e353d82c9188c5d461c10b5429efdbcfeca53beedd153311c486c36",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00098.tif",
+      "sha256": "d05e9e3194f37ca2fe532e1ed51b50864ffdc1fc243f3ff2b5dcf2e563074a96",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00099.tif",
+      "sha256": "c3bb3b46a3f518f7a72f4a825573591cb426d5618efe64c3cdfc2b20f1b25d35",
+      "bytes": 8389439
+    },
+    {
+      "path": "/home/yrc/vscodespace/research/WSVT_project/wsvtdata/BB11_20231102_20261002/raw/ref_1_00100.tif",
+      "sha256": "d31d32c32e82a447214738e20314506a6f035958a7ef9701cf3dcb3169fc9f6c",
+      "bytes": 8389439
+    }
+  ],
+  "read_and_hash_s": 1.7302191043272614,
+  "settings": {
+    "half": 10,
+    "coarse": 5,
+    "fine": 4,
+    "levels": 2,
+    "iterations": 1,
+    "cut": 1,
+    "template": 0,
+    "frames": 100,
+    "spline": "gpu",
+    "input_dtype": "uint16",
+    "host_threads": 2,
+    "device": 0
+  },
+  "timing_scope": {
+    "solver": "reference rebuilt + sample solver, including H2D and final GPU sync; excludes output download, input validation, initialization and disk I/O",
+    "api": "ready contiguous host arrays -> seven independent writable NumPy outputs, including validation and reference rebuild; excludes initialization and disk I/O",
+    "memory": "persistent GPU buffers only; not process/allocator peak; simultaneous baseline/candidate sessions are resident for alternating comparison"
+  },
+  "hardware": {
+    "host": "ps",
+    "cpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           52 bits physical, 57 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  192\nOn-line CPU(s) list:                     0-191\nVendor ID:                               AuthenticAMD\nModel name:                              AMD EPYC 9J14 96-Core Processor\nCPU family:                              25\nModel:                                   17\nThread(s) per core:                      2\nCore(s) per socket:                      96\nSocket(s):                               1\nStepping:                                1\nFrequency boost:                         enabled\nCPU max MHz:                             3709.3569\nCPU min MHz:                             1500.0000\nBogoMIPS:                                4799.81\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good amd_lbr_v2 nopl nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk avx512_bf16 clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin cppc amd_ibpb_ret arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif x2avic v_spec_ctrl vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq la57 rdpid overflow_recov succor smca fsrm flush_l1d debug_swap ibpb_exit_to_user\nVirtualization:                          AMD-V\nL1d cache:                               3 MiB (96 instances)\nL1i cache:                               3 MiB (96 instances)\nL2 cache:                                96 MiB (96 instances)\nL3 cache:                                384 MiB (12 instances)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-191\nVulnerability Gather data sampling:      Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Mitigation; Safe RET\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP always-on; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Vulnerable: Clear CPU buffers attempted, no microcode\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Mitigation; IBPB before exit to userspace",
+    "gpu": "index, name, uuid, memory.total [MiB], driver_version, power.limit [W]\n0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 49140 MiB, 580.105.08, 285.00 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 46068 MiB, 580.105.08, 285.00 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 49140 MiB, 580.105.08, 285.00 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 49140 MiB, 580.105.08, 285.00 W",
+    "torch": "2.1.2+cu118",
+    "cuda_native": "12.8",
+    "arch": 89
+  },
+  "hashes": {
+    "benchmark": "f816311b366fb666a362aa9d65b4f89c3a0a4124bfa66069a8264eac0f59d373",
+    "old_library": "86fdafd51514bf9178f17a93e7fe7800a26edc20f77b26de3975cf51f45d12b4",
+    "new_library": "e0a068bd9f102aadacf0f0616f562fe8f931d647b383b901ec957a2eb321a46c",
+    "new_runtime": "ec5907edd5466ced3835ba37691d3dcb9e849bf9fdf2845f7b5c0b39963b3bc0"
+  },
+  "load_end": {
+    "utc": "2026-10-11T14:58:34Z",
+    "load": [
+      0.416015625,
+      0.1923828125,
+      0.19970703125
+    ],
+    "gpu": "0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 86 %, 18455 MiB, 2685 MHz, 9501 MHz, 183.31 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 0 %, 18 MiB, 210 MHz, 405 MHz, 27.39 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 0 %, 18 MiB, 210 MHz, 405 MHz, 28.66 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 0 %, 41 MiB, 210 MHz, 405 MHz, 32.09 W",
+    "processes": "4128932, /home/yrc/vscodespace/anaconda3/bin/python3"
+  }
+}

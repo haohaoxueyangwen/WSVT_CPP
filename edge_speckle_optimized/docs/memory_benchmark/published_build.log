@@ -1,0 +1,24 @@
+-- The CXX compiler identification is GNU 12.3.0
+-- The CUDA compiler identification is NVIDIA 12.8.93 with host compiler GNU 12.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/g++-12 - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /usr/local/cuda-12.8/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Found OpenMP_CXX: -fopenmp (found version "4.5")
+-- Found OpenMP: TRUE (found version "4.5") found components: CXX
+-- Configuring done (3.4s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/yrc/vscodespace/research/WSVT_project/bench_results/edge_gpu_memory_opt_20261011/package/build
+[ 50%] Building CUDA object CMakeFiles/edge_kernels.dir/native/edge_kernels.cu.o
+[100%] Linking CUDA shared library /home/yrc/vscodespace/research/WSVT_project/bench_results/edge_gpu_memory_opt_20261011/package/speckle_edge/_native/libedge_kernels.so
+[100%] Built target edge_kernels
+[ 50%] Building CXX object CMakeFiles/edge_spline.dir/native/edge_spline.cpp.o
+[100%] Linking CXX shared library /home/yrc/vscodespace/research/WSVT_project/bench_results/edge_gpu_memory_opt_20261011/package/speckle_edge/_native/libedge_spline.so
+[100%] Built target edge_spline
+Built and recorded native libraries in speckle_edge/_native

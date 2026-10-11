@@ -1,0 +1,282 @@
+{
+  "fields": {
+    "metrics": {
+      "displace_y": {
+        "rmse": 0.0025493893554283985,
+        "max_abs": 4.059760093688965,
+        "nrmse_by_reference_std": 0.00045677776420706065
+      },
+      "displace_x": {
+        "rmse": 0.005142879734511772,
+        "max_abs": 8.0,
+        "nrmse_by_reference_std": 0.0009413637013178097
+      },
+      "DPC_y": {
+        "rmse": 8.550584229310647e-09,
+        "max_abs": 1.361632803309476e-05,
+        "nrmse_by_reference_std": 0.00045677779879117693
+      },
+      "DPC_x": {
+        "rmse": 1.724907989914112e-08,
+        "max_abs": 2.683178036022582e-05,
+        "nrmse_by_reference_std": 0.0009413636714307889
+      },
+      "phase": {
+        "rmse": 0.0015062471000519293,
+        "max_abs": 0.6230430603027344,
+        "nrmse_by_reference_std": 1.9322272468823978e-05
+      },
+      "transmission": {
+        "rmse": 0.0,
+        "max_abs": 0.0,
+        "nrmse_by_reference_std": 0.0
+      },
+      "match_score_neg_ssd": {
+        "rmse": 0.006042620818731606,
+        "max_abs": 7.336601257324219,
+        "nrmse_by_reference_std": 0.00014431947250526323
+      }
+    },
+    "pass": false
+  },
+  "operator_order_status": "rejected on full-size displacement gate",
+  "reordered_timings": "not ranked because full-size acceptance failed",
+  "coarse_displacement": {
+    "x": {
+      "rmse": 0.00011008124708776016,
+      "max_abs": 0.08826112747192383,
+      "nrmse_by_reference_std": 3.717385014469561e-05
+    },
+    "y": {
+      "rmse": 0.00018326843894252872,
+      "max_abs": 0.15545892715454102,
+      "nrmse_by_reference_std": 6.0201593077058935e-05
+    }
+  },
+  "rounded_guesses": {
+    "x": {
+      "different_count": 13,
+      "max_abs": 1.0
+    },
+    "y": {
+      "different_count": 15,
+      "max_abs": 1.0
+    }
+  },
+  "errors": {
+    "x": {
+      "count_above": {
+        "0.005": 12,
+        "0.05": 12,
+        "0.1": 12,
+        "1.0": 5,
+        "4.0": 2
+      },
+      "error_quantiles": {
+        "0.5": 0.0,
+        "0.99": 0.0,
+        "0.999": 0.0,
+        "0.99999": 0.0,
+        "1.0": 8.0
+      },
+      "examples": [
+        {
+          "output_yx": [
+            182,
+            1631
+          ],
+          "baseline": 3.0,
+          "reordered": 3.273953437805176
+        },
+        {
+          "output_yx": [
+            248,
+            75
+          ],
+          "baseline": -3.302629232406616,
+          "reordered": -3.0
+        },
+        {
+          "output_yx": [
+            369,
+            628
+          ],
+          "baseline": -10.0,
+          "reordered": -6.801929950714111
+        },
+        {
+          "output_yx": [
+            869,
+            1705
+          ],
+          "baseline": 3.473019599914551,
+          "reordered": 4.258100986480713
+        },
+        {
+          "output_yx": [
+            1100,
+            211
+          ],
+          "baseline": 7.61453914642334,
+          "reordered": 5.0
+        },
+        {
+          "output_yx": [
+            1156,
+            1968
+          ],
+          "baseline": 1.2781819105148315,
+          "reordered": -3.0
+        },
+        {
+          "output_yx": [
+            1242,
+            27
+          ],
+          "baseline": -3.0,
+          "reordered": -4.0
+        },
+        {
+          "output_yx": [
+            1575,
+            555
+          ],
+          "baseline": -2.0,
+          "reordered": 6.0
+        },
+        {
+          "output_yx": [
+            1604,
+            1729
+          ],
+          "baseline": 0.21181368827819824,
+          "reordered": 0.5140128135681152
+        },
+        {
+          "output_yx": [
+            1867,
+            321
+          ],
+          "baseline": -2.0,
+          "reordered": -1.7381467819213867
+        },
+        {
+          "output_yx": [
+            1882,
+            834
+          ],
+          "baseline": 7.0,
+          "reordered": 6.0
+        },
+        {
+          "output_yx": [
+            1994,
+            1543
+          ],
+          "baseline": -0.0,
+          "reordered": 2.5437588691711426
+        }
+      ]
+    },
+    "y": {
+      "count_above": {
+        "0.005": 14,
+        "0.05": 11,
+        "0.1": 10,
+        "1.0": 3,
+        "4.0": 1
+      },
+      "error_quantiles": {
+        "0.5": 0.0,
+        "0.99": 0.0,
+        "0.999": 0.0,
+        "0.99999": 0.0,
+        "1.0": 4.059760093688965
+      },
+      "examples": [
+        {
+          "output_yx": [
+            428,
+            1531
+          ],
+          "baseline": 2.0,
+          "reordered": 2.2297112941741943
+        },
+        {
+          "output_yx": [
+            453,
+            675
+          ],
+          "baseline": -0.5721955299377441,
+          "reordered": -1.0
+        },
+        {
+          "output_yx": [
+            494,
+            1752
+          ],
+          "baseline": -3.26454758644104,
+          "reordered": -4.420406341552734
+        },
+        {
+          "output_yx": [
+            651,
+            1932
+          ],
+          "baseline": 5.0,
+          "reordered": 6.0
+        },
+        {
+          "output_yx": [
+            869,
+            1705
+          ],
+          "baseline": -4.0,
+          "reordered": -5.0
+        },
+        {
+          "output_yx": [
+            1416,
+            174
+          ],
+          "baseline": 7.0,
+          "reordered": 6.286474227905273
+        },
+        {
+          "output_yx": [
+            1575,
+            555
+          ],
+          "baseline": -3.0,
+          "reordered": -5.236997604370117
+        },
+        {
+          "output_yx": [
+            1604,
+            1729
+          ],
+          "baseline": 8.0,
+          "reordered": 7.0
+        },
+        {
+          "output_yx": [
+            1882,
+            834
+          ],
+          "baseline": -6.969494819641113,
+          "reordered": -6.572903633117676
+        },
+        {
+          "output_yx": [
+            1994,
+            1543
+          ],
+          "baseline": -8.059760093688965,
+          "reordered": -4.0
+        }
+      ]
+    }
+  },
+  "outlier_union_count": 17,
+  "outliers_at_changed_guess_count": 17
+}

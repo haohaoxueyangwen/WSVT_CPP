@@ -1,0 +1,96 @@
+{
+  "wsvt": {
+    "display_roi_detector_yx": [
+      524,
+      1524,
+      524,
+      1524
+    ],
+    "field_origin_yx": [
+      10,
+      10
+    ],
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "full_max_abs": 0.0
+      },
+      "displace_x": {
+        "exact": true,
+        "full_max_abs": 0.0
+      },
+      "DPC_y": {
+        "exact": true,
+        "full_max_abs": 0.0
+      },
+      "DPC_x": {
+        "exact": true,
+        "full_max_abs": 0.0
+      },
+      "phase": {
+        "exact": true,
+        "full_max_abs": 0.0
+      },
+      "transmission": {
+        "exact": true,
+        "full_max_abs": 0.0
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "full_max_abs": 0.0
+      }
+    },
+    "display_clip_percentiles": [
+      1,
+      99
+    ],
+    "display_clip_only": true
+  },
+  "wxst": {
+    "display_roi_detector_yx": [
+      524,
+      1524,
+      524,
+      1524
+    ],
+    "field_origin_yx": [
+      10,
+      10
+    ],
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "full_max_abs": 0.0
+      },
+      "displace_x": {
+        "exact": true,
+        "full_max_abs": 0.0
+      },
+      "DPC_y": {
+        "exact": true,
+        "full_max_abs": 0.0
+      },
+      "DPC_x": {
+        "exact": true,
+        "full_max_abs": 0.0
+      },
+      "phase": {
+        "exact": true,
+        "full_max_abs": 0.0
+      },
+      "transmission": {
+        "exact": true,
+        "full_max_abs": 0.0
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "full_max_abs": 0.0
+      }
+    },
+    "display_clip_percentiles": [
+      1,
+      99
+    ],
+    "display_clip_only": true
+  }
+}

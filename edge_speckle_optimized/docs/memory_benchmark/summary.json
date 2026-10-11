@@ -1,0 +1,454 @@
+{
+  "wxst": {
+    "summary": {
+      "original": {
+        "solver_s": {
+          "mean": 0.04682231852784753,
+          "sample_sd": 0.0010051901839930228
+        },
+        "api_s": {
+          "mean": 0.06666656760498882,
+          "sample_sd": 0.0011374267356461004
+        },
+        "reference_s": {
+          "mean": 0.00478625213727355,
+          "sample_sd": 0.00011522129415943647
+        },
+        "sample_s": {
+          "mean": 0.04203606639057398,
+          "sample_sd": 0.0009218940644965545
+        },
+        "download_s": {
+          "mean": 0.017296400666236878,
+          "sample_sd": 0.0001352973650723617
+        },
+        "persistent_device_bytes": 1712082240,
+        "stages_s": {
+          "input": 0.0010279296040534972,
+          "transmission": 0.0001547839969396591,
+          "sample_front": 2.6623999699950218e-05,
+          "coarse_match": 0.008893907356262207,
+          "spline": 0.0025000831127166747,
+          "fine_match": 0.027820646667480468,
+          "DPC": 0.00033853440284729007,
+          "phase": 0.0011790335893630982
+        }
+      },
+      "copy_only": {
+        "solver_s": {
+          "mean": 0.046476728096604344,
+          "sample_sd": 0.0008892957164982818
+        },
+        "api_s": {
+          "mean": 0.05703893760219216,
+          "sample_sd": 0.0008891147001466382
+        },
+        "reference_s": {
+          "mean": 0.0047174058854579926,
+          "sample_sd": 8.541595797624356e-05
+        },
+        "sample_s": {
+          "mean": 0.04175932221114635,
+          "sample_sd": 0.0009094367145033356
+        },
+        "download_s": {
+          "mean": 0.008195038326084614,
+          "sample_sd": 8.933654892656493e-05
+        },
+        "persistent_device_bytes": 1712082240,
+        "stages_s": {
+          "input": 0.0009520640015602111,
+          "transmission": 0.00015215359926223755,
+          "sample_front": 2.682879976928234e-05,
+          "coarse_match": 0.008954675102233887,
+          "spline": 0.0025316351890563964,
+          "fine_match": 0.02753583335876465,
+          "DPC": 0.0003477504014968872,
+          "phase": 0.001178880000114441
+        }
+      },
+      "streamed": {
+        "solver_s": {
+          "mean": 0.04618244664743543,
+          "sample_sd": 0.0012558542560379723
+        },
+        "api_s": {
+          "mean": 0.05690249968320131,
+          "sample_sd": 0.0012827711193668851
+        },
+        "reference_s": {
+          "mean": 0.004754462186247111,
+          "sample_sd": 0.00011335630472027788
+        },
+        "sample_s": {
+          "mean": 0.04142798446118832,
+          "sample_sd": 0.00121576880791709
+        },
+        "download_s": {
+          "mean": 0.008208842575550079,
+          "sample_sd": 7.836674828445386e-05
+        },
+        "persistent_device_bytes": 1712082240,
+        "stages_s": {
+          "input": 0.0009819455981254577,
+          "transmission": 0.00015232000052928924,
+          "sample_front": 2.6419199630618096e-05,
+          "coarse_match": 0.008889958572387696,
+          "spline": 0.0025022783279418947,
+          "fine_match": 0.027277145767211915,
+          "DPC": 0.0003332095980644226,
+          "phase": 0.0011763711929321289
+        }
+      }
+    },
+    "checks": {
+      "copy_only": {
+        "outputs": {
+          "displace_y": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "7c3fa0df63b59b82c612cab8fb6291f292a9bb8cb5910e4a9906fc49dd0d571a"
+          },
+          "displace_x": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "0488ff0455c186d67585742cd938a8605f56f4f1224b7c6089b5bf4639779980"
+          },
+          "DPC_y": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "7812e337a78108a649a31156ce629fe0db291ce7f851ee0eaedf4ac994814e58"
+          },
+          "DPC_x": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "04c1a343462a5077be85e92216a3dda3504cf22d21ff3b72ac1da4248e18632e"
+          },
+          "phase": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "729325347415c8d3c776cae083c7ed92642a5b0983d2c85145fb029ae666bf72"
+          },
+          "transmission": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "721e11cb029f57732fd53d1dfdcba7f414c64d8af2a69987ca69c531bb9fcc01"
+          },
+          "match_score_neg_ssd": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "a1bfa051d7c58ce3f3b792fd06c682949351f3c10068061a91bb4611960229cd"
+          }
+        },
+        "features": {
+          "ref_fine": true,
+          "ref_coarse": true
+        }
+      },
+      "streamed": {
+        "outputs": {
+          "displace_y": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "7c3fa0df63b59b82c612cab8fb6291f292a9bb8cb5910e4a9906fc49dd0d571a"
+          },
+          "displace_x": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "0488ff0455c186d67585742cd938a8605f56f4f1224b7c6089b5bf4639779980"
+          },
+          "DPC_y": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "7812e337a78108a649a31156ce629fe0db291ce7f851ee0eaedf4ac994814e58"
+          },
+          "DPC_x": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "04c1a343462a5077be85e92216a3dda3504cf22d21ff3b72ac1da4248e18632e"
+          },
+          "phase": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "729325347415c8d3c776cae083c7ed92642a5b0983d2c85145fb029ae666bf72"
+          },
+          "transmission": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "721e11cb029f57732fd53d1dfdcba7f414c64d8af2a69987ca69c531bb9fcc01"
+          },
+          "match_score_neg_ssd": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "a1bfa051d7c58ce3f3b792fd06c682949351f3c10068061a91bb4611960229cd"
+          }
+        },
+        "features": {
+          "ref_fine": true,
+          "ref_coarse": true
+        }
+      }
+    },
+    "settings": {
+      "half": 10,
+      "coarse": 5,
+      "fine": 4,
+      "levels": 2,
+      "iterations": 1,
+      "cut": 1,
+      "template": 7,
+      "frames": 1,
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "host_threads": 2,
+      "device": 0
+    },
+    "hardware": {
+      "host": "ps",
+      "cpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           52 bits physical, 57 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  192\nOn-line CPU(s) list:                     0-191\nVendor ID:                               AuthenticAMD\nModel name:                              AMD EPYC 9J14 96-Core Processor\nCPU family:                              25\nModel:                                   17\nThread(s) per core:                      2\nCore(s) per socket:                      96\nSocket(s):                               1\nStepping:                                1\nFrequency boost:                         enabled\nCPU max MHz:                             3709.3569\nCPU min MHz:                             1500.0000\nBogoMIPS:                                4799.81\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good amd_lbr_v2 nopl nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk avx512_bf16 clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin cppc amd_ibpb_ret arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif x2avic v_spec_ctrl vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq la57 rdpid overflow_recov succor smca fsrm flush_l1d debug_swap ibpb_exit_to_user\nVirtualization:                          AMD-V\nL1d cache:                               3 MiB (96 instances)\nL1i cache:                               3 MiB (96 instances)\nL2 cache:                                96 MiB (96 instances)\nL3 cache:                                384 MiB (12 instances)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-191\nVulnerability Gather data sampling:      Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Mitigation; Safe RET\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP always-on; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Vulnerable: Clear CPU buffers attempted, no microcode\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Mitigation; IBPB before exit to userspace",
+      "gpu": "index, name, uuid, memory.total [MiB], driver_version, power.limit [W]\n0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 49140 MiB, 580.105.08, 285.00 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 46068 MiB, 580.105.08, 285.00 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 49140 MiB, 580.105.08, 285.00 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 49140 MiB, 580.105.08, 285.00 W",
+      "torch": "2.1.2+cu118",
+      "cuda_native": "12.8",
+      "arch": 89
+    },
+    "timing_scope": {
+      "solver": "reference rebuilt + sample solver, including H2D and final GPU sync; excludes output download, input validation, initialization and disk I/O",
+      "api": "ready contiguous host arrays -> seven independent writable NumPy outputs, including validation and reference rebuild; excludes initialization and disk I/O",
+      "memory": "persistent GPU buffers only; not process/allocator peak; simultaneous baseline/candidate sessions are resident for alternating comparison"
+    },
+    "hashes": {
+      "benchmark": "9b0386214f41f226bbd3d6856a14eb4c85b5df687e354b86704031155cdbc3a3",
+      "old_library": "86fdafd51514bf9178f17a93e7fe7800a26edc20f77b26de3975cf51f45d12b4",
+      "new_library": "bcfc9646b67c40110132004026223a7d806d6c9323cba28b58a3710fedba622a",
+      "new_runtime": "8f299bfede25ad81d45d3ceadc2a3126f94f4d9be4393b800ca4a010261b9f06"
+    }
+  },
+  "wsvt": {
+    "summary": {
+      "original": {
+        "solver_s": {
+          "mean": 0.1987961812876165,
+          "sample_sd": 0.003980457795917973
+        },
+        "api_s": {
+          "mean": 0.21622460139915348,
+          "sample_sd": 0.004125857442347976
+        },
+        "reference_s": {
+          "mean": 0.07719414234161377,
+          "sample_sd": 0.0010454378210308728
+        },
+        "sample_s": {
+          "mean": 0.12160203894600272,
+          "sample_sd": 0.0030976678561348272
+        },
+        "download_s": {
+          "mean": 0.017338768113404512,
+          "sample_sd": 0.0001582878056336052
+        },
+        "persistent_device_bytes": 6955128752,
+        "stages_s": {
+          "input": 0.052519615936279296,
+          "transmission": 0.0001602048009634018,
+          "sample_front": 0.02446853141784668,
+          "coarse_match": 0.009799103927612305,
+          "spline": 0.002358886432647705,
+          "fine_match": 0.030751641845703125,
+          "DPC": 0.00031520000100135803,
+          "phase": 0.001129523229598999
+        }
+      },
+      "copy_only": {
+        "solver_s": {
+          "mean": 0.198653129208833,
+          "sample_sd": 0.0030269912067027666
+        },
+        "api_s": {
+          "mean": 0.20701024532318116,
+          "sample_sd": 0.0030591121336603065
+        },
+        "reference_s": {
+          "mean": 0.07645533280447125,
+          "sample_sd": 0.0006504560659393096
+        },
+        "sample_s": {
+          "mean": 0.12219779640436172,
+          "sample_sd": 0.002551785083707126
+        },
+        "download_s": {
+          "mean": 0.008276550285518169,
+          "sample_sd": 5.936647591470139e-05
+        },
+        "persistent_device_bytes": 6955128752,
+        "stages_s": {
+          "input": 0.051825164031982424,
+          "transmission": 0.00015716480016708374,
+          "sample_front": 0.02412793617248535,
+          "coarse_match": 0.009835174179077148,
+          "spline": 0.0023892480373382567,
+          "fine_match": 0.03226480674743652,
+          "DPC": 0.0003407872021198273,
+          "phase": 0.0011606016159057618
+        }
+      },
+      "streamed": {
+        "solver_s": {
+          "mean": 0.207850434910506,
+          "sample_sd": 0.004148986044623175
+        },
+        "api_s": {
+          "mean": 0.21618464523926378,
+          "sample_sd": 0.004220510462908937
+        },
+        "reference_s": {
+          "mean": 0.08132176017388701,
+          "sample_sd": 0.0016081348138691559
+        },
+        "sample_s": {
+          "mean": 0.126528674736619,
+          "sample_sd": 0.0025491213742508266
+        },
+        "download_s": {
+          "mean": 0.008251462318003177,
+          "sample_sd": 9.040195742421358e-05
+        },
+        "persistent_device_bytes": 4571387824,
+        "stages_s": {
+          "input": 0.05185365829467773,
+          "transmission": 0.00015537919998168947,
+          "sample_front": 0.02891530876159668,
+          "coarse_match": 0.009832262420654297,
+          "spline": 0.0023738880157470705,
+          "fine_match": 0.0317233154296875,
+          "DPC": 0.00037068800330162046,
+          "phase": 0.0012040832042694092
+        }
+      }
+    },
+    "checks": {
+      "copy_only": {
+        "outputs": {
+          "displace_y": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "884dcd96d9f4a493228b04b378e2e716c3ddcd2a93d52154175904c8151ee92b"
+          },
+          "displace_x": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "20b811aa410105c37796256001e12eca1f1ee91cf976e9bf4320bb51e8c97119"
+          },
+          "DPC_y": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "54f4ef25233d3ff6808f14f03635dd8637fc5d6c59aad7ce2ce7f3d560a64cb1"
+          },
+          "DPC_x": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "1d0178051b178900f7c6702b86d39fce0093fb1656d4423660bba0b5d6de9cfa"
+          },
+          "phase": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "ee5c516d4cbd1fa450081633482b2f18404ed2b72b48af238b301820eff54366"
+          },
+          "transmission": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "721e11cb029f57732fd53d1dfdcba7f414c64d8af2a69987ca69c531bb9fcc01"
+          },
+          "match_score_neg_ssd": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "7fe2fd3843ae578b82193e123f96eccbdad1ab403922701e98eace5b2b60aadc"
+          }
+        },
+        "features": {
+          "ref_fine": true,
+          "ref_coarse": true,
+          "sample_fine": true,
+          "sample_coarse": true
+        }
+      },
+      "streamed": {
+        "outputs": {
+          "displace_y": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "884dcd96d9f4a493228b04b378e2e716c3ddcd2a93d52154175904c8151ee92b"
+          },
+          "displace_x": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "20b811aa410105c37796256001e12eca1f1ee91cf976e9bf4320bb51e8c97119"
+          },
+          "DPC_y": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "54f4ef25233d3ff6808f14f03635dd8637fc5d6c59aad7ce2ce7f3d560a64cb1"
+          },
+          "DPC_x": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "1d0178051b178900f7c6702b86d39fce0093fb1656d4423660bba0b5d6de9cfa"
+          },
+          "phase": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "ee5c516d4cbd1fa450081633482b2f18404ed2b72b48af238b301820eff54366"
+          },
+          "transmission": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "721e11cb029f57732fd53d1dfdcba7f414c64d8af2a69987ca69c531bb9fcc01"
+          },
+          "match_score_neg_ssd": {
+            "exact": true,
+            "max_abs": 0.0,
+            "sha256": "7fe2fd3843ae578b82193e123f96eccbdad1ab403922701e98eace5b2b60aadc"
+          }
+        },
+        "features": {
+          "ref_fine": true,
+          "ref_coarse": true,
+          "sample_fine": true,
+          "sample_coarse": true
+        }
+      }
+    },
+    "settings": {
+      "half": 10,
+      "coarse": 5,
+      "fine": 4,
+      "levels": 2,
+      "iterations": 1,
+      "cut": 1,
+      "template": 0,
+      "frames": 100,
+      "spline": "gpu",
+      "input_dtype": "uint16",
+      "host_threads": 2,
+      "device": 0
+    },
+    "hardware": {
+      "host": "ps",
+      "cpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           52 bits physical, 57 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  192\nOn-line CPU(s) list:                     0-191\nVendor ID:                               AuthenticAMD\nModel name:                              AMD EPYC 9J14 96-Core Processor\nCPU family:                              25\nModel:                                   17\nThread(s) per core:                      2\nCore(s) per socket:                      96\nSocket(s):                               1\nStepping:                                1\nFrequency boost:                         enabled\nCPU max MHz:                             3709.3569\nCPU min MHz:                             1500.0000\nBogoMIPS:                                4799.81\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good amd_lbr_v2 nopl nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk avx512_bf16 clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin cppc amd_ibpb_ret arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif x2avic v_spec_ctrl vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq la57 rdpid overflow_recov succor smca fsrm flush_l1d debug_swap ibpb_exit_to_user\nVirtualization:                          AMD-V\nL1d cache:                               3 MiB (96 instances)\nL1i cache:                               3 MiB (96 instances)\nL2 cache:                                96 MiB (96 instances)\nL3 cache:                                384 MiB (12 instances)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-191\nVulnerability Gather data sampling:      Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Mitigation; Safe RET\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP always-on; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Vulnerable: Clear CPU buffers attempted, no microcode\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Mitigation; IBPB before exit to userspace",
+      "gpu": "index, name, uuid, memory.total [MiB], driver_version, power.limit [W]\n0, NVIDIA RTX 5880 Ada Generation, GPU-8598e2e8-23cd-517a-1871-ed404637ef8a, 49140 MiB, 580.105.08, 285.00 W\n1, NVIDIA RTX 5880 Ada Generation, GPU-1088e73d-1221-d543-4994-f473321ca7ea, 46068 MiB, 580.105.08, 285.00 W\n2, NVIDIA RTX 5880 Ada Generation, GPU-59fc9ca4-415c-76ff-a9d5-63f8bd1a566b, 49140 MiB, 580.105.08, 285.00 W\n3, NVIDIA RTX 5880 Ada Generation, GPU-443510f0-391f-d929-9086-bed72534bd74, 49140 MiB, 580.105.08, 285.00 W",
+      "torch": "2.1.2+cu118",
+      "cuda_native": "12.8",
+      "arch": 89
+    },
+    "timing_scope": {
+      "solver": "reference rebuilt + sample solver, including H2D and final GPU sync; excludes output download, input validation, initialization and disk I/O",
+      "api": "ready contiguous host arrays -> seven independent writable NumPy outputs, including validation and reference rebuild; excludes initialization and disk I/O",
+      "memory": "persistent GPU buffers only; not process/allocator peak; simultaneous baseline/candidate sessions are resident for alternating comparison"
+    },
+    "hashes": {
+      "benchmark": "9b0386214f41f226bbd3d6856a14eb4c85b5df687e354b86704031155cdbc3a3",
+      "old_library": "86fdafd51514bf9178f17a93e7fe7800a26edc20f77b26de3975cf51f45d12b4",
+      "new_library": "bcfc9646b67c40110132004026223a7d806d6c9323cba28b58a3710fedba622a",
+      "new_runtime": "8f299bfede25ad81d45d3ceadc2a3126f94f4d9be4393b800ca4a010261b9f06"
+    }
+  }
+}

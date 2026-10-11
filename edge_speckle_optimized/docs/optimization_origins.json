@@ -1,0 +1,128 @@
+{
+  "baseline_package": "../edge_speckle",
+  "changed": {
+    "pyproject.toml": {
+      "baseline_sha256": "0c0ea554297290ba3598edc5e45c7fba92c150127c21f59d3cfa4c5844082187",
+      "candidate_sha256": "0de650636f9ed06747fa940ef5d022d6e7b9fbf4d4e234892dd4119754657263"
+    },
+    "README.md": {
+      "baseline_sha256": "1514a0b0232542aa4309abe8162dd281b7b0631484d3c64d53d06ba3f271a2d7",
+      "candidate_sha256": "08b0a4c159a0a7b17dc415fa124097f0da5390b1c6d2d2d336de9ca45e1750e0"
+    },
+    "docs/evidence_registry.json": {
+      "baseline_sha256": "e856155f8e02b82544dc5f30f1f09e26f4dcc1763e96cb31283f20ea60a5a9df",
+      "candidate_sha256": "d130d691ed980ab760bda3c83a116f2fa96b0c91bc0a4cb6423ddd20e11896bd"
+    },
+    "docs/source_check_windows.json": {
+      "baseline_sha256": "45d920228df7e0a38bdcc52003ea7b5f19ee602fdce598064efb1e738d488560",
+      "candidate_sha256": "e93176284852ae31266f4bc8d7715efd2fb31b90b2d979892a80437ee1d4ca28"
+    },
+    "docs/source_origins.json": {
+      "baseline_sha256": "7ce2bdc0e25d5e6b1be0f80953c2b71b9263c6b84bcf34027bad4d36af3dbf86",
+      "candidate_sha256": "0825607530b7e297b3038d43d61fc1a7ccd6471c632afb9074756ff86f8884c5"
+    },
+    "docs/versions.json": {
+      "baseline_sha256": "b7885afbfd9978e3a69690eae2fb1c849154cd2d640ae20da0af3dde503ac12c",
+      "candidate_sha256": "015e68926721afc51f6aef95933a9b21aa3babfbdaadaf3723042e6d9e0045e9"
+    },
+    "native/edge_kernels.cu": {
+      "baseline_sha256": "b943ecd8c81073cc07b5f3632e7c4f6d967d89ae59ae46aa16f37aa75809c481",
+      "candidate_sha256": "63c88fa981db62933a729c6cdc090a68281c104940c76f5470e318a554220b61"
+    },
+    "speckle_edge/api.py": {
+      "baseline_sha256": "b78a52493e1a08c08634d1563e1438c93dfc77d4e61d8395166594a62065c3a2",
+      "candidate_sha256": "c3c2b0d96fd58d91d57976431363f47a77205ee771dd419e697fd061aab09342"
+    },
+    "speckle_edge/cli.py": {
+      "baseline_sha256": "03216c38e5c27678868b06e1cc39f9764bb443da899a5b1bf84fb293427e517d",
+      "candidate_sha256": "ca279ac1dc0525e39ff3de1929b7398c2c193d6e3883e4e10e15c4e1d7603997"
+    },
+    "speckle_edge/config.py": {
+      "baseline_sha256": "ad598a52f3d78652e389f7a69b084ebd339764453b3266170d44bf159f4c5ec6",
+      "candidate_sha256": "84acb810ef65ff7814ae3953b88eb9f35eb127d268fa425429a43eca0320a426"
+    },
+    "speckle_edge/runtime.py": {
+      "baseline_sha256": "f618a9e88a4eef2dff96d60e0b6274b7ecb761d65780ebe36b0940e764560fae",
+      "candidate_sha256": "ec5907edd5466ced3835ba37691d3dcb9e849bf9fdf2845f7b5c0b39963b3bc0"
+    },
+    "speckle_edge/__init__.py": {
+      "baseline_sha256": "468d8742a6550a29499858f8ca0364c7f4ddeb4304d6b26cf004c6347ec848c2",
+      "candidate_sha256": "85a008c61756188c1d3fbd8badf524f0d7d9e612f231894eceb746bcd2111455"
+    },
+    "tools/build.py": {
+      "baseline_sha256": "2bad3503fa2bed09bc3d58bda19aab278bbc3630187b2cb88e92ec1cc8606b18",
+      "candidate_sha256": "e164cbf6f305efd49bd3a9aaa669b3c471923f48cb118ff8cda31e01cb25ee6d"
+    },
+    "tools/check_sources.py": {
+      "baseline_sha256": "42e498f3419468384760b1f5b787e3b29bf60e13ec61526f4b2d8bc70df7c15f",
+      "candidate_sha256": "49015d45ce2767a3cde104a21ee5ebf9c915246801c26f602aa570411abf0443"
+    },
+    "tools/release.py": {
+      "baseline_sha256": "b0da453df9918cccfc240bf5bf35da9fb02c5185c704aee3c8dc836d58820fe2",
+      "candidate_sha256": "6dd3d9a57e1b9012b80ec3d328acc507e6052a6fb19295d191252f503a427110"
+    },
+    "baselines/cpu/cpp_source_manifest.json": {
+      "baseline_sha256": "cd1edfea35130fd346b6c9c47b022a088a92e647bf2ff7703a8a306890674e41",
+      "candidate_sha256": "d53192dca02705ddfec58a51989ff5c3c84ea8638834f516c838da3b5b996842"
+    },
+    "baselines/legacy_wxst/wxst_orin_v2.py": {
+      "baseline_sha256": "3debd34a4ad7ad265bf4e60ca96dd74ef12697be553c0ff43ad801d9182684be",
+      "candidate_sha256": "e8dd9aba8f0cdd696c3355fbf09cb2cec9ce73aa2e5bf8467b17aba30a5a208e"
+    },
+    "baselines/legacy_wxst/wxst_orin_v3.py": {
+      "baseline_sha256": "955ab7afa1fa0c3130df1b85d7e4726d3a0f400247092640b0db93cd410eee09",
+      "candidate_sha256": "21037ba27a8904d4ccf90dbb2670e2f4f4806c2f29ea94d3affa4b9d9e8bae3d"
+    }
+  },
+  "unchanged": {
+    ".gitignore": "21086718ce7499a5a90d3500e27bb9247fe2b79cd61903793cc5e5b901984718",
+    "CMakeLists.txt": "bbf23ed13953e0a1570445e8e86ab39aa827d18c962af445bfc1363ff06fc8a0",
+    "benchmarks/README.md": "628a1c306df74a460b27bfea476e90ea1f683103ab60fd2faa7fd0dbac9049b3",
+    "configs/wsvt.json": "9f48a022be693b63d3245b0352ddf5c6d8409ee506a06cec47ca3ba4624f9c45",
+    "configs/wxst.json": "aeb1148e33e2b0a068b3bcd9a3f2d7e3d264ed14134a9baf265c748d4ee446a5",
+    "docs/AGENT_HANDOFF_CURRENT.md": "dc60b97ac2ba73a4d4385396e941e30971c801806475f3e6e0b1f619d469b37c",
+    "docs/AI_PROJECT_BRIEF.md": "0a6bc8c806df2c9b204becbcdf47438b9efde98f520cc7b387aa76f1cc9aaa9b",
+    "docs/ARCHITECTURE.md": "bcbef5f8a2d642589d73e9f57192712c2d0b52b6839c9e829af0d27148097694",
+    "docs/OUTPUTS.md": "6ae634165a82317f82a5583cc6c09fc1beea77d4e65ada57046a681580e55ecf",
+    "docs/PAPER_ROADMAP.md": "75b5b98581ce7b2dd9cb61cb1eff1170b8f806a9b251a254c8c95c9cab2f659e",
+    "docs/VALIDATION.md": "85ea10f927b15cad5518fe15eafda15056374701ac52579778ea225aaade6c1c",
+    "docs/VERSIONS.md": "c4cee7f61d373211f1086e2c2221113cc7af6e035b255aa3847760b336a14ca0",
+    "native/cached_match.cuh": "d51f35691afdbd2f0a5e28c8fb3f4b002ba128667d5135f036790937c9fe653a",
+    "native/edge_spline.cpp": "ad226b1f699fa80491104bb10e81fe7dcf7a46597fac8eb4e52ba8002c15c70e",
+    "native/features.cuh": "ebca2ed19926907f00b5e354f6d2ce953a5b7707fae018d9d476eac676218341",
+    "native/legacy_cached.cu": "c530b36a8c09e4a9801762510755c2d5ec72f42608d506218fd8ca834103443e",
+    "native/legacy_match.cu": "4563d68d83033ae09947b37609b021b6e188c7faa2e39947c98e2c15e93ffb8d",
+    "native/legacy_optimized.cu": "36a00c782b0b6bf2a7645d11299109d5c8a7d94488f9780e48b290aa475ec71e",
+    "native/primitives.cuh": "c2129b0c49dba4e72c2d992f4548922e75080016f5fe751c35b80fde458f9f13",
+    "speckle_edge/outputs.py": "9afbd55f361fb540baad62dbab1bdd8cd290f1e27facb97e2e450efa77fefdfc",
+    "speckle_edge/provenance.py": "f377b086baa764c0f8c4644f2bc588d8d12dde2727afac163a0e8529ade579c4",
+    "speckle_edge/__main__.py": "f38fd2f2c920c29c828645e87ed64743d567aaaef7fba7a15d2c7d7f8094f91f",
+    "tests/smoke_orin.py": "a147dc9ea5e57ff2472a65f09422a38677d8b84ef39d034b4bbc7cde35713ed4",
+    "tests/test_contracts.py": "d92e2967c0fbbbfd2de10464928125eff4aa8c5fe9dfe1650c2ed134b064c13c",
+    "tests/__init__.py": "1ba8de1b5a3a01bf27a9a1f419a8056cffc15d79e3722347660d2077781a45ff",
+    "baselines/cpu/CMakeLists.txt": "ad511e6d1d65e000386fb7361ec51812f0562f8a6abf6499ef3559bd05144ca4",
+    "baselines/cpu/cpp_original_snapshot.tgz": "f5c7d0c8308a0463101b9bf4a803fda3fe9aac235b9a3bb19acecf603a255709",
+    "baselines/cpu/cpu_driver.cpp": "dd0eae7a24e68820f785bcd4c9c637dd547afe4862753f48753e41668afb9f29",
+    "baselines/cpu/README.md": "2b92c07f05147f9fd3f6cf9d28b0397f106b3cf8a47295c1751f3385684e222b",
+    "baselines/cpu/wsvtConfig.cmake.in": "ea0190deb2a1b4dcb6e3963e6478b7c43a73703e8ea33e68bd7fbcedf8fcd94e",
+    "baselines/legacy_wxst/legacy_complete.py": "ad6a4a2bdec12c9f93a827e4a734ca72857389d08e7f5962b698d5cbbc68d2ce",
+    "baselines/legacy_wxst/README.md": "98119637fffe13f0e1f72a9f49799cfaaee21e7525cbb126ef221336f34a48a6",
+    "baselines/legacy_wxst/wxst_orin.py": "bc1604b67ea239514431d46b83059510632ddb1d4327a4c184b6cad5a54a8426",
+    "docs/validation/build_01.log": "2c9db7985b51b20b38d7156646874c9268be265371fefff8f22263ff9d7e9bd5",
+    "docs/validation/build_02.log": "d9d14a312f88af301ffa960cadf126216050aa6d2f6d342115e5c0d7bacdfc5a",
+    "docs/validation/cli_wsvt_report.json": "dbbc1cf09e719496bf9159bfc2080529f0047377187492f08321caea0578e869",
+    "docs/validation/cli_wxst_report.json": "8d0aa726892961acb0d3931e74a7b1f97c444da287335d087f082955d9745d8c",
+    "docs/validation/contracts_orin.log": "443f477126b6afdd05dc373af7146d1d0c8abd55ea7acf1f54f2d7d44d2529f2",
+    "docs/validation/doctor_orin.json": "388d208049dc22ab9e3c3726592dc41d9893198bb6f616ec0b785b30dce2337e",
+    "docs/validation/entrypoint_checks.json": "c6e8eadcb7cfe136503ab68b2f5ffbe576e55781489da3e5c3dfb63dbd6e142b",
+    "docs/validation/legacy_build_01.log": "2119ce5543c61ec4ab6b4879c9b01bf982f0fc34228d0134f73987277e9466c3",
+    "docs/validation/native_build_orin.json": "c468e5c846ada2a32bf6ed2081a134ea40c323448c5ce4566e09d7e30c0d848b",
+    "docs/validation/packaging_checks.json": "e24c1033df76c3577af345cf18834fac0b129c124e473a0f54e6ed9ea245002d",
+    "docs/evidence/cpu_compare_20261011/evidence/final_summary.json": "96b1a0a5d5141c219a5750646c638e405e843339b3f970dcfd8aae22f4ccd95b",
+    "docs/evidence/cpu_compare_20261011/visual_review_20261011/diagnosis_summary.json": "2e034bce40c5a5fd4120ac9782eff6aac77eae6ea69208fa8f5b8327b5e7d947",
+    "docs/evidence/cpu_compare_20261011/visual_review_20261011/gpu_coarse_actual.json": "cd55ca3ee6a13b8812d8f20e10fa62134a3d4c41590841f43df41de22e639bad",
+    "docs/evidence/edge_adaptation_20261011/evidence_02/edge_bench_02/report.json": "610c3133d2b01a6d090bbf45432953c203adbc66a7a26dbbd366342307c36971",
+    "docs/evidence/edge_adaptation_20261011/evidence_02/wsvt_baseline_full_01/diagnostics.json": "a0a3bcde96666fb7994cb25656074d63f2f55d7af34d8d7567b2a8ebf27cbabb",
+    "docs/evidence/edge_adaptation_20261011/evidence_02/wsvt_input_01/report.json": "ffcb073bca838095c22eb59af14adbbaaa625ddd857ca6e431f9aba1af3e0a25"
+  }
+}

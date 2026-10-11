@@ -1,0 +1,340 @@
+[
+  {
+    "mode": "wsvt",
+    "version": "0.1.1",
+    "configuration": {
+      "mode": "wsvt",
+      "pixel_m": 1.625e-06,
+      "distance_m": 0.4845,
+      "energy_ev": 12400.0,
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "auto",
+      "reference_policy": "each-pair",
+      "wsvt_workspace": "streamed",
+      "spatial_chunk": 16,
+      "numpy_output_copy": false,
+      "cpu_threads": 2,
+      "device": 0,
+      "warmup": 1,
+      "repeats": 1,
+      "allow_experimental": false,
+      "half": 10,
+      "coarse_radius": 5,
+      "fine_radius": 4,
+      "iterations": 1,
+      "cut": 1,
+      "pyramid_levels": 2,
+      "frames": 100,
+      "template": 0,
+      "descriptor_depth": 63,
+      "variant_id": "edge-wsvt-baseline-gpu"
+    },
+    "outputs": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "ae1befdc8eef937f42e7683f37b8837062449cb28c27a4e723e48b539bc6925b"
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "bb64aff7fe07a008f0bc9c5b64c3fa4f2bb01bcf598e5191aef869b76f5c9430"
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "fffc13634b700c59e325ab5a3b4771af1a2e9527a9b3d7b689269c07e2c04ef3"
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "cdfda1b88a5343fd8d6af33949c972b6e064cdc52a19d65cb0315759a0616df6"
+      },
+      "phase": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "b477d0052b52c1be826045b4ae452cd7980ccfdc2edb899b40ec722b8b4ae5cc"
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "dd437480889ab99cea3ddf095c4702a21f889febe03e6c33d9706c4c10de8c77"
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "5b9af51dffd1fac9e80a397ccb8c8c4c3fb9bcec5faaacc09b0eac71775bdf88"
+      }
+    },
+    "features": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true,
+    "numpy_base_types": {
+      "displace_y": "Tensor",
+      "displace_x": "Tensor",
+      "DPC_y": "Tensor",
+      "DPC_x": "Tensor",
+      "phase": "Tensor",
+      "transmission": "Tensor",
+      "match_score_neg_ssd": "Tensor"
+    }
+  },
+  {
+    "mode": "wsvt",
+    "version": "0.1.1",
+    "configuration": {
+      "mode": "wsvt",
+      "pixel_m": 1.625e-06,
+      "distance_m": 0.4845,
+      "energy_ev": 12400,
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "auto",
+      "reference_policy": "each-pair",
+      "wsvt_workspace": "materialized",
+      "spatial_chunk": 16,
+      "numpy_output_copy": false,
+      "cpu_threads": 2,
+      "device": 0,
+      "warmup": 1,
+      "repeats": 5,
+      "allow_experimental": false,
+      "half": 10,
+      "coarse_radius": 5,
+      "fine_radius": 4,
+      "iterations": 1,
+      "cut": 1,
+      "pyramid_levels": 2,
+      "frames": 100,
+      "template": 0,
+      "descriptor_depth": 63,
+      "variant_id": "edge-wsvt-baseline-gpu"
+    },
+    "outputs": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "ae1befdc8eef937f42e7683f37b8837062449cb28c27a4e723e48b539bc6925b"
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "bb64aff7fe07a008f0bc9c5b64c3fa4f2bb01bcf598e5191aef869b76f5c9430"
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "fffc13634b700c59e325ab5a3b4771af1a2e9527a9b3d7b689269c07e2c04ef3"
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "cdfda1b88a5343fd8d6af33949c972b6e064cdc52a19d65cb0315759a0616df6"
+      },
+      "phase": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "b477d0052b52c1be826045b4ae452cd7980ccfdc2edb899b40ec722b8b4ae5cc"
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "dd437480889ab99cea3ddf095c4702a21f889febe03e6c33d9706c4c10de8c77"
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "5b9af51dffd1fac9e80a397ccb8c8c4c3fb9bcec5faaacc09b0eac71775bdf88"
+      }
+    },
+    "features": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true,
+    "numpy_base_types": {
+      "displace_y": "Tensor",
+      "displace_x": "Tensor",
+      "DPC_y": "Tensor",
+      "DPC_x": "Tensor",
+      "phase": "Tensor",
+      "transmission": "Tensor",
+      "match_score_neg_ssd": "Tensor"
+    }
+  },
+  {
+    "mode": "wsvt",
+    "version": "0.1.1",
+    "configuration": {
+      "mode": "wsvt",
+      "pixel_m": 1.625e-06,
+      "distance_m": 0.4845,
+      "energy_ev": 12400,
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "auto",
+      "reference_policy": "each-pair",
+      "wsvt_workspace": "streamed",
+      "spatial_chunk": 16,
+      "numpy_output_copy": false,
+      "cpu_threads": 2,
+      "device": 0,
+      "warmup": 1,
+      "repeats": 5,
+      "allow_experimental": false,
+      "half": 10,
+      "coarse_radius": 5,
+      "fine_radius": 4,
+      "iterations": 1,
+      "cut": 1,
+      "pyramid_levels": 2,
+      "frames": 100,
+      "template": 0,
+      "descriptor_depth": 63,
+      "variant_id": "edge-wsvt-baseline-gpu"
+    },
+    "outputs": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "ae1befdc8eef937f42e7683f37b8837062449cb28c27a4e723e48b539bc6925b"
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "bb64aff7fe07a008f0bc9c5b64c3fa4f2bb01bcf598e5191aef869b76f5c9430"
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "fffc13634b700c59e325ab5a3b4771af1a2e9527a9b3d7b689269c07e2c04ef3"
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "cdfda1b88a5343fd8d6af33949c972b6e064cdc52a19d65cb0315759a0616df6"
+      },
+      "phase": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "b477d0052b52c1be826045b4ae452cd7980ccfdc2edb899b40ec722b8b4ae5cc"
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "dd437480889ab99cea3ddf095c4702a21f889febe03e6c33d9706c4c10de8c77"
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "5b9af51dffd1fac9e80a397ccb8c8c4c3fb9bcec5faaacc09b0eac71775bdf88"
+      }
+    },
+    "features": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true,
+    "numpy_base_types": {
+      "displace_y": "Tensor",
+      "displace_x": "Tensor",
+      "DPC_y": "Tensor",
+      "DPC_x": "Tensor",
+      "phase": "Tensor",
+      "transmission": "Tensor",
+      "match_score_neg_ssd": "Tensor"
+    }
+  },
+  {
+    "mode": "wxst",
+    "version": "0.1.1",
+    "configuration": {
+      "mode": "wxst",
+      "pixel_m": 1.625e-06,
+      "distance_m": 0.4845,
+      "energy_ev": 12400.0,
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "auto",
+      "reference_policy": "each-pair",
+      "wsvt_workspace": "streamed",
+      "spatial_chunk": 16,
+      "numpy_output_copy": false,
+      "cpu_threads": 2,
+      "device": 0,
+      "warmup": 1,
+      "repeats": 1,
+      "allow_experimental": false,
+      "half": 10,
+      "coarse_radius": 5,
+      "fine_radius": 4,
+      "iterations": 1,
+      "cut": 1,
+      "pyramid_levels": 2,
+      "frames": 1,
+      "template": 7,
+      "descriptor_depth": 58,
+      "variant_id": "edge-wxst-fused-gpu"
+    },
+    "outputs": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "9597cc9244927dd9e1d1de37289518fcb4024430152f5fea415a0bb975ef25ba"
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "28141ebb7c8b88a42da398c62a985c23220a353a354b5417bbb5f93342e052ab"
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "fcfa52f3d7f429ddefaa5610a796a6ca00662611db258654f4a432a2f082d4d9"
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "21f2c9ef022ce624d978f89a1c4853b5440005e817e33372783d07fc27e85e6e"
+      },
+      "phase": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "296f1ed71523779a76af3261412b51b1c7c07f1ee5221c935ae3ee2584385fc2"
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "dd437480889ab99cea3ddf095c4702a21f889febe03e6c33d9706c4c10de8c77"
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "sha256": "a067061ee803ab602bd9ee191993fdd2cd51d5b4a566ee0bcdfedb4b865f6e65"
+      }
+    },
+    "features": {
+      "ref_fine": true,
+      "ref_coarse": true
+    },
+    "ownership_pass": true,
+    "numpy_base_types": {
+      "displace_y": "Tensor",
+      "displace_x": "Tensor",
+      "DPC_y": "Tensor",
+      "DPC_x": "Tensor",
+      "phase": "Tensor",
+      "transmission": "Tensor",
+      "match_score_neg_ssd": "Tensor"
+    }
+  }
+]

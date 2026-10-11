@@ -1,0 +1,13 @@
+{
+  "mode": "wsvt",
+  "pixel_m": 0.000001625,
+  "distance_m": 0.4845,
+  "energy_ev": 12400,
+  "wsvt_workspace": "materialized",
+  "numpy_output_copy": false,
+  "input_dtype": "auto",
+  "spline": "gpu",
+  "reference_policy": "each-pair",
+  "warmup": 1,
+  "repeats": 5
+}

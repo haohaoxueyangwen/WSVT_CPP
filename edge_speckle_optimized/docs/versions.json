@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "package_version": "0.1.0",
+  "variants": [
+    {
+      "id": "python-reference",
+      "role": "historical-baseline",
+      "location": "original server project",
+      "modes": [
+        "wxst",
+        "wsvt"
+      ]
+    },
+    {
+      "id": "fastxst-c",
+      "role": "historical-baseline",
+      "location": "original server project",
+      "modes": [
+        "wxst",
+        "wsvt"
+      ]
+    },
+    {
+      "id": "fast-cpp",
+      "role": "cpu-reference",
+      "location": "baselines/cpu",
+      "modes": [
+        "wxst",
+        "wsvt"
+      ],
+      "unified_cli": false
+    },
+    {
+      "id": "wxst-gpu-v1",
+      "role": "frozen-prototype",
+      "location": "baselines/legacy_wxst/wxst_orin.py",
+      "outputs_complete": false
+    },
+    {
+      "id": "wxst-gpu-v2",
+      "role": "frozen-prototype",
+      "location": "baselines/legacy_wxst/wxst_orin_v2.py",
+      "outputs_complete": false
+    },
+    {
+      "id": "wxst-gpu-v3",
+      "role": "frozen-prototype",
+      "location": "baselines/legacy_wxst/wxst_orin_v3.py",
+      "outputs_complete": false
+    },
+    {
+      "id": "edge-wxst-fused-gpu",
+      "role": "engineering-default",
+      "mode": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "outputs_complete": true
+    },
+    {
+      "id": "edge-wxst-materialized-gpu",
+      "role": "dataflow-control",
+      "mode": "wxst",
+      "front": "materialized",
+      "spline": "gpu",
+      "outputs_complete": true
+    },
+    {
+      "id": "edge-wsvt-baseline-gpu",
+      "role": "engineering-default",
+      "mode": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "outputs_complete": true
+    },
+    {
+      "id": "edge-wsvt-reordered-gpu",
+      "role": "experimental",
+      "mode": "wsvt",
+      "front": "reordered",
+      "spline": "gpu",
+      "default": false,
+      "gate_status": "historical full-size RMSE threshold exceeded; explicit opt-in required"
+    },
+    {
+      "id": "edge-wxst-fused-cpu",
+      "role": "spline-control",
+      "mode": "wxst",
+      "front": "fused",
+      "spline": "cpu",
+      "outputs_complete": true,
+      "default": false
+    },
+    {
+      "id": "edge-wxst-materialized-cpu",
+      "role": "spline-control",
+      "mode": "wxst",
+      "front": "materialized",
+      "spline": "cpu",
+      "outputs_complete": true,
+      "default": false
+    },
+    {
+      "id": "edge-wsvt-baseline-cpu",
+      "role": "spline-control",
+      "mode": "wsvt",
+      "front": "baseline",
+      "spline": "cpu",
+      "outputs_complete": true,
+      "default": false
+    },
+    {
+      "id": "edge-wsvt-reordered-cpu",
+      "role": "spline-control",
+      "mode": "wsvt",
+      "front": "reordered",
+      "spline": "cpu",
+      "default": false,
+      "gate_status": "historical full-size RMSE threshold exceeded; explicit opt-in required"
+    }
+  ]
+}

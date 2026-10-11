@@ -1,0 +1,152 @@
+[
+  {
+    "original": "scratch/orin_cuda_20261010/wxst_match.cu",
+    "packaged": "native/primitives.cuh",
+    "original_sha256": "c2129b0c49dba4e72c2d992f4548922e75080016f5fe751c35b80fde458f9f13",
+    "packaged_sha256": "c2129b0c49dba4e72c2d992f4548922e75080016f5fe751c35b80fde458f9f13",
+    "changes": []
+  },
+  {
+    "original": "scratch/orin_cuda_20261010/wxst_optimized.cu",
+    "packaged": "native/features.cuh",
+    "original_sha256": "b672e297c9bd4c60317f06ba69b5bd7cd0dfee8428caa91cde35981c8376bcb9",
+    "packaged_sha256": "ebca2ed19926907f00b5e354f6d2ce953a5b7707fae018d9d476eac676218341",
+    "changes": [
+      {
+        "old": "#include \"wxst_match.cu\"",
+        "new": "#include \"primitives.cuh\""
+      }
+    ]
+  },
+  {
+    "original": "scratch/orin_cuda_20261010/wxst_cached.cu",
+    "packaged": "native/cached_match.cuh",
+    "original_sha256": "f3642209c2b8a8619d8b3bd2e71f690f8bcdc86585662460823a61efbd89395a",
+    "packaged_sha256": "d51f35691afdbd2f0a5e28c8fb3f4b002ba128667d5135f036790937c9fe653a",
+    "changes": [
+      {
+        "old": "#include \"wxst_optimized.cu\"",
+        "new": "#include \"features.cuh\""
+      }
+    ]
+  },
+  {
+    "original": "scratch/orin_cuda_20261010/edge_adaptation_20261011/edge_kernels.cu",
+    "packaged": "native/edge_kernels.cu",
+    "original_sha256": "7e2dc439b208fa5fc3fd965d40be862aa7949cb77d6e095e4b90caa7d5ae986d",
+    "packaged_sha256": "b943ecd8c81073cc07b5f3632e7c4f6d967d89ae59ae46aa16f37aa75809c481",
+    "changes": [
+      {
+        "old": "#include \"../wxst_cached.cu\"",
+        "new": "#include \"cached_match.cuh\""
+      }
+    ]
+  },
+  {
+    "original": "scratch/orin_cuda_20261010/edge_adaptation_20261011/edge_spline.cpp",
+    "packaged": "native/edge_spline.cpp",
+    "original_sha256": "ad226b1f699fa80491104bb10e81fe7dcf7a46597fac8eb4e52ba8002c15c70e",
+    "packaged_sha256": "ad226b1f699fa80491104bb10e81fe7dcf7a46597fac8eb4e52ba8002c15c70e",
+    "changes": []
+  },
+  {
+    "original": "scratch/orin_cuda_20261010/edge_adaptation_20261011/edge_runtime.py",
+    "packaged": "speckle_edge/runtime.py",
+    "original_sha256": "1d5d5d9ed000703ff5be92a0cdb28c988c19465142daa4f420d7ac348b6e2992",
+    "packaged_sha256": "f618a9e88a4eef2dff96d60e0b6274b7ecb761d65780ebe36b0940e764560fae",
+    "changes": [
+      {
+        "old": "\r\n",
+        "new": "\n"
+      },
+      {
+        "old": "HERE=Path(__file__).resolve().parent",
+        "new": "HERE=Path(__file__).resolve().parent / '_native'"
+      },
+      {
+        "old": "class CPUSpline:\n    def __init__(self,shape,target,threads=2):",
+        "new": "class CPUSpline:\n    def __init__(self,shape,target,threads=2):\n        self.handle=None"
+      },
+      {
+        "old": "if self.handle:self.lib.edge_spline_destroy(self.handle);self.handle=None",
+        "new": "if getattr(self,'handle',None):self.lib.edge_spline_destroy(self.handle);self.handle=None"
+      },
+      {
+        "old": "'geometry_status':'historical conversion settings, not newly calibrated'",
+        "new": "'geometry_status':'explicit session settings; calibration is not inferred by runtime'"
+      }
+    ]
+  },
+  {
+    "original": "scratch/orin_cuda_20261010/wxst_orin.py",
+    "packaged": "baselines/legacy_wxst/wxst_orin.py",
+    "original_sha256": "bc1604b67ea239514431d46b83059510632ddb1d4327a4c184b6cad5a54a8426",
+    "packaged_sha256": "bc1604b67ea239514431d46b83059510632ddb1d4327a4c184b6cad5a54a8426",
+    "changes": []
+  },
+  {
+    "original": "scratch/orin_cuda_20261010/wxst_orin_v2.py",
+    "packaged": "baselines/legacy_wxst/wxst_orin_v2.py",
+    "original_sha256": "3debd34a4ad7ad265bf4e60ca96dd74ef12697be553c0ff43ad801d9182684be",
+    "packaged_sha256": "3debd34a4ad7ad265bf4e60ca96dd74ef12697be553c0ff43ad801d9182684be",
+    "changes": []
+  },
+  {
+    "original": "scratch/orin_cuda_20261010/wxst_orin_v3.py",
+    "packaged": "baselines/legacy_wxst/wxst_orin_v3.py",
+    "original_sha256": "955ab7afa1fa0c3130df1b85d7e4726d3a0f400247092640b0db93cd410eee09",
+    "packaged_sha256": "955ab7afa1fa0c3130df1b85d7e4726d3a0f400247092640b0db93cd410eee09",
+    "changes": []
+  },
+  {
+    "original": "scratch/orin_cuda_20261010/edge_adaptation_20261011/legacy_complete.py",
+    "packaged": "baselines/legacy_wxst/legacy_complete.py",
+    "original_sha256": "47a5828737c5e3ffe78193be584be557290295155736fdc51de5bb1e116d6405",
+    "packaged_sha256": "ad6a4a2bdec12c9f93a827e4a734ca72857389d08e7f5962b698d5cbbc68d2ce",
+    "changes": [
+      {
+        "old": "\r\n",
+        "new": "\n"
+      },
+      {
+        "old": ".parent.parent/'libwxst_cached.so'",
+        "new": ".parent/'libwxst_cached.so'"
+      }
+    ]
+  },
+  {
+    "original": "scratch/orin_cuda_20261010/cpu_compare_20261011/cpp_original_snapshot.tgz",
+    "packaged": "baselines/cpu/cpp_original_snapshot.tgz",
+    "original_sha256": "f5c7d0c8308a0463101b9bf4a803fda3fe9aac235b9a3bb19acecf603a255709",
+    "packaged_sha256": "f5c7d0c8308a0463101b9bf4a803fda3fe9aac235b9a3bb19acecf603a255709",
+    "changes": []
+  },
+  {
+    "original": "scratch/orin_cuda_20261010/cpu_compare_20261011/cpp_source_manifest.json",
+    "packaged": "baselines/cpu/cpp_source_manifest.json",
+    "original_sha256": "cd1edfea35130fd346b6c9c47b022a088a92e647bf2ff7703a8a306890674e41",
+    "packaged_sha256": "cd1edfea35130fd346b6c9c47b022a088a92e647bf2ff7703a8a306890674e41",
+    "changes": []
+  },
+  {
+    "original": "scratch/orin_cuda_20261010/cpu_compare_20261011/cpu_driver.cpp",
+    "packaged": "baselines/cpu/cpu_driver.cpp",
+    "original_sha256": "dd0eae7a24e68820f785bcd4c9c637dd547afe4862753f48753e41668afb9f29",
+    "packaged_sha256": "dd0eae7a24e68820f785bcd4c9c637dd547afe4862753f48753e41668afb9f29",
+    "changes": []
+  },
+  {
+    "original": "scratch/orin_cuda_20261010/cpu_compare_20261011/CMakeLists.txt",
+    "packaged": "baselines/cpu/CMakeLists.txt",
+    "original_sha256": "ad511e6d1d65e000386fb7361ec51812f0562f8a6abf6499ef3559bd05144ca4",
+    "packaged_sha256": "ad511e6d1d65e000386fb7361ec51812f0562f8a6abf6499ef3559bd05144ca4",
+    "changes": []
+  },
+  {
+    "original": "scratch/orin_cuda_20261010/cpu_compare_20261011/wsvtConfig.cmake.in",
+    "packaged": "baselines/cpu/wsvtConfig.cmake.in",
+    "original_sha256": "ea0190deb2a1b4dcb6e3963e6478b7c43a73703e8ea33e68bd7fbcedf8fcd94e",
+    "packaged_sha256": "ea0190deb2a1b4dcb6e3963e6478b7c43a73703e8ea33e68bd7fbcedf8fcd94e",
+    "changes": []
+  }
+]

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "speckle-edge"
+version = "0.1.1"
+description = "Separate WXST/WSVT sessions for the reviewed Jetson Orin pipeline"
+requires-python = ">=3.8"
+dependencies = ["numpy>=1.19"]
+
+[project.scripts]
+speckle-edge = "speckle_edge.cli:main"
+
+[tool.setuptools]
+packages = ["speckle_edge"]
+
+[tool.setuptools.package-data]
+speckle_edge = ["_native/*.so", "_native/build_info.json"]

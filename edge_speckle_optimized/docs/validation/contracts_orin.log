@@ -1,0 +1,9 @@
+test_cli_mode_mismatch_and_explicit_geometry (test_contracts.Contracts) ... ok
+test_dtype_preservation_and_input_errors (test_contracts.Contracts) ... ok
+test_modes_and_fixed_kernel_configuration (test_contracts.Contracts) ... ok
+test_output_detector_origins_and_finite_validation (test_contracts.Contracts) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.015s
+
+OK

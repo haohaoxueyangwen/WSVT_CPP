@@ -1,0 +1,52 @@
+-- The CXX compiler identification is GNU 12.3.0
+-- The CUDA compiler identification is NVIDIA 12.8.93 with host compiler GNU 12.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /usr/local/cuda-12.8/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+CMake Warning (dev) at /home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/gpu_common/CMakeLists.txt:8 (find_package):
+  Policy CMP0146 is not set: The FindCUDA module is removed.  Run "cmake
+  --help-policy CMP0146" for policy details.  Use the cmake_policy command to
+  set the policy and suppress this warning.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Found CUDA: /usr/local/cuda-12.8 (found version "12.8")
+-- Configuring done (2.5s)
+CMake Warning (dev) in /home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/gpu_common/CMakeLists.txt:
+  Policy CMP0104 is not set: CMAKE_CUDA_ARCHITECTURES now detected for NVCC,
+  empty CUDA_ARCHITECTURES not allowed.  Run "cmake --help-policy CMP0104"
+  for policy details.  Use the cmake_policy command to set the policy and
+  suppress this warning.
+
+  CUDA_ARCHITECTURES is empty for target "speckle_native".
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in /home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/gpu_common/CMakeLists.txt:
+  Policy CMP0104 is not set: CMAKE_CUDA_ARCHITECTURES now detected for NVCC,
+  empty CUDA_ARCHITECTURES not allowed.  Run "cmake --help-policy CMP0104"
+  for policy details.  Use the cmake_policy command to set the policy and
+  suppress this warning.
+
+  CUDA_ARCHITECTURES is empty for target "speckle_native".
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Generating done (0.0s)
+-- Build files have been written to: /home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/build_desktop
+[ 20%] Building CUDA object shared_gpu/CMakeFiles/speckle_native.dir/native/edge_kernels.cu.o
+[ 40%] Building CUDA object shared_gpu/CMakeFiles/speckle_native.dir/src/session.cu.o
+[ 60%] Linking CUDA shared library ../lib/libspeckle_native.so
+[ 60%] Built target speckle_native
+[ 80%] Building CXX object shared_gpu/CMakeFiles/speckle_gpu.dir/src/main.cpp.o
+[100%] Linking CXX executable ../bin/speckle_gpu
+[100%] Built target speckle_gpu
+NATIVE_BUILD_COMPLETE desktop

@@ -1,0 +1,175 @@
+-- The C compiler identification is GNU 12.3.0
+-- The CXX compiler identification is GNU 12.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found OpenMP_C: -fopenmp (found version "4.5")
+-- Found OpenMP_CXX: -fopenmp (found version "4.5")
+-- Found OpenMP: TRUE (found version "4.5")
+-- WSVT: HDF5 enabled
+-- WSVT: FFTW3 threading support enabled
+-- WSVT: FFTW3 (single precision) enabled
+-- Configuring done (1.0s)
+CMake Warning at CMakeLists.txt:47 (add_library):
+  Cannot generate a safe runtime search path for target wsvt_ddf_author
+  because files in some directories may conflict with libraries in implicit
+  directories:
+
+    runtime library [libgomp.so.1] in /usr/lib/gcc/x86_64-linux-gnu/12 may be hidden by files in:
+      /home/yrc/vscodespace/anaconda3/envs/wsvt_cpp/lib
+
+  Some of these libraries may not be found correctly.
+
+
+CMake Warning at CMakeLists.txt:206 (add_executable):
+  Cannot generate a safe runtime search path for target wsvt_cli because
+  files in some directories may conflict with libraries in implicit
+  directories:
+
+    runtime library [libgomp.so.1] in /usr/lib/gcc/x86_64-linux-gnu/12 may be hidden by files in:
+      /home/yrc/vscodespace/anaconda3/envs/wsvt_cpp/lib
+
+  Some of these libraries may not be found correctly.
+
+
+-- Generating done (0.0s)
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    FFTW3F_INC
+    FFTW3F_LIB
+
+
+-- Build files have been written to: /home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/build_cpu_desktop
+
+[  4%] Building CXX object CMakeFiles/wsvt_core.dir/src/core.cpp.o
+[  8%] Building CXX object CMakeFiles/wsvt_core.dir/src/euclidean_dist.cpp.o
+[ 12%] Building CXX object CMakeFiles/wsvt_core.dir/src/image_ops.cpp.o
+[ 16%] Building CXX object CMakeFiles/wsvt_core.dir/src/template_window.cpp.o
+[ 20%] Building CXX object CMakeFiles/wsvt_core.dir/src/phase_recovery.cpp.o
+[ 24%] Building CXX object CMakeFiles/wsvt_core.dir/src/pyramid.cpp.o
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/phase_recovery.cpp:185:16: warning: ‘wsvt::Image2D<float> wsvt::{anonymous}::frankot_chellappa_bruteforce(wsvt::ImageView2D<const float>, wsvt::ImageView2D<const float>)’ defined but not used [-Wunused-function]
+  185 | Image2D<float> frankot_chellappa_bruteforce(
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[ 28%] Building CXX object CMakeFiles/wsvt_core.dir/src/wavelet_ops.cpp.o
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wavelet_ops.cpp: In function ‘wsvt::WaveletResult wsvt::wavelet_transform_hwd_pixelchain(std::span<const float>, std::size_t, std::size_t, std::size_t, WaveletFamily, int, int, const std::vector<DwtLevelPlan>&)’:
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wavelet_ops.cpp:556:29: warning: variable ‘cur_depth’ set but not used [-Wunused-but-set-variable]
+  556 |                 std::size_t cur_depth = depth_in;
+      |                             ^~~~~~~~~
+[ 32%] Building CXX object CMakeFiles/wsvt_core.dir/src/filter_ops.cpp.o
+[ 36%] Building CXX object CMakeFiles/wsvt_core.dir/src/io_h5.cpp.o
+[ 40%] Building CXX object CMakeFiles/wsvt_core.dir/src/io_json.cpp.o
+[ 44%] Building CXX object CMakeFiles/wsvt_core.dir/src/io_image.cpp.o
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/io_image.cpp: In function ‘wsvt::Image2D wsvt::read_image_gray(const std::string&)’:
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/io_image.cpp:70:44: warning: unused parameter ‘filename’ [-Wunused-parameter]
+   70 | Image2D read_image_gray(const std::string& filename) {
+      |                         ~~~~~~~~~~~~~~~~~~~^~~~~~~~
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/io_image.cpp: In function ‘void wsvt::read_image_gray_into(const std::string&, float*, std::size_t, std::size_t)’:
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/io_image.cpp:103:46: warning: unused parameter ‘filename’ [-Wunused-parameter]
+  103 | void read_image_gray_into(const std::string& filename, float* dst, std::size_t h, std::size_t w) {
+      |                           ~~~~~~~~~~~~~~~~~~~^~~~~~~~
+[ 48%] Building CXX object CMakeFiles/wsvt_core.dir/src/align_ops.cpp.o
+[ 52%] Building CXX object CMakeFiles/wsvt_core.dir/src/crop_ops.cpp.o
+[ 56%] Building CXX object CMakeFiles/wsvt_core.dir/src/console_ops.cpp.o
+[ 60%] Building CXX object CMakeFiles/wsvt_core.dir/src/solver_utils.cpp.o
+[ 64%] Building CXX object CMakeFiles/wsvt_core.dir/src/umpa_physical_fit.cpp.o
+[ 68%] Building CXX object CMakeFiles/wsvt_core.dir/src/scalar_darkfield.cpp.o
+[ 72%] Building CXX object CMakeFiles/wsvt_core.dir/src/umpa_ddf_kernel.cpp.o
+[ 76%] Building CXX object CMakeFiles/wsvt_core.dir/src/umpa_ddf_author_fit.cpp.o
+[ 80%] Building CXX object CMakeFiles/wsvt_core.dir/src/wsvt_umpa_refine.cpp.o
+[ 84%] Building CXX object CMakeFiles/wsvt_core.dir/src/wsvt_pipeline.cpp.o
+[ 88%] Building CXX object CMakeFiles/wsvt_core.dir/src/wxst_pipeline.cpp.o
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp: In member function ‘wsvt::SolverOutput wsvt::WSVT::solver()’:
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::temporal_stage_frame_counts’ [-Wmissing-field-initializers]
+ 2149 |     };
+      |     ^
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::temporal_stage_active_pixel_counts’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::temporal_stage_accepted_pixel_counts’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::temporal_stage_sample_descriptor_pixel_counts’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::temporal_stage_reference_descriptor_pixel_counts’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::umpa_proposal_y’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::umpa_proposal_x’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::umpa_relative_offset_y’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::umpa_relative_offset_x’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::umpa_best_cost’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::umpa_second_best_cost’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::umpa_cost_margin’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::umpa_transmission’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::umpa_visibility’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::umpa_delta’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::umpa_condition’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::umpa_numerical_valid’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::umpa_physical_valid’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::umpa_local_boundary_hit’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::umpa_candidates_evaluated’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::scalar_T’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::scalar_D’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::scalar_a’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::scalar_b’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::scalar_cost’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::scalar_delta’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::scalar_weight_sum’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::scalar_lnD’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::scalar_numerical_valid’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wsvt_pipeline.cpp:2149:5: warning: missing initializer for member ‘wsvt::SolverOutput::scalar_physical_valid’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wxst_pipeline.cpp: In member function ‘wsvt::WXSTOutput wsvt::WXST::solver()’:
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wxst_pipeline.cpp:585:5: warning: missing initializer for member ‘wsvt::WXSTOutput::scalar_T’ [-Wmissing-field-initializers]
+  585 |     };
+      |     ^
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wxst_pipeline.cpp:585:5: warning: missing initializer for member ‘wsvt::WXSTOutput::scalar_D’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wxst_pipeline.cpp:585:5: warning: missing initializer for member ‘wsvt::WXSTOutput::scalar_a’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wxst_pipeline.cpp:585:5: warning: missing initializer for member ‘wsvt::WXSTOutput::scalar_b’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wxst_pipeline.cpp:585:5: warning: missing initializer for member ‘wsvt::WXSTOutput::scalar_cost’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wxst_pipeline.cpp:585:5: warning: missing initializer for member ‘wsvt::WXSTOutput::scalar_delta’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wxst_pipeline.cpp:585:5: warning: missing initializer for member ‘wsvt::WXSTOutput::scalar_weight_sum’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wxst_pipeline.cpp:585:5: warning: missing initializer for member ‘wsvt::WXSTOutput::scalar_lnD’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wxst_pipeline.cpp:585:5: warning: missing initializer for member ‘wsvt::WXSTOutput::scalar_numerical_valid’ [-Wmissing-field-initializers]
+/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/cpu_cpp/source/src/wxst_pipeline.cpp:585:5: warning: missing initializer for member ‘wsvt::WXSTOutput::scalar_physical_valid’ [-Wmissing-field-initializers]
+[ 92%] Linking CXX static library libwsvt_core.a
+[ 92%] Built target wsvt_core
+[ 96%] Building CXX object CMakeFiles/wsvt_cli.dir/src/main.cpp.o
+[100%] Linking CXX executable wsvt_cli
+[100%] Built target wsvt_cli
+[93mWXST warning: n_group is compatibility metadata only and does not control C++ parallelism[00m
+[96mNo gpu found. Use CPU instead.[00m
+[92mComputer available cores: 192[00m
+[94mUse 2 cores for pyramid/wavelet/displace[00m
+[92mobtain pyramid image and stack the window with pyramid level: 1[00m
+[94m  pyramid detail: downsample=0.000009s tmpl_win=0.000146s normalize=0.000000s[00m
+[94m  pyramid detail: downsample=0.000007s tmpl_win=0.000051s normalize=0.000000s[00m
+[94mpyramid time: 0.000241 s[00m
+[92mobtain wavelet data...[00m
+[92mmax wavelet level: 1[00m
+[92mpyramid level: 0
+vector length: 12[00m
+[92mpyramid level: 1
+vector length: 12[00m
+[94mwavelet time: 0.000166 s[00m
+[96mpyramid level: 1
+Image size: (18, 18, 12)
+searching window:1[00m
+[96mpyramid level: 0
+Image size: (32, 32, 12)
+searching window:2[00m
+[94mdisplace time: 0.000322 s[00m
+[92mComputer available cores: 192[00m
+[94mUse 2 cores for post-process/FFTW phase recovery[00m
+[94mpost-process time: 0.002944 s[00m
+[94m  post detail: transmission=0.000002s crop_sign=0.000003s dpc_conv=0.000003s phase_recovery=0.002934s[00m
+[94mtotal time: 0.003741 s[00m
+[94m  pyramid:    0.000241 s[00m
+[94m  tmpl_win:   0.000197 s[00m
+[94m  wavelet:    0.000166 s[00m
+[94m  displace:   0.000322 s[00m
+[94m  post-proc:  0.002944 s[00m
+wxst_displace_shape=28x28
+
+/bin/bash: /home/yrc/vscodespace/anaconda3/envs/wsvt_cpp/lib/libtinfo.so.6: no version information available (required by /bin/bash)
+CPU_EDITION_BUILD_PASS

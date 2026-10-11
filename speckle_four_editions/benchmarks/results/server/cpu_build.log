@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/tools/build_cpu_verified.py", line 11, in <module>
+    p=subprocess.run(cmd,env=env,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);print(p.stdout,flush=True);p.check_returncode();assert 'FFTW3 (single precision) enabled' in p.stdout
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yrc/vscodespace/anaconda3/lib/python3.11/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yrc/vscodespace/anaconda3/lib/python3.11/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/home/yrc/vscodespace/anaconda3/lib/python3.11/subprocess.py", line 1950, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: '/home/yrc/vscodespace/anaconda3/envs/wsvt_cpp/bin/cmake'

@@ -1,0 +1,1168 @@
+[
+  {
+    "case": "wxst_odd",
+    "low_memory": false,
+    "mapped_input": false,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": false,
+        "max_abs": 7.62939453125e-06,
+        "rmse": 1.5821178745022695e-06,
+        "finite": true,
+        "max_abs_limit": 0.0023193298530578615,
+        "rmse_limit": 0.00021027513425440181,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "wxst_odd",
+    "low_memory": false,
+    "mapped_input": true,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": false,
+        "max_abs": 7.62939453125e-06,
+        "rmse": 1.5821178745022695e-06,
+        "finite": true,
+        "max_abs_limit": 0.0023193298530578615,
+        "rmse_limit": 0.00021027513425440181,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "wsvt_odd",
+    "low_memory": false,
+    "mapped_input": false,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": false,
+        "max_abs": 7.62939453125e-06,
+        "rmse": 1.0008727339538462e-06,
+        "finite": true,
+        "max_abs_limit": 0.002314492053985596,
+        "rmse_limit": 0.00021017292239072153,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "wsvt_odd",
+    "low_memory": true,
+    "mapped_input": false,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": false,
+        "max_abs": 7.62939453125e-06,
+        "rmse": 1.0008727339538462e-06,
+        "finite": true,
+        "max_abs_limit": 0.002314492053985596,
+        "rmse_limit": 0.00021017292239072153,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "wsvt_odd",
+    "low_memory": false,
+    "mapped_input": true,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": false,
+        "max_abs": 7.62939453125e-06,
+        "rmse": 1.0008727339538462e-06,
+        "finite": true,
+        "max_abs_limit": 0.002314492053985596,
+        "rmse_limit": 0.00021017292239072153,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "wsvt_odd",
+    "low_memory": true,
+    "mapped_input": true,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": false,
+        "max_abs": 7.62939453125e-06,
+        "rmse": 1.0008727339538462e-06,
+        "finite": true,
+        "max_abs_limit": 0.002314492053985596,
+        "rmse_limit": 0.00021017292239072153,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "wsvt_even",
+    "low_memory": false,
+    "mapped_input": false,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": false,
+        "max_abs": 1.1444091796875e-05,
+        "rmse": 1.6532063022017244e-06,
+        "finite": true,
+        "max_abs_limit": 0.0023057948303222657,
+        "rmse_limit": 0.0002099090086921373,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "wsvt_even",
+    "low_memory": true,
+    "mapped_input": false,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": false,
+        "max_abs": 1.1444091796875e-05,
+        "rmse": 1.6532063022017244e-06,
+        "finite": true,
+        "max_abs_limit": 0.0023057948303222657,
+        "rmse_limit": 0.0002099090086921373,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "wsvt_even",
+    "low_memory": false,
+    "mapped_input": true,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": false,
+        "max_abs": 1.1444091796875e-05,
+        "rmse": 1.6532063022017244e-06,
+        "finite": true,
+        "max_abs_limit": 0.0023057948303222657,
+        "rmse_limit": 0.0002099090086921373,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "wsvt_even",
+    "low_memory": true,
+    "mapped_input": true,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": false,
+        "max_abs": 1.1444091796875e-05,
+        "rmse": 1.6532063022017244e-06,
+        "finite": true,
+        "max_abs_limit": 0.0023057948303222657,
+        "rmse_limit": 0.0002099090086921373,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "wsvt_float",
+    "low_memory": false,
+    "mapped_input": false,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": false,
+        "max_abs": 7.62939453125e-06,
+        "rmse": 1.0008727339538462e-06,
+        "finite": true,
+        "max_abs_limit": 0.002314492053985596,
+        "rmse_limit": 0.00021017292239072153,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "wsvt_float",
+    "low_memory": true,
+    "mapped_input": false,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": false,
+        "max_abs": 7.62939453125e-06,
+        "rmse": 1.0008727339538462e-06,
+        "finite": true,
+        "max_abs_limit": 0.002314492053985596,
+        "rmse_limit": 0.00021017292239072153,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "wsvt_float",
+    "low_memory": false,
+    "mapped_input": true,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": false,
+        "max_abs": 7.62939453125e-06,
+        "rmse": 1.0008727339538462e-06,
+        "finite": true,
+        "max_abs_limit": 0.002314492053985596,
+        "rmse_limit": 0.00021017292239072153,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "wsvt_float",
+    "low_memory": true,
+    "mapped_input": true,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": false,
+        "max_abs": 7.62939453125e-06,
+        "rmse": 1.0008727339538462e-06,
+        "finite": true,
+        "max_abs_limit": 0.002314492053985596,
+        "rmse_limit": 0.00021017292239072153,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "constant",
+    "low_memory": false,
+    "mapped_input": false,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "max_abs_limit": 0.002,
+        "rmse_limit": 0.0002,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "constant",
+    "low_memory": true,
+    "mapped_input": false,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "max_abs_limit": 0.002,
+        "rmse_limit": 0.0002,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "constant",
+    "low_memory": false,
+    "mapped_input": true,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "max_abs_limit": 0.002,
+        "rmse_limit": 0.0002,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "constant",
+    "low_memory": true,
+    "mapped_input": true,
+    "fields": {
+      "displace_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "displace_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_y": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "DPC_x": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "phase": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "max_abs_limit": 0.002,
+        "rmse_limit": 0.0002,
+        "pass": true
+      },
+      "transmission": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      },
+      "match_score_neg_ssd": {
+        "exact": true,
+        "max_abs": 0.0,
+        "rmse": 0.0,
+        "finite": true,
+        "pass": true
+      }
+    },
+    "descriptors": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  }
+]

@@ -1,0 +1,8 @@
+build_*/
+__pycache__/
+*.pyc
+*.so
+*.npy
+*.npz
+dist/
+runs/

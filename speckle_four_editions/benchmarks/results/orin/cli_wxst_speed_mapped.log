@@ -1,0 +1,6 @@
+measured 0 solver=0.596797 api=0.605735
+measured 1 solver=0.596466 api=0.614055
+measured 2 solver=0.596999 api=0.610817
+measured 3 solver=0.595286 api=0.604745
+measured 4 solver=0.595201 api=0.60906
+complete /home/xray/Documents/WSVT_GPU_orin_20261010/native_four_editions_20261011/wxst/cli_wxst_speed_mapped

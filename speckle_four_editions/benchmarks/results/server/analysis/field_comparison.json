@@ -1,0 +1,2515 @@
+{
+  "wsvt": {
+    "native_speed": {
+      "displace_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "displace_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "phase": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 2.0541606698195712e-05,
+          "changed_pixels": 3509380,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 2.7182937257230684e-05,
+          "changed_pixels": 838687,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 3.32700368221511e-05,
+          "changed_pixels": 249168,
+          "pass_gate": true
+        }
+      },
+      "transmission": {
+        "full": {
+          "shape": [
+            2048,
+            2048
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "match_score_neg_ssd": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "descriptors": {
+        "ref_fine": true,
+        "ref_coarse": true,
+        "sample_fine": true,
+        "sample_coarse": true
+      }
+    },
+    "native_memory": {
+      "displace_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "displace_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "phase": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 2.0541606698195712e-05,
+          "changed_pixels": 3509380,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 2.7182937257230684e-05,
+          "changed_pixels": 838687,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 3.32700368221511e-05,
+          "changed_pixels": 249168,
+          "pass_gate": true
+        }
+      },
+      "transmission": {
+        "full": {
+          "shape": [
+            2048,
+            2048
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "match_score_neg_ssd": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "descriptors": {
+        "ref_fine": true,
+        "ref_coarse": true,
+        "sample_fine": true,
+        "sample_coarse": true
+      }
+    },
+    "original_pinned": {
+      "displace_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "displace_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "phase": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "transmission": {
+        "full": {
+          "shape": [
+            2048,
+            2048
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "match_score_neg_ssd": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "descriptors": {
+        "ref_fine": true,
+        "ref_coarse": true,
+        "sample_fine": true,
+        "sample_coarse": true
+      }
+    },
+    "native_speed_pinned": {
+      "displace_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "displace_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "phase": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 2.0541606698195712e-05,
+          "changed_pixels": 3509380,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 2.7182937257230684e-05,
+          "changed_pixels": 838687,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 3.32700368221511e-05,
+          "changed_pixels": 249168,
+          "pass_gate": true
+        }
+      },
+      "transmission": {
+        "full": {
+          "shape": [
+            2048,
+            2048
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "match_score_neg_ssd": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "descriptors": {
+        "ref_fine": true,
+        "ref_coarse": true,
+        "sample_fine": true,
+        "sample_coarse": true
+      }
+    },
+    "cli_wsvt_speed_copy": {
+      "displace_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "displace_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "phase": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 2.0541606698195712e-05,
+          "changed_pixels": 3509380,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 2.7182937257230684e-05,
+          "changed_pixels": 838687,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 3.32700368221511e-05,
+          "changed_pixels": 249168,
+          "pass_gate": true
+        }
+      },
+      "transmission": {
+        "full": {
+          "shape": [
+            2048,
+            2048
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "match_score_neg_ssd": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "descriptors": {}
+    },
+    "cli_wsvt_low_memory_copy": {
+      "displace_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "displace_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "phase": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 2.0541606698195712e-05,
+          "changed_pixels": 3509380,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 2.7182937257230684e-05,
+          "changed_pixels": 838687,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 3.32700368221511e-05,
+          "changed_pixels": 249168,
+          "pass_gate": true
+        }
+      },
+      "transmission": {
+        "full": {
+          "shape": [
+            2048,
+            2048
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "match_score_neg_ssd": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "descriptors": {}
+    }
+  },
+  "wxst": {
+    "native_speed": {
+      "displace_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "displace_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "phase": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 1.7359907626037334e-05,
+          "changed_pixels": 3650137,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 2.521494753196954e-05,
+          "changed_pixels": 842530,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 3.115700586965601e-05,
+          "changed_pixels": 243808,
+          "pass_gate": true
+        }
+      },
+      "transmission": {
+        "full": {
+          "shape": [
+            2048,
+            2048
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "match_score_neg_ssd": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "descriptors": {
+        "ref_fine": true,
+        "ref_coarse": true
+      }
+    },
+    "original_pinned": {
+      "displace_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "displace_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "phase": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "transmission": {
+        "full": {
+          "shape": [
+            2048,
+            2048
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "match_score_neg_ssd": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "descriptors": {
+        "ref_fine": true,
+        "ref_coarse": true
+      }
+    },
+    "native_speed_pinned": {
+      "displace_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "displace_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "phase": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 1.7359907626037334e-05,
+          "changed_pixels": 3650137,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 2.521494753196954e-05,
+          "changed_pixels": 842530,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 3.115700586965601e-05,
+          "changed_pixels": 243808,
+          "pass_gate": true
+        }
+      },
+      "transmission": {
+        "full": {
+          "shape": [
+            2048,
+            2048
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "match_score_neg_ssd": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "descriptors": {
+        "ref_fine": true,
+        "ref_coarse": true
+      }
+    },
+    "cli_wxst_speed_copy": {
+      "displace_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "displace_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_y": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "DPC_x": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "phase": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 1.7359907626037334e-05,
+          "changed_pixels": 3650137,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 2.521494753196954e-05,
+          "changed_pixels": 842530,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": false,
+          "max_abs": 0.000152587890625,
+          "rmse": 3.115700586965601e-05,
+          "changed_pixels": 243808,
+          "pass_gate": true
+        }
+      },
+      "transmission": {
+        "full": {
+          "shape": [
+            2048,
+            2048
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "match_score_neg_ssd": {
+        "full": {
+          "shape": [
+            2028,
+            2028
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "center1000": {
+          "shape": [
+            1000,
+            1000
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        },
+        "user_roi": {
+          "shape": [
+            500,
+            600
+          ],
+          "exact": true,
+          "max_abs": 0.0,
+          "rmse": 0.0,
+          "changed_pixels": 0,
+          "pass_gate": true
+        }
+      },
+      "descriptors": {}
+    }
+  }
+}

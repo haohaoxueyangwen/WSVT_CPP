@@ -1,0 +1,6 @@
+measured 0 solver=1.268 api=1.27179
+measured 1 solver=1.26219 api=1.26586
+measured 2 solver=1.26213 api=1.26595
+measured 3 solver=1.2624 api=1.26615
+measured 4 solver=1.26248 api=1.26612
+complete /home/xray/Documents/WSVT_GPU_orin_20261010/native_four_editions_20261011/wsvt/cli_wsvt_speed_copy

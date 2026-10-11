@@ -35,3 +35,7 @@ The edge package implements search half-window 10, coarse radius 5, fine radius 
 Build on Orin with `python3 tools/build.py` from `edge_speckle`. Native CUDA/CPU-spline rebuilds, four small-input packaging regressions and both CLI entries passed on the recorded Orin environment; [validation records](edge_speckle/docs/VALIDATION.md) retain the scope and known localized cross-backend differences. This publication does not rerun full-size benchmarks or native tests for the separate root C++ snapshot. Data and generated native binaries are not included.
 
 See [version responsibilities](edge_speckle/docs/VERSIONS.md) and [GitHub publication provenance](docs/jetson_edge_publication.md). CPU benchmark source inside the edge package is an archival, separately configured comparison snapshot; it does not replace the root C++ source.
+
+## Native four-edition release (2026-10-12)
+
+See [speckle_four_editions](speckle_four_editions/README.md) for preserved Python/CPU editions and native C++/CUDA/cuFFT discrete-GPU and Jetson editions. Original edge_speckle packages remain available. Both hosts were tested on full2048 BB11 inputs, including WSVT speed/low-memory policies, raw trials, memory receipts and reconstruction comparisons. [Measured results](speckle_four_editions/benchmarks/RESULTS.md).

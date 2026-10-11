@@ -1,0 +1,187 @@
+[
+  {
+    "solver_s": 0.6048525010119192,
+    "api_s": 0.6486757560051046,
+    "reference_s": 0.046539775998098776,
+    "sample_s": 0.5583127250138205,
+    "download_s": 0.03214945498621091,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.5583127250138205,
+      "call_with_download_s": 0.5904621800000314,
+      "reference_prepare_s": 0.046539775998098776,
+      "gpu_event_s": {
+        "input": 0.002195039987564087,
+        "transmission": 0.002105216026306152,
+        "sample_front": 0.0003055039942264557,
+        "coarse_match": 0.10035715484619141,
+        "spline": 0.02293734359741211,
+        "fine_match": 0.4111552429199219,
+        "DPC": 0.003209343910217285,
+        "phase": 0.015425727844238282
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 0.00010848199599422514,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": [
+      1.93,
+      1.41,
+      0.87
+    ],
+    "repeat": 0
+  },
+  {
+    "solver_s": 0.6089301589818206,
+    "api_s": 0.6526947899837978,
+    "reference_s": 0.046863395982654765,
+    "sample_s": 0.5620667629991658,
+    "download_s": 0.02938416801043786,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.5620667629991658,
+      "call_with_download_s": 0.5914509310096037,
+      "reference_prepare_s": 0.046863395982654765,
+      "gpu_event_s": {
+        "input": 0.0022006399631500245,
+        "transmission": 0.0020903999805450438,
+        "sample_front": 0.00030463999509811404,
+        "coarse_match": 0.10035545349121094,
+        "spline": 0.022920608520507812,
+        "fine_match": 0.4112296142578125,
+        "DPC": 0.00339190411567688,
+        "phase": 0.01893065643310547
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.465802577324212e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": [
+      1.93,
+      1.41,
+      0.87
+    ],
+    "repeat": 1
+  },
+  {
+    "solver_s": 0.6065858360088896,
+    "api_s": 0.655057895986829,
+    "reference_s": 0.04678432201035321,
+    "sample_s": 0.5598015139985364,
+    "download_s": 0.03259400601382367,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.5598015139985364,
+      "call_with_download_s": 0.5923955200123601,
+      "reference_prepare_s": 0.04678432201035321,
+      "gpu_event_s": {
+        "input": 0.0037335040569305418,
+        "transmission": 0.0021043839454650878,
+        "sample_front": 0.0003065919876098633,
+        "coarse_match": 0.10035603332519531,
+        "spline": 0.022906175613403322,
+        "fine_match": 0.411150390625,
+        "DPC": 0.0032111999988555908,
+        "phase": 0.01543564796447754
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.48490051086992e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": [
+      1.93,
+      1.41,
+      0.87
+    ],
+    "repeat": 2
+  },
+  {
+    "solver_s": 0.6051715769863222,
+    "api_s": 0.6526376369874924,
+    "reference_s": 0.04685200398671441,
+    "sample_s": 0.5583195729996078,
+    "download_s": 0.03151664597680792,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.5583195729996078,
+      "call_with_download_s": 0.5898362189764157,
+      "reference_prepare_s": 0.04685200398671441,
+      "gpu_event_s": {
+        "input": 0.0022066559791564942,
+        "transmission": 0.0020797760486602783,
+        "sample_front": 0.00030876800417900085,
+        "coarse_match": 0.10035330963134766,
+        "spline": 0.02289753532409668,
+        "fine_match": 0.4111532287597656,
+        "DPC": 0.0032111361026763915,
+        "phase": 0.01545580768585205
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.052999666891992e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": [
+      1.93,
+      1.41,
+      0.87
+    ],
+    "repeat": 3
+  },
+  {
+    "solver_s": 0.6069669619901106,
+    "api_s": 0.6562369530147407,
+    "reference_s": 0.048688189999666065,
+    "sample_s": 0.5582787719904445,
+    "download_s": 0.03187546698609367,
+    "detail": {
+      "kind": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 0.5582787719904445,
+      "call_with_download_s": 0.5901542389765382,
+      "reference_prepare_s": 0.048688189999666065,
+      "gpu_event_s": {
+        "input": 0.0022029440402984617,
+        "transmission": 0.0020662400722503663,
+        "sample_front": 0.00030745598673820497,
+        "coarse_match": 0.10035513305664062,
+        "spline": 0.022910463333129884,
+        "fine_match": 0.4111563720703125,
+        "DPC": 0.003213536024093628,
+        "phase": 0.01542627239227295
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.385700104758143e-05,
+      "persistent_device_bytes": 1712082240,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": [
+      1.93,
+      1.41,
+      0.87
+    ],
+    "repeat": 4
+  }
+]

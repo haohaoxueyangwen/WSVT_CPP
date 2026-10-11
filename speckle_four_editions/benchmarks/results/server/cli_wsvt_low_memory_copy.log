@@ -1,0 +1,6 @@
+measured 0 solver=0.168259 api=0.172563
+measured 1 solver=0.167448 api=0.171749
+measured 2 solver=0.175608 api=0.179907
+measured 3 solver=0.174548 api=0.178848
+measured 4 solver=0.166364 api=0.170661
+complete /home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/wsvt/cli_wsvt_low_memory_copy

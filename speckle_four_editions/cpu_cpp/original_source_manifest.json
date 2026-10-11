@@ -1,0 +1,188 @@
+{
+  "source_sha256": {
+    "CMakeLists.txt": "00a7d5f88a6f46959bb81c46c7eea19d3c14216f6a4a2ceaf68e2f982880826a",
+    "src/align_ops.cpp": "1d9e96924c5cf79601b823443bc8dc12f0164f052f9c7f5ca5167e9e95231ad8",
+    "src/console_ops.cpp": "17833503e373c8f35ac342c440ae8234ac409b0690f691ad7dd4749ef91a149a",
+    "src/core.cpp": "63b0aca42903698d913ef205a224914e46ebdefdc859a5bf78cb193f7b6eca6b",
+    "src/crop_ops.cpp": "0367402eb998e7fed4d6359f39cc859412375d69b67b4c2624b84047263e8b03",
+    "src/euclidean_dist.cpp": "b1245192ba98bee6da29384665ae873292f75aa45b3634e7e1a74b2e39ccf0c9",
+    "src/filter_ops.cpp": "340482478b164881f4c00c44950b75e8b17c004426ff849e3730017cb47abc4b",
+    "src/image_ops.cpp": "afcbbbfdb406176022f8c370140e5560915e8736c473f1d192c52b58b4e17e77",
+    "src/io_h5.cpp": "6beec188a6fc369eef819963497cd09d0a94b3e4ea7dd470cfa24e693974fe52",
+    "src/io_image.cpp": "50bc6c313001cfb6d317d105881d75de8b01503a4a27c3d38eb743bcfce6ddde",
+    "src/io_json.cpp": "1902cef706776f897fe4a9fa7f62f11c88794826d64395e8668e601d874889f3",
+    "src/main.cpp": "9eb1398992ae912efbbc59512229e4678675edce2ebe2af1cc306a757825bbe9",
+    "src/phase_recovery.cpp": "c33a119a02117b3629a1dc90f2f756a55fbac1dee097cecd5ee720e510ea4a37",
+    "src/pyramid.cpp": "79583103d7f7d323aae5565eea417b2592e968d5534881ebb121eeaef665cb32",
+    "src/scalar_darkfield.cpp": "e62faa95811da43c3ce6c6ccba302fd114b9baacc2419bf8d07243cfb0d3492b",
+    "src/solver_utils.cpp": "469c74b5a015fcd02509ce532524f25bcd1aa7baabd29a3aaf7725c6b398c93d",
+    "src/template_window.cpp": "ab274c5822f8da97484b9affc218b1ddee20547352e317cddeb15f2820443166",
+    "src/umpa_ddf_author_c_api.cpp": "9489fcd4991ac6e37edc4892635d013ca5d7b40dd613081efa97ae11e5a40657",
+    "src/umpa_ddf_author_fit.cpp": "48d7757e2957c89ea98a7456a84fb791fcca76bcfa0435e767497318b2dddeea",
+    "src/umpa_ddf_kernel.cpp": "e1f103619a08c535e138825b74f92913cec9b0ffebf82e1ff53b027baeb0a2a9",
+    "src/umpa_physical_fit.cpp": "8cb0cd08c41f1ba4f9af3425703177e78df4bf2a23a3b8b97b6b2b70b38a8f8a",
+    "src/wavelet_ops.cpp": "9fc64aed3f8d3fc94591effd18ed1736050faa9f8bddb2d3de65d5b04ee9fe5d",
+    "src/wsvt_pipeline.cpp": "064df16a4bee819940eade97bf2a513112c3527816946a1d3ecc70d01f3e8696",
+    "src/wsvt_umpa_refine.cpp": "18e1e0c6d9ff91f6f102f874c4aa8f8311525baa357626c6db48d1cdb1e1888a",
+    "src/wxst_pipeline.cpp": "68508c61a96490089142c58e9db2fe6ab2692ac8c8b3e39f764e70b53ea30889",
+    "include/wsvt/align_ops.hpp": "6559568b455398618f1f75a264e286a24cee5f203de5765dbfac86318ccf8a29",
+    "include/wsvt/aligned_alloc.hpp": "26b36773aa29b25496d4e254b2d4628256d15276941ebc7a7a78ab2ac56f03ba",
+    "include/wsvt/common.hpp": "97d839c6866517984a94b5264b6190e65af323186fbc9f217cc31b3a12afb0ea",
+    "include/wsvt/console_ops.hpp": "b039b62db5fa8e58c7da44f099a0efb981c96f1e48b45f7c713df0f12e1df60c",
+    "include/wsvt/core.hpp": "2e0eaf0f275c51c27bb23624cbc879e43ea3a5116478111b7978a77264f1ea59",
+    "include/wsvt/crop_ops.hpp": "0ee7280477b2b6214b070195d168352129724617013cd111c5c515565d31b8d8",
+    "include/wsvt/euclidean_dist.hpp": "05daaab6ee8fda94e66cc1962b78ef15f3cbea0b6c517bcb797a1637da3bcb9b",
+    "include/wsvt/export.hpp": "cda2ced603b9f80c399b3cb933219edbcd260cb3032fe3327af6437790695fa7",
+    "include/wsvt/filter_ops.hpp": "b6b44c225c64963f24d261db67db125f1ba00d2b58ef08428da8b218020198dc",
+    "include/wsvt/image.hpp": "badb92784d0fba5f33a95b28afdbdaba27a41b2b2995e4c363f4df2d8161dc83",
+    "include/wsvt/image_ops.hpp": "6baf6c9b4be0bfaf69bf26a187ed30bee7def2859663780a8d714d3a94d42dd8",
+    "include/wsvt/io_h5.hpp": "0afcc571f135847a54836e4bd6373af27faacbbb17c830366097216a26f574c6",
+    "include/wsvt/io_image.hpp": "72a6477ecefa3802e812fea4b3d0f8a22ea20ef9880f1db2215d1c140339aede",
+    "include/wsvt/io_json.hpp": "a3efdc8b8f2252156fab3c7959a6d785ac1501dc9fed73a1c2bdde21b9c412ff",
+    "include/wsvt/phase_recovery.hpp": "732ca4c27486a0e8966389f796d48b50af762837d240dd729e25e2a46009465e",
+    "include/wsvt/pyramid.hpp": "21b602359d674dce8eee4a48775e61c21413163b5d13d0998a788c2fbb6915a7",
+    "include/wsvt/scalar_darkfield.hpp": "6a91c01f1902b94d95637085c0c83bbce77e39897fe50fc0a77f68e22a8f34c1",
+    "include/wsvt/search_pruning.hpp": "62e5a4723fbce0e83943be49196b9940b117096f2b2f289f54ffb639964fc772",
+    "include/wsvt/solver_utils.hpp": "9292bef840534812fdefc1c89d49a3cd52c07bcc8091354267df15b10546d6ef",
+    "include/wsvt/template_window.hpp": "a561f9e76d0fb2fa1ed76a34819388b96e198ee04df8f1c49adbf542e6eaf5a4",
+    "include/wsvt/types.hpp": "385f2e855f78407aafc3af81ff0a3e4c062ee91d222bd4fb6f99d4243e4a1fe7",
+    "include/wsvt/umpa_ddf_author_fit.hpp": "ae7f6016f67abf6cdffe5c24411d300581d67d49804acabf5c497a577e01b0a2",
+    "include/wsvt/umpa_ddf_kernel.hpp": "cf712e60c5c96874e1f5f4c7c0ec7a596c78854aa8aa01503b3034adaa24c29d",
+    "include/wsvt/umpa_physical_fit.hpp": "8f34cf0a9c82239739ed4b01e64b3ae6158b93db1f282a065eeea6795bda8d8d",
+    "include/wsvt/wavelet_ops.hpp": "47eb3478b4b380139cc2bab7f1f6a91ba1462b4e3d2975ddf01e770cbc1175db",
+    "include/wsvt/wsvt_pipeline.hpp": "63719112e61dc5b25993e14736b20335f28e5dfb1fc399a8a15a44cab6e82796",
+    "include/wsvt/wsvt_umpa_refine.hpp": "f255ee9ff74621a3f6d304ad828568f30fc3a7f093d1567bff1679b500ea2e64",
+    "include/wsvt/wxst_pipeline.hpp": "3e99c4cc4d97f5e58a8e7349ba2fa46a0bc5fe6a86676ef8a42dab4d721c143e"
+  },
+  "local_source_sha256": {
+    "CMakeLists.txt": "00a7d5f88a6f46959bb81c46c7eea19d3c14216f6a4a2ceaf68e2f982880826a",
+    "src/align_ops.cpp": "1d9e96924c5cf79601b823443bc8dc12f0164f052f9c7f5ca5167e9e95231ad8",
+    "src/console_ops.cpp": "17833503e373c8f35ac342c440ae8234ac409b0690f691ad7dd4749ef91a149a",
+    "src/core.cpp": "63b0aca42903698d913ef205a224914e46ebdefdc859a5bf78cb193f7b6eca6b",
+    "src/crop_ops.cpp": "0367402eb998e7fed4d6359f39cc859412375d69b67b4c2624b84047263e8b03",
+    "src/euclidean_dist.cpp": "b1245192ba98bee6da29384665ae873292f75aa45b3634e7e1a74b2e39ccf0c9",
+    "src/filter_ops.cpp": "340482478b164881f4c00c44950b75e8b17c004426ff849e3730017cb47abc4b",
+    "src/image_ops.cpp": "54a832c846a59e90d7dccdd893fb2a74ca958de31efac7cc7e8aca11180314c9",
+    "src/io_h5.cpp": "6beec188a6fc369eef819963497cd09d0a94b3e4ea7dd470cfa24e693974fe52",
+    "src/io_image.cpp": "50bc6c313001cfb6d317d105881d75de8b01503a4a27c3d38eb743bcfce6ddde",
+    "src/io_json.cpp": "8c4fff89df548b23bd40a4a932ddc4248171472fdc011f41a40bc72d25df36fa",
+    "src/main.cpp": "9eb1398992ae912efbbc59512229e4678675edce2ebe2af1cc306a757825bbe9",
+    "src/phase_recovery.cpp": "c33a119a02117b3629a1dc90f2f756a55fbac1dee097cecd5ee720e510ea4a37",
+    "src/pyramid.cpp": "fc510c49b488bbaa137b4d02d3e051afbb2184b7f17bd1aa1727c3cad1bd6b75",
+    "src/scalar_darkfield.cpp": "e62faa95811da43c3ce6c6ccba302fd114b9baacc2419bf8d07243cfb0d3492b",
+    "src/solver_utils.cpp": "2652d9843efffdccc209e57224b1a3c62eeb9c4026670944762e49a9d9a3843b",
+    "src/template_window.cpp": "ab274c5822f8da97484b9affc218b1ddee20547352e317cddeb15f2820443166",
+    "src/umpa_ddf_author_c_api.cpp": "9489fcd4991ac6e37edc4892635d013ca5d7b40dd613081efa97ae11e5a40657",
+    "src/umpa_ddf_author_fit.cpp": "48d7757e2957c89ea98a7456a84fb791fcca76bcfa0435e767497318b2dddeea",
+    "src/umpa_ddf_kernel.cpp": "e1f103619a08c535e138825b74f92913cec9b0ffebf82e1ff53b027baeb0a2a9",
+    "src/umpa_physical_fit.cpp": "09a5f0dea1d752e0822efe9ccffef2292ce475c5d2869f8a8ec6d46fb8f08d50",
+    "src/wavelet_ops.cpp": "01d0f0947ca95d7f87d18be1909214dbacac4d388ddbbe80cc8294a93f01e7e1",
+    "src/wsvt_pipeline.cpp": "064df16a4bee819940eade97bf2a513112c3527816946a1d3ecc70d01f3e8696",
+    "src/wsvt_umpa_refine.cpp": "394d6b95fcd3d9270b9844b499c78b06549bdf38d24f78eee267d635d0a6c822",
+    "src/wxst_pipeline.cpp": "68508c61a96490089142c58e9db2fe6ab2692ac8c8b3e39f764e70b53ea30889",
+    "include/wsvt/align_ops.hpp": "6559568b455398618f1f75a264e286a24cee5f203de5765dbfac86318ccf8a29",
+    "include/wsvt/aligned_alloc.hpp": "11b1c003e90ce8fecf70a0d597e02175a25e2f8fb8d95c0af41d6c135176cbbc",
+    "include/wsvt/common.hpp": "81a7d4e395fa8c33478fd4f2db343ddcb133c81611dc70fc6b8b53be55dd9feb",
+    "include/wsvt/console_ops.hpp": "b039b62db5fa8e58c7da44f099a0efb981c96f1e48b45f7c713df0f12e1df60c",
+    "include/wsvt/core.hpp": "2e0eaf0f275c51c27bb23624cbc879e43ea3a5116478111b7978a77264f1ea59",
+    "include/wsvt/crop_ops.hpp": "0ee7280477b2b6214b070195d168352129724617013cd111c5c515565d31b8d8",
+    "include/wsvt/euclidean_dist.hpp": "05daaab6ee8fda94e66cc1962b78ef15f3cbea0b6c517bcb797a1637da3bcb9b",
+    "include/wsvt/export.hpp": "cda2ced603b9f80c399b3cb933219edbcd260cb3032fe3327af6437790695fa7",
+    "include/wsvt/filter_ops.hpp": "b6b44c225c64963f24d261db67db125f1ba00d2b58ef08428da8b218020198dc",
+    "include/wsvt/image.hpp": "badb92784d0fba5f33a95b28afdbdaba27a41b2b2995e4c363f4df2d8161dc83",
+    "include/wsvt/image_ops.hpp": "ec78940872933cb4f09706daf47455d83806cb66c4235d45ee855258602708d5",
+    "include/wsvt/io_h5.hpp": "0afcc571f135847a54836e4bd6373af27faacbbb17c830366097216a26f574c6",
+    "include/wsvt/io_image.hpp": "72a6477ecefa3802e812fea4b3d0f8a22ea20ef9880f1db2215d1c140339aede",
+    "include/wsvt/io_json.hpp": "a3efdc8b8f2252156fab3c7959a6d785ac1501dc9fed73a1c2bdde21b9c412ff",
+    "include/wsvt/phase_recovery.hpp": "732ca4c27486a0e8966389f796d48b50af762837d240dd729e25e2a46009465e",
+    "include/wsvt/pyramid.hpp": "8f2b0f68f7984969c5dead720409d3d8cdb5806aa10aa6d21b651e5075238def",
+    "include/wsvt/scalar_darkfield.hpp": "6a91c01f1902b94d95637085c0c83bbce77e39897fe50fc0a77f68e22a8f34c1",
+    "include/wsvt/search_pruning.hpp": "2273bb6dadaaff2d67f647936d32aa608685d22542d6ed7e2bf4377b56b08410",
+    "include/wsvt/solver_utils.hpp": "2582a1244d277d915efec5772140f551b32bf7d91dd2e4ef39344238659a446e",
+    "include/wsvt/template_window.hpp": "a561f9e76d0fb2fa1ed76a34819388b96e198ee04df8f1c49adbf542e6eaf5a4",
+    "include/wsvt/types.hpp": "385f2e855f78407aafc3af81ff0a3e4c062ee91d222bd4fb6f99d4243e4a1fe7",
+    "include/wsvt/umpa_ddf_author_fit.hpp": "ae7f6016f67abf6cdffe5c24411d300581d67d49804acabf5c497a577e01b0a2",
+    "include/wsvt/umpa_ddf_kernel.hpp": "6ed6f218b9ad8e81ac2d0929f7380b2e39cf879bc4f11c7fb98f65a49853a4bc",
+    "include/wsvt/umpa_physical_fit.hpp": "fc80c0a1b882e2ff857d775f87d1ff5f626f2f465c3f767c3de860a95aa34dba",
+    "include/wsvt/wavelet_ops.hpp": "7d3ee222b110f1ceaf186a9c1621ad201866af5c71acb22d46dbf392932f8fc5",
+    "include/wsvt/wsvt_pipeline.hpp": "63719112e61dc5b25993e14736b20335f28e5dfb1fc399a8a15a44cab6e82796",
+    "include/wsvt/wsvt_umpa_refine.hpp": "cd9a9dab8c0f646ad26696ae9b4aa0e63dcd5a25b25ff8f310f481039fff6833",
+    "include/wsvt/wxst_pipeline.hpp": "3e99c4cc4d97f5e58a8e7349ba2fa46a0bc5fe6a86676ef8a42dab4d721c143e"
+  },
+  "local_server_match": false,
+  "differences": [
+    {
+      "file": "src/image_ops.cpp",
+      "same_after_line_ending_normalization": true
+    },
+    {
+      "file": "src/io_json.cpp",
+      "same_after_line_ending_normalization": true
+    },
+    {
+      "file": "src/pyramid.cpp",
+      "same_after_line_ending_normalization": true
+    },
+    {
+      "file": "src/solver_utils.cpp",
+      "same_after_line_ending_normalization": true
+    },
+    {
+      "file": "src/umpa_physical_fit.cpp",
+      "same_after_line_ending_normalization": true
+    },
+    {
+      "file": "src/wavelet_ops.cpp",
+      "same_after_line_ending_normalization": true
+    },
+    {
+      "file": "src/wsvt_umpa_refine.cpp",
+      "same_after_line_ending_normalization": true
+    },
+    {
+      "file": "include/wsvt/aligned_alloc.hpp",
+      "same_after_line_ending_normalization": true
+    },
+    {
+      "file": "include/wsvt/common.hpp",
+      "same_after_line_ending_normalization": true
+    },
+    {
+      "file": "include/wsvt/image_ops.hpp",
+      "same_after_line_ending_normalization": true
+    },
+    {
+      "file": "include/wsvt/pyramid.hpp",
+      "same_after_line_ending_normalization": true
+    },
+    {
+      "file": "include/wsvt/search_pruning.hpp",
+      "same_after_line_ending_normalization": true
+    },
+    {
+      "file": "include/wsvt/solver_utils.hpp",
+      "same_after_line_ending_normalization": true
+    },
+    {
+      "file": "include/wsvt/umpa_ddf_kernel.hpp",
+      "same_after_line_ending_normalization": true
+    },
+    {
+      "file": "include/wsvt/umpa_physical_fit.hpp",
+      "same_after_line_ending_normalization": true
+    },
+    {
+      "file": "include/wsvt/wavelet_ops.hpp",
+      "same_after_line_ending_normalization": true
+    },
+    {
+      "file": "include/wsvt/wsvt_umpa_refine.hpp",
+      "same_after_line_ending_normalization": true
+    }
+  ],
+  "source_choice": "authoritative server bytes",
+  "archive_sha256": "f5c7d0c8308a0463101b9bf4a803fda3fe9aac235b9a3bb19acecf603a255709",
+  "git_head": "e3b470c17d9e69ec28b0fe3073940a7c6ff30552",
+  "git_status": " M CMakeLists.txt\n M include/wsvt/umpa_ddf_author_fit.hpp\n M include/wsvt/wsvt_pipeline.hpp\n M include/wsvt/wxst_pipeline.hpp\n M src/main.cpp\n M src/umpa_ddf_author_c_api.cpp\n M src/umpa_ddf_author_fit.cpp\n M src/umpa_ddf_kernel.cpp\n M src/wsvt_pipeline.cpp\n M src/wxst_pipeline.cpp\n M tests/CMakeLists.txt\n?? include/wsvt/scalar_darkfield.hpp\n?? src/scalar_darkfield.cpp\n?? tests/scalar_darkfield_field_cli.cpp\n?? tests/test_scalar_darkfield_field.cpp\n",
+  "scope": "Current dirty source, byte-verified against authoritative server; no source modified"
+}

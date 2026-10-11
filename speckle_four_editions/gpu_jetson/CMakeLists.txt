@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+set(SPECKLE_ARCH "87" CACHE STRING "Orin SM target")
+set(SPECKLE_PLATFORM "jetson" CACHE STRING "Shared DRAM platform")
+project(speckle_gpu_jetson LANGUAGES CXX CUDA)
+add_subdirectory(../gpu_common shared_gpu)

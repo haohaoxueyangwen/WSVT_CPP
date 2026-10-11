@@ -1,0 +1,6 @@
+measured 0 solver=0.159375 api=0.163682
+measured 1 solver=0.164439 api=0.168752
+measured 2 solver=0.162357 api=0.166657
+measured 3 solver=0.159863 api=0.16416
+measured 4 solver=0.156632 api=0.160931
+complete /home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/wsvt/cli_wsvt_speed_copy

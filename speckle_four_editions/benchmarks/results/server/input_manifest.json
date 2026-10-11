@@ -1,0 +1,48 @@
+{
+  "wsvt": {
+    "sample": {
+      "shape": [
+        100,
+        2048,
+        2048
+      ],
+      "dtype": "uint16",
+      "canonical_sha256": "80534d45fe6937e857dd4ea50682e2c565bed1d99f9b79eef0a9da34ba4940df",
+      "file_sha256": "cabfd1197b22d7a3a815602adc449eba1b92a499c2ff3aa6d1da81589af41879",
+      "bytes": 838860800
+    },
+    "reference": {
+      "shape": [
+        100,
+        2048,
+        2048
+      ],
+      "dtype": "uint16",
+      "canonical_sha256": "414af5ce3a38ee5c9aa0a7a15d8a91917b95134ba236998bd80177909a2e618d",
+      "file_sha256": "ffd8e9610f9e0a78001a681e990d63708f9605f1ae9cb3f2a6bc14d1272c4b57",
+      "bytes": 838860800
+    }
+  },
+  "wxst": {
+    "sample": {
+      "shape": [
+        2048,
+        2048
+      ],
+      "dtype": "float32",
+      "canonical_sha256": "d8acf65584f47a5359e3d73951303827586ba4351fca4cff590eac44851657b4",
+      "file_sha256": "982dc500ed29d33c350e35495080b97e7e4566d9ddfe0875714f009908ebe836",
+      "bytes": 16777216
+    },
+    "reference": {
+      "shape": [
+        2048,
+        2048
+      ],
+      "dtype": "float32",
+      "canonical_sha256": "df88ea033fc2c8557261efd75d69c8c80c714f805804845e7901c0a41c022392",
+      "file_sha256": "c841e87b679741a0a6e74642f0d5c11ffcb6634d3fd62c1178c41d6a643fd86d",
+      "bytes": 16777216
+    }
+  }
+}

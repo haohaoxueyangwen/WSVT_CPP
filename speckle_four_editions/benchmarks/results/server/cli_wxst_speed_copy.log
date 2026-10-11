@@ -1,0 +1,6 @@
+measured 0 solver=0.057657 api=0.0655944
+measured 1 solver=0.0575136 api=0.0654551
+measured 2 solver=0.0531624 api=0.061105
+measured 3 solver=0.0562846 api=0.064227
+measured 4 solver=0.0564566 api=0.0643964
+complete /home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/wxst/cli_wxst_speed_copy

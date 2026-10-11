@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+set(SPECKLE_ARCH "89" CACHE STRING "Ada SM target")
+set(SPECKLE_PLATFORM "desktop" CACHE STRING "Discrete GPU platform")
+project(speckle_gpu_discrete LANGUAGES CXX CUDA)
+add_subdirectory(../gpu_common shared_gpu)

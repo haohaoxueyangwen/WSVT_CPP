@@ -1,0 +1,10 @@
+SMOKE_PASS wxst_odd low False mapped False phase {'exact': False, 'max_abs': 1.33514404296875e-05, 'rmse': 2.877187559933809e-06, 'finite': True, 'max_abs_limit': 0.0023193298530578615, 'rmse_limit': 0.00021027513425440181, 'pass': True}
+SMOKE_PASS wsvt_odd low False mapped False phase {'exact': False, 'max_abs': 1.33514404296875e-05, 'rmse': 2.564443833156828e-06, 'finite': True, 'max_abs_limit': 0.002314492053985596, 'rmse_limit': 0.00021017292239072153, 'pass': True}
+SMOKE_PASS wsvt_odd low True mapped False phase {'exact': False, 'max_abs': 1.33514404296875e-05, 'rmse': 2.564443833156828e-06, 'finite': True, 'max_abs_limit': 0.002314492053985596, 'rmse_limit': 0.00021017292239072153, 'pass': True}
+SMOKE_PASS wsvt_even low False mapped False phase {'exact': False, 'max_abs': 1.52587890625e-05, 'rmse': 3.5435786539207526e-06, 'finite': True, 'max_abs_limit': 0.0023057948303222657, 'rmse_limit': 0.0002099090086921373, 'pass': True}
+SMOKE_PASS wsvt_even low True mapped False phase {'exact': False, 'max_abs': 1.52587890625e-05, 'rmse': 3.5435786539207526e-06, 'finite': True, 'max_abs_limit': 0.0023057948303222657, 'rmse_limit': 0.0002099090086921373, 'pass': True}
+SMOKE_PASS wsvt_float low False mapped False phase {'exact': False, 'max_abs': 1.33514404296875e-05, 'rmse': 2.564443833156828e-06, 'finite': True, 'max_abs_limit': 0.002314492053985596, 'rmse_limit': 0.00021017292239072153, 'pass': True}
+SMOKE_PASS wsvt_float low True mapped False phase {'exact': False, 'max_abs': 1.33514404296875e-05, 'rmse': 2.564443833156828e-06, 'finite': True, 'max_abs_limit': 0.002314492053985596, 'rmse_limit': 0.00021017292239072153, 'pass': True}
+SMOKE_PASS constant low False mapped False phase {'exact': True, 'max_abs': 0.0, 'rmse': 0.0, 'finite': True, 'max_abs_limit': 0.002, 'rmse_limit': 0.0002, 'pass': True}
+SMOKE_PASS constant low True mapped False phase {'exact': True, 'max_abs': 0.0, 'rmse': 0.0, 'finite': True, 'max_abs_limit': 0.002, 'rmse_limit': 0.0002, 'pass': True}
+ALL_SMOKE_PASS

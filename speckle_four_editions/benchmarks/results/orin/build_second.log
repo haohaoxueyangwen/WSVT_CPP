@@ -1,0 +1,35 @@
+-- The CXX compiler identification is GNU 9.4.0
+-- The CUDA compiler identification is NVIDIA 11.4.315
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc
+-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc -- works
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Looking for C++ include pthread.h
+-- Looking for C++ include pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found CUDA: /usr/local/cuda (found version "11.4") 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/xray/Documents/WSVT_GPU_orin_20261010/native_four_editions_20261011/release/build_jetson
+Scanning dependencies of target speckle_native
+[ 40%] Building CUDA object shared_gpu/CMakeFiles/speckle_native.dir/src/session.cu.o
+[ 40%] Building CUDA object shared_gpu/CMakeFiles/speckle_native.dir/native/edge_kernels.cu.o
+[ 60%] Linking CUDA shared library ../lib/libspeckle_native.so
+[ 60%] Built target speckle_native
+Scanning dependencies of target speckle_gpu
+[ 80%] Building CXX object shared_gpu/CMakeFiles/speckle_gpu.dir/src/main.cpp.o
+[100%] Linking CXX executable ../bin/speckle_gpu
+[100%] Built target speckle_gpu
+NATIVE_BUILD_COMPLETE jetson

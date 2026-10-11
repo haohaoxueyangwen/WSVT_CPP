@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wsvt"
+version = "0.1.0"
+description = "C++ WSVT/WXST tracking and native dark-field (Python I/O and baselines)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "WSVT project" }]
+dependencies = ["numpy"]
+
+[project.scripts]
+wsvt-ddf = "wsvt.darkfield.cpp_fit:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+hdf5 = ["h5py"]
+gpu = ["torch"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"wsvt.fastxst" = ["c_solver.c"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "scripts"]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+markers = [
+    "unit: no extra binaries or server data",
+    "cpp_binary: requires a built WSVT_CPP target",
+    "server_data: requires server artifacts",
+    "gpu: requires CUDA",
+]
+addopts = "-q"

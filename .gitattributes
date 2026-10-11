@@ -5,3 +5,5 @@
 /benchmarks/orin_memory_opt_20261011/comparison.csv whitespace=cr-at-eol
 /benchmarks/orin_memory_opt_20261011/**/timing.csv whitespace=cr-at-eol
 /benchmarks/orin_memory_opt_20261011/actual_cuda_flags.txt -whitespace
+
+/speckle_four_editions/** -text

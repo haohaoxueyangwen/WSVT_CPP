@@ -1,0 +1,21 @@
+{
+  "mode": "wxst",
+  "platform": "jetson",
+  "workspace": "speed",
+  "input_policy": "copy",
+  "half": 10,
+  "coarse": 5,
+  "fine": 4,
+  "levels": 2,
+  "iterations": 1,
+  "cut": 1,
+  "template": 7,
+  "frames": 1,
+  "chunk": 16,
+  "reference_policy": "each-pair",
+  "pixel_m": 1.625e-06,
+  "distance_m": 0.4845,
+  "energy_ev": 12400,
+  "repeats": 5,
+  "warmup": 1
+}

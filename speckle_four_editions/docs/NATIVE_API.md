@@ -1,0 +1,16 @@
+# Native session API and ownership
+
+Include `speckle_native.h`, link `libspeckle_native` (cudart/cuFFT dependencies). No Torch, Python or FFTW link is required for the GPU runtime.
+
+1. Create `SpeckleConfig` with height/width, mode0WXST/1WSVT, input_u16, low_memory, chunk16, device, mapped_input and explicit calibrated geometry. `speckle_create()` returns a session or null; `speckle_error()` supplies the thread-local error.
+2. Allocate input/output host buffers once. `speckle_host_alloc(bytes,mapped)` supplies pinned storage; mapped inputs must use mapped pinned allocation on the integrated GPU. Input/host buffers are owned by the caller. Never free them while a call is using them.
+3. `speckle_prepare()` validates the input, computes and retains reference descriptors and reference first-frame intensity. Rebuild each pair for comparable benchmarks. Call once and reuse only for an unchanged reference; explicitly label cached-reference throughput separately.
+4. `speckle_solve()` computes sample descriptors/search/spline/postprocess/cuFFT phase, synchronizes and writes seven supplied host output buffers. Only the requested fields are downloaded; no intermediate descriptor download is required in production. Output order is `displace_y, displace_x, DPC_y, DPC_x, phase, transmission, match_score_neg_ssd`. All float32. Transmission is H×W (origin0,0); other fields are (H-20)×(W-20) (origin10,10). Phase units rad, DPC rad, displacement pixel; score is negative SSD.
+5. The session never owns output arrays. Reusing a caller output buffer overwrites that buffer; supply new buffers or retain a copy if previous outputs must survive. `tools/native_api.py` allocates new independent NumPy outputs each call, tested to survive subsequent solves and session destruction.
+6. Destroy the session and free each host allocation exactly once. Session operations belong to their creating thread. It owns one nonblocking CUDA stream; internal stages are deliberately ordered. No concurrent solves on one session. Separate sessions require separate buffers and consume additional memory.
+
+CUDA device buffers, stream/events, GPU spline axis factors, cuFFT forward/inverse plans and their shared workspace persist for the session. No per-solve cudaMalloc/cuFFT planning is needed. Phase implements the original frequency signs/positive Nyquist, denominator floor1e-12, inverse normalization and mean removal; mean reduction uses double accumulation, and the full FFT backend differs from Torch. Results therefore retain declared small phase differences, not a bitwise phase promise.
+
+Jetson WSVT mapped input avoids its additional raw device stack. GPU-intensive descriptors and FFT workspaces remain cached device allocations backed by the same physical DRAM. This is selective memory placement, not blanket managed allocation. Keep pinned/mapped input buffers persistent: allocating them every frame pair was outside the measured hot-path timing and would add deployment cost.
+
+Current validated settings are specialized to WSVT100 and WXST7×7, half10/coarse5/fine4,L2,I1,cut1,noDF. Generalizing frame count/windows requires a separately tested kernel/configuration change. Validation, IO and geometry errors are returned rather than silently changing settings.

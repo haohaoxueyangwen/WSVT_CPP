@@ -1,0 +1,307 @@
+{
+  "mode": "wsvt",
+  "profile": "original",
+  "platform": "jetson",
+  "shape": [
+    100,
+    2048,
+    2048
+  ],
+  "input_dtype": "uint16",
+  "transport": "pageable host",
+  "summary": {
+    "solver_s": {
+      "mean": 1.3986738090170547,
+      "sample_sd": 0.004957573477440945
+    },
+    "api_s": {
+      "mean": 1.433283225807827,
+      "sample_sd": 0.0030558260907872278
+    },
+    "reference_s": {
+      "mean": 0.3902531154104508,
+      "sample_sd": 0.004056925116085817
+    },
+    "sample_s": {
+      "mean": 1.0084206936066038,
+      "sample_sd": 0.0020204926969808064
+    },
+    "download_s": {
+      "mean": 0.034377919998951255,
+      "sample_sd": 0.003403045711170824
+    }
+  },
+  "memory": {
+    "process_peak_rss_bytes": 3137728512,
+    "rss_scope": "Lifetime through end of measured solves, includes input read/imports/initialization/warmup; subsequent verification and saving excluded.",
+    "torch_peak_allocated_bytes": 7061602304,
+    "torch_peak_reserved_bytes": 7090470912,
+    "persistent_device_bytes": 6955128752
+  },
+  "warmup": {
+    "solver_s": 1.592035211971961,
+    "api_s": 1.6335126780031715,
+    "reference_s": 0.527481770986924,
+    "sample_s": 1.064553440985037,
+    "download_s": 0.04125019902130589,
+    "detail": {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "uint16",
+      "solver_s": 1.064553440985037,
+      "call_with_download_s": 1.105803640006343,
+      "reference_prepare_s": 0.527481770986924,
+      "gpu_event_s": {
+        "input": 0.11492479705810547,
+        "transmission": 0.0020216639041900635,
+        "sample_front": 0.28819631958007813,
+        "coarse_match": 0.1213934097290039,
+        "spline": 0.023033279418945313,
+        "fine_match": 0.45740966796875,
+        "DPC": 0.003215552091598511,
+        "phase": 0.05371968078613281
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 0.00012572898413054645,
+      "persistent_device_bytes": 6955128752,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+    },
+    "load_before": [
+      1.72,
+      1.14,
+      0.67
+    ]
+  },
+  "records": [
+    {
+      "solver_s": 1.4020121640351135,
+      "api_s": 1.4317090420227032,
+      "reference_s": 0.3931242360267788,
+      "sample_s": 1.0088879280083347,
+      "download_s": 0.029485099978046492,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 1.0088879280083347,
+        "call_with_download_s": 1.0383730279863812,
+        "reference_prepare_s": 0.3931242360267788,
+        "gpu_event_s": {
+          "input": 0.0975343017578125,
+          "transmission": 0.00207807993888855,
+          "sample_front": 0.2882176513671875,
+          "coarse_match": 0.12125468444824218,
+          "spline": 0.023021535873413088,
+          "fine_match": 0.4574352111816406,
+          "DPC": 0.0032165119647979737,
+          "phase": 0.015499648094177245
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 0.00011334600276313722,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": [
+        2.47,
+        1.31,
+        0.72
+      ],
+      "repeat": 0
+    },
+    {
+      "solver_s": 1.4047976750007365,
+      "api_s": 1.4374893170024734,
+      "reference_s": 0.3936782919918187,
+      "sample_s": 1.0111193830089178,
+      "download_s": 0.032487927994225174,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 1.0111193830089178,
+        "call_with_download_s": 1.043607311003143,
+        "reference_prepare_s": 0.3936782919918187,
+        "gpu_event_s": {
+          "input": 0.09955916595458984,
+          "transmission": 0.002075040102005005,
+          "sample_front": 0.2882523498535156,
+          "coarse_match": 0.12127545928955077,
+          "spline": 0.023030624389648438,
+          "fine_match": 0.4575425415039063,
+          "DPC": 0.0032148799896240233,
+          "phase": 0.015549792289733886
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 9.676898480392992e-05,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": [
+        2.47,
+        1.31,
+        0.72
+      ],
+      "repeat": 1
+    },
+    {
+      "solver_s": 1.3990809190145228,
+      "api_s": 1.4349481590033974,
+      "reference_s": 0.3927336700144224,
+      "sample_s": 1.0063472490001004,
+      "download_s": 0.035626694007078186,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 1.0063472490001004,
+        "call_with_download_s": 1.0419739430071786,
+        "reference_prepare_s": 0.3927336700144224,
+        "gpu_event_s": {
+          "input": 0.09497020721435546,
+          "transmission": 0.0020302720069885253,
+          "sample_front": 0.28821142578125,
+          "coarse_match": 0.12138595581054687,
+          "spline": 0.023008064270019533,
+          "fine_match": 0.4573072509765625,
+          "DPC": 0.0032154879570007325,
+          "phase": 0.015547103881835937
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 0.00010217700037173927,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": [
+        2.47,
+        1.31,
+        0.72
+      ],
+      "repeat": 2
+    },
+    {
+      "solver_s": 1.3943700969975907,
+      "api_s": 1.4327440930064768,
+      "reference_s": 0.38509342999896035,
+      "sample_s": 1.0092766669986304,
+      "download_s": 0.038129545020638034,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 1.0092766669986304,
+        "call_with_download_s": 1.0474062120192684,
+        "reference_prepare_s": 0.38509342999896035,
+        "gpu_event_s": {
+          "input": 0.09428288269042968,
+          "transmission": 0.002061791896820068,
+          "sample_front": 0.2882198486328125,
+          "coarse_match": 0.1213186264038086,
+          "spline": 0.02300819206237793,
+          "fine_match": 0.45747369384765624,
+          "DPC": 0.003493920087814331,
+          "phase": 0.018696096420288084
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 9.721700916998088e-05,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": [
+        2.35,
+        1.3,
+        0.73
+      ],
+      "repeat": 3
+    },
+    {
+      "solver_s": 1.3931081900373101,
+      "api_s": 1.429525518004084,
+      "reference_s": 0.386635949020274,
+      "sample_s": 1.0064722410170361,
+      "download_s": 0.036160332994768396,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 1.0064722410170361,
+        "call_with_download_s": 1.0426325740118045,
+        "reference_prepare_s": 0.386635949020274,
+        "gpu_event_s": {
+          "input": 0.09510966491699219,
+          "transmission": 0.0020602879524230957,
+          "sample_front": 0.2881261291503906,
+          "coarse_match": 0.12138111877441406,
+          "spline": 0.02301372718811035,
+          "fine_match": 0.45723760986328127,
+          "DPC": 0.003214495897293091,
+          "phase": 0.015527615547180176
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 0.00010192202171310782,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load_before": [
+        2.35,
+        1.3,
+        0.73
+      ],
+      "repeat": 4
+    }
+  ],
+  "features_sha256": {
+    "ref_fine": "47b3fe66e8a66fb3f477a478c0328903f8bbe0fed6cb2c8dc99486ce4ab8813b",
+    "ref_coarse": "2b92c58fff765fb832c25b52d159db9e3e29887bfb7ec65dc4179997a9c1c0b8",
+    "sample_fine": "9aacce5acdeb24288b9a0ea7a8fec197444d2c1a3512bda26c9a5912eb003fbd",
+    "sample_coarse": "92bf6dee869e757b3b1a684d39ce96187dbbb812dcfbfabf988d7218bc57cb36"
+  },
+  "read_s": 0.4782961299933959,
+  "constructor_s": 3.9395351920102257,
+  "save_s": 0.09285939601249993,
+  "geometry": {
+    "pixel_m": 1.625e-06,
+    "distance_m": 0.4845,
+    "energy_ev": 12400.0
+  },
+  "settings": {
+    "half": 10,
+    "coarse": 5,
+    "fine": 4,
+    "levels": 2,
+    "iterations": 1,
+    "cut": 1,
+    "template": 0,
+    "frames": 100,
+    "host_threads": 2,
+    "spline": "gpu",
+    "reference_policy": "each-pair",
+    "warmup": 1,
+    "repeats": 5,
+    "low_memory": false,
+    "chunk": 16
+  },
+  "scope": "Pair solver includes reference rebuild and sample compute, final synchronization, no outputs. API ready host arrays to seven new independently owned NumPy outputs. Input read, pinned/mapped host setup, constructor, file saving excluded and recorded; no Python/PyTorch reconstruction in native profiles.",
+  "hashes": {
+    "driver": "1a5e30f723226317a1808e84f8620379270323e4dbc1dd0a10ac6f0875b3c571",
+    "library": "de534dfe637aec7d8f079a587a89f2171c9b89968aaa5805de58c001e36e4e4d"
+  },
+  "sampled_memory": {
+    "peak_rss_bytes": 3137728512,
+    "system_used_peak_bytes": 17857978368,
+    "nvml_process_peak_bytes": null,
+    "sample_interval_s": 0.025,
+    "scope": "25ms sampled peaks are lower bounds. Adapter profiles: formal only. CLI profiles: whole lifetime including constructor. System RAM includes background/cache. Unified DRAM metrics overlap; do not sum."
+  }
+}

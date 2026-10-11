@@ -1,0 +1,19 @@
+{
+  "state": "PASS",
+  "meaning": "Engineering/numerical comparison with preserved GPU; not independent physical truth",
+  "rois": {
+    "center1000": [
+      524,
+      1524,
+      524,
+      1524
+    ],
+    "user_roi": [
+      724,
+      1324,
+      924,
+      1424
+    ]
+  },
+  "phase_gate": "max .002 +1e-5*maxabs; RMS .0002+1e-6*rms; rad"
+}

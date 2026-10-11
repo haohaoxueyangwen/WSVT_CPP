@@ -1,0 +1,4638 @@
+[
+  {
+    "time": 1791734174.382467,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 121594605568,
+    "SwapFree": 1967124480,
+    "VmHWM": 12288,
+    "VmRSS": 12288,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "start"
+  },
+  {
+    "time": 1791734174.4077692,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 121586606080,
+    "SwapFree": 1967124480,
+    "VmHWM": 17772544,
+    "VmRSS": 17772544,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "start"
+  },
+  {
+    "time": 1791734174.4330807,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 121573265408,
+    "SwapFree": 1967124480,
+    "VmHWM": 27402240,
+    "VmRSS": 27402240,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "start"
+  },
+  {
+    "time": 1791734174.458448,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 121572388864,
+    "SwapFree": 1967124480,
+    "VmHWM": 33468416,
+    "VmRSS": 33468416,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "start"
+  },
+  {
+    "time": 1791734174.483799,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 121524019200,
+    "SwapFree": 1967124480,
+    "VmHWM": 85667840,
+    "VmRSS": 85667840,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "load_inputs"
+  },
+  {
+    "time": 1791734174.5092077,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 121377218560,
+    "SwapFree": 1967124480,
+    "VmHWM": 230371328,
+    "VmRSS": 230371328,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "load_inputs"
+  },
+  {
+    "time": 1791734174.5345838,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 121231040512,
+    "SwapFree": 1967124480,
+    "VmHWM": 377171968,
+    "VmRSS": 377171968,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "load_inputs"
+  },
+  {
+    "time": 1791734174.559948,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 121084444672,
+    "SwapFree": 1967124480,
+    "VmHWM": 523972608,
+    "VmRSS": 523972608,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "load_inputs"
+  },
+  {
+    "time": 1791734174.5854108,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 120920866816,
+    "SwapFree": 1967124480,
+    "VmHWM": 687550464,
+    "VmRSS": 687550464,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "load_inputs"
+  },
+  {
+    "time": 1791734174.610825,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 120744706048,
+    "SwapFree": 1967124480,
+    "VmHWM": 863711232,
+    "VmRSS": 863711232,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "load_inputs"
+  },
+  {
+    "time": 1791734174.6362422,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 120589516800,
+    "SwapFree": 1967124480,
+    "VmHWM": 1021005824,
+    "VmRSS": 1021005824,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "load_inputs"
+  },
+  {
+    "time": 1791734174.6616466,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 120425938944,
+    "SwapFree": 1967124480,
+    "VmHWM": 1182486528,
+    "VmRSS": 1182486528,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "load_inputs"
+  },
+  {
+    "time": 1791734174.6870785,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 120258166784,
+    "SwapFree": 1967124480,
+    "VmHWM": 1350258688,
+    "VmRSS": 1350258688,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "load_inputs"
+  },
+  {
+    "time": 1791734174.7124972,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 120090394624,
+    "SwapFree": 1967124480,
+    "VmHWM": 1515933696,
+    "VmRSS": 1515933696,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "load_inputs"
+  },
+  {
+    "time": 1791734174.7379131,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119918428160,
+    "SwapFree": 1967124480,
+    "VmHWM": 1689997312,
+    "VmRSS": 1689997312,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "load_inputs"
+  },
+  {
+    "time": 1791734174.7633233,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119858941952,
+    "SwapFree": 1967124480,
+    "VmHWM": 1766690816,
+    "VmRSS": 1766690816,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734174.788709,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119844491264,
+    "SwapFree": 1967124480,
+    "VmHWM": 1835298816,
+    "VmRSS": 1835298816,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734174.8141222,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119840362496,
+    "SwapFree": 1967124480,
+    "VmHWM": 1853550592,
+    "VmRSS": 1853550592,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734174.839507,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119832104960,
+    "SwapFree": 1967124480,
+    "VmHWM": 1865191424,
+    "VmRSS": 1865191424,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734174.8648937,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119832104960,
+    "SwapFree": 1967124480,
+    "VmHWM": 1873920000,
+    "VmRSS": 1873920000,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734174.8902988,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119823847424,
+    "SwapFree": 1967124480,
+    "VmHWM": 1883152384,
+    "VmRSS": 1883152384,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734174.915677,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119815634944,
+    "SwapFree": 1967124480,
+    "VmHWM": 1890217984,
+    "VmRSS": 1890217984,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734174.9410913,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119815634944,
+    "SwapFree": 1967124480,
+    "VmHWM": 1898303488,
+    "VmRSS": 1898303488,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734174.96648,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119807377408,
+    "SwapFree": 1967124480,
+    "VmHWM": 1903140864,
+    "VmRSS": 1903140864,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734174.991866,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119799717888,
+    "SwapFree": 1967124480,
+    "VmHWM": 1912459264,
+    "VmRSS": 1912459264,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.017262,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119790944256,
+    "SwapFree": 1967124480,
+    "VmHWM": 1947738112,
+    "VmRSS": 1947738112,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.042652,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119782756352,
+    "SwapFree": 1967124480,
+    "VmHWM": 1968377856,
+    "VmRSS": 1968377856,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.068034,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119783272448,
+    "SwapFree": 1967124480,
+    "VmHWM": 1975250944,
+    "VmRSS": 1975250944,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.0934074,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119775289344,
+    "SwapFree": 1967124480,
+    "VmHWM": 1984139264,
+    "VmRSS": 1984139264,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.118783,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119765483520,
+    "SwapFree": 1967124480,
+    "VmHWM": 1990369280,
+    "VmRSS": 1990369280,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.144198,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119765483520,
+    "SwapFree": 1967124480,
+    "VmHWM": 1994493952,
+    "VmRSS": 1994493952,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.1695719,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119757225984,
+    "SwapFree": 1967124480,
+    "VmHWM": 2000896000,
+    "VmRSS": 2000896000,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.194943,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119754129408,
+    "SwapFree": 1967124480,
+    "VmHWM": 2004918272,
+    "VmRSS": 2004918272,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.2203429,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119750000640,
+    "SwapFree": 1967124480,
+    "VmHWM": 2009288704,
+    "VmRSS": 2009288704,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.2457259,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119741743104,
+    "SwapFree": 1967124480,
+    "VmHWM": 2018062336,
+    "VmRSS": 2018062336,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.2711468,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119733743616,
+    "SwapFree": 1967124480,
+    "VmHWM": 2026422272,
+    "VmRSS": 2026422272,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.296525,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119730909184,
+    "SwapFree": 1967124480,
+    "VmHWM": 2031206400,
+    "VmRSS": 2031206400,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.321903,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119730135040,
+    "SwapFree": 1967124480,
+    "VmHWM": 2032193536,
+    "VmRSS": 2032193536,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.347288,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119724199936,
+    "SwapFree": 1967124480,
+    "VmHWM": 2037690368,
+    "VmRSS": 2037690368,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.3726726,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119718006784,
+    "SwapFree": 1967124480,
+    "VmHWM": 2043703296,
+    "VmRSS": 2043703296,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.3980644,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119709749248,
+    "SwapFree": 1967124480,
+    "VmHWM": 2048311296,
+    "VmRSS": 2048311296,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.4234395,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119709749248,
+    "SwapFree": 1967124480,
+    "VmHWM": 2051469312,
+    "VmRSS": 2051469312,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.4488358,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119701491712,
+    "SwapFree": 1967124480,
+    "VmHWM": 2053308416,
+    "VmRSS": 2053308416,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.4742398,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119701491712,
+    "SwapFree": 1967124480,
+    "VmHWM": 2053464064,
+    "VmRSS": 2053464064,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.4996154,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119701491712,
+    "SwapFree": 1967124480,
+    "VmHWM": 2056192000,
+    "VmRSS": 2056192000,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.5250065,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119701491712,
+    "SwapFree": 1967124480,
+    "VmHWM": 2060206080,
+    "VmRSS": 2060206080,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.5503876,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119685537792,
+    "SwapFree": 1967124480,
+    "VmHWM": 2062655488,
+    "VmRSS": 2062655488,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.575767,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119688466432,
+    "SwapFree": 1967124480,
+    "VmHWM": 2067066880,
+    "VmRSS": 2067066880,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.6020525,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119688941568,
+    "SwapFree": 1967124480,
+    "VmHWM": 2067128320,
+    "VmRSS": 2067128320,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.6276894,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119688617984,
+    "SwapFree": 1967124480,
+    "VmHWM": 2067562496,
+    "VmRSS": 2067562496,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.6680756,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119663185920,
+    "SwapFree": 1967124480,
+    "VmHWM": 2067628032,
+    "VmRSS": 2067628032,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.6936367,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119658991616,
+    "SwapFree": 1967124480,
+    "VmHWM": 2067628032,
+    "VmRSS": 2067628032,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.7280412,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119625568256,
+    "SwapFree": 1967124480,
+    "VmHWM": 2067693568,
+    "VmRSS": 2067693568,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.7588296,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119621279744,
+    "SwapFree": 1967124480,
+    "VmHWM": 2067693568,
+    "VmRSS": 2067693568,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.7875273,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119588114432,
+    "SwapFree": 1967124480,
+    "VmHWM": 2067693568,
+    "VmRSS": 2067693568,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.8187392,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119582904320,
+    "SwapFree": 1967124480,
+    "VmHWM": 2067693568,
+    "VmRSS": 2067693568,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.8486893,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119556702208,
+    "SwapFree": 1967124480,
+    "VmHWM": 2068221952,
+    "VmRSS": 2068221952,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.8750713,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119548702720,
+    "SwapFree": 1967124480,
+    "VmHWM": 2083590144,
+    "VmRSS": 2083590144,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.9009063,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119548821504,
+    "SwapFree": 1967124480,
+    "VmHWM": 2083831808,
+    "VmRSS": 2083831808,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.9275393,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119489622016,
+    "SwapFree": 1967124480,
+    "VmHWM": 2128769024,
+    "VmRSS": 2128769024,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.9529347,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119488585728,
+    "SwapFree": 1967124480,
+    "VmHWM": 2138112000,
+    "VmRSS": 2138112000,
+    "nvml_process_bytes": 12582912,
+    "gpu_processes": {
+      "30649": 12582912
+    },
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734175.97921,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119475437568,
+    "SwapFree": 1967124480,
+    "VmHWM": 2154893312,
+    "VmRSS": 2154893312,
+    "nvml_process_bytes": 25165824,
+    "gpu_processes": {
+      "30649": 25165824
+    },
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734176.0047445,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119456628736,
+    "SwapFree": 1967124480,
+    "VmHWM": 2173931520,
+    "VmRSS": 2173931520,
+    "nvml_process_bytes": 3871342592,
+    "gpu_processes": {
+      "30649": 3871342592
+    },
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734176.0302272,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119440375808,
+    "SwapFree": 1967124480,
+    "VmHWM": 2201407488,
+    "VmRSS": 2201407488,
+    "nvml_process_bytes": 7230980096,
+    "gpu_processes": {
+      "30649": 7230980096
+    },
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734176.055663,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119399862272,
+    "SwapFree": 1967124480,
+    "VmHWM": 2242449408,
+    "VmRSS": 2242449408,
+    "nvml_process_bytes": 7230980096,
+    "gpu_processes": {
+      "30649": 7230980096
+    },
+    "stage": "initialize"
+  },
+  {
+    "time": 1791734176.0811138,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119399862272,
+    "SwapFree": 1967124480,
+    "VmHWM": 2244120576,
+    "VmRSS": 2238210048,
+    "nvml_process_bytes": 7398752256,
+    "gpu_processes": {
+      "30649": 7398752256
+    },
+    "stage": "warmup"
+  },
+  {
+    "time": 1791734176.1066716,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119399862272,
+    "SwapFree": 1967124480,
+    "VmHWM": 2244120576,
+    "VmRSS": 2238210048,
+    "nvml_process_bytes": 7398752256,
+    "gpu_processes": {
+      "30649": 7398752256
+    },
+    "stage": "warmup"
+  },
+  {
+    "time": 1791734176.1321776,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119399862272,
+    "SwapFree": 1967124480,
+    "VmHWM": 2244120576,
+    "VmRSS": 2240118784,
+    "nvml_process_bytes": 7398752256,
+    "gpu_processes": {
+      "30649": 7398752256
+    },
+    "stage": "warmup"
+  },
+  {
+    "time": 1791734176.1576266,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119399862272,
+    "SwapFree": 1967124480,
+    "VmHWM": 2244120576,
+    "VmRSS": 2240258048,
+    "nvml_process_bytes": 7398752256,
+    "gpu_processes": {
+      "30649": 7398752256
+    },
+    "stage": "warmup"
+  },
+  {
+    "time": 1791734176.1831806,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119399862272,
+    "SwapFree": 1967124480,
+    "VmHWM": 2244120576,
+    "VmRSS": 2240258048,
+    "nvml_process_bytes": 7398752256,
+    "gpu_processes": {
+      "30649": 7398752256
+    },
+    "stage": "warmup"
+  },
+  {
+    "time": 1791734176.2087407,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119399862272,
+    "SwapFree": 1967124480,
+    "VmHWM": 2246144000,
+    "VmRSS": 2246144000,
+    "nvml_process_bytes": 7432306688,
+    "gpu_processes": {
+      "30649": 7432306688
+    },
+    "stage": "warmup"
+  },
+  {
+    "time": 1791734176.2341983,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119399862272,
+    "SwapFree": 1967124480,
+    "VmHWM": 2246144000,
+    "VmRSS": 2246144000,
+    "nvml_process_bytes": 7432306688,
+    "gpu_processes": {
+      "30649": 7432306688
+    },
+    "stage": "warmup"
+  },
+  {
+    "time": 1791734176.2596345,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119399862272,
+    "SwapFree": 1967124480,
+    "VmHWM": 2246144000,
+    "VmRSS": 2246144000,
+    "nvml_process_bytes": 7432306688,
+    "gpu_processes": {
+      "30649": 7432306688
+    },
+    "stage": "warmup"
+  },
+  {
+    "time": 1791734176.285077,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119389687808,
+    "SwapFree": 1967124480,
+    "VmHWM": 2266910720,
+    "VmRSS": 2266910720,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "warmup"
+  },
+  {
+    "time": 1791734176.3105195,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119342223360,
+    "SwapFree": 1967124480,
+    "VmHWM": 2307416064,
+    "VmRSS": 2307416064,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "warmup"
+  },
+  {
+    "time": 1791734176.3359568,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119296622592,
+    "SwapFree": 1967124480,
+    "VmHWM": 2360033280,
+    "VmRSS": 2360033280,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "warmup"
+  },
+  {
+    "time": 1791734176.3614106,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119246815232,
+    "SwapFree": 1967124480,
+    "VmHWM": 2404724736,
+    "VmRSS": 2397118464,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "warmup"
+  },
+  {
+    "time": 1791734176.3868568,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119246815232,
+    "SwapFree": 1967124480,
+    "VmHWM": 2404724736,
+    "VmRSS": 2373763072,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "warmup"
+  },
+  {
+    "time": 1791734176.4123101,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119246815232,
+    "SwapFree": 1967124480,
+    "VmHWM": 2404724736,
+    "VmRSS": 2373763072,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.4378288,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119246815232,
+    "SwapFree": 1967124480,
+    "VmHWM": 2404724736,
+    "VmRSS": 2373763072,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.4633715,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119246815232,
+    "SwapFree": 1967124480,
+    "VmHWM": 2404724736,
+    "VmRSS": 2373763072,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.4888246,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119246815232,
+    "SwapFree": 1967124480,
+    "VmHWM": 2404724736,
+    "VmRSS": 2373763072,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.5143697,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119246815232,
+    "SwapFree": 1967124480,
+    "VmHWM": 2404724736,
+    "VmRSS": 2373763072,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.5398884,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119246815232,
+    "SwapFree": 1967124480,
+    "VmHWM": 2404724736,
+    "VmRSS": 2373763072,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.565345,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119250624512,
+    "SwapFree": 1967124480,
+    "VmHWM": 2404724736,
+    "VmRSS": 2373763072,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.5907745,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119250624512,
+    "SwapFree": 1967124480,
+    "VmHWM": 2404724736,
+    "VmRSS": 2373763072,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.6162388,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119250624512,
+    "SwapFree": 1967124480,
+    "VmHWM": 2404724736,
+    "VmRSS": 2392412160,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.6416907,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119234367488,
+    "SwapFree": 1967124480,
+    "VmHWM": 2423775232,
+    "VmRSS": 2423775232,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.6672106,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119234367488,
+    "SwapFree": 1967124480,
+    "VmHWM": 2423775232,
+    "VmRSS": 2423775232,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.6927452,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119234912256,
+    "SwapFree": 1967124480,
+    "VmHWM": 2423775232,
+    "VmRSS": 2423775232,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.718191,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119235129344,
+    "SwapFree": 1967124480,
+    "VmHWM": 2423775232,
+    "VmRSS": 2423775232,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.743737,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119235227648,
+    "SwapFree": 1967124480,
+    "VmHWM": 2423775232,
+    "VmRSS": 2423775232,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.769305,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119235395584,
+    "SwapFree": 1967124480,
+    "VmHWM": 2423779328,
+    "VmRSS": 2423779328,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.794739,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119235395584,
+    "SwapFree": 1967124480,
+    "VmHWM": 2423779328,
+    "VmRSS": 2423779328,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.820203,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119235395584,
+    "SwapFree": 1967124480,
+    "VmHWM": 2423779328,
+    "VmRSS": 2423779328,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.8456202,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119227138048,
+    "SwapFree": 1967124480,
+    "VmHWM": 2428633088,
+    "VmRSS": 2428633088,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.8711016,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119181524992,
+    "SwapFree": 1967124480,
+    "VmHWM": 2473132032,
+    "VmRSS": 2473132032,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.897321,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119181524992,
+    "SwapFree": 1967124480,
+    "VmHWM": 2473136128,
+    "VmRSS": 2473136128,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.9228714,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119181524992,
+    "SwapFree": 1967124480,
+    "VmHWM": 2473136128,
+    "VmRSS": 2473136128,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.948471,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119181524992,
+    "SwapFree": 1967124480,
+    "VmHWM": 2473136128,
+    "VmRSS": 2473136128,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.973909,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119181524992,
+    "SwapFree": 1967124480,
+    "VmHWM": 2473136128,
+    "VmRSS": 2473136128,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734176.999452,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119181524992,
+    "SwapFree": 1967124480,
+    "VmHWM": 2473136128,
+    "VmRSS": 2473136128,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.0250027,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119181524992,
+    "SwapFree": 1967124480,
+    "VmHWM": 2473136128,
+    "VmRSS": 2473136128,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.0504384,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119181524992,
+    "SwapFree": 1967124480,
+    "VmHWM": 2473136128,
+    "VmRSS": 2473136128,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.0758865,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119181524992,
+    "SwapFree": 1967124480,
+    "VmHWM": 2473136128,
+    "VmRSS": 2473136128,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.101361,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119181524992,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423267328,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.1269052,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119181524992,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423267328,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.1524656,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119182295040,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423267328,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.177898,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119182295040,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423267328,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.2034502,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119182295040,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423267328,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.2289648,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119182295040,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423267328,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.2544203,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119182295040,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423267328,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.279852,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119182295040,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423267328,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.305292,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119182295040,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423267328,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.3307734,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119182295040,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423279616,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.3563275,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119182295040,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423279616,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.3818686,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119182295040,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423279616,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.4073112,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119182295040,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423279616,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.4328156,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119182295040,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423279616,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.4584146,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119182295040,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423279616,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.4838583,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119182295040,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423279616,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.5092869,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119185629184,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423279616,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.5347311,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119185629184,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423279616,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "formal"
+  },
+  {
+    "time": 1791734177.5602121,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119243694080,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2375847936,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734177.5856671,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119243694080,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2390552576,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734177.6110957,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119243694080,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2390417408,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734177.636535,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119227437056,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2405421056,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734177.6620197,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119210921984,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734177.6874375,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119210921984,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734177.712851,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119235694592,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2394451968,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734177.7382977,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119211368448,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734177.7637286,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119211368448,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734177.789187,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119227883520,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2383659008,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734177.81463,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119211782144,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734177.8400626,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119211782144,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734177.865479,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119228297216,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2372333568,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734177.890905,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119220482048,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2418053120,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734177.9163659,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119212482560,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734177.9417949,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119228997632,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2360971264,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734177.9672298,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119228997632,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2408013824,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734177.9926603,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119212740608,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.018104,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119212740608,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2404954112,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.0435262,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119229313024,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2397523968,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.0689497,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119213056000,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.094377,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119213056000,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.1197913,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119229571072,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2387013632,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.1452415,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119213768704,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.1706696,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119213768704,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.1961079,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119246901248,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2375299072,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.2215424,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119214129152,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2420203520,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.2470126,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119214272512,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.2724605,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119230787584,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2363891712,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.2982337,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119230025728,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2411032576,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.3240294,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119214542848,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.3498924,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119214542848,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2365108224,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.3757062,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119231057920,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2403504128,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.4014916,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119214800896,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.4272668,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119214800896,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.4530468,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119231315968,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2396041216,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.4788394,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119215058944,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.5046701,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119215058944,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.5304677,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119235158016,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2388672512,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.5562973,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119218900992,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.5820932,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119218900992,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.607881,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119235416064,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2380484608,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.6337333,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119219159040,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.6595476,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119219159040,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.6853502,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119235674112,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2372386816,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.7111742,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119219445760,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2418298880,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.7369757,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119219445760,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.762833,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119235960832,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2363310080,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.7886465,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119232090112,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2411474944,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.8144574,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119219703808,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.8403575,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119219703808,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.8661876,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119236218880,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.8920264,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119235960832,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.917829,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119235465216,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.9436333,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119235465216,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.969449,
+    "load": [
+      2.46630859375,
+      2.54443359375,
+      1.50390625
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119234949120,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734178.9952717,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119235092480,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.021067,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119234834432,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.0468557,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119234834432,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2388381696,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.072703,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119234932736,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2397499392,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.0985093,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119218675712,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.1243248,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119218675712,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.1501307,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119235190784,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2388729856,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.1759264,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119218933760,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.201744,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119222898688,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.227576,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119247671296,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2380267520,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.2533906,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119223156736,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.2792113,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119223222272,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.3050368,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119239737344,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2372050944,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.3308318,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119223480320,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2418868224,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.3566484,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119223480320,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.3824198,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119239995392,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2363817984,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.4082236,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119231995904,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2411855872,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.4340277,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119223738368,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.4599347,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119223738368,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.4857757,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119240253440,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2405216256,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.5115857,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119215738880,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.5374026,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119215738880,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.5632243,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119240511488,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2397437952,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.589028,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119218548736,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.6148202,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119218548736,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.6406474,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119243321344,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2389434368,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.6664767,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119218806784,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.692283,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119218806784,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.7180665,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119244029952,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2380722176,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.7440495,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119219515392,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.7698371,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119219515392,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.7956765,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119244091392,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2371813376,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.8214822,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119227834368,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2418749440,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.8473141,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119219613696,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.8731384,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119244386304,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2362871808,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.9012456,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119228293120,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2414751744,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.9270613,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119220035584,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.9528756,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119244808192,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2358460416,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734179.9786878,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119243001856,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2407194624,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.004517,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119230013440,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.0303204,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119231303680,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2402856960,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.0561397,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119256268800,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2399408128,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.0819266,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119231754240,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.107746,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119231754240,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.133562,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119256526848,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2391666688,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.1593928,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119232012288,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.185197,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119232344064,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.2109754,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119265116160,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2382610432,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.2368226,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119232344064,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.2629435,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119232344064,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.288751,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119258025984,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2374238208,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.3145907,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119241768960,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2420654080,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.3404598,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119233511424,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423447552,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.3662574,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119258284032,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.3920426,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119258284032,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.4178271,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119258284032,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.443688,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119258284032,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.4695346,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119258284032,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.495379,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119258284032,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.521198,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119260516352,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.5470402,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119260516352,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.572909,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119260516352,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.5988586,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119260516352,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.6247008,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119260516352,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.6506028,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119260516352,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.676558,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119260516352,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.7023637,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119260012544,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.7282,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119260012544,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2357518336,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.7540445,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119260078080,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2382835712,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "verify"
+  },
+  {
+    "time": 1791734180.7798653,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119252078592,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423848960,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "save_outputs"
+  },
+  {
+    "time": 1791734180.8057287,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119249498112,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423848960,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "save_outputs"
+  },
+  {
+    "time": 1791734180.831552,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119254659072,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423848960,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "save_outputs"
+  },
+  {
+    "time": 1791734180.8573568,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 119253626880,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 2423848960,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "save_outputs"
+  },
+  {
+    "time": 1791734180.8831685,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 120867401728,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 746156032,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "complete"
+  },
+  {
+    "time": 1791734180.9089594,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 120867401728,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 746184704,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "complete"
+  },
+  {
+    "time": 1791734180.9347804,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 120941264896,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 679858176,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "complete"
+  },
+  {
+    "time": 1791734180.960591,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 120941264896,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 679858176,
+    "nvml_process_bytes": 7503609856,
+    "gpu_processes": {
+      "30649": 7503609856
+    },
+    "stage": "complete"
+  },
+  {
+    "time": 1791734180.9864442,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 120941264896,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 678178816,
+    "nvml_process_bytes": 7499415552,
+    "gpu_processes": {
+      "30649": 7499415552
+    },
+    "stage": "complete"
+  },
+  {
+    "time": 1791734181.012274,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 120941264896,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 692785152,
+    "nvml_process_bytes": 7499415552,
+    "gpu_processes": {
+      "30649": 7499415552
+    },
+    "stage": "complete"
+  },
+  {
+    "time": 1791734181.0380747,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 120941264896,
+    "SwapFree": 1967124480,
+    "VmHWM": 2470137856,
+    "VmRSS": 693035008,
+    "nvml_process_bytes": 7499415552,
+    "gpu_processes": {
+      "30649": 7499415552
+    },
+    "stage": "complete"
+  },
+  {
+    "time": 1791734181.0638702,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 120947367936,
+    "SwapFree": 1967124480,
+    "nvml_process_bytes": 7499415552,
+    "gpu_processes": {
+      "30649": 7499415552
+    },
+    "stage": "complete"
+  },
+  {
+    "time": 1791734181.0903332,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 121155739648,
+    "SwapFree": 1967124480,
+    "nvml_process_bytes": 7499415552,
+    "gpu_processes": {
+      "30649": 7499415552
+    },
+    "stage": "complete"
+  },
+  {
+    "time": 1791734181.1160555,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 121320890368,
+    "SwapFree": 1967124480,
+    "nvml_process_bytes": 7499415552,
+    "gpu_processes": {
+      "30649": 7499415552
+    },
+    "stage": "complete"
+  },
+  {
+    "time": 1791734181.1417468,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 121459257344,
+    "SwapFree": 1967124480,
+    "nvml_process_bytes": 7499415552,
+    "gpu_processes": {
+      "30649": 7499415552
+    },
+    "stage": "complete"
+  },
+  {
+    "time": 1791734181.168025,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 121536471040,
+    "SwapFree": 1967124480,
+    "nvml_process_bytes": 7499415552,
+    "gpu_processes": {
+      "30649": 7499415552
+    },
+    "stage": "complete"
+  },
+  {
+    "time": 1791734181.1942961,
+    "load": [
+      2.50927734375,
+      2.55224609375,
+      1.51220703125
+    ],
+    "MemTotal": 134745522176,
+    "MemAvailable": 121572683776,
+    "SwapFree": 1967124480,
+    "nvml_process_bytes": 0,
+    "gpu_processes": {},
+    "stage": "complete"
+  }
+]

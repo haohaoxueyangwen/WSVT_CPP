@@ -1,0 +1,6 @@
+measured 0 solver=1.47041 api=1.47404
+measured 1 solver=1.47115 api=1.4749
+measured 2 solver=1.47024 api=1.47408
+measured 3 solver=1.47115 api=1.47483
+measured 4 solver=1.47093 api=1.47476
+complete /home/xray/Documents/WSVT_GPU_orin_20261010/native_four_editions_20261011/wsvt/cli_wsvt_low_memory_copy

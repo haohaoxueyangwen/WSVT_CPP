@@ -1,0 +1,277 @@
+{
+  "mode": "wsvt",
+  "profile": "native_speed",
+  "platform": "jetson",
+  "shape": [
+    100,
+    2048,
+    2048
+  ],
+  "input_dtype": "uint16",
+  "transport": "pageable host",
+  "summary": {
+    "solver_s": {
+      "mean": 1.3841842767957133,
+      "sample_sd": 0.0014190387120487807
+    },
+    "api_s": {
+      "mean": 1.4173373595927843,
+      "sample_sd": 0.0019438361647628587
+    },
+    "reference_s": {
+      "mean": 0.3838091067969799,
+      "sample_sd": 0.0009646207096247265
+    },
+    "sample_s": {
+      "mean": 1.0003751699987333,
+      "sample_sd": 0.0009166080459449346
+    },
+    "download_s": {
+      "mean": 0.03269520060857758,
+      "sample_sd": 0.0018579715179880447
+    }
+  },
+  "memory": {
+    "process_peak_rss_bytes": 1899651072,
+    "rss_scope": "Lifetime through end of measured solves, includes input read/imports/initialization/warmup; subsequent verification and saving excluded.",
+    "native_explicit_device_bytes": 6955289732,
+    "native_persistent_bytes": 6922387460,
+    "native_fft_workspace_bytes": 32902272
+  },
+  "warmup": {
+    "solver_s": 1.5302183610328939,
+    "api_s": 1.563966754998546,
+    "reference_s": 0.5240353470144328,
+    "sample_s": 1.006183014018461,
+    "download_s": 0.03310751999379136,
+    "detail": {
+      "reference_s": 0.5240353470144328,
+      "sample_solver_s": 1.006183014018461,
+      "download_s": 0.03310751999379136,
+      "call_s": 1.0392996549780946,
+      "persistent_bytes": 6922387460,
+      "fft_workspace_bytes": 32902272,
+      "device_allocation_bytes": 6955289732,
+      "stages_s": [
+        0.09861440277099609,
+        0.0019526720046997071,
+        0.2889518127441406,
+        0.12121100616455079,
+        0.023009664535522462,
+        0.45731744384765627,
+        0.003491935968399048,
+        0.01117199993133545
+      ]
+    },
+    "load_before": [
+      2.06,
+      1.27,
+      0.72
+    ]
+  },
+  "records": [
+    {
+      "solver_s": 1.3821022589690983,
+      "api_s": 1.4156690499803517,
+      "reference_s": 0.3831418789923191,
+      "sample_s": 0.9989603799767792,
+      "download_s": 0.03312387299956754,
+      "detail": {
+        "reference_s": 0.3831418789923191,
+        "sample_solver_s": 0.9989603799767792,
+        "download_s": 0.03312387299956754,
+        "call_s": 1.0320929249865003,
+        "persistent_bytes": 6922387460,
+        "fft_workspace_bytes": 32902272,
+        "device_allocation_bytes": 6955289732,
+        "stages_s": [
+          0.09338114929199219,
+          0.0019687680006027224,
+          0.28897125244140626,
+          0.12106739044189453,
+          0.02299193572998047,
+          0.4573759460449219,
+          0.003213536024093628,
+          0.009427840232849122
+        ]
+      },
+      "load_before": [
+        1.98,
+        1.27,
+        0.73
+      ],
+      "repeat": 0
+    },
+    {
+      "solver_s": 1.3833458590088412,
+      "api_s": 1.4184651210089214,
+      "reference_s": 0.38257934199646115,
+      "sample_s": 1.00076651701238,
+      "download_s": 0.034598997997818515,
+      "detail": {
+        "reference_s": 0.38257934199646115,
+        "sample_solver_s": 1.00076651701238,
+        "download_s": 0.034598997997818515,
+        "call_s": 1.0353744110034313,
+        "persistent_bytes": 6922387460,
+        "fft_workspace_bytes": 32902272,
+        "device_allocation_bytes": 6955289732,
+        "stages_s": [
+          0.09480809783935547,
+          0.001956768035888672,
+          0.28907046508789064,
+          0.12122054290771485,
+          0.023014591217041015,
+          0.4572159423828125,
+          0.0032124478816986084,
+          0.009437888145446778
+        ]
+      },
+      "load_before": [
+        1.98,
+        1.27,
+        0.73
+      ],
+      "repeat": 1
+    },
+    {
+      "solver_s": 1.384987034020014,
+      "api_s": 1.4154230599815492,
+      "reference_s": 0.3839777300017886,
+      "sample_s": 1.0010093040182255,
+      "download_s": 0.03000549101852812,
+      "detail": {
+        "reference_s": 0.3839777300017886,
+        "sample_solver_s": 1.0010093040182255,
+        "download_s": 0.03000549101852812,
+        "call_s": 1.0310240119870286,
+        "persistent_bytes": 6922387460,
+        "fft_workspace_bytes": 32902272,
+        "device_allocation_bytes": 6955289732,
+        "stages_s": [
+          0.09528864288330079,
+          0.0019780479669570922,
+          0.2890843200683594,
+          0.12121539306640625,
+          0.0230067195892334,
+          0.4573097229003906,
+          0.003211872100830078,
+          0.009435232162475587
+        ]
+      },
+      "load_before": [
+        1.98,
+        1.27,
+        0.73
+      ],
+      "repeat": 2
+    },
+    {
+      "solver_s": 1.3849879289919045,
+      "api_s": 1.4170847139903344,
+      "reference_s": 0.38502142499783076,
+      "sample_s": 0.9999665039940737,
+      "download_s": 0.03171156402095221,
+      "detail": {
+        "reference_s": 0.38502142499783076,
+        "sample_solver_s": 0.9999665039940737,
+        "download_s": 0.03171156402095221,
+        "call_s": 1.0316867399960756,
+        "persistent_bytes": 6922387460,
+        "fft_workspace_bytes": 32902272,
+        "device_allocation_bytes": 6955289732,
+        "stages_s": [
+          0.09411763000488281,
+          0.0019600000381469725,
+          0.28901651000976564,
+          0.1212218246459961,
+          0.023007104873657227,
+          0.45738031005859375,
+          0.003216799974441528,
+          0.009422911643981933
+        ]
+      },
+      "load_before": [
+        1.98,
+        1.27,
+        0.73
+      ],
+      "repeat": 3
+    },
+    {
+      "solver_s": 1.385498302988708,
+      "api_s": 1.4200448530027643,
+      "reference_s": 0.3843251579964999,
+      "sample_s": 1.001173144992208,
+      "download_s": 0.034036077006021515,
+      "detail": {
+        "reference_s": 0.3843251579964999,
+        "sample_solver_s": 1.001173144992208,
+        "download_s": 0.034036077006021515,
+        "call_s": 1.035216518008383,
+        "persistent_bytes": 6922387460,
+        "fft_workspace_bytes": 32902272,
+        "device_allocation_bytes": 6955289732,
+        "stages_s": [
+          0.09549686431884766,
+          0.0019673919677734375,
+          0.2890993347167969,
+          0.12108700561523437,
+          0.023019392013549803,
+          0.45739859008789063,
+          0.003214688062667847,
+          0.009428480148315429
+        ]
+      },
+      "load_before": [
+        1.82,
+        1.25,
+        0.72
+      ],
+      "repeat": 4
+    }
+  ],
+  "features_sha256": {
+    "ref_fine": "47b3fe66e8a66fb3f477a478c0328903f8bbe0fed6cb2c8dc99486ce4ab8813b",
+    "ref_coarse": "2b92c58fff765fb832c25b52d159db9e3e29887bfb7ec65dc4179997a9c1c0b8",
+    "sample_fine": "9aacce5acdeb24288b9a0ea7a8fec197444d2c1a3512bda26c9a5912eb003fbd",
+    "sample_coarse": "92bf6dee869e757b3b1a684d39ce96187dbbb812dcfbfabf988d7218bc57cb36"
+  },
+  "read_s": 0.3979413899942301,
+  "constructor_s": 1.2378403920156416,
+  "save_s": 0.09001260201330297,
+  "geometry": {
+    "pixel_m": 1.625e-06,
+    "distance_m": 0.4845,
+    "energy_ev": 12400.0
+  },
+  "settings": {
+    "half": 10,
+    "coarse": 5,
+    "fine": 4,
+    "levels": 2,
+    "iterations": 1,
+    "cut": 1,
+    "template": 0,
+    "frames": 100,
+    "host_threads": 2,
+    "spline": "gpu",
+    "reference_policy": "each-pair",
+    "warmup": 1,
+    "repeats": 5,
+    "low_memory": false,
+    "chunk": 16
+  },
+  "scope": "Pair solver includes reference rebuild and sample compute, final synchronization, no outputs. API ready host arrays to seven new independently owned NumPy outputs. Input read, pinned/mapped host setup, constructor, file saving excluded and recorded; no Python/PyTorch reconstruction in native profiles.",
+  "hashes": {
+    "driver": "1a5e30f723226317a1808e84f8620379270323e4dbc1dd0a10ac6f0875b3c571",
+    "library": "dd0b4b58418ed6e9ea42a1afe1124ddb22844b247625626bc0e2e95f8b4f9d1d"
+  },
+  "sampled_memory": {
+    "peak_rss_bytes": 1899380736,
+    "system_used_peak_bytes": 16887484416,
+    "nvml_process_peak_bytes": null,
+    "sample_interval_s": 0.025,
+    "scope": "25ms sampled peaks are lower bounds. Adapter profiles: formal only. CLI profiles: whole lifetime including constructor. System RAM includes background/cache. Unified DRAM metrics overlap; do not sum."
+  }
+}

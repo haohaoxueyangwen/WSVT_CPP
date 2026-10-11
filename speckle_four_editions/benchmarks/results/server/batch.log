@@ -1,0 +1,14 @@
+PROFILE_COMPLETE wsvt original
+PROFILE_COMPLETE wsvt native_speed
+PROFILE_COMPLETE wsvt native_memory
+PROFILE_COMPLETE wsvt original_pinned
+PROFILE_COMPLETE wsvt native_speed_pinned
+CLI_COMPLETE cli_wsvt_speed_copy
+CLI_COMPLETE cli_wsvt_low_memory_copy
+MODE_COMPLETE wsvt
+PROFILE_COMPLETE wxst original
+PROFILE_COMPLETE wxst native_speed
+PROFILE_COMPLETE wxst original_pinned
+PROFILE_COMPLETE wxst native_speed_pinned
+CLI_COMPLETE cli_wxst_speed_copy
+MODE_COMPLETE wxst

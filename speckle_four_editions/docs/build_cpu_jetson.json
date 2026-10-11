@@ -1,0 +1,25 @@
+{
+  "platform": "aarch64",
+  "configure": [
+    "/home/xray/Documents/WSVT_GPU_orin_20261010/cpu_compare_20261011/toolchain/bin/cmake",
+    "-S",
+    "/home/xray/Documents/WSVT_GPU_orin_20261010/native_four_editions_20261011/release/cpu_cpp/source",
+    "-B",
+    "/home/xray/Documents/WSVT_GPU_orin_20261010/native_four_editions_20261011/release/build_cpu_jetson",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DCMAKE_CXX_COMPILER=/home/xray/Documents/WSVT_GPU_orin_20261010/cpu_compare_20261011/toolchain/bin/aarch64-conda-linux-gnu-g++",
+    "-DCMAKE_C_COMPILER=/home/xray/Documents/WSVT_GPU_orin_20261010/cpu_compare_20261011/toolchain/bin/aarch64-conda-linux-gnu-gcc",
+    "-DWSVT_WITH_OPENCV=OFF",
+    "-DWSVT_WITH_HDF5=OFF",
+    "-DFFTW3F_LIB=/home/xray/Documents/WSVT_GPU_orin_20261010/cpu_compare_20261011/toolchain/lib/libfftw3f.so",
+    "-DFFTW3F_INC=/home/xray/Documents/WSVT_GPU_orin_20261010/cpu_compare_20261011/toolchain/include",
+    "-DFFTW3F_THREADS_LIB=/home/xray/Documents/WSVT_GPU_orin_20261010/cpu_compare_20261011/toolchain/lib/libfftw3f_threads.so",
+    "-DCMAKE_PREFIX_PATH=/home/xray/Documents/WSVT_GPU_orin_20261010/cpu_compare_20261011/toolchain"
+  ],
+  "compiler_version": "aarch64-conda-linux-gnu-g++ (conda-forge gcc 12.4.0-2) 12.4.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "binary_sha256": "916f60b2e71839cf1442d87af525164f736b94cc95b901b5e8a2e4363b400c55",
+  "ldd": "\tlinux-vdso.so.1 (0x0000ffffa24c9000)\n\t/home/xray/Documents/WSVT_GPU_orin_20261010/cpu_compare_20261011/toolchain/lib/libstdc++.so.6 (0x0000ffffa2150000)\n\tlibgomp.so.1 => /home/xray/Documents/WSVT_GPU_orin_20261010/cpu_compare_20261011/toolchain/lib/libgomp.so.1 (0x0000ffffa20df000)\n\tlibpthread.so.0 => /lib/aarch64-linux-gnu/libpthread.so.0 (0x0000ffffa208a000)\n\tlibfftw3f.so.3 => /home/xray/Documents/WSVT_GPU_orin_20261010/cpu_compare_20261011/toolchain/lib/libfftw3f.so.3 (0x0000ffffa1f89000)\n\tlibfftw3f_threads.so.3 => /home/xray/Documents/WSVT_GPU_orin_20261010/cpu_compare_20261011/toolchain/lib/libfftw3f_threads.so.3 (0x0000ffffa1f68000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000ffffa1ebd000)\n\tlibgcc_s.so.1 => /home/xray/Documents/WSVT_GPU_orin_20261010/cpu_compare_20261011/toolchain/lib/libgcc_s.so.1 (0x0000ffffa1e8c000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000ffffa1d19000)\n\tlibdl.so.2 => /lib/aarch64-linux-gnu/libdl.so.2 (0x0000ffffa1d05000)\n\t/lib/ld-linux-aarch64.so.1 (0x0000ffffa2499000)\n",
+  "demo_stdout": "\u001b[93mWXST warning: n_group is compatibility metadata only and does not control C++ parallelism\u001b[00m\n\u001b[96mNo gpu found. Use CPU instead.\u001b[00m\n\u001b[92mComputer available cores: 12\u001b[00m\n\u001b[94mUse 2 cores for pyramid/wavelet/displace\u001b[00m\n\u001b[92mobtain pyramid image and stack the window with pyramid level: 1\u001b[00m\n\u001b[94m  pyramid detail: downsample=0.000015s tmpl_win=0.000203s normalize=0.000000s\u001b[00m\n\u001b[94m  pyramid detail: downsample=0.000011s tmpl_win=0.000099s normalize=0.000000s\u001b[00m\n\u001b[94mpyramid time: 0.000393 s\u001b[00m\n\u001b[92mobtain wavelet data...\u001b[00m\n\u001b[92mmax wavelet level: 1\u001b[00m\n\u001b[92mpyramid level: 0\nvector length: 12\u001b[00m\n\u001b[92mpyramid level: 1\nvector length: 12\u001b[00m\n\u001b[94mwavelet time: 0.000310 s\u001b[00m\n\u001b[96mpyramid level: 1\nImage size: (18, 18, 12)\nsearching window:1\u001b[00m\n\u001b[96mpyramid level: 0\nImage size: (32, 32, 12)\nsearching window:2\u001b[00m\n\u001b[94mdisplace time: 0.000473 s\u001b[00m\n\u001b[92mComputer available cores: 12\u001b[00m\n\u001b[94mUse 2 cores for post-process/FFTW phase recovery\u001b[00m\n\u001b[94mpost-process time: 0.001949 s\u001b[00m\n\u001b[94m  post detail: transmission=0.000003s crop_sign=0.000003s dpc_conv=0.000003s phase_recovery=0.001938s\u001b[00m\n\u001b[94mtotal time: 0.003230 s\u001b[00m\n\u001b[94m  pyramid:    0.000393 s\u001b[00m\n\u001b[94m  tmpl_win:   0.000303 s\u001b[00m\n\u001b[94m  wavelet:    0.000310 s\u001b[00m\n\u001b[94m  displace:   0.000473 s\u001b[00m\n\u001b[94m  post-proc:  0.001949 s\u001b[00m\nwxst_displace_shape=28x28\n",
+  "fft": "FFTW3 float with thread library, no brute DFT fallback",
+  "snapshot": "Frozen53 original files unchanged; missing packaging template copied from baseline artifact"
+}

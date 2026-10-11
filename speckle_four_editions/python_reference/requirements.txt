@@ -1,0 +1,7 @@
+numpy
+scipy
+PyWavelets
+Pillow
+matplotlib
+numba
+h5py

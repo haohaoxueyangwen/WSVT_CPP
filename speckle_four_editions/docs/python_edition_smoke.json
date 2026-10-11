@@ -1,0 +1,56 @@
+{
+  "wxst": {
+    "mode": "wxst",
+    "elapsed_run_s": 0.4919069963507354,
+    "scope": "Original q.run(), no file read/save; original output/normalization rules retained",
+    "fields": [
+      "displace_y",
+      "displace_x",
+      "DPC_y",
+      "DPC_x",
+      "phase",
+      "transmission"
+    ],
+    "settings": {
+      "M_image": 128,
+      "cal_half_window": 10,
+      "N_s_extend": 4,
+      "n_cores": 2,
+      "n_group": 2,
+      "energy": 12400.0,
+      "p_x": 1.625e-06,
+      "z": 0.4845,
+      "wavelet_level_cut": 1,
+      "pyramid_level": 2,
+      "n_iter": 1,
+      "use_wavelet": true
+    }
+  },
+  "wsvt": {
+    "mode": "wsvt",
+    "elapsed_run_s": 1.028600879944861,
+    "scope": "Original q.run(), no file read/save; original output/normalization rules retained",
+    "fields": [
+      "displace_y",
+      "displace_x",
+      "DPC_y",
+      "DPC_x",
+      "phase",
+      "transmission"
+    ],
+    "settings": {
+      "M_image": 128,
+      "cal_half_window": 10,
+      "N_s_extend": 4,
+      "n_cores": 2,
+      "n_group": 2,
+      "energy": 12400.0,
+      "p_x": 1.625e-06,
+      "z": 0.4845,
+      "wavelet_level_cut": 1,
+      "pyramid_level": 2,
+      "n_iter": 1,
+      "use_wavelet": true
+    }
+  }
+}

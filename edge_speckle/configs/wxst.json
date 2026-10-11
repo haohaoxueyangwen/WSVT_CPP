@@ -1,0 +1,13 @@
+{
+  "mode": "wxst",
+  "pixel_m": null,
+  "distance_m": null,
+  "energy_ev": null,
+  "front": "fused",
+  "spline": "gpu",
+  "input_dtype": "float32",
+  "reference_policy": "each-pair",
+  "cpu_threads": 2,
+  "warmup": 1,
+  "repeats": 1
+}

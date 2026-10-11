@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+build/
+dist/
+*.egg-info/
+speckle_edge/_native/*
+baselines/legacy_wxst/*.so
+baselines/cpu/source/
+baselines/cpu/build/
+runs/
+tests/results/

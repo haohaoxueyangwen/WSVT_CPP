@@ -1,0 +1,2 @@
+# Preserve the exact reviewed source bytes and the SHA256 release manifest.
+/edge_speckle/** -text

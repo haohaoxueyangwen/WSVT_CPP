@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.21)
+project(orin_original_cpu_compare LANGUAGES C CXX)
+add_subdirectory(source)
+add_library(cpu_driver SHARED cpu_driver.cpp)
+target_link_libraries(cpu_driver PRIVATE wsvt_core)
+target_compile_features(cpu_driver PRIVATE cxx_std_20)

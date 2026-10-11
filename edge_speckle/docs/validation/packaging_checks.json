@@ -1,0 +1,456 @@
+{
+  "packaging_regression_pass": true,
+  "cases": [
+    {
+      "mode": "wxst",
+      "front": "fused",
+      "spline": "gpu",
+      "dtype": "float32",
+      "shape": [
+        256,
+        256
+      ],
+      "exact_field_values": true,
+      "max_abs_difference": {
+        "displace_y": 0.0,
+        "displace_x": 0.0,
+        "DPC_y": 0.0,
+        "DPC_x": 0.0,
+        "phase": 0.0,
+        "transmission": 0.0,
+        "match_score_neg_ssd": 0.0
+      },
+      "persistent_buffers_reused": true,
+      "owned_outputs_unchanged": true,
+      "unprepared_rejected": true,
+      "cross_thread_rejected": true,
+      "closed_rejected": true,
+      "outputs": {
+        "displace_y": {
+          "shape": [
+            236,
+            236
+          ],
+          "dtype": "float32",
+          "unit": "detector pixel",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "displace_x": {
+          "shape": [
+            236,
+            236
+          ],
+          "dtype": "float32",
+          "unit": "detector pixel",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "DPC_y": {
+          "shape": [
+            236,
+            236
+          ],
+          "dtype": "float32",
+          "unit": "rad",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "DPC_x": {
+          "shape": [
+            236,
+            236
+          ],
+          "dtype": "float32",
+          "unit": "rad",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "phase": {
+          "shape": [
+            236,
+            236
+          ],
+          "dtype": "float32",
+          "unit": "rad",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "transmission": {
+          "shape": [
+            256,
+            256
+          ],
+          "dtype": "float32",
+          "unit": "dimensionless",
+          "detector_origin_yx": [
+            0,
+            0
+          ]
+        },
+        "match_score_neg_ssd": {
+          "shape": [
+            236,
+            236
+          ],
+          "dtype": "float32",
+          "unit": "negative SSD, arbitrary units",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        }
+      },
+      "pass": true
+    },
+    {
+      "mode": "wxst",
+      "front": "materialized",
+      "spline": "cpu",
+      "dtype": "float32",
+      "shape": [
+        127,
+        159
+      ],
+      "exact_field_values": true,
+      "max_abs_difference": {
+        "displace_y": 0.0,
+        "displace_x": 0.0,
+        "DPC_y": 0.0,
+        "DPC_x": 0.0,
+        "phase": 0.0,
+        "transmission": 0.0,
+        "match_score_neg_ssd": 0.0
+      },
+      "persistent_buffers_reused": true,
+      "owned_outputs_unchanged": true,
+      "unprepared_rejected": true,
+      "cross_thread_rejected": true,
+      "closed_rejected": true,
+      "outputs": {
+        "displace_y": {
+          "shape": [
+            107,
+            139
+          ],
+          "dtype": "float32",
+          "unit": "detector pixel",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "displace_x": {
+          "shape": [
+            107,
+            139
+          ],
+          "dtype": "float32",
+          "unit": "detector pixel",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "DPC_y": {
+          "shape": [
+            107,
+            139
+          ],
+          "dtype": "float32",
+          "unit": "rad",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "DPC_x": {
+          "shape": [
+            107,
+            139
+          ],
+          "dtype": "float32",
+          "unit": "rad",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "phase": {
+          "shape": [
+            107,
+            139
+          ],
+          "dtype": "float32",
+          "unit": "rad",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "transmission": {
+          "shape": [
+            127,
+            159
+          ],
+          "dtype": "float32",
+          "unit": "dimensionless",
+          "detector_origin_yx": [
+            0,
+            0
+          ]
+        },
+        "match_score_neg_ssd": {
+          "shape": [
+            107,
+            139
+          ],
+          "dtype": "float32",
+          "unit": "negative SSD, arbitrary units",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        }
+      },
+      "pass": true
+    },
+    {
+      "mode": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "dtype": "float32",
+      "shape": [
+        100,
+        128,
+        128
+      ],
+      "exact_field_values": true,
+      "max_abs_difference": {
+        "displace_y": 0.0,
+        "displace_x": 0.0,
+        "DPC_y": 0.0,
+        "DPC_x": 0.0,
+        "phase": 0.0,
+        "transmission": 0.0,
+        "match_score_neg_ssd": 0.0
+      },
+      "persistent_buffers_reused": true,
+      "owned_outputs_unchanged": true,
+      "unprepared_rejected": true,
+      "cross_thread_rejected": true,
+      "closed_rejected": true,
+      "outputs": {
+        "displace_y": {
+          "shape": [
+            108,
+            108
+          ],
+          "dtype": "float32",
+          "unit": "detector pixel",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "displace_x": {
+          "shape": [
+            108,
+            108
+          ],
+          "dtype": "float32",
+          "unit": "detector pixel",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "DPC_y": {
+          "shape": [
+            108,
+            108
+          ],
+          "dtype": "float32",
+          "unit": "rad",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "DPC_x": {
+          "shape": [
+            108,
+            108
+          ],
+          "dtype": "float32",
+          "unit": "rad",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "phase": {
+          "shape": [
+            108,
+            108
+          ],
+          "dtype": "float32",
+          "unit": "rad",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "transmission": {
+          "shape": [
+            128,
+            128
+          ],
+          "dtype": "float32",
+          "unit": "dimensionless",
+          "detector_origin_yx": [
+            0,
+            0
+          ]
+        },
+        "match_score_neg_ssd": {
+          "shape": [
+            108,
+            108
+          ],
+          "dtype": "float32",
+          "unit": "negative SSD, arbitrary units",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        }
+      },
+      "pass": true
+    },
+    {
+      "mode": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "dtype": "uint16",
+      "shape": [
+        100,
+        128,
+        128
+      ],
+      "exact_field_values": true,
+      "max_abs_difference": {
+        "displace_y": 0.0,
+        "displace_x": 0.0,
+        "DPC_y": 0.0,
+        "DPC_x": 0.0,
+        "phase": 0.0,
+        "transmission": 0.0,
+        "match_score_neg_ssd": 0.0
+      },
+      "persistent_buffers_reused": true,
+      "owned_outputs_unchanged": true,
+      "unprepared_rejected": true,
+      "cross_thread_rejected": true,
+      "closed_rejected": true,
+      "outputs": {
+        "displace_y": {
+          "shape": [
+            108,
+            108
+          ],
+          "dtype": "float32",
+          "unit": "detector pixel",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "displace_x": {
+          "shape": [
+            108,
+            108
+          ],
+          "dtype": "float32",
+          "unit": "detector pixel",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "DPC_y": {
+          "shape": [
+            108,
+            108
+          ],
+          "dtype": "float32",
+          "unit": "rad",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "DPC_x": {
+          "shape": [
+            108,
+            108
+          ],
+          "dtype": "float32",
+          "unit": "rad",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "phase": {
+          "shape": [
+            108,
+            108
+          ],
+          "dtype": "float32",
+          "unit": "rad",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        },
+        "transmission": {
+          "shape": [
+            128,
+            128
+          ],
+          "dtype": "float32",
+          "unit": "dimensionless",
+          "detector_origin_yx": [
+            0,
+            0
+          ]
+        },
+        "match_score_neg_ssd": {
+          "shape": [
+            108,
+            108
+          ],
+          "dtype": "float32",
+          "unit": "negative SSD, arbitrary units",
+          "detector_origin_yx": [
+            10,
+            10
+          ]
+        }
+      },
+      "pass": true
+    }
+  ],
+  "scope": "Short packaging and ownership regression; not a new performance or physical-accuracy experiment"
+}

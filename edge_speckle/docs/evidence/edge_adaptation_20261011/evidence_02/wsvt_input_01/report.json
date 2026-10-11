@@ -1,0 +1,1568 @@
+{
+  "scope": "Orin WSVT typed ingress controlled experiment, both original operator order, not CPU-vs-GPU",
+  "shape": [
+    100,
+    2048,
+    2048
+  ],
+  "front": "baseline",
+  "spline": "gpu",
+  "half": 10,
+  "K": 63,
+  "cut": 1,
+  "iterations": 1,
+  "clock_policy": "unchanged, no lock",
+  "warmup": 1,
+  "repeats": 5,
+  "order": "alternating",
+  "cpu_threads": 2,
+  "pair_summary": {
+    "uint16": {
+      "solver_s": {
+        "mean": 1.0032958508003502,
+        "sample_sd": 0.00034005971379079603
+      },
+      "pair_solver_s": {
+        "mean": 1.3890241976012476,
+        "sample_sd": 0.0012015350263609355
+      },
+      "reference_prepare_this_call_s": {
+        "mean": 0.3857283468008973,
+        "sample_sd": 0.0013585660558718099
+      },
+      "call_including_validation_download_s": {
+        "mean": 1.4425141539948527,
+        "sample_sd": 0.004878077812247008
+      },
+      "persistent_device_bytes": 6955128752
+    },
+    "float32": {
+      "solver_s": {
+        "mean": 1.0960082545992917,
+        "sample_sd": 0.00020922738763348703
+      },
+      "pair_solver_s": {
+        "mean": 1.5718905709974933,
+        "sample_sd": 0.00023752287237494544
+      },
+      "reference_prepare_this_call_s": {
+        "mean": 0.4758823163982015,
+        "sample_sd": 0.00019976522316875143
+      },
+      "call_including_validation_download_s": {
+        "mean": 2.8168936073896473,
+        "sample_sd": 0.004272958271524703
+      },
+      "persistent_device_bytes": 7793989552
+    }
+  },
+  "static_reference_summary": {
+    "uint16": {
+      "solver_s": {
+        "mean": 1.004454320401419,
+        "sample_sd": 0.0006357944314211317
+      },
+      "reference_prepare_this_call_s": {
+        "mean": 0.0,
+        "sample_sd": 0.0
+      },
+      "call_including_validation_download_s": {
+        "mean": 1.0597605873947031,
+        "sample_sd": 0.0033190556673916693
+      },
+      "persistent_device_bytes": 6955128752
+    },
+    "float32": {
+      "solver_s": {
+        "mean": 1.0961167167988606,
+        "sample_sd": 0.0006009652432134359
+      },
+      "reference_prepare_this_call_s": {
+        "mean": 0.0,
+        "sample_sd": 0.0
+      },
+      "call_including_validation_download_s": {
+        "mean": 1.749291902995901,
+        "sample_sd": 0.0009725254853548382
+      },
+      "persistent_device_bytes": 7793989552
+    }
+  },
+  "pair_records": [
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 1.0961534089874476,
+      "call_with_download_s": 1.1518662299786229,
+      "reference_prepare_s": 0.47553628898458555,
+      "gpu_event_s": {
+        "input": 0.18658607482910156,
+        "transmission": 0.0020456640720367433,
+        "sample_front": 0.28863595581054685,
+        "coarse_match": 0.12131228637695313,
+        "spline": 0.02294704055786133,
+        "fine_match": 0.4551573791503906,
+        "DPC": 0.0032087039947509767,
+        "phase": 0.015384544372558593
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.702600073069334e-05,
+      "persistent_device_bytes": 7793989552,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.47553628898458555,
+      "pair_solver_s": 1.5716896979720332,
+      "call_including_validation_download_s": 2.811826063989429,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "each_pair",
+      "repeat": 0
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "uint16",
+      "solver_s": 1.0030370179738384,
+      "call_with_download_s": 1.0603833039931487,
+      "reference_prepare_s": 0.38479625500622205,
+      "gpu_event_s": {
+        "input": 0.0933938217163086,
+        "transmission": 0.0020756800174713133,
+        "sample_front": 0.2888487854003906,
+        "coarse_match": 0.12081353759765626,
+        "spline": 0.022969951629638673,
+        "fine_match": 0.4554893798828125,
+        "DPC": 0.0032101120948791503,
+        "phase": 0.01539136028289795
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.532898548059165e-05,
+      "persistent_device_bytes": 6955128752,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.38479625500622205,
+      "pair_solver_s": 1.3878332729800604,
+      "call_including_validation_download_s": 1.4454418999957852,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "each_pair",
+      "repeat": 0
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "uint16",
+      "solver_s": 1.0028487270174082,
+      "call_with_download_s": 1.0481170620187186,
+      "reference_prepare_s": 0.3874688089999836,
+      "gpu_event_s": {
+        "input": 0.0938329315185547,
+        "transmission": 0.0020974400043487548,
+        "sample_front": 0.28841653442382814,
+        "coarse_match": 0.12073206329345704,
+        "spline": 0.022963903427124024,
+        "fine_match": 0.45547885131835936,
+        "DPC": 0.0032103359699249268,
+        "phase": 0.015381792068481445
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 8.928199531510472e-05,
+      "persistent_device_bytes": 6955128752,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.3874688089999836,
+      "pair_solver_s": 1.3903175360173918,
+      "call_including_validation_download_s": 1.4358244350005407,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "each_pair",
+      "repeat": 1
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 1.095941022009356,
+      "call_with_download_s": 1.151701907016104,
+      "reference_prepare_s": 0.4759764230111614,
+      "gpu_event_s": {
+        "input": 0.18649839782714844,
+        "transmission": 0.002040447950363159,
+        "sample_front": 0.2889732666015625,
+        "coarse_match": 0.12071641540527343,
+        "spline": 0.022941951751708985,
+        "fine_match": 0.4551630249023437,
+        "DPC": 0.003206847906112671,
+        "phase": 0.015370143890380859
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.49780223891139e-05,
+      "persistent_device_bytes": 7793989552,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.4759764230111614,
+      "pair_solver_s": 1.5719174450205173,
+      "call_including_validation_download_s": 2.8127486069861334,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "each_pair",
+      "repeat": 1
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 1.0958827159774955,
+      "call_with_download_s": 1.1524324459896889,
+      "reference_prepare_s": 0.47603549700579606,
+      "gpu_event_s": {
+        "input": 0.18653768920898436,
+        "transmission": 0.0020394880771636963,
+        "sample_front": 0.28868209838867187,
+        "coarse_match": 0.12094694519042969,
+        "spline": 0.022926784515380858,
+        "fine_match": 0.4551587829589844,
+        "DPC": 0.003208672046661377,
+        "phase": 0.015369248390197755
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.600099292583764e-05,
+      "persistent_device_bytes": 7793989552,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.47603549700579606,
+      "pair_solver_s": 1.5719182129832916,
+      "call_including_validation_download_s": 2.8208959689945914,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "each_pair",
+      "repeat": 2
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "uint16",
+      "solver_s": 1.0035452820011415,
+      "call_with_download_s": 1.0534918989869766,
+      "reference_prepare_s": 0.385128388996236,
+      "gpu_event_s": {
+        "input": 0.09408761596679688,
+        "transmission": 0.002020319938659668,
+        "sample_front": 0.288952880859375,
+        "coarse_match": 0.12083090972900391,
+        "spline": 0.022975456237792968,
+        "fine_match": 0.45549099731445314,
+        "DPC": 0.0032102720737457275,
+        "phase": 0.015381440162658692
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.622500510886312e-05,
+      "persistent_device_bytes": 6955128752,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.385128388996236,
+      "pair_solver_s": 1.3886736709973775,
+      "call_including_validation_download_s": 1.4388440029870253,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "each_pair",
+      "repeat": 2
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "uint16",
+      "solver_s": 1.003644995013019,
+      "call_with_download_s": 1.0609832500049379,
+      "reference_prepare_s": 0.3843785210046917,
+      "gpu_event_s": {
+        "input": 0.0934863052368164,
+        "transmission": 0.002039520025253296,
+        "sample_front": 0.2892001647949219,
+        "coarse_match": 0.1210436782836914,
+        "spline": 0.022931264877319335,
+        "fine_match": 0.4554760437011719,
+        "DPC": 0.003210752010345459,
+        "phase": 0.015380576133728027
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.568201494403183e-05,
+      "persistent_device_bytes": 6955128752,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.3843785210046917,
+      "pair_solver_s": 1.3880235160177108,
+      "call_including_validation_download_s": 1.4456096139911097,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "each_pair",
+      "repeat": 3
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 1.0957745549967512,
+      "call_with_download_s": 1.1512708920054138,
+      "reference_prepare_s": 0.47589498199522495,
+      "gpu_event_s": {
+        "input": 0.18672569274902343,
+        "transmission": 0.002032543897628784,
+        "sample_front": 0.28877386474609373,
+        "coarse_match": 0.12065769958496093,
+        "spline": 0.02293849563598633,
+        "fine_match": 0.4551227111816406,
+        "DPC": 0.0032090559005737303,
+        "phase": 0.01536246395111084
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.491399396210909e-05,
+      "persistent_device_bytes": 7793989552,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.47589498199522495,
+      "pair_solver_s": 1.5716695369919762,
+      "call_including_validation_download_s": 2.8200371069833636,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "each_pair",
+      "repeat": 3
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 1.0962895710254088,
+      "call_with_download_s": 1.1525306880066637,
+      "reference_prepare_s": 0.4759683909942396,
+      "gpu_event_s": {
+        "input": 0.1866354217529297,
+        "transmission": 0.002063999891281128,
+        "sample_front": 0.28887808227539064,
+        "coarse_match": 0.12104617309570312,
+        "spline": 0.02294931221008301,
+        "fine_match": 0.45511083984375,
+        "DPC": 0.0032075200080871583,
+        "phase": 0.015411199569702149
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.702498209662735e-05,
+      "persistent_device_bytes": 7793989552,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.4759683909942396,
+      "pair_solver_s": 1.5722579620196484,
+      "call_including_validation_download_s": 2.8189602899947204,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "each_pair",
+      "repeat": 4
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "uint16",
+      "solver_s": 1.0034032319963444,
+      "call_with_download_s": 1.0596767340030055,
+      "reference_prepare_s": 0.38686975999735296,
+      "gpu_event_s": {
+        "input": 0.09355964660644531,
+        "transmission": 0.0020567998886108396,
+        "sample_front": 0.28918014526367186,
+        "coarse_match": 0.12064956665039063,
+        "spline": 0.022972192764282227,
+        "fine_match": 0.4555173645019531,
+        "DPC": 0.003210495948791504,
+        "phase": 0.01540937614440918
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.673699969425797e-05,
+      "persistent_device_bytes": 6955128752,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.38686975999735296,
+      "pair_solver_s": 1.3902729919936974,
+      "call_including_validation_download_s": 1.4468508179998025,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "each_pair",
+      "repeat": 4
+    }
+  ],
+  "static_reference_records": [
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 1.097181744989939,
+      "call_with_download_s": 1.1454819039790891,
+      "reference_prepare_s": 0.4759683909942396,
+      "gpu_event_s": {
+        "input": 0.18811325073242188,
+        "transmission": 0.0020336639881134034,
+        "sample_front": 0.288840087890625,
+        "coarse_match": 0.12087983703613281,
+        "spline": 0.022944223403930663,
+        "fine_match": 0.4551187744140625,
+        "DPC": 0.0032095038890838624,
+        "phase": 0.01536963176727295
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.977701120078564e-05,
+      "persistent_device_bytes": 7793989552,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.0,
+      "pair_solver_s": null,
+      "call_including_validation_download_s": 1.7476131939911284,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "static",
+      "repeat": 0
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "uint16",
+      "solver_s": 1.0040569700067863,
+      "call_with_download_s": 1.0537613750202581,
+      "reference_prepare_s": 0.38686975999735296,
+      "gpu_event_s": {
+        "input": 0.0949816665649414,
+        "transmission": 0.0020356481075286866,
+        "sample_front": 0.2885873107910156,
+        "coarse_match": 0.12077449798583985,
+        "spline": 0.022975776672363283,
+        "fine_match": 0.45548858642578127,
+        "DPC": 0.003211711883544922,
+        "phase": 0.015376447677612304
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.965000208467245e-05,
+      "persistent_device_bytes": 6955128752,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.0,
+      "pair_solver_s": null,
+      "call_including_validation_download_s": 1.0539315219793934,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "static",
+      "repeat": 0
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "uint16",
+      "solver_s": 1.0036279080086388,
+      "call_with_download_s": 1.061810848012101,
+      "reference_prepare_s": 0.38686975999735296,
+      "gpu_event_s": {
+        "input": 0.09462108612060546,
+        "transmission": 0.002078495979309082,
+        "sample_front": 0.28856564331054685,
+        "coarse_match": 0.12072633361816407,
+        "spline": 0.02296678352355957,
+        "fine_match": 0.4554899597167969,
+        "DPC": 0.0032104640007019044,
+        "phase": 0.01536252784729004
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.731299360282719e-05,
+      "persistent_device_bytes": 6955128752,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.0,
+      "pair_solver_s": null,
+      "call_including_validation_download_s": 1.0620088339783251,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "static",
+      "repeat": 1
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 1.0959919659944717,
+      "call_with_download_s": 1.1521362180064898,
+      "reference_prepare_s": 0.4759683909942396,
+      "gpu_event_s": {
+        "input": 0.1869766387939453,
+        "transmission": 0.002029184103012085,
+        "sample_front": 0.288905517578125,
+        "coarse_match": 0.12068399810791015,
+        "spline": 0.02295827293395996,
+        "fine_match": 0.45517083740234376,
+        "DPC": 0.0032081599235534667,
+        "phase": 0.01540499210357666
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.88180108834058e-05,
+      "persistent_device_bytes": 7793989552,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.0,
+      "pair_solver_s": null,
+      "call_including_validation_download_s": 1.7501344509946648,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "static",
+      "repeat": 1
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 1.0957979790109675,
+      "call_with_download_s": 1.151675601984607,
+      "reference_prepare_s": 0.4759683909942396,
+      "gpu_event_s": {
+        "input": 0.1870070037841797,
+        "transmission": 0.0020375680923461915,
+        "sample_front": 0.28881369018554687,
+        "coarse_match": 0.12062630462646484,
+        "spline": 0.022934976577758788,
+        "fine_match": 0.4551306457519531,
+        "DPC": 0.0032077438831329347,
+        "phase": 0.015386112213134765
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.48169908951968e-05,
+      "persistent_device_bytes": 7793989552,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.0,
+      "pair_solver_s": null,
+      "call_including_validation_download_s": 1.7494692880136427,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "static",
+      "repeat": 2
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "uint16",
+      "solver_s": 1.0045551859948318,
+      "call_with_download_s": 1.0601206769933924,
+      "reference_prepare_s": 0.38686975999735296,
+      "gpu_event_s": {
+        "input": 0.0957733154296875,
+        "transmission": 0.002036992073059082,
+        "sample_front": 0.2887094421386719,
+        "coarse_match": 0.12051494598388672,
+        "spline": 0.022964927673339845,
+        "fine_match": 0.45552505493164064,
+        "DPC": 0.003211551904678345,
+        "phase": 0.015393343925476075
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.555401629768312e-05,
+      "persistent_device_bytes": 6955128752,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.0,
+      "pair_solver_s": null,
+      "call_including_validation_download_s": 1.0603198150056414,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "static",
+      "repeat": 2
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "uint16",
+      "solver_s": 1.0047555089986417,
+      "call_with_download_s": 1.0607914710126352,
+      "reference_prepare_s": 0.38686975999735296,
+      "gpu_event_s": {
+        "input": 0.09590672302246094,
+        "transmission": 0.0020525119304656983,
+        "sample_front": 0.28858575439453127,
+        "coarse_match": 0.12051881408691406,
+        "spline": 0.022962879180908204,
+        "fine_match": 0.45551730346679686,
+        "DPC": 0.0032115840911865236,
+        "phase": 0.015383999824523925
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.83380014076829e-05,
+      "persistent_device_bytes": 6955128752,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.0,
+      "pair_solver_s": null,
+      "call_including_validation_download_s": 1.060993746999884,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "static",
+      "repeat": 3
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 1.095801499002846,
+      "call_with_download_s": 1.151566736982204,
+      "reference_prepare_s": 0.4759683909942396,
+      "gpu_event_s": {
+        "input": 0.1869703369140625,
+        "transmission": 0.0020369598865509035,
+        "sample_front": 0.288820068359375,
+        "coarse_match": 0.12083628845214844,
+        "spline": 0.022929632186889648,
+        "fine_match": 0.4551169738769531,
+        "DPC": 0.0032074239253997803,
+        "phase": 0.015354463577270508
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.523300104774535e-05,
+      "persistent_device_bytes": 7793989552,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.0,
+      "pair_solver_s": null,
+      "call_including_validation_download_s": 1.7495629219920374,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "static",
+      "repeat": 3
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "float32",
+      "solver_s": 1.0958103949960787,
+      "call_with_download_s": 1.1517148670100141,
+      "reference_prepare_s": 0.4759683909942396,
+      "gpu_event_s": {
+        "input": 0.18696754455566406,
+        "transmission": 0.0020438399314880373,
+        "sample_front": 0.2887732543945313,
+        "coarse_match": 0.12080537414550781,
+        "spline": 0.022947263717651368,
+        "fine_match": 0.4551451416015625,
+        "DPC": 0.0032064640522003174,
+        "phase": 0.015363072395324707
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.580899495631456e-05,
+      "persistent_device_bytes": 7793989552,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.0,
+      "pair_solver_s": null,
+      "call_including_validation_download_s": 1.7496796599880327,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "static",
+      "repeat": 4
+    },
+    {
+      "kind": "wsvt",
+      "front": "baseline",
+      "spline": "gpu",
+      "input_dtype": "uint16",
+      "solver_s": 1.0052760289981961,
+      "call_with_download_s": 1.0613476389844436,
+      "reference_prepare_s": 0.38686975999735296,
+      "gpu_event_s": {
+        "input": 0.09595350646972656,
+        "transmission": 0.0020646400451660154,
+        "sample_front": 0.28924212646484376,
+        "coarse_match": 0.12051983642578125,
+        "spline": 0.02296118354797363,
+        "fine_match": 0.4554405517578125,
+        "DPC": 0.003209791898727417,
+        "phase": 0.015370143890380859
+      },
+      "spline_enqueue_or_cpu_handoff_wall_s": 9.363298886455595e-05,
+      "persistent_device_bytes": 6955128752,
+      "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+      "outputs_owned_copies": true,
+      "geometry_status": "historical conversion settings, not newly calibrated",
+      "reference_prepare_this_call_s": 0.0,
+      "pair_solver_s": null,
+      "call_including_validation_download_s": 1.0615490190102719,
+      "incremental_peak_cuda_bytes": 100663296,
+      "reference_policy": "static",
+      "repeat": 4
+    }
+  ],
+  "full_check": {
+    "metrics": {
+      "displace_y": {
+        "rmse": 0.0,
+        "max_abs": 0.0,
+        "nrmse_by_reference_std": 0.0
+      },
+      "displace_x": {
+        "rmse": 0.0,
+        "max_abs": 0.0,
+        "nrmse_by_reference_std": 0.0
+      },
+      "DPC_y": {
+        "rmse": 0.0,
+        "max_abs": 0.0,
+        "nrmse_by_reference_std": 0.0
+      },
+      "DPC_x": {
+        "rmse": 0.0,
+        "max_abs": 0.0,
+        "nrmse_by_reference_std": 0.0
+      },
+      "phase": {
+        "rmse": 0.0,
+        "max_abs": 0.0,
+        "nrmse_by_reference_std": 0.0
+      },
+      "transmission": {
+        "rmse": 0.0,
+        "max_abs": 0.0,
+        "nrmse_by_reference_std": 0.0
+      },
+      "match_score_neg_ssd": {
+        "rmse": 0.0,
+        "max_abs": 0.0,
+        "nrmse_by_reference_std": 0.0
+      }
+    },
+    "pass": true
+  },
+  "source_sha256": {
+    "diagnose_wsvt_full.py": "882a11064b43d2f0c962e1e91b018a60b4e621983e09d68a347e5c9c45244d31",
+    "bench_edge.py": "5fd0d09b6b013ae9750d39d50d4e177bb48cbf8dcd8aff3fd02aff1e500af178",
+    "edge_spline.cpp": "ad226b1f699fa80491104bb10e81fe7dcf7a46597fac8eb4e52ba8002c15c70e",
+    "validate_u16.py": "2b159ae5713c5bc4b0ead4bdc48e0db6654b520c360344c1e456cede0d191c4f",
+    "legacy_complete.py": "47a5828737c5e3ffe78193be584be557290295155736fdc51de5bb1e116d6405",
+    "libedge_spline.so": "071e33554eeb7bf4d92f19f75ff3bc8db0b99e01d8469058b008529ff91a3a40",
+    "edge_runtime.py": "1d5d5d9ed000703ff5be92a0cdb28c988c19465142daa4f420d7ac348b6e2992",
+    "edge_kernels.cu": "7e2dc439b208fa5fc3fd965d40be862aa7949cb77d6e095e4b90caa7d5ae986d",
+    "bench_wsvt_full.py": "66a94b915d8171da03e69333f5593ee49bbab7e46584a5d79413cb5687e31d83",
+    "bench_wsvt_input.py": "d03f60761b02729b021e47ab0574f0667a50bbd29ea8a388ae03a775efa5e0a8",
+    "libedge_kernels.so": "a7198b9c9359e91141b08286a3b8fce1b033b51b8d45eb720b0ad1473a1060c3",
+    "validate_edge.py": "280436d356a6251abc571ca4384c4b8dd726e23ad97116e69dbf0b6a46eb7b95",
+    "run_edge.py": "99b7a58830fe420b546aa5abb7fa5cc480efd858bd3f2418ff62e31ca9a2c888",
+    "libedge_kernels_pre_u16.so": "59f1814230e809fac2f4ced66628b1b86df7d80fbf5770dfac7adb37df9ab7f8"
+  },
+  "input_manifest": {
+    "scope": "Full2048 real100-scan-pair lossless pack for Orin operator-order experiment",
+    "source": "D:\\Yangrc\\DATA\\CRL_3Dprinting_exp\\20231102CRL\\BB11\\scan_speckle",
+    "shape": [
+      100,
+      2048,
+      2048
+    ],
+    "stored_dtype": "uint16",
+    "files": [
+      {
+        "file": "sample_1_00001.tif",
+        "sha256": "b269ed5982d60339f61d46a6d8c9b4aec35a5ec433234989e908b6d1bf67003d"
+      },
+      {
+        "file": "sample_1_00002.tif",
+        "sha256": "07487eaa995b6f7140763cd87e4623ebd677c2b4e8609b16ddcc38f6efedd2a1"
+      },
+      {
+        "file": "sample_1_00003.tif",
+        "sha256": "93265486f18bc527d0d79e6d65f411cdbf19a8f5e74f6f2f67560945d995c2b0"
+      },
+      {
+        "file": "sample_1_00004.tif",
+        "sha256": "fec630fc8b6be6f227a630a87338bb745ae9e8d39de6a21a41f417a524137f30"
+      },
+      {
+        "file": "sample_1_00005.tif",
+        "sha256": "8581f8f96aa20352ae11a8bfcb7beaff79b6fe3b15dfbd01dfb688060cbb2b91"
+      },
+      {
+        "file": "sample_1_00006.tif",
+        "sha256": "9de773980fea68ad1b03172ad33e5b468aea3b64bc5a6c530ec6c02709677f6a"
+      },
+      {
+        "file": "sample_1_00007.tif",
+        "sha256": "af56ef01818d4abb274d2bb5a9f2ff6452c854ed60abfbad67fd95965388ec58"
+      },
+      {
+        "file": "sample_1_00008.tif",
+        "sha256": "72b2918817bf8d90910b4452347eb2e6e4dae29b755db582b7fcf93f9ae34845"
+      },
+      {
+        "file": "sample_1_00009.tif",
+        "sha256": "929811eb3ec5591622dd3b145bf342b6a316af721be907818253a60311e3d6ec"
+      },
+      {
+        "file": "sample_1_00010.tif",
+        "sha256": "7aa4cdfd81f57df2fd0f43afdc6785f9411496beac27e5f8f9d89318df378d45"
+      },
+      {
+        "file": "sample_1_00011.tif",
+        "sha256": "f507373de02e450672c2e395f190d952494bab9baedd371ad3ab14bc6863829a"
+      },
+      {
+        "file": "sample_1_00012.tif",
+        "sha256": "620650943e9008df5d7511e36d74fc689e65043317d0310c7b8ed6a6075b07c6"
+      },
+      {
+        "file": "sample_1_00013.tif",
+        "sha256": "e192e2986c6158be64e5cb19ede8efcd6f810f8a08002d8f028fb02a58cf3210"
+      },
+      {
+        "file": "sample_1_00014.tif",
+        "sha256": "7ba6578f792b6b308f2534abfdd470ff2603efbe600862277545aa0a02e206d9"
+      },
+      {
+        "file": "sample_1_00015.tif",
+        "sha256": "51dc60da6003a39f8beb5623de03fe6eb588460a3efa0593c9a3a563bdc15f49"
+      },
+      {
+        "file": "sample_1_00016.tif",
+        "sha256": "fa67dae9c67c3afff45bfe923efce6c55ad598757450e9839edf1617a641506c"
+      },
+      {
+        "file": "sample_1_00017.tif",
+        "sha256": "e847661e7326f0377560eb781b3f959fc519cbbb720bd63390db04f9e058f10e"
+      },
+      {
+        "file": "sample_1_00018.tif",
+        "sha256": "6056449c3e738407a34b26c25113401321269ca4832b56af9dfa2e202aedf7bc"
+      },
+      {
+        "file": "sample_1_00019.tif",
+        "sha256": "a2aea320e358455bfddccddfed74245284571246fed458115d5fbb86e2e12e6e"
+      },
+      {
+        "file": "sample_1_00020.tif",
+        "sha256": "d61c38ed9f4f272e4673d3a9a9044ee95abfdbf40ab36b344ff89b8c982ab5a1"
+      },
+      {
+        "file": "sample_1_00021.tif",
+        "sha256": "7b723f6a349a5f498aa1132e48d98141547c44d35ca6f5d8a10ccf04dbb6dfdb"
+      },
+      {
+        "file": "sample_1_00022.tif",
+        "sha256": "068ec35a04a77a1d01a220f50eb03b735193834ddd854e719573b916dfaec8a4"
+      },
+      {
+        "file": "sample_1_00023.tif",
+        "sha256": "d1f3b1ccdc8679034ab4be6604d4fda23a3064f37bc4bf536c87b105f521b9c2"
+      },
+      {
+        "file": "sample_1_00024.tif",
+        "sha256": "09bdf720df34d3e8ca0b784d45f96108ce3d52109c939d1ff3ae5eecbf21bd65"
+      },
+      {
+        "file": "sample_1_00025.tif",
+        "sha256": "78a420defd1141dcd9934732d78304667cf09a37f4a32af72dc5a68357eeffe8"
+      },
+      {
+        "file": "sample_1_00026.tif",
+        "sha256": "e3b06bfc3d2d996d033507ab5707120240eb9de8ed29c073d748ca26022dea38"
+      },
+      {
+        "file": "sample_1_00027.tif",
+        "sha256": "de060c376304e1d4b08ab93de755819d3485a8e18cc72a858be52820612ff004"
+      },
+      {
+        "file": "sample_1_00028.tif",
+        "sha256": "f9a9765940536e5767e95f6871f84463c91539a263bc9d791ab661bbd6fbfcbd"
+      },
+      {
+        "file": "sample_1_00029.tif",
+        "sha256": "36a8b7c8ef1f728ba753e8682ac04c5dc98fda1925101eb5d96f040d2309ed53"
+      },
+      {
+        "file": "sample_1_00030.tif",
+        "sha256": "8a18fa3e180d4791b6cfc3fa6a7a852ab02ebf2da840a230de705954665e9ef8"
+      },
+      {
+        "file": "sample_1_00031.tif",
+        "sha256": "b428164a34c7ec48b8d4ebd9f89764e325a87f2135d6a316668929f6caebd241"
+      },
+      {
+        "file": "sample_1_00032.tif",
+        "sha256": "fb21fa6e6fa73521b609e990c05ed1cf2e78eb87fd52984ae7dd1de8bcc328b9"
+      },
+      {
+        "file": "sample_1_00033.tif",
+        "sha256": "bec7547423ce9f038f1df40dc9971d707eb45f768403e3bb8f812753612e7340"
+      },
+      {
+        "file": "sample_1_00034.tif",
+        "sha256": "eec29b894413adfda43b8579ec7fee538ff7e1d17aa1cd91ccb349a8392789e0"
+      },
+      {
+        "file": "sample_1_00035.tif",
+        "sha256": "9696fc770156ad499b4258ff9b7b538813fe1b30e241e9a21ad842dad8c8c693"
+      },
+      {
+        "file": "sample_1_00036.tif",
+        "sha256": "04bf2d75a15b9db2715e9d4c70476ed3540af45048a4ddfa94af866e8855b9b7"
+      },
+      {
+        "file": "sample_1_00037.tif",
+        "sha256": "75a77a09440bb54676f4bfc25d70517d2c62f060e21cf21868cdd7f999095c20"
+      },
+      {
+        "file": "sample_1_00038.tif",
+        "sha256": "12a4af11159fc5336c9c3c7cbc3a1143d139e19267a7bdea9f9eee0c35357472"
+      },
+      {
+        "file": "sample_1_00039.tif",
+        "sha256": "ffec4f05b4f45512eb7f8b42802d6b6ea51bd6b3715e935332c29cf7e2327420"
+      },
+      {
+        "file": "sample_1_00040.tif",
+        "sha256": "4637b768531d53394210f44ea73baf9937e0cb106a44c1be9e55047d68ad3a7a"
+      },
+      {
+        "file": "sample_1_00041.tif",
+        "sha256": "2afa11650f0ec7f3cb5a94201ba8e53bf4740374e21ca9bbdded6f9546ce5398"
+      },
+      {
+        "file": "sample_1_00042.tif",
+        "sha256": "b53c64930dfe73bfc02520b4094e8d51173e9a6cbd7f8173900ef31a77fccef7"
+      },
+      {
+        "file": "sample_1_00043.tif",
+        "sha256": "9dfc9160f7205dc2a2d7b930314ee55fa39fe7740c7ccbff24ba4621a4aa0705"
+      },
+      {
+        "file": "sample_1_00044.tif",
+        "sha256": "78ff742f2df95a557c9db02621a68822d3a067d6cd4129f7732300d85428ea12"
+      },
+      {
+        "file": "sample_1_00045.tif",
+        "sha256": "337b79781e66815c1c2ad1cf4dd4b2bcc2afceef5d219b49698dec484c85d0f7"
+      },
+      {
+        "file": "sample_1_00046.tif",
+        "sha256": "7688a402270310aed255f83eb519efc4902ff5f5be7c498c406cccd4383c16ef"
+      },
+      {
+        "file": "sample_1_00047.tif",
+        "sha256": "ac34ef548f749dc4c076b4894161989d7fbef2d43ffa1ef3e1379b6e422e1091"
+      },
+      {
+        "file": "sample_1_00048.tif",
+        "sha256": "e3a965d0090a39a57afd5e17fecdb57a1f8906192c7f060eefbe52c2e830d9f7"
+      },
+      {
+        "file": "sample_1_00049.tif",
+        "sha256": "6280bc6c26d7e5099e89dce5e98d1a73d6ad9014f47c9e256eec9a141ecbb54e"
+      },
+      {
+        "file": "sample_1_00050.tif",
+        "sha256": "f7dc6d19c971ee6fb3b43f9b0360547f3afd5500aeebecbd9344a2889b38eb64"
+      },
+      {
+        "file": "sample_1_00051.tif",
+        "sha256": "8738b65caf188b43e91427747fe3caab07b8ae064ab929cb7ce9581c8602f3a7"
+      },
+      {
+        "file": "sample_1_00052.tif",
+        "sha256": "bf19de1cb73916290975e9b191ee731b8003bb6d39eef3875cce0f5334a332a3"
+      },
+      {
+        "file": "sample_1_00053.tif",
+        "sha256": "1d251217d64b5b1d65ace6504d1e8a3a90df8de4534d58ebf1cb1e1b0cb5f86c"
+      },
+      {
+        "file": "sample_1_00054.tif",
+        "sha256": "a081a96266847713b82091571766f0364c728621d92fe9dbcb61078e20341cdb"
+      },
+      {
+        "file": "sample_1_00055.tif",
+        "sha256": "9650ccdfd9723465b9ed35aadcc69352fbba104bcefb96157c773e1b4c807fed"
+      },
+      {
+        "file": "sample_1_00056.tif",
+        "sha256": "8b16128f0cf284307bac0bf898fdd63934e9c612ac73b793a793a2e9f1b8fe25"
+      },
+      {
+        "file": "sample_1_00057.tif",
+        "sha256": "85073ddafd5cae377d9828123b05b43bf1e0591a3b14579f9a381277e185158e"
+      },
+      {
+        "file": "sample_1_00058.tif",
+        "sha256": "4654b4b3b3a9e14c77b019f0bd598d0c1840157875bc62af243ccd68e76fc787"
+      },
+      {
+        "file": "sample_1_00059.tif",
+        "sha256": "e78d71c95a81c49107f5950ae9acf79c295ca5bb4715841aaf89a8a05849d847"
+      },
+      {
+        "file": "sample_1_00060.tif",
+        "sha256": "a3cb7ac2b0efbc7b42cb6cc2ac53b2491e61360174827193f4d7c56d3ccebef6"
+      },
+      {
+        "file": "sample_1_00061.tif",
+        "sha256": "b53aec6ff2bef08b99c58f42a92d9fe13bf683e2f07230965fe16ce0b909b642"
+      },
+      {
+        "file": "sample_1_00062.tif",
+        "sha256": "003caca5ec047191427589910b2046a3dfcd2a4d971353e75fd936051ab1f002"
+      },
+      {
+        "file": "sample_1_00063.tif",
+        "sha256": "5d9fe780a81f93c727e7acc950857a130d2c55e87d993b7f057f100f6098b8a9"
+      },
+      {
+        "file": "sample_1_00064.tif",
+        "sha256": "d4d0d733f0d0b970b1f740a26260593c3719161abaeb4fe6773ece1543d1a519"
+      },
+      {
+        "file": "sample_1_00065.tif",
+        "sha256": "679ec3502f6750dd91141c7561c985ba433c282d8b5a9bfd42dd40076606ca0f"
+      },
+      {
+        "file": "sample_1_00066.tif",
+        "sha256": "13c53a710ca22602378758c9cb5426fe53cf2fa3f6b6273bb32af46148c837d0"
+      },
+      {
+        "file": "sample_1_00067.tif",
+        "sha256": "ea43167928eeaaec43dce312e7fac904c26158713c0ab6acad85828b796a3e46"
+      },
+      {
+        "file": "sample_1_00068.tif",
+        "sha256": "08dfd212f5ad4fde3bee975f2dd98c72343cf16d8653c72751e4214cca77f1c4"
+      },
+      {
+        "file": "sample_1_00069.tif",
+        "sha256": "66fd934c268c153267883db26a5ac7b262eb7871316f624c1e6d3421d623ff6d"
+      },
+      {
+        "file": "sample_1_00070.tif",
+        "sha256": "987a1287d0402b90b4e93a6bebeb09a6833f60038513d35edc788ed8b6f841c8"
+      },
+      {
+        "file": "sample_1_00071.tif",
+        "sha256": "0524b57911c35b25f2c5ab2bd1b58f0eb126059e55ad2010c06e1085f33341b9"
+      },
+      {
+        "file": "sample_1_00072.tif",
+        "sha256": "2abed5b06e008c7e864eedd3b60bfefe8b2c5dfbf0341791bfbe74e08e5b3363"
+      },
+      {
+        "file": "sample_1_00073.tif",
+        "sha256": "3574f713eff468fe8b7fbc9eddc54a752f76257f6e1123f172b2b00cdf71852d"
+      },
+      {
+        "file": "sample_1_00074.tif",
+        "sha256": "5d45fc1d831c6031827535e406ea357c062c405bfc87c83fd5ba29f6d3c431ed"
+      },
+      {
+        "file": "sample_1_00075.tif",
+        "sha256": "be3b7d07e5ce56431ba00e5d65d503b1532bf5e292fd576b4e335f7d1ce23623"
+      },
+      {
+        "file": "sample_1_00076.tif",
+        "sha256": "b14013f856c99f6ea0e92d7f0bed92c8a4160db1bdb2189fbcfef4f623a095e1"
+      },
+      {
+        "file": "sample_1_00077.tif",
+        "sha256": "f2a47bfee00da07be1a1eadf776cb1d41edca4c6c2667be61289665148418d64"
+      },
+      {
+        "file": "sample_1_00078.tif",
+        "sha256": "abcf7573be12e2b0a36c01f1d564699656d6b2c3ebbfcfc00245da7cb6dbf442"
+      },
+      {
+        "file": "sample_1_00079.tif",
+        "sha256": "15ad2929a685dcea3dac244e0ceae9a85aabd6653108dea86c77379e0fe870e4"
+      },
+      {
+        "file": "sample_1_00080.tif",
+        "sha256": "b712424650bc9fbc05fa2000b3e535ca15905619a12b7bd871006b654116e33b"
+      },
+      {
+        "file": "sample_1_00081.tif",
+        "sha256": "84ea5ff91309465da375898eef158b53fbac7e9ac76934350558859e4be88dbe"
+      },
+      {
+        "file": "sample_1_00082.tif",
+        "sha256": "c0f4815327d45c920b5959f9dc5c6ddb668f98499ade75793174a97996c52809"
+      },
+      {
+        "file": "sample_1_00083.tif",
+        "sha256": "ff5f1993c20448556a0f96a2e572a0e63c0d12d9c7b4a6747baf0bb62f5cd1aa"
+      },
+      {
+        "file": "sample_1_00084.tif",
+        "sha256": "533d671a858b69b9e82ace77870d899d4f07436048fea979eb34142756a8e48c"
+      },
+      {
+        "file": "sample_1_00085.tif",
+        "sha256": "e9619709218a7614047dbd7d1bec53f90e6814afaa9babf2230678abce6fcc5b"
+      },
+      {
+        "file": "sample_1_00086.tif",
+        "sha256": "488e527924eb7320a6d2d4360eff98b57c160a72573e5485052a000ad7fc6f4f"
+      },
+      {
+        "file": "sample_1_00087.tif",
+        "sha256": "47416cf7821dbe88d197a588cd0c9ee1ec39f48aa9621ac282dcd2f3fbbd8707"
+      },
+      {
+        "file": "sample_1_00088.tif",
+        "sha256": "e1e824db16ad2b4c325baf1bc4acde96f96a9ac4b8a5968c263bf0864d995173"
+      },
+      {
+        "file": "sample_1_00089.tif",
+        "sha256": "d2091e8e0c26c2584b971f054ef752951a7e3d9d43505656661df81caf161d7c"
+      },
+      {
+        "file": "sample_1_00090.tif",
+        "sha256": "bd50907c055fb79a5ab85f95c13e7039c0bc67564eb4f5e41947e9e1857856f9"
+      },
+      {
+        "file": "sample_1_00091.tif",
+        "sha256": "4025f8cdc0984069ab69474a1a64bd69c56341837992cdf5a1fc5e2c3f67032b"
+      },
+      {
+        "file": "sample_1_00092.tif",
+        "sha256": "947b25d2c6d71f9fed2a12e160c24d608ae597a849e427d84287d0b454e1b980"
+      },
+      {
+        "file": "sample_1_00093.tif",
+        "sha256": "e251fb78ceb7945fd6fd41d520292f6f1d0d4fc4e19ee87baa051e8400b3ab28"
+      },
+      {
+        "file": "sample_1_00094.tif",
+        "sha256": "b16dd6f81fa628408cc50b7b16c92cba92bf94350ebf1cae5a5fd7d834c7c1cb"
+      },
+      {
+        "file": "sample_1_00095.tif",
+        "sha256": "43029e5879c4437a51ab92360ca0736fb77752e7e1cc8102f9b390534b022251"
+      },
+      {
+        "file": "sample_1_00096.tif",
+        "sha256": "c9b1f8b31fe9b27f73740d97b7b14a4f1caa06c08503d4976e90a62fcdfb5f75"
+      },
+      {
+        "file": "sample_1_00097.tif",
+        "sha256": "18e9060e0b7d8d335605f48553e3d702bea1177c165c2a747cd5a7133b185ea0"
+      },
+      {
+        "file": "sample_1_00098.tif",
+        "sha256": "9a4fbfaef670621645dc88b43696f7e93d3be1a1974a52c432481482026f683d"
+      },
+      {
+        "file": "sample_1_00099.tif",
+        "sha256": "0466f713662a953dc51224208fdca8312e973fc07a01e44e5c3d5af272e58b79"
+      },
+      {
+        "file": "sample_1_00100.tif",
+        "sha256": "c475ac2f6c6da634c3173f460f9256fbd05693dcb112040c64b2b5ae92a97382"
+      },
+      {
+        "file": "ref_1_00001.tif",
+        "sha256": "c317963e02fd94ef43d9967354f10739a69377fdb9b661a2e0a7b2b0aa6c1bd0"
+      },
+      {
+        "file": "ref_1_00002.tif",
+        "sha256": "c7a5bb1e7ed77a09305b730bcbb4bd21203598514d764c298835341a350a13f2"
+      },
+      {
+        "file": "ref_1_00003.tif",
+        "sha256": "7b17d8647efe9f4f6f1dc17b2d1cd3de05f094877816cb20e9af7e647340ae75"
+      },
+      {
+        "file": "ref_1_00004.tif",
+        "sha256": "da886406766eb66a81435899710b09662965f6217d5fc768947a099f80ce26d6"
+      },
+      {
+        "file": "ref_1_00005.tif",
+        "sha256": "5e0594506ffa4011a593af9c2f4d9dd4c786363ad4445a1f54cf08bd2caeb5a8"
+      },
+      {
+        "file": "ref_1_00006.tif",
+        "sha256": "625d4db4e08385cc7d36c48e6b20c0223fa3884f54a257249dd38f7696957888"
+      },
+      {
+        "file": "ref_1_00007.tif",
+        "sha256": "dd3045eaae4c6a26f53e49807487372d55cf87cbddeeccea00cc69345b73f112"
+      },
+      {
+        "file": "ref_1_00008.tif",
+        "sha256": "2435df54fba09282b80dd447436273d3542452c5c323ed71a919d119f2d8a3e4"
+      },
+      {
+        "file": "ref_1_00009.tif",
+        "sha256": "f22675521ac5b45dff0b371b0ffef631b07795f94dfe6463bb89c4afb34fcad6"
+      },
+      {
+        "file": "ref_1_00010.tif",
+        "sha256": "085a6a9b095f9f2549702433522db966bbf3b01666904a28631988d0f53e4125"
+      },
+      {
+        "file": "ref_1_00011.tif",
+        "sha256": "0185659dd41f10ba1ca940a5ce2598bfc885c3890913cd4b13e80eebfe13cd42"
+      },
+      {
+        "file": "ref_1_00012.tif",
+        "sha256": "fd7910dcf5c9546f519a2fa7ddb976965ad7fa9de97e5e132266d7387f0874ed"
+      },
+      {
+        "file": "ref_1_00013.tif",
+        "sha256": "228b8657ce30852c035d494a82819e23427a4641759bd9e2b29cc8063ba2a8e3"
+      },
+      {
+        "file": "ref_1_00014.tif",
+        "sha256": "809026deff01fcdcedc973c245a39bde93be404cb253e047c26ba86302fe1d66"
+      },
+      {
+        "file": "ref_1_00015.tif",
+        "sha256": "3ccfb0fac74778b7aaded4edaa6e2d19a003c91e576070d1105621ec7d185cc9"
+      },
+      {
+        "file": "ref_1_00016.tif",
+        "sha256": "06027352a7777ebcde519c772c5bf44ecb34a10f35ed263b52a9a4f621cc8593"
+      },
+      {
+        "file": "ref_1_00017.tif",
+        "sha256": "7b4dcf482c65031392609275448243405bf93071ea55bfbdb7b8055dd159f9d7"
+      },
+      {
+        "file": "ref_1_00018.tif",
+        "sha256": "c9764668a3855c6760bd2720cc7c36bbafdec91f0929eed640703208e39de239"
+      },
+      {
+        "file": "ref_1_00019.tif",
+        "sha256": "aa2c301a0b9ea5299fa61a90d2e868f1e8956ab43d637b170fbf004fe139a485"
+      },
+      {
+        "file": "ref_1_00020.tif",
+        "sha256": "d4bc0e8a0ed05ed79c4eedf8333d87c2a8a87b664320c93f6181700113909180"
+      },
+      {
+        "file": "ref_1_00021.tif",
+        "sha256": "85984eac2db59fba4757d09d59083f142b2fa5e1b173e2a2d6e756618efeba1b"
+      },
+      {
+        "file": "ref_1_00022.tif",
+        "sha256": "be7df5c5aaceff44cd74d434b82174ecb4774acc287a7a4898908eff32730473"
+      },
+      {
+        "file": "ref_1_00023.tif",
+        "sha256": "30e41ef0ec70e3b7c910ca72a4067d14c407e7019507c99a78f98cd32aca5df1"
+      },
+      {
+        "file": "ref_1_00024.tif",
+        "sha256": "b2a19b29f8084dc64dbe8f1178809bc60cb7859376a372530a701dc02a2bbde0"
+      },
+      {
+        "file": "ref_1_00025.tif",
+        "sha256": "3f5d2ab024a22af879d65e8a03598fb50041a6747632781ba82a1086cf777b95"
+      },
+      {
+        "file": "ref_1_00026.tif",
+        "sha256": "5ae40714889aa0caf20b859f5c716be05af7d8ba1cff3413d89c92d06d5cef4d"
+      },
+      {
+        "file": "ref_1_00027.tif",
+        "sha256": "b991db8589898eb9065398c8a45505db20b7d9aa7d12e48bdfbe4f00fc669c2f"
+      },
+      {
+        "file": "ref_1_00028.tif",
+        "sha256": "7ebc5632b442737c198b9557919e3d426826c2deb58b6e6967af86e440bc5173"
+      },
+      {
+        "file": "ref_1_00029.tif",
+        "sha256": "5ae3fd8f8ce5db01601e39a54053c261426129f18517341558fb946621b16173"
+      },
+      {
+        "file": "ref_1_00030.tif",
+        "sha256": "9c1bdce701b68ee9de3d11a07d93972751cdc92ddbbccdc5b39c3da508367a0f"
+      },
+      {
+        "file": "ref_1_00031.tif",
+        "sha256": "dd5e5a167b7dcc8c2c277bb44cd1a5b90b98badc0a6cbab87a86a1bc76a81219"
+      },
+      {
+        "file": "ref_1_00032.tif",
+        "sha256": "498d275e6d96c130ae127f6e069a71fe4590019579a387f281a54f04153375c9"
+      },
+      {
+        "file": "ref_1_00033.tif",
+        "sha256": "544e925491532be6b7eb525eb45d1204ab2c8b947275901daf91259b501684d5"
+      },
+      {
+        "file": "ref_1_00034.tif",
+        "sha256": "47a8b832340745a54e047ffad656debb9aa7f95a3b43338f8e6ad1d2d432661d"
+      },
+      {
+        "file": "ref_1_00035.tif",
+        "sha256": "fa0f63b9cdc6ed60170c8cad8e0ccbf074f4aea41da8980425623916cee11f12"
+      },
+      {
+        "file": "ref_1_00036.tif",
+        "sha256": "88db0cf78ca4bad4e0ef1c144c2703ec5efa3e398ddd77243900fbbabc2cf997"
+      },
+      {
+        "file": "ref_1_00037.tif",
+        "sha256": "b5a923378033c6f78133ea129f22bf5b5e097a6092c346e3b1f925eb8ff2a98d"
+      },
+      {
+        "file": "ref_1_00038.tif",
+        "sha256": "9da10af4405f2301d9f58b6e7d588c7e18440513f0c3267afbded1aa5ef169ff"
+      },
+      {
+        "file": "ref_1_00039.tif",
+        "sha256": "c8dc162273fb2b65a32f90ee85a259d54d943eef5a9105af0719d2f87663d32e"
+      },
+      {
+        "file": "ref_1_00040.tif",
+        "sha256": "7d005faed83517bcc66d0806ab31c0410832ae9e2a66d2be669aeac93c2f52ef"
+      },
+      {
+        "file": "ref_1_00041.tif",
+        "sha256": "276989b6b2e63316f2980060e573fc8b315dd6ab0c7cc96767916b85bfe259b3"
+      },
+      {
+        "file": "ref_1_00042.tif",
+        "sha256": "d386fbbe35b939c78588036674dee71a66b26b110978f4d6791b288e13176f4a"
+      },
+      {
+        "file": "ref_1_00043.tif",
+        "sha256": "772dc1005d0a73436e98fd75146fd8f7a8f8f5168ae71cb86b91903775c1cd05"
+      },
+      {
+        "file": "ref_1_00044.tif",
+        "sha256": "7fb54588fc0fc114204b815de17836a8e7dfe741016e24b20c9a80669fb35770"
+      },
+      {
+        "file": "ref_1_00045.tif",
+        "sha256": "1a8e9f1ec3303cf91cf7e767970fc400c3658885730bdfddff7e094cae2d3047"
+      },
+      {
+        "file": "ref_1_00046.tif",
+        "sha256": "ec14bddcf176150954acb8a4a5d722f3712de562303cfd37e8f058eb06541358"
+      },
+      {
+        "file": "ref_1_00047.tif",
+        "sha256": "f2a170e3b93329dcaac7c647fed22f0cd851982c1df92b3318e8b4d9a000b7b3"
+      },
+      {
+        "file": "ref_1_00048.tif",
+        "sha256": "00c6cc11d0d2c041cbd9e05c58627f3c93f9c915862a82f81419644ae431cad9"
+      },
+      {
+        "file": "ref_1_00049.tif",
+        "sha256": "20a92a4f2f03bc1362f10f8d4834514dafd524a8e86ee179dab0b62c074b7296"
+      },
+      {
+        "file": "ref_1_00050.tif",
+        "sha256": "07fca1021cca3e37d00cadc3767cbf5e3f1d1089de2ccdaa1761b1d966a3b7ab"
+      },
+      {
+        "file": "ref_1_00051.tif",
+        "sha256": "7473d6428161c51d10e333b5968a16f2bfb2557496cd0067bae869b667dfd882"
+      },
+      {
+        "file": "ref_1_00052.tif",
+        "sha256": "40c326d4a1d473c3e48acee153ece4ca3bca0657a2e11e0d92fd33d41a4265e0"
+      },
+      {
+        "file": "ref_1_00053.tif",
+        "sha256": "7b1498565c05bdac70b9894d15a3dcd7527a9896a6b8f00b9b30fbc1724eec3d"
+      },
+      {
+        "file": "ref_1_00054.tif",
+        "sha256": "a49488a7bae6f970f52fcd38affae919c19bd978b970dc5e5bac147bc6687ba1"
+      },
+      {
+        "file": "ref_1_00055.tif",
+        "sha256": "1d3544f2e55f83be8a3a5f54caa594ef6f2c04e1914e0df7accc10366dfc1193"
+      },
+      {
+        "file": "ref_1_00056.tif",
+        "sha256": "a71d7f9f704a5ce14ca35f2d820b8ac846b274c644bd26247057560b55dc84e2"
+      },
+      {
+        "file": "ref_1_00057.tif",
+        "sha256": "dd06010bd4a0932bb1690ff8b02dd22583155405725676f882c186b4fbfedd18"
+      },
+      {
+        "file": "ref_1_00058.tif",
+        "sha256": "a12f72e2fcf122b0bface83cf164ba7ba612e8160df3045137f29248c350c6ad"
+      },
+      {
+        "file": "ref_1_00059.tif",
+        "sha256": "e9e5e091c0c962bd16ef2dc254cb2cd801091a3f3944830dd93baba7e0e60cb2"
+      },
+      {
+        "file": "ref_1_00060.tif",
+        "sha256": "aa7efd3fb45f960fb2dbb4ee21cf4d37dd04ff52815c6f96a0c096d213e075aa"
+      },
+      {
+        "file": "ref_1_00061.tif",
+        "sha256": "1b8386600b273aceca460a0061063fdfc520ca95734d3d950756d09defa38b7b"
+      },
+      {
+        "file": "ref_1_00062.tif",
+        "sha256": "f5b5f24c5fb175614e9f15d980d040f975aa0672cfbf102d8393ad23419aa630"
+      },
+      {
+        "file": "ref_1_00063.tif",
+        "sha256": "da66ab1bb0922f07a23a54b80800ed8395e3940e833723ba5d6a80873c9375e5"
+      },
+      {
+        "file": "ref_1_00064.tif",
+        "sha256": "522b2a7a9a15fa4d0e69fd21252f0d64158ada684db48497ab631ec4b9641931"
+      },
+      {
+        "file": "ref_1_00065.tif",
+        "sha256": "437022fa162cca62a4f3fbe83db4cb51c6b1b88428682679206d959251f9cf1d"
+      },
+      {
+        "file": "ref_1_00066.tif",
+        "sha256": "d563e12a5ac4dc13f58828ca97e9d47bc8642175897d59004021a57ac8f52093"
+      },
+      {
+        "file": "ref_1_00067.tif",
+        "sha256": "e49189e96f4fa3bdec4c68a90921765aef8e08c8508595a77410b03df13e1a60"
+      },
+      {
+        "file": "ref_1_00068.tif",
+        "sha256": "7885f76537e18192b7c7051f00f28ae3e2d1e7c9595570da9ab3ff1a64e4b402"
+      },
+      {
+        "file": "ref_1_00069.tif",
+        "sha256": "8fc27ebffd8cde5a7acdf04dcec72295a28827791cdec9aee25aa1e0d806be48"
+      },
+      {
+        "file": "ref_1_00070.tif",
+        "sha256": "4d938b305d8a8ee9b65bdaa66400e93157e9ce4436e171153aab405524b5724f"
+      },
+      {
+        "file": "ref_1_00071.tif",
+        "sha256": "25bd3463a166e67a8a69944c74591ef79b2cc93b6e5c1059c9a957a041f529ed"
+      },
+      {
+        "file": "ref_1_00072.tif",
+        "sha256": "723c12bdb5a3f319ce68a674b4b946d362b8d738f18035d12c9fb306662207ea"
+      },
+      {
+        "file": "ref_1_00073.tif",
+        "sha256": "92e5a2fd705e68b7e613c7df2365df23f889010b6b095c77d7c4bd46b7899760"
+      },
+      {
+        "file": "ref_1_00074.tif",
+        "sha256": "4f194492f023ddf37b956e1846b0e005477904fed649e3f36285cbc15b454832"
+      },
+      {
+        "file": "ref_1_00075.tif",
+        "sha256": "dba632a12692bfdafd8aa0a5de28fd81ada19064de0eb7deea03e6975f519939"
+      },
+      {
+        "file": "ref_1_00076.tif",
+        "sha256": "def2cd6f90b3770e569fa72af2c375d68882015935462d4dbfb5e2220cbb57da"
+      },
+      {
+        "file": "ref_1_00077.tif",
+        "sha256": "f85b811386cb767303d811387d34e7769538a4989e7dd17a1c0d103e535d2b5d"
+      },
+      {
+        "file": "ref_1_00078.tif",
+        "sha256": "bd6e07f0b45a22a26b37b1fc0ee3e2a886f63c0f84f3481ff9de6c1fb7c5622d"
+      },
+      {
+        "file": "ref_1_00079.tif",
+        "sha256": "b4d995adb4b277a6e3c5e3387b7601184635cfc144616e437c3b7ef9e89645e0"
+      },
+      {
+        "file": "ref_1_00080.tif",
+        "sha256": "293d7cace12b2a13f7522517bca61f0c2f638463e3db6a9aa6574596f46d5ec0"
+      },
+      {
+        "file": "ref_1_00081.tif",
+        "sha256": "20b440603991b4bf1acc5e797d75aa51219aedeb814e35a2abdb7383e289fa2f"
+      },
+      {
+        "file": "ref_1_00082.tif",
+        "sha256": "73df098ae85efcf8f4c35de94a840e06f428cb219eef802349aac6dbc2843610"
+      },
+      {
+        "file": "ref_1_00083.tif",
+        "sha256": "e70306e53c456b34bbeb85ca2f7bdbb7d9a700b57c82c6facf45fa36c779f6f1"
+      },
+      {
+        "file": "ref_1_00084.tif",
+        "sha256": "b4079ca4a1aeb8ad1e6a213c6d3cdb7ad7913adfde7a974e0d92f3d46881dcb1"
+      },
+      {
+        "file": "ref_1_00085.tif",
+        "sha256": "27c24d6989823fb82371cbfb21f4c1e9729d17561be4c484bd0b808da0661a95"
+      },
+      {
+        "file": "ref_1_00086.tif",
+        "sha256": "d60855257dc537b8b8b64a926aacea6b82a31c361f8a6c4c5ae6695d61301335"
+      },
+      {
+        "file": "ref_1_00087.tif",
+        "sha256": "bd8695294597041fb5d4f185cc078b718d5d7f09b5b18c7d4a8a318a44bcab07"
+      },
+      {
+        "file": "ref_1_00088.tif",
+        "sha256": "27573e7baf56bb8511eaa8eabc6fef66beaf5b7dbb4d3a25f527939ead5e1e55"
+      },
+      {
+        "file": "ref_1_00089.tif",
+        "sha256": "b114d143de50fdd1b3b2c05ba9fe58e5212d64007bb221f473fe898ba2b211c6"
+      },
+      {
+        "file": "ref_1_00090.tif",
+        "sha256": "28690c57e2970cd841dfd3fe442e38f5ebbd059d47cbf669d4b1ff5984208db6"
+      },
+      {
+        "file": "ref_1_00091.tif",
+        "sha256": "c3a22f83e9c3616d7ff34d20c554e445819bccbefc527df3f2f36e73851a560b"
+      },
+      {
+        "file": "ref_1_00092.tif",
+        "sha256": "d344b377fd4843d67d65d851a71384cf0fe183d28a55cd0105985468a49714fd"
+      },
+      {
+        "file": "ref_1_00093.tif",
+        "sha256": "25533bc0b24aafcad8a621dcb601679fc7a5a893774aeffb6a2196faf26a0ec3"
+      },
+      {
+        "file": "ref_1_00094.tif",
+        "sha256": "69b02c2762a1b5e964b99653dc6c93b77b54e00a77697e506bc1aaf5f599cd9f"
+      },
+      {
+        "file": "ref_1_00095.tif",
+        "sha256": "b8c106bb641578e22121889cd2e19e6fb87762e1a998d65e63cb0ffbb51ea017"
+      },
+      {
+        "file": "ref_1_00096.tif",
+        "sha256": "f0f8ef86897b8790ebb849425b22e6ae4cff44cedabda6e14ea8821afd581651"
+      },
+      {
+        "file": "ref_1_00097.tif",
+        "sha256": "e1786f060e353d82c9188c5d461c10b5429efdbcfeca53beedd153311c486c36"
+      },
+      {
+        "file": "ref_1_00098.tif",
+        "sha256": "d05e9e3194f37ca2fe532e1ed51b50864ffdc1fc243f3ff2b5dcf2e563074a96"
+      },
+      {
+        "file": "ref_1_00099.tif",
+        "sha256": "c3bb3b46a3f518f7a72f4a825573591cb426d5618efe64c3cdfc2b20f1b25d35"
+      },
+      {
+        "file": "ref_1_00100.tif",
+        "sha256": "d31d32c32e82a447214738e20314506a6f035958a7ef9701cf3dcb3169fc9f6c"
+      }
+    ],
+    "bytes": 1182690064,
+    "bundle_sha256": "ea7653cbaf8a585210b70cc0bc23443bec5d3943c0d814fd332c32c82a655d3f",
+    "packing_s": 61.26643600000534
+  },
+  "timing_scope": "Solver excludes host finite scans and result download; API wall includes both. Pair includes reference prepare. Decode, initialization, save excluded.",
+  "memory_scope": "Persistent tensor bytes per session, not system RSS"
+}

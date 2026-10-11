@@ -1,0 +1,36 @@
+{
+  "cli_checks": [
+    {
+      "mode": "wxst",
+      "seven_fields": true,
+      "dtype": "float32",
+      "complete": true,
+      "report": "tests/results/cli_wxst_final/report.json"
+    },
+    {
+      "mode": "wsvt",
+      "seven_fields": true,
+      "dtype": "uint16",
+      "complete": true,
+      "report": "tests/results/cli_wsvt_final/report.json"
+    }
+  ],
+  "legacy_modules": [
+    {
+      "module": "wxst_orin",
+      "native_abi_loaded": true
+    },
+    {
+      "module": "wxst_orin_v2",
+      "native_abi_loaded": true
+    },
+    {
+      "module": "wxst_orin_v3",
+      "native_abi_loaded": true
+    },
+    {
+      "module": "legacy_complete",
+      "native_abi_loaded": true
+    }
+  ]
+}

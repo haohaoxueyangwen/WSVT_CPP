@@ -1,0 +1,580 @@
+{
+  "utc": "2026-10-11T15:16:45Z",
+  "host": {
+    "exit_code": 0,
+    "stdout": "xray-desktop\n",
+    "stderr": ""
+  },
+  "cpu": {
+    "exit_code": 0,
+    "stdout": "\u67b6\u6784\uff1a                           aarch64\nCPU \u8fd0\u884c\u6a21\u5f0f\uff1a                   32-bit, 64-bit\n\u5b57\u8282\u5e8f\uff1a                         Little Endian\nCPU:                             12\n\u5728\u7ebf CPU \u5217\u8868\uff1a                  0-11\n\u6bcf\u4e2a\u6838\u7684\u7ebf\u7a0b\u6570\uff1a                 1\n\u6bcf\u4e2a\u5ea7\u7684\u6838\u6570\uff1a                   4\n\u5ea7\uff1a                             3\n\u5382\u5546 ID\uff1a                        ARM\n\u578b\u53f7\uff1a                           1\n\u578b\u53f7\u540d\u79f0\uff1a                       ARMv8 Processor rev 1 (v8l)\n\u6b65\u8fdb\uff1a                           r0p1\nCPU \u6700\u5927 MHz\uff1a                   2201.6001\nCPU \u6700\u5c0f MHz\uff1a                   115.2000\nBogoMIPS\uff1a                       62.50\nL1d \u7f13\u5b58\uff1a                       768 KiB\nL1i \u7f13\u5b58\uff1a                       768 KiB\nL2 \u7f13\u5b58\uff1a                        3 MiB\nL3 \u7f13\u5b58\uff1a                        6 MiB\nVulnerability Itlb multihit:     Not affected\nVulnerability L1tf:              Not affected\nVulnerability Mds:               Not affected\nVulnerability Meltdown:          Not affected\nVulnerability Spec store bypass: Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:        Mitigation; __user pointer sanitization\nVulnerability Spectre v2:        Not affected\nVulnerability Srbds:             Not affected\nVulnerability Tsx async abort:   Not affected\n\u6807\u8bb0\uff1a                           fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp uscat ilrcpc flagm\n",
+    "stderr": ""
+  },
+  "before_load": [
+    0.23,
+    0.3,
+    0.89
+  ],
+  "meminfo": "MemTotal:       64303804 kB\nMemFree:        46354748 kB\nMemAvailable:   53232804 kB\nBuffers:          291688 kB\nCached:          6536788 kB\nSwapCached:            0 kB\nActive:          3287464 kB\nInactive:        4931448 kB\nActive(anon):       7824 kB\nInactive(anon):  1430636 kB\nActive(file):    3279640 kB\nInactive(file):  3500812 kB\nUnevictable:       18404 kB\nMlocked:               0 kB\nSwapTotal:      32151888 kB\nSwapFree:       32151888 kB\nDirty:              3692 kB\nWriteback:             0 kB\nAnonPages:       1389116 kB\nMapped:           437016 kB\nShmem:             29804 kB\nKReclaimable:     733880 kB\nSlab:             915312 kB\nSReclaimable:     733880 kB\nSUnreclaim:       181432 kB\nKernelStack:       11744 kB\nPageTables:        26516 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    64303788 kB\nCommitted_AS:    6175352 kB\nVmallocTotal:   135290159040 kB\nVmallocUsed:      166620 kB\nVmallocChunk:          0 kB\nPercpu:             8592 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:    567296 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nCmaTotal:         524288 kB\nCmaFree:          260468 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\n",
+  "disk": {
+    "exit_code": 0,
+    "stdout": "\u6587\u4ef6\u7cfb\u7edf        \u5bb9\u91cf  \u5df2\u7528  \u53ef\u7528 \u5df2\u7528% \u6302\u8f7d\u70b9\n/dev/mmcblk0p1   57G   38G   17G   70% /\n",
+    "stderr": ""
+  },
+  "running_processes": {
+    "exit_code": 0,
+    "stdout": "    PID %CPU COMMAND\n      1  0.0 systemd\n      2  0.0 kthreadd\n      3  0.0 rcu_gp\n      4  0.0 rcu_par_gp\n      8  0.0 mm_percpu_wq\n      9  0.0 rcu_tasks_kthre\n     10  0.0 rcu_tasks_rude_\n     11  0.0 rcu_tasks_trace\n     12  0.0 ksoftirqd/0\n     13  0.0 rcu_preempt\n     14  0.0 migration/0\n     16  0.0 cpuhp/0\n     17  0.0 cpuhp/1\n     18  0.0 migration/1\n     19  0.0 ksoftirqd/1\n     22  0.0 cpuhp/2\n     23  0.0 migration/2\n     24  0.0 ksoftirqd/2\n     27  0.0 cpuhp/3\n     28  0.0 migration/3\n     29  0.0 ksoftirqd/3\n     32  0.0 cpuhp/4\n     33  0.0 migration/4\n     34  0.0 ksoftirqd/4\n     37  0.0 cpuhp/5\n     38  0.0 migration/5\n     39  0.0 ksoftirqd/5\n     42  0.0 cpuhp/6\n     43  0.0 migration/6\n     44  0.0 ksoftirqd/6\n     47  0.0 cpuhp/7\n     48  0.0 migration/7\n     49  0.0 ksoftirqd/7\n     51  0.0 kworker/7:0H-kblockd\n     52  0.0 cpuhp/8\n     53  0.0 migration/8\n     54  0.0 ksoftirqd/8\n     57  0.0 cpuhp/9\n     58  0.0 migration/9\n     59  0.0 ksoftirqd/9\n     62  0.0 cpuhp/10\n     63  0.0 migration/10\n     64  0.0 ksoftirqd/10\n     67  0.0 cpuhp/11\n     68  0.0 migration/11\n     69  0.0 ksoftirqd/11\n     72  0.0 kdevtmpfs\n     73  0.0 netns\n     77  0.0 kauditd\n     78  0.0 irq/14-mc_statu\n     79  0.0 khungtaskd\n     80  0.0 oom_reaper\n     81  0.0 writeback\n     82  0.0 kcompactd0\n     83  0.0 ksmd\n     84  0.0 khugepaged\n    113  0.0 kintegrityd\n    114  0.0 kblockd\n    115  0.0 blkcg_punt_bio\n    117  0.0 irq/229-2190000\n    118  0.0 devfreq_wq\n    119  0.0 watchdogd\n    122  0.0 rpciod\n    123  0.0 kworker/u25:0-hci0\n    124  0.0 xprtiod\n    127  0.0 kswapd0\n    128  0.0 nfsiod\n    131  0.0 kthrotld\n    137  0.0 kpcitest\n    142  0.0 nvme-wq\n    143  0.0 nvme-reset-wq\n    144  0.0 nvme-delete-wq\n    145  0.0 uas\n    146  0.0 irq/253-tegra_r\n    148  0.0 dm_bufio_cache\n    150  0.0 irq/254-nvvrs-p\n    155  0.0 irq/244-tegra_d\n    156  0.0 irq/245-tegra_d\n    157  0.0 dce-async-ipc-w\n    158  0.0 irq/117-bc00000\n    159  0.0 kworker/2:1H-kblockd\n    160  0.0 ipv6_addrconf\n    161  0.0 krfcommd\n    162  0.0 kstrp\n    170  0.0 host_low_prio_w\n    171  0.0 irq/132-host_sy\n    172  0.0 irq/133-host_sy\n    173  0.0 irq/134-host_sy\n    174  0.0 irq/135-host_sy\n    175  0.0 irq/136-host_sy\n    176  0.0 irq/137-host_sy\n    177  0.0 irq/138-host_sy\n    178  0.0 irq/139-host_sy\n    179  0.0 irq/140-host_st\n    182  0.0 irq/142-tsec_ri\n    183  0.0 pva_task_status\n    184  0.0 irq/143-pva-isr\n    185  0.0 irq/144-pva-isr\n    186  0.0 irq/145-pva-isr\n    187  0.0 irq/146-pva-isr\n    188  0.0 irq/147-pva-isr\n    189  0.0 irq/148-pva-isr\n    190  0.0 irq/149-pva-isr\n    191  0.0 irq/150-pva-isr\n    192  0.0 irq/151-pva-isr\n    193  0.0 irq/236-3610000\n    194  0.0 irq/233-3610000\n    199  0.0 irq/51-tegra-pc\n    204  0.0 sdhci\n    205  0.0 irq/69-mmc0\n    207  0.0 mmc_complete\n    210  0.0 irq/51-aerdrv\n    211  0.0 irq/53-tegra-pc\n    214  0.0 irq/55-tegra-pc\n    215  0.0 sdhci\n    216  0.0 irq/70-mmc1\n    217  0.0 irq/302-3400000\n    222  0.0 kworker/1:1H-kblockd\n    252  0.0 irq/118-d230000\n    266  0.0 jbd2/mmcblk0p1-\n    267  0.0 ext4-rsv-conver\n    268  0.0 kworker/8:1H-kblockd\n    275  0.0 kworker/5:1H-kblockd\n    277  0.0 kworker/9:1H-kblockd\n    278  0.0 kworker/3:1H-kblockd\n    280  0.0 kworker/6:1H-kblockd\n    291  0.0 kworker/10:1H-kblockd\n    298  0.0 kworker/11:1H-kblockd\n    308  0.0 systemd-journal\n    335  0.0 nvmap-bz\n    336  0.0 irq/237-gk20a_s\n    337  0.0 irq/238-gk20a_s\n    338  0.0 irq/239-gk20a_s\n    339  0.0 irq/240-gk20a_n\n    346  0.0 tee-supplicant\n    348  0.0 optee_bus_scan\n    358  0.0 systemd-udevd\n    362  0.0 haveged\n    363  0.0 rpcbind\n    364  0.0 systemd-resolve\n    365  0.0 systemd-timesyn\n    411  0.0 accounts-daemon\n    414  0.0 avahi-daemon\n    415  0.0 cron\n    417  0.0 dbus-daemon\n    418  0.0 NetworkManager\n    423  0.0 networkd-dispat\n    432  0.0 polkitd\n    439  0.0 rsyslogd\n    445  0.0 switcheroo-cont\n    447  0.0 systemd-logind\n    449  0.0 udisksd\n    452  0.0 wpa_supplicant\n    469  0.0 avahi-daemon\n    486  0.0 sugov:0\n    487  0.0 sugov:8\n    490  0.0 sugov:4\n    518  0.0 nvfancontrol\n    548  0.0 nv_queue\n    550  0.0 nv_queue\n    560  0.0 irq/71-3210000.\n    565  0.0 spi0\n    569  0.0 irq/72-3230000.\n    570  0.0 spi2\n    599  0.0 irq/307-rt5640\n    605  0.0 cfg80211\n    614  0.0 tmp451\n    650  0.0 irq/310-1-0008\n    655  0.0 cryptd\n    656  0.0 btfwwork\n    810  0.0 adspp_kthread\n    814  0.0 kworker/u25:2-hci0\n    818  0.0 file-storage\n    834  0.0 loop0\n    922  0.0 ModemManager\n    924  0.0 bluetoothd\n    972  0.0 sw-quiesce\n    973  0.1 nvgpu_channel_p\n    974  0.0 nvgpu_nvs_ga10b\n    975  0.0 nvgpu_pg_init_g\n    980  0.0 nvgpu_clk_arb_p\n    992  0.0 nvargus-daemon\n    994  0.0 nvs-service\n   1010  0.0 whoopsie\n   1011  0.1 containerd\n   1012  0.0 gdm3\n   1014  0.0 agetty\n   1015  0.0 agetty\n   1016  0.0 agetty\n   1126  0.0 kerneloops\n   1135  0.0 kerneloops\n   1205  0.0 gdm-session-wor\n   1390  0.0 nvphsd\n   1404  0.0 nvphsd\n   1407  0.0 irq/312-6810000\n   1427  0.0 irq/57-eth0.com\n   1447  0.0 sshd\n   1454  0.0 RTW_CMD_THREAD\n   1476  0.0 dockerd\n   1574  0.0 systemd\n   1575  0.0 (sd-pam)\n   1598  0.0 pulseaudio\n   1601  0.1 tracker-miner-f\n   1607  0.0 gnome-keyring-d\n   1635  0.0 gdm-x-session\n   1638  0.0 Xorg\n   1640  0.0 rtkit-daemon\n   1658  0.0 dbus-daemon\n   1781  0.0 nvidia-modeset/\n   1784  0.0 nvidia-modeset/\n   1788  0.0 nvidia\n   1789  0.0 nv_queue\n   1804  0.0 gvfsd\n   1888  0.0 gvfsd-fuse\n   1911  0.0 jtop\n   1914  0.0 gvfs-udisks2-vo\n   1927  0.0 gvfs-mtp-volume\n   1931  0.0 gvfs-afc-volume\n   1936  0.0 gvfs-gphoto2-vo\n   1940  0.0 gvfs-goa-volume\n   1945  0.0 goa-daemon\n   1959  0.0 goa-identity-se\n   1967  0.0 upowerd\n   1972  0.0 gnome-session-b\n   2001  0.0 jtop\n   2010  0.5 jtop\n   2177  0.0 ssh-agent\n   2285  0.0 at-spi-bus-laun\n   2290  0.0 dbus-daemon\n   2297  0.0 gnome-session-c\n   2304  0.0 gnome-session-b\n   2336  0.1 gnome-shell\n   2361  0.0 ibus-daemon\n   2365  0.0 ibus-dconf\n   2366  0.0 ibus-extension-\n   2368  0.0 ibus-x11\n   2371  0.0 ibus-portal\n   2384  0.0 at-spi2-registr\n   2394  0.0 xdg-permission-\n   2399  0.0 gnome-shell-cal\n   2405  0.0 evolution-sourc\n   2415  0.0 evolution-calen\n   2420  0.0 dconf-service\n   2433  0.0 evolution-addre\n   2451  0.0 gvfsd-trash\n   2455  0.0 gjs\n   2474  0.0 gsd-a11y-settin\n   2477  0.0 gsd-color\n   2479  0.0 gsd-datetime\n   2482  0.0 gsd-housekeepin\n   2484  0.0 gsd-keyboard\n   2486  0.0 gsd-media-keys\n   2487  0.0 gsd-power\n   2488  0.0 gsd-print-notif\n   2489  0.0 gsd-rfkill\n   2491  0.0 gsd-screensaver\n   2496  0.0 gsd-sharing\n   2497  0.0 gsd-smartcard\n   2499  0.0 gsd-sound\n   2501  0.0 gsd-usb-protect\n   2505  0.0 gsd-wacom\n   2508  0.0 gsd-wwan\n   2511  0.0 gsd-xsettings\n   2534  0.0 vino-server\n   2537  0.0 python3\n   2541  0.0 gsd-disk-utilit\n   2544  0.0 evolution-alarm\n   2584  0.0 colord\n   2591  0.0 gsd-printer\n   2637  0.0 python3\n   2639  0.0 python3\n   2640  0.0 python3\n   2642  0.0 python3\n   2645  0.0 python3\n   2646  0.0 python3\n   2648  0.0 python3\n   2649  0.0 python3\n   2653  0.0 python3\n   2654  0.0 python3\n   2655  0.0 python3\n   2656  0.0 python3\n   2657  0.0 python3\n   2658  0.0 python3\n   2659  0.0 python3\n   2660  0.0 python3\n   2661  0.1 python3\n   2662  0.0 python3\n   2663  0.0 python3\n   2664  0.0 ibus-engine-sim\n   3551  0.0 ibus-engine-lib\n   3921  0.0 update-notifier\n   3926  0.0 gvfsd-metadata\n   4024  0.0 update-manager\n   9754  0.0 kworker/1:2-events\n   9773  0.0 sshd\n   9839  0.0 sshd\n   9840  0.0 bash\n  10157  0.0 kworker/0:2H-kblockd\n  15481  0.0 kworker/4:0H-kblockd\n  15506  0.0 sshd\n  15550  0.0 sshd\n  15551  0.0 bash\n  16213  0.0 sshd\n  16271  0.8 sshd\n  16272  0.0 sh\n  16326  1.3 code-04c0d99f4f\n  16359  0.0 code-04c0d99f4f\n  16442  0.0 sh\n  16446  1.3 MainThread\n  16471  0.0 MainThread\n  16532  0.5 MainThread\n  16544  1.9 MainThread\n  16630  0.0 sh\n  16741  0.0 bash\n  17189  5.2 jtop\n  21587  0.0 kworker/7:1H\n  37852  0.0 kworker/8:2H\n  42005  0.0 kworker/9:0H\n  42655  0.0 kworker/1:2H\n  42688  0.0 kworker/5:2H\n  44495  0.0 kworker/10:0H\n  57889  0.0 kworker/6:2-pm\n  71610  0.0 kworker/10:1-events\n  91846  0.1 kworker/0:0-read_counters_wq\n 120859  0.0 kworker/10:2-events\n 120881  0.0 kworker/4:2\n 136008  0.0 kworker/8:2-read_counters_wq\n 151165  0.2 kworker/4:0-mm_percpu_wq\n 155759  0.2 kworker/0:2-events\n 157868  0.0 kworker/4:2H\n 158089  0.0 kworker/3:0-mm_percpu_wq\n 158703  0.0 kworker/2:2H\n 162947  0.0 kworker/3:0H\n 164552  0.0 kworker/9:0-events\n 166007  0.0 fwupd\n 166087  0.0 kworker/6:2H\n 169404  0.0 kworker/11:1-events\n 181817  0.0 kworker/11:0H\n 181911  0.0 kworker/3:2-cgroup_destroy\n 181930  0.1 kworker/u24:0-events_unbound\n 182639  0.0 kworker/5:0-mm_percpu_wq\n 189501  0.2 kworker/u24:2-events_unbound\n 192238  0.0 kworker/7:2\n 194338  0.0 kworker/2:0\n 194483  0.0 kworker/9:2\n 194764  0.0 kworker/11:0-events\n 195153  0.0 kworker/5:1-cgroup_destroy\n 199433  0.0 MainThread\n 201619  0.2 kworker/8:0-pm\n 204383  0.0 kworker/1:0-mm_percpu_wq\n 204748  0.0 kworker/6:1-rcu_gp\n 204990  0.0 sshd\n 205064  0.0 sshd\n 205619  0.0 kworker/7:0-mm_percpu_wq\n 205665  0.0 kworker/0:0H\n 206850  0.0 kworker/2:1-mm_percpu_wq\n 207553  0.0 kworker/10:0-mm_percpu_wq\n 208016  0.0 kworker/1:1-mm_percpu_wq\n 208421  0.0 kworker/8:1\n 208477  0.0 kworker/7:2H\n 208504  0.0 kworker/0:1\n 209258  0.2 kworker/u24:1-events_unbound\n 209601  0.0 sleep\n 210578  1.2 tracker-store\n 210601  0.0 kworker/9:1-events\n 210666  0.0 kworker/9:2H\n 210773  0.0 bash\n 210774  6.0 python3\n 210778  0.0 ps\n",
+    "stderr": ""
+  },
+  "power_mode": {
+    "exit_code": 0,
+    "stdout": "NV Power Mode: MAXN\n0\nNVPM ERROR: Error opening /sys/kernel/nvpmodel_emc_cap/emc_iso_cap: 13\nNVPM ERROR: failed to read PARAM EMC: ARG MAX_FREQ: PATH /sys/kernel/nvpmodel_emc_cap/emc_iso_cap\n",
+    "stderr": ""
+  },
+  "tegrastats_idle": {
+    "exit_code": 124,
+    "stdout": "10-11-2026 23:16:46 RAM 10860/62797MB (lfb 8883x4MB) SWAP 0/31398MB (cached 0MB) CPU [1%@729,0%@729,4%@729,0%@729,2%@729,1%@729,1%@729,5%@729,0%@729,1%@729,1%@729,2%@729] EMC_FREQ 0% GR3D_FREQ 0% CV0@-256C CPU@47.875C Tboard@38C SOC2@45.25C Tdiode@38.25C SOC0@44.781C CV1@-256C GPU@-256C tj@48.156C SOC1@44.625C CV2@-256C\n10-11-2026 23:16:47 RAM 10860/62797MB (lfb 8883x4MB) SWAP 0/31398MB (cached 0MB) CPU [23%@729,1%@729,6%@729,2%@729,2%@729,0%@729,0%@729,6%@729,0%@729,2%@729,0%@729,0%@729] EMC_FREQ 0% GR3D_FREQ 0% CV0@-256C CPU@48.093C Tboard@38C SOC2@45.281C Tdiode@38.25C SOC0@44.843C CV1@-256C GPU@-256C tj@48.375C SOC1@44.437C CV2@-256C\n",
+    "stderr": ""
+  },
+  "original_path": "/home/xray/Documents/WSVT_GPU_orin_20261010/edge_speckle",
+  "original_source_checks": {
+    ".gitignore": {
+      "expected": "21086718ce7499a5a90d3500e27bb9247fe2b79cd61903793cc5e5b901984718",
+      "actual": "21086718ce7499a5a90d3500e27bb9247fe2b79cd61903793cc5e5b901984718"
+    },
+    "baselines/cpu/CMakeLists.txt": {
+      "expected": "ad511e6d1d65e000386fb7361ec51812f0562f8a6abf6499ef3559bd05144ca4",
+      "actual": "ad511e6d1d65e000386fb7361ec51812f0562f8a6abf6499ef3559bd05144ca4"
+    },
+    "baselines/cpu/cpp_original_snapshot.tgz": {
+      "expected": "f5c7d0c8308a0463101b9bf4a803fda3fe9aac235b9a3bb19acecf603a255709",
+      "actual": "f5c7d0c8308a0463101b9bf4a803fda3fe9aac235b9a3bb19acecf603a255709"
+    },
+    "baselines/cpu/cpp_source_manifest.json": {
+      "expected": "cd1edfea35130fd346b6c9c47b022a088a92e647bf2ff7703a8a306890674e41",
+      "actual": "cd1edfea35130fd346b6c9c47b022a088a92e647bf2ff7703a8a306890674e41"
+    },
+    "baselines/cpu/cpu_driver.cpp": {
+      "expected": "dd0eae7a24e68820f785bcd4c9c637dd547afe4862753f48753e41668afb9f29",
+      "actual": "dd0eae7a24e68820f785bcd4c9c637dd547afe4862753f48753e41668afb9f29"
+    },
+    "baselines/cpu/README.md": {
+      "expected": "2b92c07f05147f9fd3f6cf9d28b0397f106b3cf8a47295c1751f3385684e222b",
+      "actual": "2b92c07f05147f9fd3f6cf9d28b0397f106b3cf8a47295c1751f3385684e222b"
+    },
+    "baselines/cpu/wsvtConfig.cmake.in": {
+      "expected": "ea0190deb2a1b4dcb6e3963e6478b7c43a73703e8ea33e68bd7fbcedf8fcd94e",
+      "actual": "ea0190deb2a1b4dcb6e3963e6478b7c43a73703e8ea33e68bd7fbcedf8fcd94e"
+    },
+    "baselines/legacy_wxst/legacy_complete.py": {
+      "expected": "ad6a4a2bdec12c9f93a827e4a734ca72857389d08e7f5962b698d5cbbc68d2ce",
+      "actual": "ad6a4a2bdec12c9f93a827e4a734ca72857389d08e7f5962b698d5cbbc68d2ce"
+    },
+    "baselines/legacy_wxst/README.md": {
+      "expected": "98119637fffe13f0e1f72a9f49799cfaaee21e7525cbb126ef221336f34a48a6",
+      "actual": "98119637fffe13f0e1f72a9f49799cfaaee21e7525cbb126ef221336f34a48a6"
+    },
+    "baselines/legacy_wxst/wxst_orin.py": {
+      "expected": "bc1604b67ea239514431d46b83059510632ddb1d4327a4c184b6cad5a54a8426",
+      "actual": "bc1604b67ea239514431d46b83059510632ddb1d4327a4c184b6cad5a54a8426"
+    },
+    "baselines/legacy_wxst/wxst_orin_v2.py": {
+      "expected": "3debd34a4ad7ad265bf4e60ca96dd74ef12697be553c0ff43ad801d9182684be",
+      "actual": "3debd34a4ad7ad265bf4e60ca96dd74ef12697be553c0ff43ad801d9182684be"
+    },
+    "baselines/legacy_wxst/wxst_orin_v3.py": {
+      "expected": "955ab7afa1fa0c3130df1b85d7e4726d3a0f400247092640b0db93cd410eee09",
+      "actual": "955ab7afa1fa0c3130df1b85d7e4726d3a0f400247092640b0db93cd410eee09"
+    },
+    "benchmarks/README.md": {
+      "expected": "628a1c306df74a460b27bfea476e90ea1f683103ab60fd2faa7fd0dbac9049b3",
+      "actual": "628a1c306df74a460b27bfea476e90ea1f683103ab60fd2faa7fd0dbac9049b3"
+    },
+    "CMakeLists.txt": {
+      "expected": "bbf23ed13953e0a1570445e8e86ab39aa827d18c962af445bfc1363ff06fc8a0",
+      "actual": "bbf23ed13953e0a1570445e8e86ab39aa827d18c962af445bfc1363ff06fc8a0"
+    },
+    "configs/wsvt.json": {
+      "expected": "9f48a022be693b63d3245b0352ddf5c6d8409ee506a06cec47ca3ba4624f9c45",
+      "actual": "9f48a022be693b63d3245b0352ddf5c6d8409ee506a06cec47ca3ba4624f9c45"
+    },
+    "configs/wxst.json": {
+      "expected": "aeb1148e33e2b0a068b3bcd9a3f2d7e3d264ed14134a9baf265c748d4ee446a5",
+      "actual": "aeb1148e33e2b0a068b3bcd9a3f2d7e3d264ed14134a9baf265c748d4ee446a5"
+    },
+    "docs/AGENT_HANDOFF_CURRENT.md": {
+      "expected": "dc60b97ac2ba73a4d4385396e941e30971c801806475f3e6e0b1f619d469b37c",
+      "actual": "dc60b97ac2ba73a4d4385396e941e30971c801806475f3e6e0b1f619d469b37c"
+    },
+    "docs/AI_PROJECT_BRIEF.md": {
+      "expected": "0a6bc8c806df2c9b204becbcdf47438b9efde98f520cc7b387aa76f1cc9aaa9b",
+      "actual": "0a6bc8c806df2c9b204becbcdf47438b9efde98f520cc7b387aa76f1cc9aaa9b"
+    },
+    "docs/ARCHITECTURE.md": {
+      "expected": "bcbef5f8a2d642589d73e9f57192712c2d0b52b6839c9e829af0d27148097694",
+      "actual": "bcbef5f8a2d642589d73e9f57192712c2d0b52b6839c9e829af0d27148097694"
+    },
+    "docs/evidence/cpu_compare_20261011/evidence/final_summary.json": {
+      "expected": "96b1a0a5d5141c219a5750646c638e405e843339b3f970dcfd8aae22f4ccd95b",
+      "actual": "96b1a0a5d5141c219a5750646c638e405e843339b3f970dcfd8aae22f4ccd95b"
+    },
+    "docs/evidence/cpu_compare_20261011/visual_review_20261011/diagnosis_summary.json": {
+      "expected": "2e034bce40c5a5fd4120ac9782eff6aac77eae6ea69208fa8f5b8327b5e7d947",
+      "actual": "2e034bce40c5a5fd4120ac9782eff6aac77eae6ea69208fa8f5b8327b5e7d947"
+    },
+    "docs/evidence/cpu_compare_20261011/visual_review_20261011/gpu_coarse_actual.json": {
+      "expected": "cd55ca3ee6a13b8812d8f20e10fa62134a3d4c41590841f43df41de22e639bad",
+      "actual": "cd55ca3ee6a13b8812d8f20e10fa62134a3d4c41590841f43df41de22e639bad"
+    },
+    "docs/evidence/edge_adaptation_20261011/evidence_02/edge_bench_02/report.json": {
+      "expected": "610c3133d2b01a6d090bbf45432953c203adbc66a7a26dbbd366342307c36971",
+      "actual": "610c3133d2b01a6d090bbf45432953c203adbc66a7a26dbbd366342307c36971"
+    },
+    "docs/evidence/edge_adaptation_20261011/evidence_02/wsvt_baseline_full_01/diagnostics.json": {
+      "expected": "a0a3bcde96666fb7994cb25656074d63f2f55d7af34d8d7567b2a8ebf27cbabb",
+      "actual": "a0a3bcde96666fb7994cb25656074d63f2f55d7af34d8d7567b2a8ebf27cbabb"
+    },
+    "docs/evidence/edge_adaptation_20261011/evidence_02/wsvt_input_01/report.json": {
+      "expected": "ffcb073bca838095c22eb59af14adbbaaa625ddd857ca6e431f9aba1af3e0a25",
+      "actual": "ffcb073bca838095c22eb59af14adbbaaa625ddd857ca6e431f9aba1af3e0a25"
+    },
+    "docs/evidence_registry.json": {
+      "expected": "e856155f8e02b82544dc5f30f1f09e26f4dcc1763e96cb31283f20ea60a5a9df",
+      "actual": "e856155f8e02b82544dc5f30f1f09e26f4dcc1763e96cb31283f20ea60a5a9df"
+    },
+    "docs/OUTPUTS.md": {
+      "expected": "6ae634165a82317f82a5583cc6c09fc1beea77d4e65ada57046a681580e55ecf",
+      "actual": "6ae634165a82317f82a5583cc6c09fc1beea77d4e65ada57046a681580e55ecf"
+    },
+    "docs/PAPER_ROADMAP.md": {
+      "expected": "75b5b98581ce7b2dd9cb61cb1eff1170b8f806a9b251a254c8c95c9cab2f659e",
+      "actual": "75b5b98581ce7b2dd9cb61cb1eff1170b8f806a9b251a254c8c95c9cab2f659e"
+    },
+    "docs/source_check_windows.json": {
+      "expected": "45d920228df7e0a38bdcc52003ea7b5f19ee602fdce598064efb1e738d488560",
+      "actual": "45d920228df7e0a38bdcc52003ea7b5f19ee602fdce598064efb1e738d488560"
+    },
+    "docs/source_origins.json": {
+      "expected": "7ce2bdc0e25d5e6b1be0f80953c2b71b9263c6b84bcf34027bad4d36af3dbf86",
+      "actual": "7ce2bdc0e25d5e6b1be0f80953c2b71b9263c6b84bcf34027bad4d36af3dbf86"
+    },
+    "docs/validation/build_01.log": {
+      "expected": "2c9db7985b51b20b38d7156646874c9268be265371fefff8f22263ff9d7e9bd5",
+      "actual": "2c9db7985b51b20b38d7156646874c9268be265371fefff8f22263ff9d7e9bd5"
+    },
+    "docs/validation/build_02.log": {
+      "expected": "d9d14a312f88af301ffa960cadf126216050aa6d2f6d342115e5c0d7bacdfc5a",
+      "actual": "d9d14a312f88af301ffa960cadf126216050aa6d2f6d342115e5c0d7bacdfc5a"
+    },
+    "docs/validation/cli_wsvt_report.json": {
+      "expected": "dbbc1cf09e719496bf9159bfc2080529f0047377187492f08321caea0578e869",
+      "actual": "dbbc1cf09e719496bf9159bfc2080529f0047377187492f08321caea0578e869"
+    },
+    "docs/validation/cli_wxst_report.json": {
+      "expected": "8d0aa726892961acb0d3931e74a7b1f97c444da287335d087f082955d9745d8c",
+      "actual": "8d0aa726892961acb0d3931e74a7b1f97c444da287335d087f082955d9745d8c"
+    },
+    "docs/validation/contracts_orin.log": {
+      "expected": "443f477126b6afdd05dc373af7146d1d0c8abd55ea7acf1f54f2d7d44d2529f2",
+      "actual": "443f477126b6afdd05dc373af7146d1d0c8abd55ea7acf1f54f2d7d44d2529f2"
+    },
+    "docs/validation/doctor_orin.json": {
+      "expected": "388d208049dc22ab9e3c3726592dc41d9893198bb6f616ec0b785b30dce2337e",
+      "actual": "388d208049dc22ab9e3c3726592dc41d9893198bb6f616ec0b785b30dce2337e"
+    },
+    "docs/validation/entrypoint_checks.json": {
+      "expected": "c6e8eadcb7cfe136503ab68b2f5ffbe576e55781489da3e5c3dfb63dbd6e142b",
+      "actual": "c6e8eadcb7cfe136503ab68b2f5ffbe576e55781489da3e5c3dfb63dbd6e142b"
+    },
+    "docs/validation/legacy_build_01.log": {
+      "expected": "2119ce5543c61ec4ab6b4879c9b01bf982f0fc34228d0134f73987277e9466c3",
+      "actual": "2119ce5543c61ec4ab6b4879c9b01bf982f0fc34228d0134f73987277e9466c3"
+    },
+    "docs/validation/native_build_orin.json": {
+      "expected": "c468e5c846ada2a32bf6ed2081a134ea40c323448c5ce4566e09d7e30c0d848b",
+      "actual": "c468e5c846ada2a32bf6ed2081a134ea40c323448c5ce4566e09d7e30c0d848b"
+    },
+    "docs/validation/packaging_checks.json": {
+      "expected": "e24c1033df76c3577af345cf18834fac0b129c124e473a0f54e6ed9ea245002d",
+      "actual": "e24c1033df76c3577af345cf18834fac0b129c124e473a0f54e6ed9ea245002d"
+    },
+    "docs/VALIDATION.md": {
+      "expected": "85ea10f927b15cad5518fe15eafda15056374701ac52579778ea225aaade6c1c",
+      "actual": "85ea10f927b15cad5518fe15eafda15056374701ac52579778ea225aaade6c1c"
+    },
+    "docs/versions.json": {
+      "expected": "b7885afbfd9978e3a69690eae2fb1c849154cd2d640ae20da0af3dde503ac12c",
+      "actual": "b7885afbfd9978e3a69690eae2fb1c849154cd2d640ae20da0af3dde503ac12c"
+    },
+    "docs/VERSIONS.md": {
+      "expected": "c4cee7f61d373211f1086e2c2221113cc7af6e035b255aa3847760b336a14ca0",
+      "actual": "c4cee7f61d373211f1086e2c2221113cc7af6e035b255aa3847760b336a14ca0"
+    },
+    "native/cached_match.cuh": {
+      "expected": "d51f35691afdbd2f0a5e28c8fb3f4b002ba128667d5135f036790937c9fe653a",
+      "actual": "d51f35691afdbd2f0a5e28c8fb3f4b002ba128667d5135f036790937c9fe653a"
+    },
+    "native/edge_kernels.cu": {
+      "expected": "b943ecd8c81073cc07b5f3632e7c4f6d967d89ae59ae46aa16f37aa75809c481",
+      "actual": "b943ecd8c81073cc07b5f3632e7c4f6d967d89ae59ae46aa16f37aa75809c481"
+    },
+    "native/edge_spline.cpp": {
+      "expected": "ad226b1f699fa80491104bb10e81fe7dcf7a46597fac8eb4e52ba8002c15c70e",
+      "actual": "ad226b1f699fa80491104bb10e81fe7dcf7a46597fac8eb4e52ba8002c15c70e"
+    },
+    "native/features.cuh": {
+      "expected": "ebca2ed19926907f00b5e354f6d2ce953a5b7707fae018d9d476eac676218341",
+      "actual": "ebca2ed19926907f00b5e354f6d2ce953a5b7707fae018d9d476eac676218341"
+    },
+    "native/legacy_cached.cu": {
+      "expected": "c530b36a8c09e4a9801762510755c2d5ec72f42608d506218fd8ca834103443e",
+      "actual": "c530b36a8c09e4a9801762510755c2d5ec72f42608d506218fd8ca834103443e"
+    },
+    "native/legacy_match.cu": {
+      "expected": "4563d68d83033ae09947b37609b021b6e188c7faa2e39947c98e2c15e93ffb8d",
+      "actual": "4563d68d83033ae09947b37609b021b6e188c7faa2e39947c98e2c15e93ffb8d"
+    },
+    "native/legacy_optimized.cu": {
+      "expected": "36a00c782b0b6bf2a7645d11299109d5c8a7d94488f9780e48b290aa475ec71e",
+      "actual": "36a00c782b0b6bf2a7645d11299109d5c8a7d94488f9780e48b290aa475ec71e"
+    },
+    "native/primitives.cuh": {
+      "expected": "c2129b0c49dba4e72c2d992f4548922e75080016f5fe751c35b80fde458f9f13",
+      "actual": "c2129b0c49dba4e72c2d992f4548922e75080016f5fe751c35b80fde458f9f13"
+    },
+    "pyproject.toml": {
+      "expected": "0c0ea554297290ba3598edc5e45c7fba92c150127c21f59d3cfa4c5844082187",
+      "actual": "0c0ea554297290ba3598edc5e45c7fba92c150127c21f59d3cfa4c5844082187"
+    },
+    "README.md": {
+      "expected": "1514a0b0232542aa4309abe8162dd281b7b0631484d3c64d53d06ba3f271a2d7",
+      "actual": "1514a0b0232542aa4309abe8162dd281b7b0631484d3c64d53d06ba3f271a2d7"
+    },
+    "speckle_edge/__init__.py": {
+      "expected": "468d8742a6550a29499858f8ca0364c7f4ddeb4304d6b26cf004c6347ec848c2",
+      "actual": "468d8742a6550a29499858f8ca0364c7f4ddeb4304d6b26cf004c6347ec848c2"
+    },
+    "speckle_edge/__main__.py": {
+      "expected": "f38fd2f2c920c29c828645e87ed64743d567aaaef7fba7a15d2c7d7f8094f91f",
+      "actual": "f38fd2f2c920c29c828645e87ed64743d567aaaef7fba7a15d2c7d7f8094f91f"
+    },
+    "speckle_edge/api.py": {
+      "expected": "b78a52493e1a08c08634d1563e1438c93dfc77d4e61d8395166594a62065c3a2",
+      "actual": "b78a52493e1a08c08634d1563e1438c93dfc77d4e61d8395166594a62065c3a2"
+    },
+    "speckle_edge/cli.py": {
+      "expected": "03216c38e5c27678868b06e1cc39f9764bb443da899a5b1bf84fb293427e517d",
+      "actual": "03216c38e5c27678868b06e1cc39f9764bb443da899a5b1bf84fb293427e517d"
+    },
+    "speckle_edge/config.py": {
+      "expected": "ad598a52f3d78652e389f7a69b084ebd339764453b3266170d44bf159f4c5ec6",
+      "actual": "ad598a52f3d78652e389f7a69b084ebd339764453b3266170d44bf159f4c5ec6"
+    },
+    "speckle_edge/outputs.py": {
+      "expected": "9afbd55f361fb540baad62dbab1bdd8cd290f1e27facb97e2e450efa77fefdfc",
+      "actual": "9afbd55f361fb540baad62dbab1bdd8cd290f1e27facb97e2e450efa77fefdfc"
+    },
+    "speckle_edge/provenance.py": {
+      "expected": "f377b086baa764c0f8c4644f2bc588d8d12dde2727afac163a0e8529ade579c4",
+      "actual": "f377b086baa764c0f8c4644f2bc588d8d12dde2727afac163a0e8529ade579c4"
+    },
+    "speckle_edge/runtime.py": {
+      "expected": "f618a9e88a4eef2dff96d60e0b6274b7ecb761d65780ebe36b0940e764560fae",
+      "actual": "f618a9e88a4eef2dff96d60e0b6274b7ecb761d65780ebe36b0940e764560fae"
+    },
+    "tests/__init__.py": {
+      "expected": "1ba8de1b5a3a01bf27a9a1f419a8056cffc15d79e3722347660d2077781a45ff",
+      "actual": "1ba8de1b5a3a01bf27a9a1f419a8056cffc15d79e3722347660d2077781a45ff"
+    },
+    "tests/smoke_orin.py": {
+      "expected": "a147dc9ea5e57ff2472a65f09422a38677d8b84ef39d034b4bbc7cde35713ed4",
+      "actual": "a147dc9ea5e57ff2472a65f09422a38677d8b84ef39d034b4bbc7cde35713ed4"
+    },
+    "tests/test_contracts.py": {
+      "expected": "d92e2967c0fbbbfd2de10464928125eff4aa8c5fe9dfe1650c2ed134b064c13c",
+      "actual": "d92e2967c0fbbbfd2de10464928125eff4aa8c5fe9dfe1650c2ed134b064c13c"
+    },
+    "tools/build.py": {
+      "expected": "2bad3503fa2bed09bc3d58bda19aab278bbc3630187b2cb88e92ec1cc8606b18",
+      "actual": "2bad3503fa2bed09bc3d58bda19aab278bbc3630187b2cb88e92ec1cc8606b18"
+    },
+    "tools/check_sources.py": {
+      "expected": "42e498f3419468384760b1f5b787e3b29bf60e13ec61526f4b2d8bc70df7c15f",
+      "actual": "42e498f3419468384760b1f5b787e3b29bf60e13ec61526f4b2d8bc70df7c15f"
+    },
+    "tools/release.py": {
+      "expected": "b0da453df9918cccfc240bf5bf35da9fb02c5185c704aee3c8dc836d58820fe2",
+      "actual": "b0da453df9918cccfc240bf5bf35da9fb02c5185c704aee3c8dc836d58820fe2"
+    }
+  },
+  "original_native_sha256": {
+    "speckle_edge/_native/libedge_spline.so": "090ff70e242745f99c83e4698351a4e53f40c712aaf4790714533ba3ffccee94",
+    "speckle_edge/_native/build_info.json": "c468e5c846ada2a32bf6ed2081a134ea40c323448c5ce4566e09d7e30c0d848b",
+    "speckle_edge/_native/libedge_kernels.so": "de534dfe637aec7d8f079a587a89f2171c9b89968aaa5805de58c001e36e4e4d"
+  },
+  "original_build_flags": "# CMAKE generated file: DO NOT EDIT!\n# Generated by \"Unix Makefiles\" Generator, CMake Version 3.16\n\n# compile CUDA with /usr/local/cuda/bin/nvcc\nCUDA_FLAGS = -O3 -DNDEBUG -Xcompiler=-fPIC   -O3 --std=c++17 --fmad=false -arch=sm_87\n\nCUDA_DEFINES = -Dedge_kernels_EXPORTS\n\nCUDA_INCLUDES = \n\n",
+  "original_build_info": {
+    "schema_version": 1,
+    "arch": "87",
+    "configure_command": [
+      "cmake",
+      "-S",
+      "/home/xray/Documents/WSVT_GPU_orin_20261010/edge_speckle",
+      "-B",
+      "/home/xray/Documents/WSVT_GPU_orin_20261010/edge_speckle/build",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc",
+      "-DEDGE_CUDA_ARCH=87"
+    ],
+    "cmake": "cmake version 3.16.3\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2022 NVIDIA Corporation\nBuilt on Sun_Oct_23_22:16:07_PDT_2022\nCuda compilation tools, release 11.4, V11.4.315\nBuild cuda_11.4.r11.4/compiler.31964100_0",
+    "cxx": "c++ (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0\nCopyright (C) 2019 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+    "cuda_compile_options": [
+      "-O3",
+      "--std=c++17",
+      "--fmad=false",
+      "-arch=sm_87"
+    ],
+    "cmake_cache": "# This is the CMakeCache file.\n# For build in directory: /home/xray/Documents/WSVT_GPU_orin_20261010/edge_speckle/build\n# It was generated by CMake: /usr/bin/cmake\n# You can edit this file to change values found and used by cmake.\n# If you do not want to change any of the values, simply exit the editor.\n# If you do want to change a value, simply edit, save, and exit the editor.\n# The syntax for the file is as follows:\n# KEY:TYPE=VALUE\n# KEY is the name of a variable in the cache.\n# TYPE is a hint to GUIs for the type of VALUE, DO NOT EDIT TYPE!.\n# VALUE is the current value for the KEY.\n\n########################\n# EXTERNAL cache entries\n########################\n\n//Path to a program.\nCMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line\n\n//Path to a program.\nCMAKE_AR:FILEPATH=/usr/bin/ar\n\n//Choose the type of build, options are: None Debug Release RelWithDebInfo\n// MinSizeRel ...\nCMAKE_BUILD_TYPE:STRING=Release\n\n//Enable/Disable color output during build.\nCMAKE_COLOR_MAKEFILE:BOOL=ON\n\n//No help, variable specified on the command line.\nCMAKE_CUDA_COMPILER:UNINITIALIZED=/usr/local/cuda/bin/nvcc\n\n//Flags used by the CUDA compiler during all build types.\nCMAKE_CUDA_FLAGS:STRING=\n\n//Flags used by the CUDA compiler during DEBUG builds.\nCMAKE_CUDA_FLAGS_DEBUG:STRING=-g\n\n//Flags used by the CUDA compiler during MINSIZEREL builds.\nCMAKE_CUDA_FLAGS_MINSIZEREL:STRING=-O1 -DNDEBUG\n\n//Flags used by the CUDA compiler during RELEASE builds.\nCMAKE_CUDA_FLAGS_RELEASE:STRING=-O3 -DNDEBUG\n\n//Flags used by the CUDA compiler during RELWITHDEBINFO builds.\nCMAKE_CUDA_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG\n\n//CXX compiler\nCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++\n\n//A wrapper around 'ar' adding the appropriate '--plugin' option\n// for the GCC compiler\nCMAKE_CXX_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar-9\n\n//A wrapper around 'ranlib' adding the appropriate '--plugin' option\n// for the GCC compiler\nCMAKE_CXX_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib-9\n\n//Flags used by the CXX compiler during all build types.\nCMAKE_CXX_FLAGS:STRING=\n\n//Flags used by the CXX compiler during DEBUG builds.\nCMAKE_CXX_FLAGS_DEBUG:STRING=-g\n\n//Flags used by the CXX compiler during MINSIZEREL builds.\nCMAKE_CXX_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG\n\n//Flags used by the CXX compiler during RELEASE builds.\nCMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG\n\n//Flags used by the CXX compiler during RELWITHDEBINFO builds.\nCMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG\n\n//Path to a program.\nCMAKE_DLLTOOL:FILEPATH=CMAKE_DLLTOOL-NOTFOUND\n\n//Flags used by the linker during all build types.\nCMAKE_EXE_LINKER_FLAGS:STRING=\n\n//Flags used by the linker during DEBUG builds.\nCMAKE_EXE_LINKER_FLAGS_DEBUG:STRING=\n\n//Flags used by the linker during MINSIZEREL builds.\nCMAKE_EXE_LINKER_FLAGS_MINSIZEREL:STRING=\n\n//Flags used by the linker during RELEASE builds.\nCMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=\n\n//Flags used by the linker during RELWITHDEBINFO builds.\nCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=\n\n//Enable/Disable output of compile commands during generation.\nCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=OFF\n\n//Install path prefix, prepended onto install directories.\nCMAKE_INSTALL_PREFIX:PATH=/usr/local\n\n//Path to a program.\nCMAKE_LINKER:FILEPATH=/usr/bin/ld\n\n//Path to a program.\nCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/make\n\n//Flags used by the linker during the creation of modules during\n// all build types.\nCMAKE_MODULE_LINKER_FLAGS:STRING=\n\n//Flags used by the linker during the creation of modules during\n// DEBUG builds.\nCMAKE_MODULE_LINKER_FLAGS_DEBUG:STRING=\n\n//Flags used by the linker during the creation of modules during\n// MINSIZEREL builds.\nCMAKE_MODULE_LINKER_FLAGS_MINSIZEREL:STRING=\n\n//Flags used by the linker during the creation of modules during\n// RELEASE builds.\nCMAKE_MODULE_LINKER_FLAGS_RELEASE:STRING=\n\n//Flags used by the linker during the creation of modules during\n// RELWITHDEBINFO builds.\nCMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=\n\n//Path to a program.\nCMAKE_NM:FILEPATH=/usr/bin/nm\n\n//Path to a program.\nCMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy\n\n//Path to a program.\nCMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump\n\n//Value Computed by CMake\nCMAKE_PROJECT_DESCRIPTION:STATIC=\n\n//Value Computed by CMake\nCMAKE_PROJECT_HOMEPAGE_URL:STATIC=\n\n//Value Computed by CMake\nCMAKE_PROJECT_NAME:STATIC=speckle_edge\n\n//Path to a program.\nCMAKE_RANLIB:FILEPATH=/usr/bin/ranlib\n\n//Path to a program.\nCMAKE_READELF:FILEPATH=/usr/bin/readelf\n\n//Flags used by the linker during the creation of shared libraries\n// during all build types.\nCMAKE_SHARED_LINKER_FLAGS:STRING=\n\n//Flags used by the linker during the creation of shared libraries\n// during DEBUG builds.\nCMAKE_SHARED_LINKER_FLAGS_DEBUG:STRING=\n\n//Flags used by the linker during the creation of shared libraries\n// during MINSIZEREL builds.\nCMAKE_SHARED_LINKER_FLAGS_MINSIZEREL:STRING=\n\n//Flags used by the linker during the creation of shared libraries\n// during RELEASE builds.\nCMAKE_SHARED_LINKER_FLAGS_RELEASE:STRING=\n\n//Flags used by the linker during the creation of shared libraries\n// during RELWITHDEBINFO builds.\nCMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO:STRING=\n\n//If set, runtime paths are not added when installing shared libraries,\n// but are added when building.\nCMAKE_SKIP_INSTALL_RPATH:BOOL=NO\n\n//If set, runtime paths are not added when using shared libraries.\nCMAKE_SKIP_RPATH:BOOL=NO\n\n//Flags used by the linker during the creation of static libraries\n// during all build types.\nCMAKE_STATIC_LINKER_FLAGS:STRING=\n\n//Flags used by the linker during the creation of static libraries\n// during DEBUG builds.\nCMAKE_STATIC_LINKER_FLAGS_DEBUG:STRING=\n\n//Flags used by the linker during the creation of static libraries\n// during MINSIZEREL builds.\nCMAKE_STATIC_LINKER_FLAGS_MINSIZEREL:STRING=\n\n//Flags used by the linker during the creation of static libraries\n// during RELEASE builds.\nCMAKE_STATIC_LINKER_FLAGS_RELEASE:STRING=\n\n//Flags used by the linker during the creation of static libraries\n// during RELWITHDEBINFO builds.\nCMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=\n\n//Path to a program.\nCMAKE_STRIP:FILEPATH=/usr/bin/strip\n\n//If this value is on, makefiles will be generated without the\n// .SILENT directive, and all commands will be echoed to the console\n// during the make.  This is useful for debugging only. With Visual\n// Studio IDE projects all commands are done without /nologo.\nCMAKE_VERBOSE_MAKEFILE:BOOL=FALSE\n\n//CUDA SM target; reviewed device is Orin SM87\nEDGE_CUDA_ARCH:STRING=87\n\n//CXX compiler flags for OpenMP parallelization\nOpenMP_CXX_FLAGS:STRING=-fopenmp\n\n//CXX compiler libraries for OpenMP parallelization\nOpenMP_CXX_LIB_NAMES:STRING=gomp;pthread\n\n//Path to the gomp library for OpenMP\nOpenMP_gomp_LIBRARY:FILEPATH=/usr/lib/gcc/aarch64-linux-gnu/9/libgomp.so\n\n//Path to the pthread library for OpenMP\nOpenMP_pthread_LIBRARY:FILEPATH=/usr/lib/aarch64-linux-gnu/libpthread.so\n\n//Value Computed by CMake\nspeckle_edge_BINARY_DIR:STATIC=/home/xray/Documents/WSVT_GPU_orin_20261010/edge_speckle/build\n\n//Value Computed by CMake\nspeckle_edge_SOURCE_DIR:STATIC=/home/xray/Documents/WSVT_GPU_orin_20261010/edge_speckle\n\n\n########################\n# INTERNAL cache entries\n########################\n\n//ADVANCED property for variable: CMAKE_ADDR2LINE\nCMAKE_ADDR2LINE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_AR\nCMAKE_AR-ADVANCED:INTERNAL=1\n//This is the directory where this CMakeCache.txt was created\nCMAKE_CACHEFILE_DIR:INTERNAL=/home/xray/Documents/WSVT_GPU_orin_20261010/edge_speckle/build\n//Major version of cmake used to create the current loaded cache\nCMAKE_CACHE_MAJOR_VERSION:INTERNAL=3\n//Minor version of cmake used to create the current loaded cache\nCMAKE_CACHE_MINOR_VERSION:INTERNAL=16\n//Patch version of cmake used to create the current loaded cache\nCMAKE_CACHE_PATCH_VERSION:INTERNAL=3\n//ADVANCED property for variable: CMAKE_COLOR_MAKEFILE\nCMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1\n//Path to CMake executable.\nCMAKE_COMMAND:INTERNAL=/usr/bin/cmake\n//Path to cpack program executable.\nCMAKE_CPACK_COMMAND:INTERNAL=/usr/bin/cpack\n//Path to ctest program executable.\nCMAKE_CTEST_COMMAND:INTERNAL=/usr/bin/ctest\n//ADVANCED property for variable: CMAKE_CUDA_COMPILER\nCMAKE_CUDA_COMPILER-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CUDA_FLAGS\nCMAKE_CUDA_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CUDA_FLAGS_DEBUG\nCMAKE_CUDA_FLAGS_DEBUG-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CUDA_FLAGS_MINSIZEREL\nCMAKE_CUDA_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CUDA_FLAGS_RELEASE\nCMAKE_CUDA_FLAGS_RELEASE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CUDA_FLAGS_RELWITHDEBINFO\nCMAKE_CUDA_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_COMPILER\nCMAKE_CXX_COMPILER-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_COMPILER_AR\nCMAKE_CXX_COMPILER_AR-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_COMPILER_RANLIB\nCMAKE_CXX_COMPILER_RANLIB-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_FLAGS\nCMAKE_CXX_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_FLAGS_DEBUG\nCMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_FLAGS_MINSIZEREL\nCMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_FLAGS_RELEASE\nCMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_FLAGS_RELWITHDEBINFO\nCMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_DLLTOOL\nCMAKE_DLLTOOL-ADVANCED:INTERNAL=1\n//Path to cache edit program executable.\nCMAKE_EDIT_COMMAND:INTERNAL=/usr/bin/ccmake\n//Executable file format\nCMAKE_EXECUTABLE_FORMAT:INTERNAL=ELF\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS\nCMAKE_EXE_LINKER_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_DEBUG\nCMAKE_EXE_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_MINSIZEREL\nCMAKE_EXE_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_RELEASE\nCMAKE_EXE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO\nCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_EXPORT_COMPILE_COMMANDS\nCMAKE_EXPORT_COMPILE_COMMANDS-ADVANCED:INTERNAL=1\n//Name of external makefile project generator.\nCMAKE_EXTRA_GENERATOR:INTERNAL=\n//Name of generator.\nCMAKE_GENERATOR:INTERNAL=Unix Makefiles\n//Generator instance identifier.\nCMAKE_GENERATOR_INSTANCE:INTERNAL=\n//Name of generator platform.\nCMAKE_GENERATOR_PLATFORM:INTERNAL=\n//Name of generator toolset.\nCMAKE_GENERATOR_TOOLSET:INTERNAL=\n//Source directory with the top level CMakeLists.txt file for this\n// project\nCMAKE_HOME_DIRECTORY:INTERNAL=/home/xray/Documents/WSVT_GPU_orin_20261010/edge_speckle\n//Install .so files without execute permission.\nCMAKE_INSTALL_SO_NO_EXE:INTERNAL=1\n//ADVANCED property for variable: CMAKE_LINKER\nCMAKE_LINKER-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MAKE_PROGRAM\nCMAKE_MAKE_PROGRAM-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS\nCMAKE_MODULE_LINKER_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_DEBUG\nCMAKE_MODULE_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL\nCMAKE_MODULE_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_RELEASE\nCMAKE_MODULE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO\nCMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_NM\nCMAKE_NM-ADVANCED:INTERNAL=1\n//number of local generators\nCMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1\n//ADVANCED property for variable: CMAKE_OBJCOPY\nCMAKE_OBJCOPY-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_OBJDUMP\nCMAKE_OBJDUMP-ADVANCED:INTERNAL=1\n//Platform information initialized\nCMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_RANLIB\nCMAKE_RANLIB-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_READELF\nCMAKE_READELF-ADVANCED:INTERNAL=1\n//Path to CMake installation.\nCMAKE_ROOT:INTERNAL=/usr/share/cmake-3.16\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS\nCMAKE_SHARED_LINKER_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_DEBUG\nCMAKE_SHARED_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL\nCMAKE_SHARED_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_RELEASE\nCMAKE_SHARED_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO\nCMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SKIP_INSTALL_RPATH\nCMAKE_SKIP_INSTALL_RPATH-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SKIP_RPATH\nCMAKE_SKIP_RPATH-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS\nCMAKE_STATIC_LINKER_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_DEBUG\nCMAKE_STATIC_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL\nCMAKE_STATIC_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_RELEASE\nCMAKE_STATIC_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO\nCMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STRIP\nCMAKE_STRIP-ADVANCED:INTERNAL=1\n//uname command\nCMAKE_UNAME:INTERNAL=/usr/bin/uname\n//ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE\nCMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1\n//Details about finding OpenMP\nFIND_PACKAGE_MESSAGE_DETAILS_OpenMP:INTERNAL=[TRUE][cfound components: CXX ][v()]\n//Details about finding OpenMP_CXX\nFIND_PACKAGE_MESSAGE_DETAILS_OpenMP_CXX:INTERNAL=[-fopenmp][/usr/lib/gcc/aarch64-linux-gnu/9/libgomp.so][/usr/lib/aarch64-linux-gnu/libpthread.so][v()]\n//Result of TRY_COMPILE\nOpenMP_COMPILE_RESULT_CXX_fopenmp:INTERNAL=TRUE\n//ADVANCED property for variable: OpenMP_CXX_FLAGS\nOpenMP_CXX_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: OpenMP_CXX_LIB_NAMES\nOpenMP_CXX_LIB_NAMES-ADVANCED:INTERNAL=1\n//CXX compiler's OpenMP specification date\nOpenMP_CXX_SPEC_DATE:INTERNAL=201511\n//Result of TRY_COMPILE\nOpenMP_SPECTEST_CXX_:INTERNAL=TRUE\n//ADVANCED property for variable: OpenMP_gomp_LIBRARY\nOpenMP_gomp_LIBRARY-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: OpenMP_pthread_LIBRARY\nOpenMP_pthread_LIBRARY-ADVANCED:INTERNAL=1\n\n",
+    "source_and_binary_sha256": {
+      "native/edge_spline.cpp": "ad226b1f699fa80491104bb10e81fe7dcf7a46597fac8eb4e52ba8002c15c70e",
+      "native/legacy_match.cu": "4563d68d83033ae09947b37609b021b6e188c7faa2e39947c98e2c15e93ffb8d",
+      "native/edge_kernels.cu": "b943ecd8c81073cc07b5f3632e7c4f6d967d89ae59ae46aa16f37aa75809c481",
+      "native/primitives.cuh": "c2129b0c49dba4e72c2d992f4548922e75080016f5fe751c35b80fde458f9f13",
+      "native/legacy_optimized.cu": "36a00c782b0b6bf2a7645d11299109d5c8a7d94488f9780e48b290aa475ec71e",
+      "native/legacy_cached.cu": "c530b36a8c09e4a9801762510755c2d5ec72f42608d506218fd8ca834103443e",
+      "native/features.cuh": "ebca2ed19926907f00b5e354f6d2ce953a5b7707fae018d9d476eac676218341",
+      "native/cached_match.cuh": "d51f35691afdbd2f0a5e28c8fb3f4b002ba128667d5135f036790937c9fe653a",
+      "speckle_edge/_native/libedge_spline.so": "090ff70e242745f99c83e4698351a4e53f40c712aaf4790714533ba3ffccee94",
+      "speckle_edge/_native/libedge_kernels.so": "de534dfe637aec7d8f079a587a89f2171c9b89968aaa5805de58c001e36e4e4d",
+      "CMakeLists.txt": "bbf23ed13953e0a1570445e8e86ab39aa827d18c962af445bfc1363ff06fc8a0"
+    }
+  },
+  "data_npz_path": "/home/xray/Documents/WSVT_GPU_orin_20261010/edge_adaptation_20261011/wsvt100_full2048.npz",
+  "data_npz_sha256": "ea7653cbaf8a585210b70cc0bc23443bec5d3943c0d814fd332c32c82a655d3f",
+  "data_npz_bytes": 1182690064,
+  "arrays": {
+    "sample": {
+      "shape": [
+        100,
+        2048,
+        2048
+      ],
+      "dtype": "uint16",
+      "sha256": "80534d45fe6937e857dd4ea50682e2c565bed1d99f9b79eef0a9da34ba4940df",
+      "per_frame_sha256": [
+        "8c5e3eb4ad077bdafdfedd065b3062fd98dedde7b13ec4ed5c7d287119568d23",
+        "f0756957d94eacd4244e8970251223365331c07e8f655017551f523a5083052d",
+        "faf172ac89a924f2eb51d08d74adbbb91964aa3390b79be51d958863c3b37852",
+        "6336dd2b02faed52749dbe0deebb91f64d022b2bdb97ef50ed1481104f7d3608",
+        "1aff5d3a1a13abc4bd5afc7ee4366407a7b58becb99be945175a0df1036c8e6d",
+        "b06ca6b6486fec922f78874c9b2cec1d29647484cb6b8afee3875cc9c1d8ce95",
+        "3eb76f6a23b386299c05ad13cabba11999d25f2cfe7b18056f8da36769f434ab",
+        "53572a29512ecd560547c98c65fcbeea1ce0b1ae64160144c2904d3d99a9c71e",
+        "8ab822a6823c96fef50e87ca6473f6a4cedbc840ba901c265d140951803e90c1",
+        "0473bd27d40f614a1ac3d4d79662f696beeea483a2c2a6896b6fac98527eb042",
+        "51c708e0d68d030ca30d6855b9840299b06c1d771f44ab0981f692c249398d4e",
+        "f54f83533fe73ea1a54448b74399f6e8c2d06be9a0062c18f3af37ae3292c883",
+        "011acc2b3461e22d3f56bcc5a3db1ec567ce5e260e612abf8b373db86f9d5e0a",
+        "ddfee9f2daec9274693f4c3861fd13e74d48e54b8e535ac1096bb5d6ef55f5d0",
+        "07fe65af7bf6578fb2e56bc90ecc446041fb45769c2d28574fc7fa4df0cb3a3f",
+        "1a8dc250230b8ac088bc8c57c8c2a8d2f3e228fe3efc521f6d398cbe1990f7fa",
+        "35693f818f8fa3720d8edb49026485ac274262da4d53b8b14b9e30ab61876ed5",
+        "2b6d63141803847b2c98fc151eff81dc23196bb564319a8cfcc8ed5b865ba6d8",
+        "4b320145b3b7fd103e973fbc74eb53ccc3e9576e74ea838b4160f91171881dcb",
+        "324df4f7b1a41ad556c9f6b9bdd761536ec42964ad14357df262644b0a552f25",
+        "3ca75e37cc7b5fc0847bbb7d384a33ac6a82115a7e1ad502d544648351a5d89f",
+        "0b11f9bb2ed657070e8fa2ec810fba341c45d614064fb77fff5d7e5d25021628",
+        "ba3e235464d96d715a3e51854892fb858e5aa971ee1502eab129558e8e2f5cae",
+        "d6de50ddd7b181e9cfca2d18b259d443e4d69aed1adc1bed8990781fcde6d911",
+        "93995e211f24fb90d3ae5fe1762eac61953cdcf05a24d3ccd51769d653757e4f",
+        "e86e5fa626387fef254a893dc46217d457873e04702d98afa4ea22502f212410",
+        "fdc1dd4e299ec82c6d378e43ccf616286963a22992873d0abb651634842982de",
+        "ec50eb9e513503dc557fbe504067cc3bd8b8cce38e00f9172381d1cfcdd1b98e",
+        "d48a4addb75ce13e7cdd73fff5771d493b07e47e9ef3a8b2bbc459029eca4b90",
+        "57f8d900c248dc18e9db4fb26c0f32c5d647e0683e0bd28995d2d9506fadc285",
+        "43d8ba361317ea31a57d6954a0ce25a3dc0b0046387673b81bf0a31670addbce",
+        "0c20e0743183dcd3bd4ce251c19acad5c4088043a13c24e5583318c065eeb9af",
+        "046930da5f6859cd9bd976cce3ad747c4100c1b53c1e636fea5bce3e3639aec6",
+        "4cb41390513a87077ecd21f63bceb4b61ca5fd91a7e882d31f5f00ff0e59fa6e",
+        "10190420edd9f6564c88b7829702c7d163f1e4bfa638d814ac849627dfaf9421",
+        "4a1f912411bcf2216d2b4b40fccdbc9a47e4a394fd207960e50e54ff9db68fe2",
+        "3e063842d42fdc2008982a5bcccd4f0443d901165db496c29c1bd5d454e3ea25",
+        "193bba11d581b89b3d65ed1883f9678f50ec5cc2bec16c1525d80b5f0c523f0e",
+        "f61aaebdb46cfc21c7c642e40a457ce4f5252721c9a0cf70535064c717a66424",
+        "01bb39c8f3da39007982e2e85550a072965553519aa2adc66564f4a280c0ee8d",
+        "fa65a813e04be6650cf2e5cefd2feb6f86eeb089cded710dc5ce05bcb4488f30",
+        "01a36a7394074ae18e3e3fb1286a35639c154187ea529ecf3c107a1e3fb86239",
+        "bca69a3328cf82ee32806d6a2a05a2e33d5c7ec6240cb0ac5c1bd8b20337607b",
+        "fd8e214e00aab681b7b587bf839c5641e63c980e856118bc3048d20c90b5f382",
+        "6d79e6b98cce366d71bd0f50c715f42684623b3b0e46fde19cac5937afdf796d",
+        "e6922b4659d66bcd910d3f7e3584a5ab634a67988b71f18ed04a0660d6f25b5f",
+        "bf50d9c933890a4bcf2001b07e76073d09a937f7329b7397088ea4d36ba52dc6",
+        "5c4751a2bd74f51dfa22cd4dd7edfce01febfdd556ef672c81009b8fff82eb6a",
+        "0a1d00581fbb934dfef84a9a1516e5ab08c413fc3953620f9486eab429c69bd4",
+        "854a5749284cd84ac134baf001f952605c0c0df843c3740c5d109d5f9c9ec1e5",
+        "456cc3af060a30dbfd7c315ce9f27fdce30982345b57f1edfce4f32a680a2432",
+        "e1595b17da21410c4ba6b685090c5a7487c2e3c546031c2c9547cd061a051cf5",
+        "5fc565adc53c8a886c1b670d9608eec917f6ccb05bbd1fb2ab297199f4e50249",
+        "f7319aade72d4ed4a9841ddd74073113f0527f322ceed1d7435f881668caf0f8",
+        "1c1d733a4822674b00f021f41663951dd2cf96bff6b3e8a0bc83c0d9a908ba87",
+        "9a2791afdbcb0a3a38e3368d89f783fbf2663139ba1a03c0f4cd93d3d138e6d6",
+        "7bf36816e130cc3dd4f80d59754bb5789822b219d6b6d675ed1f7ce683529c26",
+        "d24127a0e068a3babbc5174bda76844da9f613f9f5481b1ed84b7607d53ec606",
+        "996eab37b20ecbfc8b26c38011676fa09d2dc530f31e23bfa7249d28e48528f5",
+        "d675c826011e9d2da200cf4d0a0b41cc9e3a170910c4016d788030c2ca58b723",
+        "fa68cf0bc4ab7a282a2deeab4731142053cd5e58d8259e66e95176fbb946ddf7",
+        "5743538a948db7fff5c3fa547104a2ca7a8493c76f67ef2c95907d690459e61c",
+        "9f9eb1aad4d8708337391951a5e4bff7fb4d12c7b47e31b51780f921e26f3169",
+        "799221bb7105a372123a6d87febd01539f43dadd9c279412c082dd67fe4aa8ad",
+        "df16acc9ddea3bcc68450a37bb20c7bca93803907e94355d48918257a647b7fc",
+        "f2a6a7f030df17b98530e3e584b66bec2486716e25b20401d9d5458ecc78e035",
+        "369c9cb5b17026a81b310d54868872446c9623960664fb357bfe8af154647572",
+        "922aa81107acaae26c9bf6b23a1df59d3bf6da884c891fbce854cfc015afd712",
+        "2ffa8a7c6533f47866901cc8b0486b9e7954217ff44387c2db9ebc2744f0c8e4",
+        "8d81a49d718c340bf8161006aca14d9a4fb5cb5a75e69db28691cc43647ec2ed",
+        "ac82b296a250e4df118c82614fe1619bd26331d27cc42e6a5298da4526d2d31f",
+        "99a0b35b2d05f4d5411401784d60f0c25aa0f9df44159da2f88e0ec4022d86d5",
+        "3afa3794c6d488572b31d8db188a58149149d12f887a7d3f53a6b2d9e199284f",
+        "ad85db2c94b118b4c93b13ce6f05948e644cc071c6f394963683584e70bd8770",
+        "aa72e659c957849e2df47eab5be7f1ecd5868fdc17d6149e4942d7448d7165d5",
+        "109e70b1f7b33d3ec46a5e143870c0915b057f8b619df465fb5e07c025cdff84",
+        "0011449e58f60a76a790895a38b77f7585c32c2fc0a802c4a15a4a37afb11f1b",
+        "2e38e590c25bfd81f4d6d93cc744d4e3d3fb38e1f54c22cab038d41122d0935f",
+        "8db4b68c011524e04e961231d43ae0464b1c8a1be9a1e46c04da34034f14b5e4",
+        "dd737726abd42c90dad1e67588ff61b4e726806ec9c49f796cbf44aa8a1a6eab",
+        "d84f25ad9302dd44765bf42ed0a2cbf65a05fb8c900732b521e10a8012ddabf8",
+        "b966a50f3d25e0aef5c33b2f5c8c6568ccf2cbd23a39dff840d2a52f559f3f14",
+        "5f6892137f6a96c5bbfb2b18626926c9c17c1c6dceef95f0f441752238337469",
+        "77d70fca36a9e1c0200f78c669ea6c3b8efaa2d66c6c16e6684bc70f3a3544f5",
+        "d325ce49da0a060ceeb6ba8122b93118095f4c18993bcdaf51653560bd5e6c42",
+        "ae72ff5877c940d6e00668289613ad6cfba903388f155eb31a2622effece0853",
+        "84709d4c23d4a33f3eab11df3773908337e12d3113fff1a20542744bde2d7460",
+        "a5d015d609f897550fe317435586d4023164b994b53ea45f2d6c89155260fd64",
+        "830cc27ff52faa7ec7b1b5bcf0dfc4b2f81a7c9d7441bbe4b994ad62ef4faabb",
+        "e37f416545584118399dded38a0b44f0e64efe999bef0271cfa7d536385061b1",
+        "49bb385b60ae05c61827a7d479bdb9a7da2b403fe51b0d285ef8a6953a0ed062",
+        "4dc23f13bd6889f9ed7e2a64446a2c561a6c3aca2828050d57be329a2aacc6c7",
+        "af040c610fd0ae1cdf6d1c75b44e9238fa9a06ae836ad07b889a4f89f66edff9",
+        "8f0080d92ff941460e81b3e894f0b6e19ebc055476170e0f1341357d890fb230",
+        "b203f131f6314c3e844f2c1269345c9db9fe799b893d6c1087fd160219e297e6",
+        "9cb0a8c4511301edaded3088a0e1a721acb7e4d8fd1892df88128d6af453d3fc",
+        "44241deb5892f2f51463d678d2ae1cd195b44ac3c1994773167d6e6cc95779e4",
+        "ee89f94febf07da136273ac04a7ade5c5996b9e2252c16e268179b251a913dea",
+        "79fad267ecf0fa315fc15c68a3fc064a15b603682c6ccfe98ba07fcd67914f44",
+        "a4ef52aa24cffd338a67ca78a8ec86068394e044f81f022ff8a8c4d2ec5e9839"
+      ]
+    },
+    "reference": {
+      "shape": [
+        100,
+        2048,
+        2048
+      ],
+      "dtype": "uint16",
+      "sha256": "414af5ce3a38ee5c9aa0a7a15d8a91917b95134ba236998bd80177909a2e618d",
+      "per_frame_sha256": [
+        "f4951c79b3dff6aa1619f9b13688c985d4e5f66c55b9b80f16fee6450597fb10",
+        "290f7b48227700e8c3f333a957ab17941bbab9f48c052e613597524d4c0e7e30",
+        "7f5708365886f478f55bc6fa61fcc37424ffdeb448f9e00b879fdd497eb1357b",
+        "0ef5c34a174ce8059a141e2fc9e7c04c427d22c888968dae90e7ac42fabbdc99",
+        "fa564ed471c711a1788ff0981bfb3ba046d7fde9e79d6bc49c78808d2a35217d",
+        "941fb2c95a5f94a9ef9df839ff0a4fcc801a4c9ae8effff0c9c942de84ce3078",
+        "23fd3f4d7d9acef0baa02780b5c5d3353dd01266164c4d4f2014f5fe09e8f2a8",
+        "9ebc5819481d9bb2098cdbdfdcf1e5ac92b77a27e293621c03a29ce014d7994c",
+        "f6b99780c80bf0cf9c7e0f25b5106abfa746f4ef36a5d6557bcc3c92dfc03b1b",
+        "c42a5b27367744eccaa5a877c0332b584553180a269cf9ee369eefb1498f260a",
+        "6d4cd456b0c20dab2fe84c0324f04bc063694ada01053b30ec556fb53cba3bb2",
+        "e3900c1a49acb1d4ee8b7efeaa36dd04788a5316dfc93af633d2dd4a706af344",
+        "a3f02e21f29bc40d13814ed5576033bedcab8ea8dbd32a8429b2921f9efaed54",
+        "2c62afd81881e2f8d687339526af460d1c914c7482191618571cc0c7be9831b2",
+        "0d8dd521fcfbc4d4844987c5ee1b436e2d017361e71a8dba2e3eaf01136fa5ce",
+        "17fb7d2dd80055c951de8d5825fbc6a00583deaecf79a5a51776b37efbdac261",
+        "a373003d1b49d952f9ca27bc6ff2ae3fea99901706c9250fd1c51efceaf0e79c",
+        "c5749443c0167ba3e6c01735d8db74cc3cbc2a7aac57a0b2faf72595ea455cbb",
+        "81b1fe1a6346efb8a49ade2486bf5cf0e8a6bc1db4c0874a33eecb330a7e9146",
+        "0f285ec866074adf2d8ce649faf1e92f5a827713534ad91aa99554d5e26122c6",
+        "8a485176573ca982bd2f503412a9e6b8d29b4b0827a7d2e897b27949ba4f166b",
+        "4cf234188bbcf457fefe484034e4e6392a31b95062f4fbe38e8f3a37fd343f9f",
+        "35cc2fb47512f1e5220465f36bdb3ac11e1101cd0b23ab9f4eee02118788c26a",
+        "6515d62643d0dce066b443ab93dcca78ad370a17a60b5a6103ea0caa94bd7447",
+        "a161c5f279693078363663b7505e11fc721d78f98ed31379eee9bfa56aaf5ed7",
+        "0d3d76a233fc053073ebc17daf4759ab6ace254d0aa3e607683ee0f0b9b6efe0",
+        "52d3c10297d77d1c27f4dd3fb107682f6a7f738dec5a04213c31e9d92262e73f",
+        "88d76462f0916fc9104c340b1e1a61738537ca9ca9a755b9b3d7cfcd269f7146",
+        "d2b270364da83a5ef47454ecfc9cc1c23931e72ac64aedaad8cfa51810d33b77",
+        "cc382d83e2bdc6949081b4b0442353de50a1cbbcce99424bd0723c063279c793",
+        "d022b871ea2317068136b2d4512ef28edea81d7015cdafa95f1121d37ed6f1b6",
+        "10d5828fb198081820d25b654f992d2186dd910f37d99ca6c2516123b13aa3f8",
+        "3b4fe5b4fc004890fac0256fcde7c4cdcdbabc2151fecc87346f125033a013f6",
+        "90a15f13f95ec019b9bd3b2e7876e20c9c519d8732ad19813e9c48b2bca68156",
+        "1e4db1e43064497157ed52ba5c2ef8f5133e407e13c406b027b2e87836370789",
+        "008a6fe857fd678466d215df61ea6e0132b1953f9b6af46a0c6618242e0486f7",
+        "52d9c63fe8dd22917c41cc04eb681fb421da44d3b6f900c56145e1fe819039b3",
+        "6e60a202f7e32d37a8e375b0e240ccfa056c81b6a088609a14188348a9012454",
+        "b0409129a5ef3407f050198fa5af0f1a1dcc3e8ddb3fbf0c4bdd4afa52fe3349",
+        "b31df5e6687c2d49b1a7f029397c0f8d64bede0cf0f402f7cadbcab1a6d9ca8c",
+        "47c61bfe74230ee1f524c780d9d37650994e6643cab99ca6c63f30e827422433",
+        "5871f6019e1180f3e8c74af109bb29e19d75459103e4dce8b835effab4c27a21",
+        "52ce204a2e234340e8622381e9b1c46ca6e4673e2bc80db59f0d82df46d8389b",
+        "09de00ad21ab2609c2e4bcaa24f04b02c91582a084baf2886220b3a851efbc2b",
+        "7d21cc1bbdd6396a20a96d398a77cf5221adeb4748709519fb7c0bad64633daf",
+        "bbfde15cce530f25f03a8a7ddb7175dc8bb954723e4e5e8766d2b42c01414eca",
+        "f40fa078db875736f3898611caac1f930003d758189d09c793ed52572be8bed9",
+        "1fea1df47f20894f8de9b31dc25514f7fc57e6a54ba8b1e3909430aea14a0c99",
+        "169e0292587ff96ba11c6eb58343fbdb3d1b47c7d694a3e5e7343d59ce058ea4",
+        "e8f84ebcf36b2cadb74d80e51b9f7ca3e26e8978feb73371bdb742da6b061f6e",
+        "7276382719c10d73fb44f51a19f071199c62b44e6010a7b8beb09daa82eae7e2",
+        "796abae6ad88334634acb86a1d38622f5764e7b3d7e6fc614a9afdd935dcfd09",
+        "346a725f4c58ec87d043c959c6497b232a8129530f4b6747533a953b5acff2f1",
+        "84c6b772e7f4d8de7ede35ca612a7e61510dc86c6c43278849db9d18308066d9",
+        "7b73aac2fc4b5d9ad12e9183b03aa70bbc773e28b9c33252bb2940170e1089df",
+        "aaadf1bb5ac26f342cb8d38d19ab44c5542a49ca52ea08b7de24a414bcf5d387",
+        "95752d0ebed02feb4d6362cf36037efbd79520e61465ef34afd00e0474c66ffc",
+        "d20bdbdcd32b31f7d942bd5f59543e3f20922eddc6e0b73daf6e71aa932cfc97",
+        "b5422ae419a5c4fb09c747704645cc6be692449081661a902b52625708891af1",
+        "c10ea49d34817c41313416bdf6a5da33c84d6ccfb37fc8c2907c7023cf2ec19f",
+        "0cd8222be3b9b905d66e4af979c415b553863563532726423b370fbc79321050",
+        "1e55baf04114783661b42d74863600b410c035181068873e9540c85a9d305535",
+        "6b149d209436483f20d4812ed8f89520f32ad37f5a30eaecf73b0646837d2d99",
+        "090db4618d65a2f7c9b422c0ef2ecd2db9176c4884c6ad9aac69345e0297da29",
+        "04843012edead2f816b8bd7a91e5b6adea9e5213720cf13360089ad9883a5c49",
+        "af4df422cc44f080624a193c19d408fae912d663de6ef2ee88c320058bd04c74",
+        "9657f4274e681611744cab334542240e5ffe8ea03655524994969967f4197064",
+        "7c51d8a607a751e4dc80d31d357779a65b5fe17a4d5906465cdb4658a76d853c",
+        "311942814815c07e6f2872a1254e2756ab96268aa5f00d0aacc52950717fbc10",
+        "78749227f0f315768c0373da2bdfe9cf5c8f7d6ef15d77de88b128c72b27e836",
+        "d60d79e1f89f1493e063b6051eb16216e7c8993b189a4b378d65d6ad83cd6904",
+        "2eb76762bda5126fd80561aabc9fea46cd376a3b20243bf75eea308a65382bdf",
+        "7e3ff9e56c9e1b706ad6e0df04484803262caf2660bcf45855fe619f42890080",
+        "521880e7212800c2de098b4af5fa6abd6a16e1073d35f39cc06b5a495d0e167b",
+        "cae8ed37c8b2283cee7bccc9a10b1a9e3bffca8d796ec859b36fc0dd1e51f145",
+        "1a3111264dc6f596df15f6c75e2d5d80ac7a3fd5ce2e87dca1a3d27c423b7dee",
+        "7f157b8e46d58ab831e43cb1f0dbfe53c683509cdd49350fc5e7f9e8f0a14d95",
+        "29982d3ec65f8c5efa3d82d8379fa6f7fd236282cce91a8ef3bbfa33b79c55bf",
+        "aa7aa92f2dc218ec91352aa73bc2f8896bf022237e1ee2c7ff4cce94545ebcfd",
+        "64d8069ae9b301843260a4d26c5ee1ee11a704312b27fc851b3314ff19d373e6",
+        "474db81087895346ad1fd46f9c09940f1956389657cad5d398cf82643b5f6b7a",
+        "711ebee3fbf1ee1bfef271041b688142c1a3aaf60c09b4c57f853dad620c5a17",
+        "c704159e40ac073f473f3aad222fc8d2df0cbe0f5d7afb142e3133d306cfd0b9",
+        "154eecd93d708ce4567875b0bb63c68c9a280596d664915d2f13b197523ee85a",
+        "4edd6eca05fdceea3d4bbb3f00459f9d64b5601d42c5bb0b751e17fa5c385ace",
+        "e913166589166fcf28fdccf5cb2dfa8c582a92d2d84bca934e8803dc73cca69e",
+        "c00355f814664bdb1c7f73550a9d82c440e27954e55285b0060088e218f9b7c4",
+        "8e78554437dbe8799db1269afae8527b2e654007d9230b75b8ef6776867845d8",
+        "8e00de3a870416793d6aac7cbbff79dc71a68faa00cf7c17c8c0faf90cd52b20",
+        "8bb7007cab74ac55870e416b90db53b06b31110f4e1f29bb3d5b61639d467e4b",
+        "32f4aafa386ea321061b636a8d1f5daa575dd7bb7382f1dd98b8bda23e40e929",
+        "edbeeffb4727c986e059efa13d5c1a29fee4831c49025770fe40df53b8c1e160",
+        "d0aed8979929aa652bbab4ea2cbae995ada270c59f626c694b3dfed45c4ee85f",
+        "9ae7cc0012ea2af1c50dabdf27b209fa2fa866c0a151351a7192f7e4ddce6d9f",
+        "d7571faf813f8d3e70003b791442f0910053fa382347044dcd02ec6730f4f9eb",
+        "d0b390a7516f3fe8e816e1ae15bf28bb6605188143b731f5a598df975695a986",
+        "291da9e9812f7336c56a9a48f5fd815f4e557e4a33dfac7ba86a913cc3ec75ac",
+        "7cf628c30bc0fbfdab7981900f43001937de0cceaf971e445387b75b9f0799ed",
+        "ef90b7a9be45289b2f5eba66d99abbd3a3d289f71db6864fb9cf5139f91e7bdc",
+        "b4411d209b59305758eb4c9846882cd6131d693afc38a896f10ea88eb63ffbcb"
+      ]
+    }
+  }
+}

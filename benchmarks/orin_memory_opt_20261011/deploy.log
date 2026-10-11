@@ -1,0 +1,383 @@
+['.gitignore', 'baselines/cpu/CMakeLists.txt', 'baselines/cpu/cpp_original_snapshot.tgz', 'baselines/cpu/cpp_source_manifest.json', 'baselines/cpu/cpu_driver.cpp']
+{
+  "pass_check": true,
+  "matching_subpixel_spline_block_unchanged": true,
+  "postprocess_block_unchanged": true,
+  "phase_block_unchanged": true,
+  "manifest_ok": true,
+  "files": [
+    {
+      "file": "pyproject.toml",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "README.md",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/AGENT_HANDOFF_CURRENT.md",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/AI_PROJECT_BRIEF.md",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/evidence_registry.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/PAPER_ROADMAP.md",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/source_check_windows.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/source_origins.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/versions.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/VERSIONS.md",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "native/edge_kernels.cu",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "speckle_edge/api.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "speckle_edge/cli.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "speckle_edge/config.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "speckle_edge/runtime.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "speckle_edge/__init__.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "tools/build.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "tools/check_sources.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "tools/release.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "baselines/cpu/cpp_source_manifest.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "baselines/legacy_wxst/wxst_orin_v2.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "baselines/legacy_wxst/wxst_orin_v3.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": ".gitignore",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "CMakeLists.txt",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "benchmarks/README.md",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "configs/wsvt.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "configs/wxst.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/ARCHITECTURE.md",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/OUTPUTS.md",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/VALIDATION.md",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "native/cached_match.cuh",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "native/edge_spline.cpp",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "native/features.cuh",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "native/legacy_cached.cu",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "native/legacy_match.cu",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "native/legacy_optimized.cu",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "native/primitives.cuh",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "speckle_edge/outputs.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "speckle_edge/provenance.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "speckle_edge/__main__.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "tests/smoke_orin.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "tests/test_contracts.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "tests/__init__.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "baselines/cpu/CMakeLists.txt",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "baselines/cpu/cpp_original_snapshot.tgz",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "baselines/cpu/cpu_driver.cpp",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "baselines/cpu/README.md",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "baselines/cpu/wsvtConfig.cmake.in",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "baselines/legacy_wxst/legacy_complete.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "baselines/legacy_wxst/README.md",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "baselines/legacy_wxst/wxst_orin.py",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/validation/build_01.log",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/validation/build_02.log",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/validation/cli_wsvt_report.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/validation/cli_wxst_report.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/validation/contracts_orin.log",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/validation/doctor_orin.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/validation/entrypoint_checks.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/validation/legacy_build_01.log",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/validation/native_build_orin.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/validation/packaging_checks.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/evidence/cpu_compare_20261011/evidence/final_summary.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/evidence/cpu_compare_20261011/visual_review_20261011/diagnosis_summary.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/evidence/cpu_compare_20261011/visual_review_20261011/gpu_coarse_actual.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/evidence/edge_adaptation_20261011/evidence_02/edge_bench_02/report.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/evidence/edge_adaptation_20261011/evidence_02/wsvt_baseline_full_01/diagnostics.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    },
+    {
+      "file": "docs/evidence/edge_adaptation_20261011/evidence_02/wsvt_input_01/report.json",
+      "baseline_preserved": true,
+      "candidate_registered": true
+    }
+  ]
+}
+-- The CXX compiler identification is GNU 9.4.0
+-- The CUDA compiler identification is NVIDIA 11.4.315
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc
+-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc -- works
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Found OpenMP_CXX: -fopenmp (found version "4.5") 
+-- Found OpenMP: TRUE (found version "4.5") found components: CXX 
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_CUDA_ARCHITECTURES
+
+
+-- Build files have been written to: /home/xray/Documents/WSVT_GPU_orin_20261010/memory_opt_20261011/package/build
+Scanning dependencies of target edge_kernels
+[ 50%] Building CUDA object CMakeFiles/edge_kernels.dir/native/edge_kernels.cu.o
+[100%] Linking CUDA shared library ../speckle_edge/_native/libedge_kernels.so
+[100%] Built target edge_kernels
+Scanning dependencies of target edge_spline
+[ 50%] Building CXX object CMakeFiles/edge_spline.dir/native/edge_spline.cpp.o
+[100%] Linking CXX shared library ../speckle_edge/_native/libedge_spline.so
+[100%] Built target edge_spline
+Built and recorded native libraries in speckle_edge/_native
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.027s
+
+OK
+DEPLOY_COMPLETE

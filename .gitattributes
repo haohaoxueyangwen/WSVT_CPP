@@ -1,3 +1,7 @@
 # Preserve the exact reviewed source bytes and the SHA256 release manifest.
 /edge_speckle/** -text
 /edge_speckle_optimized/** -text
+/benchmarks/orin_memory_opt_20261011/** -text
+/benchmarks/orin_memory_opt_20261011/comparison.csv whitespace=cr-at-eol
+/benchmarks/orin_memory_opt_20261011/**/timing.csv whitespace=cr-at-eol
+/benchmarks/orin_memory_opt_20261011/actual_cuda_flags.txt -whitespace

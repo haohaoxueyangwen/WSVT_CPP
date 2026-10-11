@@ -1,0 +1,1 @@
+Incremental evidence only: Orin GPU engineering benchmark for original/speed/low-memory WSVT. Report separate solver/API timings and CUDA allocator vs RSS scopes. Exact old-GPU preservation is not physical truth. Do not insert these timings into EPYC/Ada tables; keep hardware-specific. No original manuscript has been edited.

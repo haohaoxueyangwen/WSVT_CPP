@@ -1,0 +1,1 @@
+Completed user-authorized BB11 uint16100x2048x2048 benchmark, half10/coarse5/fine4/L2/I1/cut1/noDF/GPU spline/host2. Original0.1.0 untouched; optimized0.1.1 isolated. Seven fields and four descriptor hashes exact. Power/clock settings unchanged. Further low-memory kernel tuning requires a separate bounded experiment; current preset measurements remain frozen.

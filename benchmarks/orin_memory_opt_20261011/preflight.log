@@ -1,0 +1,28 @@
+{
+  "original_source_manifest_pass": true,
+  "arrays": {
+    "sample": {
+      "shape": [
+        100,
+        2048,
+        2048
+      ],
+      "dtype": "uint16",
+      "sha256": "80534d45fe6937e857dd4ea50682e2c565bed1d99f9b79eef0a9da34ba4940df"
+    },
+    "reference": {
+      "shape": [
+        100,
+        2048,
+        2048
+      ],
+      "dtype": "uint16",
+      "sha256": "414af5ce3a38ee5c9aa0a7a15d8a91917b95134ba236998bd80177909a2e618d"
+    }
+  },
+  "original_native_sha256": {
+    "speckle_edge/_native/libedge_spline.so": "090ff70e242745f99c83e4698351a4e53f40c712aaf4790714533ba3ffccee94",
+    "speckle_edge/_native/build_info.json": "c468e5c846ada2a32bf6ed2081a134ea40c323448c5ce4566e09d7e30c0d848b",
+    "speckle_edge/_native/libedge_kernels.so": "de534dfe637aec7d8f079a587a89f2171c9b89968aaa5805de58c001e36e4e4d"
+  }
+}

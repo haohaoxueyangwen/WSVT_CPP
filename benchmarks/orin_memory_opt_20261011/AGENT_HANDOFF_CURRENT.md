@@ -1,0 +1,1 @@
+Independent Orin comparison complete. Original/source/binaries preserved. See README.md, comparison.json/csv, smoke.json, summary.json, native build receipt and figures. No subpixel change. Speed mode retains old solver latency; low-memory mode trades ~15.4% longer solver time for ~33.8% lower allocated peak. No production default changed by this experiment.

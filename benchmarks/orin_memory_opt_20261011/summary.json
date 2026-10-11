@@ -1,0 +1,977 @@
+{
+  "original": {
+    "profile": "original",
+    "summary": {
+      "solver_s": {
+        "mean": 1.3887527577986476,
+        "sample_sd": 0.0011943681384013146
+      },
+      "api_s": {
+        "mean": 1.428376018407289,
+        "sample_sd": 0.0024504180368710746
+      },
+      "reference_s": {
+        "mean": 0.3837621378013864,
+        "sample_sd": 0.0008728375483638753
+      },
+      "sample_s": {
+        "mean": 1.0049906199972611,
+        "sample_sd": 0.0006058637035345352
+      },
+      "download_s": {
+        "mean": 0.039353727200068536,
+        "sample_sd": 0.0025026308291903735
+      }
+    },
+    "memory": {
+      "persistent_device_bytes": 6955128752,
+      "cuda_peak_allocated_bytes": 7061602304,
+      "cuda_peak_reserved_bytes": 7090470912,
+      "cuda_current_allocated_bytes": 6960939008,
+      "cuda_current_reserved_bytes": 7090470912,
+      "process_lifetime_peak_rss_bytes": 3144978432,
+      "scope": "Allocator peaks reset after warmup; includes initialized session and all five pair solves. RSS peak through end of formal solves includes imports, input decoding, initialization and warmup, excludes subsequent output saving/descriptor verification. Shared DRAM metrics overlap; do not add.",
+      "sampled_formal_peak_rss_bytes": 3144724480,
+      "sampled_formal_system_used_bytes": 16937598976,
+      "system_used_before_process_bytes": 11326926848,
+      "sampled_formal_system_used_delta_bytes": 5610672128,
+      "sampled_note": "25 ms nominal sampler, lower bounds on transient peaks; system metric includes other processes/cache and is not GPU VRAM. tegrastats 200 ms recorded separately."
+    },
+    "warmup": {
+      "solver_s": 1.5200396179861855,
+      "api_s": 1.563462526013609,
+      "reference_s": 0.44577108198427595,
+      "sample_s": 1.0742685360019095,
+      "download_s": 0.04319679198670201,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 1.0742685360019095,
+        "call_with_download_s": 1.1174653279886115,
+        "reference_prepare_s": 0.44577108198427595,
+        "gpu_event_s": {
+          "input": 0.09566390228271485,
+          "transmission": 0.002039328098297119,
+          "sample_front": 0.28837945556640626,
+          "coarse_match": 0.12095577239990235,
+          "spline": 0.023045919418334962,
+          "fine_match": 0.45677719116210935,
+          "DPC": 0.003216480016708374,
+          "phase": 0.08350991821289062
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 0.0001283210003748536,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load": [
+        2.87,
+        0.94,
+        0.97
+      ]
+    },
+    "repeats": 5,
+    "records": [
+      {
+        "solver_s": 1.3876870610110927,
+        "api_s": 1.4287760490260553,
+        "reference_s": 0.38328059602645226,
+        "sample_s": 1.0044064649846405,
+        "download_s": 0.04081362500437535,
+        "detail": {
+          "kind": "wsvt",
+          "front": "baseline",
+          "spline": "gpu",
+          "input_dtype": "uint16",
+          "solver_s": 1.0044064649846405,
+          "call_with_download_s": 1.0452200899890158,
+          "reference_prepare_s": 0.38328059602645226,
+          "gpu_event_s": {
+            "input": 0.09361039733886718,
+            "transmission": 0.002027231931686401,
+            "sample_front": 0.28841720581054686,
+            "coarse_match": 0.1209323501586914,
+            "spline": 0.023040704727172852,
+            "fine_match": 0.4568417358398438,
+            "DPC": 0.0032183680534362794,
+            "phase": 0.01559887981414795
+          },
+          "spline_enqueue_or_cpu_handoff_wall_s": 0.00010428999667055905,
+          "persistent_device_bytes": 6955128752,
+          "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+          "outputs_owned_copies": true,
+          "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+        },
+        "load": [
+          2.72,
+          0.94,
+          0.97
+        ],
+        "repeat": 0
+      },
+      {
+        "solver_s": 1.387315280007897,
+        "api_s": 1.4279985670000315,
+        "reference_s": 0.3824736730020959,
+        "sample_s": 1.004841607005801,
+        "download_s": 0.040393042989308015,
+        "detail": {
+          "kind": "wsvt",
+          "front": "baseline",
+          "spline": "gpu",
+          "input_dtype": "uint16",
+          "solver_s": 1.004841607005801,
+          "call_with_download_s": 1.045234649995109,
+          "reference_prepare_s": 0.3824736730020959,
+          "gpu_event_s": {
+            "input": 0.09356531524658203,
+            "transmission": 0.0020690879821777344,
+            "sample_front": 0.2884778747558594,
+            "coarse_match": 0.12111555480957031,
+            "spline": 0.023009023666381835,
+            "fine_match": 0.456882568359375,
+            "DPC": 0.003218688011169434,
+            "phase": 0.015437472343444824
+          },
+          "spline_enqueue_or_cpu_handoff_wall_s": 0.00010204900172539055,
+          "persistent_device_bytes": 6955128752,
+          "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+          "outputs_owned_copies": true,
+          "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+        },
+        "load": [
+          2.72,
+          0.94,
+          0.97
+        ],
+        "repeat": 1
+      },
+      {
+        "solver_s": 1.3901133639737964,
+        "api_s": 1.4308832770038862,
+        "reference_s": 0.38409842998953536,
+        "sample_s": 1.006014933984261,
+        "download_s": 0.04049432501778938,
+        "detail": {
+          "kind": "wsvt",
+          "front": "baseline",
+          "spline": "gpu",
+          "input_dtype": "uint16",
+          "solver_s": 1.006014933984261,
+          "call_with_download_s": 1.0465092590020504,
+          "reference_prepare_s": 0.38409842998953536,
+          "gpu_event_s": {
+            "input": 0.09534896087646484,
+            "transmission": 0.002064768075942993,
+            "sample_front": 0.28845455932617187,
+            "coarse_match": 0.12097913360595704,
+            "spline": 0.02300796890258789,
+            "fine_match": 0.45679794311523436,
+            "DPC": 0.0032172799110412598,
+            "phase": 0.015451264381408692
+          },
+          "spline_enqueue_or_cpu_handoff_wall_s": 0.0001032650179695338,
+          "persistent_device_bytes": 6955128752,
+          "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+          "outputs_owned_copies": true,
+          "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+        },
+        "load": [
+          2.72,
+          0.94,
+          0.97
+        ],
+        "repeat": 2
+      },
+      {
+        "solver_s": 1.3893278180039488,
+        "api_s": 1.4297784310183488,
+        "reference_s": 0.3845641319931019,
+        "sample_s": 1.0047636860108469,
+        "download_s": 0.040171631990233436,
+        "detail": {
+          "kind": "wsvt",
+          "front": "baseline",
+          "spline": "gpu",
+          "input_dtype": "uint16",
+          "solver_s": 1.0047636860108469,
+          "call_with_download_s": 1.0449353180010803,
+          "reference_prepare_s": 0.3845641319931019,
+          "gpu_event_s": {
+            "input": 0.09346015930175781,
+            "transmission": 0.0020651519298553467,
+            "sample_front": 0.2884783935546875,
+            "coarse_match": 0.12112838745117188,
+            "spline": 0.023004863739013674,
+            "fine_match": 0.45689993286132813,
+            "DPC": 0.003216223955154419,
+            "phase": 0.01543235206604004
+          },
+          "spline_enqueue_or_cpu_handoff_wall_s": 0.0001035219756886363,
+          "persistent_device_bytes": 6955128752,
+          "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+          "outputs_owned_copies": true,
+          "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+        },
+        "load": [
+          2.5,
+          0.93,
+          0.96
+        ],
+        "repeat": 3
+      },
+      {
+        "solver_s": 1.3893202659965027,
+        "api_s": 1.424443767988123,
+        "reference_s": 0.38439385799574666,
+        "sample_s": 1.004926408000756,
+        "download_s": 0.034896010998636484,
+        "detail": {
+          "kind": "wsvt",
+          "front": "baseline",
+          "spline": "gpu",
+          "input_dtype": "uint16",
+          "solver_s": 1.004926408000756,
+          "call_with_download_s": 1.0398224189993925,
+          "reference_prepare_s": 0.38439385799574666,
+          "gpu_event_s": {
+            "input": 0.09414015960693359,
+            "transmission": 0.0020683200359344484,
+            "sample_front": 0.2884691772460938,
+            "coarse_match": 0.12101952362060547,
+            "spline": 0.023018400192260743,
+            "fine_match": 0.45689279174804687,
+            "DPC": 0.00321776008605957,
+            "phase": 0.015427776336669922
+          },
+          "spline_enqueue_or_cpu_handoff_wall_s": 0.00010316900443285704,
+          "persistent_device_bytes": 6955128752,
+          "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+          "outputs_owned_copies": true,
+          "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+        },
+        "load": [
+          2.5,
+          0.93,
+          0.96
+        ],
+        "repeat": 4
+      }
+    ],
+    "features_sha256": {
+      "ref_fine": "47b3fe66e8a66fb3f477a478c0328903f8bbe0fed6cb2c8dc99486ce4ab8813b",
+      "ref_coarse": "2b92c58fff765fb832c25b52d159db9e3e29887bfb7ec65dc4179997a9c1c0b8",
+      "sample_fine": "9aacce5acdeb24288b9a0ea7a8fec197444d2c1a3512bda26c9a5912eb003fbd",
+      "sample_coarse": "92bf6dee869e757b3b1a684d39ce96187dbbb812dcfbfabf988d7218bc57cb36"
+    },
+    "read_decode_s": 11.938599851011531,
+    "output_save_s": 0.09127432099194266,
+    "shape": [
+      100,
+      2048,
+      2048
+    ],
+    "input_dtype": "uint16",
+    "settings": {
+      "half": 10,
+      "coarse": 5,
+      "fine": 4,
+      "levels": 2,
+      "iterations": 1,
+      "cut": 1,
+      "spatial_template": 0,
+      "frames": 100,
+      "spline": "gpu",
+      "host_threads": 2,
+      "device": 0,
+      "wsvt_workspace": "materialized",
+      "spatial_chunk": 100,
+      "numpy_output_copy": true,
+      "reference_policy": "each-pair"
+    },
+    "timing_scope": {
+      "solver": "reference rebuild + sample solver, including input uploads and final GPU synchronization; excludes validation, output download, initialization and file I/O",
+      "api": "ready contiguous host arrays -> seven independent writable NumPy arrays, including validation, reference rebuild and output download; excludes initialization and file I/O"
+    },
+    "hashes": {
+      "runtime": "f618a9e88a4eef2dff96d60e0b6274b7ecb761d65780ebe36b0940e764560fae",
+      "native": "de534dfe637aec7d8f079a587a89f2171c9b89968aaa5805de58c001e36e4e4d",
+      "script": "9650a71b302c76b0b7749a3c7ecf0df855d519f220ee152c894666cc45ce4078"
+    },
+    "environment": {
+      "torch": "2.0.0+nv23.05",
+      "cuda": "11.4",
+      "device_name": "Orin",
+      "properties": "_CudaDeviceProperties(name='Orin', major=8, minor=7, total_memory=62796MB, multi_processor_count=16)"
+    }
+  },
+  "speed": {
+    "profile": "speed",
+    "summary": {
+      "solver_s": {
+        "mean": 1.3896370383969043,
+        "sample_sd": 0.0013270627860636542
+      },
+      "api_s": {
+        "mean": 1.422334819001844,
+        "sample_sd": 0.0029581633526811995
+      },
+      "reference_s": {
+        "mean": 0.38399494779878296,
+        "sample_sd": 0.0009961341931289808
+      },
+      "sample_s": {
+        "mean": 1.0056420905981214,
+        "sample_sd": 0.000439547632253212
+      },
+      "download_s": {
+        "mean": 0.03247805299470201,
+        "sample_sd": 0.0029752795292858616
+      }
+    },
+    "memory": {
+      "persistent_device_bytes": 6955128752,
+      "cuda_peak_allocated_bytes": 7061602304,
+      "cuda_peak_reserved_bytes": 7090470912,
+      "cuda_current_allocated_bytes": 6960939008,
+      "cuda_current_reserved_bytes": 7090470912,
+      "process_lifetime_peak_rss_bytes": 3271200768,
+      "scope": "Allocator peaks reset after warmup; includes initialized session and all five pair solves. RSS peak through end of formal solves includes imports, input decoding, initialization and warmup, excludes subsequent output saving/descriptor verification. Shared DRAM metrics overlap; do not add.",
+      "sampled_formal_peak_rss_bytes": 3271200768,
+      "sampled_formal_system_used_bytes": 17338392576,
+      "system_used_before_process_bytes": 11345534976,
+      "sampled_formal_system_used_delta_bytes": 5992857600,
+      "sampled_note": "25 ms nominal sampler, lower bounds on transient peaks; system metric includes other processes/cache and is not GPU VRAM. tegrastats 200 ms recorded separately."
+    },
+    "warmup": {
+      "solver_s": 1.5047101689851843,
+      "api_s": 1.5307080789934844,
+      "reference_s": 0.4783505189989228,
+      "sample_s": 1.0263596499862615,
+      "download_s": 0.02578145998995751,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 1.0263596499862615,
+        "call_with_download_s": 1.052141109976219,
+        "reference_prepare_s": 0.4783505189989228,
+        "gpu_event_s": {
+          "input": 0.09447087860107421,
+          "transmission": 0.0020185279846191406,
+          "sample_front": 0.2883656616210937,
+          "coarse_match": 0.12113760375976562,
+          "spline": 0.022991872787475585,
+          "fine_match": 0.45725149536132814,
+          "DPC": 0.0032135679721832277,
+          "phase": 0.036133953094482425
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 0.00010710497735999525,
+        "persistent_device_bytes": 6955128752,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "numpy_output_copy": false,
+        "wsvt_workspace": "materialized",
+        "spatial_chunk": 16,
+        "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load": [
+        3.06,
+        1.19,
+        1.05
+      ]
+    },
+    "repeats": 5,
+    "records": [
+      {
+        "solver_s": 1.3911634579999372,
+        "api_s": 1.4215484340093099,
+        "reference_s": 0.3848197199986316,
+        "sample_s": 1.0063437380013056,
+        "download_s": 0.030138636997435242,
+        "detail": {
+          "kind": "wsvt",
+          "front": "baseline",
+          "spline": "gpu",
+          "input_dtype": "uint16",
+          "solver_s": 1.0063437380013056,
+          "call_with_download_s": 1.0364823749987409,
+          "reference_prepare_s": 0.3848197199986316,
+          "gpu_event_s": {
+            "input": 0.09474585723876953,
+            "transmission": 0.0020343360900878906,
+            "sample_front": 0.28833627319335936,
+            "coarse_match": 0.12125334167480468,
+            "spline": 0.02302003288269043,
+            "fine_match": 0.45740185546875,
+            "DPC": 0.0032145600318908693,
+            "phase": 0.015445152282714843
+          },
+          "spline_enqueue_or_cpu_handoff_wall_s": 0.00010201698751188815,
+          "persistent_device_bytes": 6955128752,
+          "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+          "outputs_owned_copies": true,
+          "numpy_output_copy": false,
+          "wsvt_workspace": "materialized",
+          "spatial_chunk": 16,
+          "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+          "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+        },
+        "load": [
+          3.06,
+          1.19,
+          1.05
+        ],
+        "repeat": 0
+      },
+      {
+        "solver_s": 1.3879572399891913,
+        "api_s": 1.4199861740053166,
+        "reference_s": 0.3826122350001242,
+        "sample_s": 1.005345004989067,
+        "download_s": 0.03181488299742341,
+        "detail": {
+          "kind": "wsvt",
+          "front": "baseline",
+          "spline": "gpu",
+          "input_dtype": "uint16",
+          "solver_s": 1.005345004989067,
+          "call_with_download_s": 1.0371598879864905,
+          "reference_prepare_s": 0.3826122350001242,
+          "gpu_event_s": {
+            "input": 0.0940975341796875,
+            "transmission": 0.0020348160266876222,
+            "sample_front": 0.2883670959472656,
+            "coarse_match": 0.12123149108886719,
+            "spline": 0.023014720916748048,
+            "fine_match": 0.4572905578613281,
+            "DPC": 0.0032174720764160157,
+            "phase": 0.01543779182434082
+          },
+          "spline_enqueue_or_cpu_handoff_wall_s": 9.724899427965283e-05,
+          "persistent_device_bytes": 6955128752,
+          "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+          "outputs_owned_copies": true,
+          "numpy_output_copy": false,
+          "wsvt_workspace": "materialized",
+          "spatial_chunk": 16,
+          "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+          "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+        },
+        "load": [
+          2.89,
+          1.18,
+          1.05
+        ],
+        "repeat": 1
+      },
+      {
+        "solver_s": 1.3905782359652221,
+        "api_s": 1.4262145439861342,
+        "reference_s": 0.38476928797899745,
+        "sample_s": 1.0058089479862247,
+        "download_s": 0.03543541001272388,
+        "detail": {
+          "kind": "wsvt",
+          "front": "baseline",
+          "spline": "gpu",
+          "input_dtype": "uint16",
+          "solver_s": 1.0058089479862247,
+          "call_with_download_s": 1.0412443579989485,
+          "reference_prepare_s": 0.38476928797899745,
+          "gpu_event_s": {
+            "input": 0.09441718292236329,
+            "transmission": 0.002077888011932373,
+            "sample_front": 0.28831280517578123,
+            "coarse_match": 0.1212176284790039,
+            "spline": 0.023001855850219726,
+            "fine_match": 0.4573082275390625,
+            "DPC": 0.0032159678936004637,
+            "phase": 0.015431520462036132
+          },
+          "spline_enqueue_or_cpu_handoff_wall_s": 9.878497803583741e-05,
+          "persistent_device_bytes": 6955128752,
+          "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+          "outputs_owned_copies": true,
+          "numpy_output_copy": false,
+          "wsvt_workspace": "materialized",
+          "spatial_chunk": 16,
+          "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+          "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+        },
+        "load": [
+          2.89,
+          1.18,
+          1.05
+        ],
+        "repeat": 2
+      },
+      {
+        "solver_s": 1.3886529930168763,
+        "api_s": 1.4245642820023932,
+        "reference_s": 0.3832727560075,
+        "sample_s": 1.0053802370093763,
+        "download_s": 0.035721653985092416,
+        "detail": {
+          "kind": "wsvt",
+          "front": "baseline",
+          "spline": "gpu",
+          "input_dtype": "uint16",
+          "solver_s": 1.0053802370093763,
+          "call_with_download_s": 1.0411018909944687,
+          "reference_prepare_s": 0.3832727560075,
+          "gpu_event_s": {
+            "input": 0.0940283203125,
+            "transmission": 0.002068000078201294,
+            "sample_front": 0.2882359619140625,
+            "coarse_match": 0.1212200927734375,
+            "spline": 0.023007871627807618,
+            "fine_match": 0.4573482971191406,
+            "DPC": 0.003214688062667847,
+            "phase": 0.015436800003051757
+          },
+          "spline_enqueue_or_cpu_handoff_wall_s": 9.907400817610323e-05,
+          "persistent_device_bytes": 6955128752,
+          "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+          "outputs_owned_copies": true,
+          "numpy_output_copy": false,
+          "wsvt_workspace": "materialized",
+          "spatial_chunk": 16,
+          "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+          "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+        },
+        "load": [
+          2.89,
+          1.18,
+          1.05
+        ],
+        "repeat": 3
+      },
+      {
+        "solver_s": 1.3898332650132943,
+        "api_s": 1.419360661006067,
+        "reference_s": 0.3845007400086615,
+        "sample_s": 1.0053325250046328,
+        "download_s": 0.02927968098083511,
+        "detail": {
+          "kind": "wsvt",
+          "front": "baseline",
+          "spline": "gpu",
+          "input_dtype": "uint16",
+          "solver_s": 1.0053325250046328,
+          "call_with_download_s": 1.0346122059854679,
+          "reference_prepare_s": 0.3845007400086615,
+          "gpu_event_s": {
+            "input": 0.09405811309814453,
+            "transmission": 0.002060544013977051,
+            "sample_front": 0.2882852478027344,
+            "coarse_match": 0.12122358703613281,
+            "spline": 0.023017087936401368,
+            "fine_match": 0.4573323669433594,
+            "DPC": 0.003217344045639038,
+            "phase": 0.015452704429626464
+          },
+          "spline_enqueue_or_cpu_handoff_wall_s": 9.584100916981697e-05,
+          "persistent_device_bytes": 6955128752,
+          "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+          "outputs_owned_copies": true,
+          "numpy_output_copy": false,
+          "wsvt_workspace": "materialized",
+          "spatial_chunk": 16,
+          "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+          "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+        },
+        "load": [
+          2.66,
+          1.16,
+          1.04
+        ],
+        "repeat": 4
+      }
+    ],
+    "features_sha256": {
+      "ref_fine": "47b3fe66e8a66fb3f477a478c0328903f8bbe0fed6cb2c8dc99486ce4ab8813b",
+      "ref_coarse": "2b92c58fff765fb832c25b52d159db9e3e29887bfb7ec65dc4179997a9c1c0b8",
+      "sample_fine": "9aacce5acdeb24288b9a0ea7a8fec197444d2c1a3512bda26c9a5912eb003fbd",
+      "sample_coarse": "92bf6dee869e757b3b1a684d39ce96187dbbb812dcfbfabf988d7218bc57cb36"
+    },
+    "read_decode_s": 11.823163421999197,
+    "output_save_s": 0.09239571201032959,
+    "shape": [
+      100,
+      2048,
+      2048
+    ],
+    "input_dtype": "uint16",
+    "settings": {
+      "half": 10,
+      "coarse": 5,
+      "fine": 4,
+      "levels": 2,
+      "iterations": 1,
+      "cut": 1,
+      "spatial_template": 0,
+      "frames": 100,
+      "spline": "gpu",
+      "host_threads": 2,
+      "device": 0,
+      "wsvt_workspace": "materialized",
+      "spatial_chunk": 100,
+      "numpy_output_copy": false,
+      "reference_policy": "each-pair"
+    },
+    "timing_scope": {
+      "solver": "reference rebuild + sample solver, including input uploads and final GPU synchronization; excludes validation, output download, initialization and file I/O",
+      "api": "ready contiguous host arrays -> seven independent writable NumPy arrays, including validation, reference rebuild and output download; excludes initialization and file I/O"
+    },
+    "hashes": {
+      "runtime": "ec5907edd5466ced3835ba37691d3dcb9e849bf9fdf2845f7b5c0b39963b3bc0",
+      "native": "38877862f03ec0c90042c282fd11951c4cd574a6d922deec095435c78811b7a7",
+      "script": "9650a71b302c76b0b7749a3c7ecf0df855d519f220ee152c894666cc45ce4078"
+    },
+    "environment": {
+      "torch": "2.0.0+nv23.05",
+      "cuda": "11.4",
+      "device_name": "Orin",
+      "properties": "_CudaDeviceProperties(name='Orin', major=8, minor=7, total_memory=62796MB, multi_processor_count=16)"
+    }
+  },
+  "low_memory": {
+    "profile": "low_memory",
+    "summary": {
+      "solver_s": {
+        "mean": 1.602848797797924,
+        "sample_sd": 0.0019404927971349746
+      },
+      "api_s": {
+        "mean": 1.6336552960041444,
+        "sample_sd": 0.0032824634692073577
+      },
+      "reference_s": {
+        "mean": 0.4895464102039114,
+        "sample_sd": 0.0021275324188876005
+      },
+      "sample_s": {
+        "mean": 1.1133023875940125,
+        "sample_sd": 0.001090068376027124
+      },
+      "download_s": {
+        "mean": 0.0305721590120811,
+        "sample_sd": 0.0029799981858276998
+      }
+    },
+    "memory": {
+      "persistent_device_bytes": 4571387824,
+      "cuda_peak_allocated_bytes": 4677402624,
+      "cuda_peak_reserved_bytes": 4708106240,
+      "cuda_current_allocated_bytes": 4576739328,
+      "cuda_current_reserved_bytes": 4708106240,
+      "process_lifetime_peak_rss_bytes": 3205222400,
+      "scope": "Allocator peaks reset after warmup; includes initialized session and all five pair solves. RSS peak through end of formal solves includes imports, input decoding, initialization and warmup, excludes subsequent output saving/descriptor verification. Shared DRAM metrics overlap; do not add.",
+      "sampled_formal_peak_rss_bytes": 3205222400,
+      "sampled_formal_system_used_bytes": 15139946496,
+      "system_used_before_process_bytes": 11346644992,
+      "sampled_formal_system_used_delta_bytes": 3793301504,
+      "sampled_note": "25 ms nominal sampler, lower bounds on transient peaks; system metric includes other processes/cache and is not GPU VRAM. tegrastats 200 ms recorded separately."
+    },
+    "warmup": {
+      "solver_s": 1.8122399759595282,
+      "api_s": 1.840652670012787,
+      "reference_s": 0.6399998139822856,
+      "sample_s": 1.1722401619772427,
+      "download_s": 0.028165203024400398,
+      "detail": {
+        "kind": "wsvt",
+        "front": "baseline",
+        "spline": "gpu",
+        "input_dtype": "uint16",
+        "solver_s": 1.1722401619772427,
+        "call_with_download_s": 1.200405365001643,
+        "reference_prepare_s": 0.6399998139822856,
+        "gpu_event_s": {
+          "input": 0.09702329254150391,
+          "transmission": 0.0020340800285339354,
+          "sample_front": 0.3936323547363281,
+          "coarse_match": 0.12091542053222656,
+          "spline": 0.02302297592163086,
+          "fine_match": 0.4571785278320312,
+          "DPC": 0.0032151999473571777,
+          "phase": 0.07445257568359374
+        },
+        "spline_enqueue_or_cpu_handoff_wall_s": 0.00010688201291486621,
+        "persistent_device_bytes": 4571387824,
+        "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+        "outputs_owned_copies": true,
+        "numpy_output_copy": false,
+        "wsvt_workspace": "streamed",
+        "spatial_chunk": 16,
+        "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+        "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+      },
+      "load": [
+        3.71,
+        1.55,
+        1.18
+      ]
+    },
+    "repeats": 5,
+    "records": [
+      {
+        "solver_s": 1.601622356014559,
+        "api_s": 1.6346722950111143,
+        "reference_s": 0.48993348702788353,
+        "sample_s": 1.1116888689866755,
+        "download_s": 0.03281163101200946,
+        "detail": {
+          "kind": "wsvt",
+          "front": "baseline",
+          "spline": "gpu",
+          "input_dtype": "uint16",
+          "solver_s": 1.1116888689866755,
+          "call_with_download_s": 1.144500499998685,
+          "reference_prepare_s": 0.48993348702788353,
+          "gpu_event_s": {
+            "input": 0.09544124603271484,
+            "transmission": 0.00202620792388916,
+            "sample_front": 0.3936735534667969,
+            "coarse_match": 0.12111068725585937,
+            "spline": 0.02299929618835449,
+            "fine_match": 0.45713568115234376,
+            "DPC": 0.003215264081954956,
+            "phase": 0.015434271812438964
+          },
+          "spline_enqueue_or_cpu_handoff_wall_s": 9.836899698711932e-05,
+          "persistent_device_bytes": 4571387824,
+          "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+          "outputs_owned_copies": true,
+          "numpy_output_copy": false,
+          "wsvt_workspace": "streamed",
+          "spatial_chunk": 16,
+          "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+          "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+        },
+        "load": [
+          3.71,
+          1.55,
+          1.18
+        ],
+        "repeat": 0
+      },
+      {
+        "solver_s": 1.6022059789975174,
+        "api_s": 1.633015761995921,
+        "reference_s": 0.4877927550114691,
+        "sample_s": 1.1144132239860483,
+        "download_s": 0.03057019502739422,
+        "detail": {
+          "kind": "wsvt",
+          "front": "baseline",
+          "spline": "gpu",
+          "input_dtype": "uint16",
+          "solver_s": 1.1144132239860483,
+          "call_with_download_s": 1.1449834190134425,
+          "reference_prepare_s": 0.4877927550114691,
+          "gpu_event_s": {
+            "input": 0.09817852783203125,
+            "transmission": 0.002050976037979126,
+            "sample_front": 0.3936584777832031,
+            "coarse_match": 0.12098079681396484,
+            "spline": 0.02303657531738281,
+            "fine_match": 0.45715435791015624,
+            "DPC": 0.0032162559032440185,
+            "phase": 0.015466912269592285
+          },
+          "spline_enqueue_or_cpu_handoff_wall_s": 9.705699631012976e-05,
+          "persistent_device_bytes": 4571387824,
+          "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+          "outputs_owned_copies": true,
+          "numpy_output_copy": false,
+          "wsvt_workspace": "streamed",
+          "spatial_chunk": 16,
+          "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+          "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+        },
+        "load": [
+          3.71,
+          1.55,
+          1.18
+        ],
+        "repeat": 1
+      },
+      {
+        "solver_s": 1.6015725639881566,
+        "api_s": 1.6348418330017012,
+        "reference_s": 0.48745134298224,
+        "sample_s": 1.1141212210059166,
+        "download_s": 0.03303457799484022,
+        "detail": {
+          "kind": "wsvt",
+          "front": "baseline",
+          "spline": "gpu",
+          "input_dtype": "uint16",
+          "solver_s": 1.1141212210059166,
+          "call_with_download_s": 1.1471557990007568,
+          "reference_prepare_s": 0.48745134298224,
+          "gpu_event_s": {
+            "input": 0.09614514923095703,
+            "transmission": 0.0020556800365448,
+            "sample_front": 0.3937853393554688,
+            "coarse_match": 0.12122815704345703,
+            "spline": 0.02320649528503418,
+            "fine_match": 0.4582872009277344,
+            "DPC": 0.003207648038864136,
+            "phase": 0.015426112174987792
+          },
+          "spline_enqueue_or_cpu_handoff_wall_s": 9.750499157235026e-05,
+          "persistent_device_bytes": 4571387824,
+          "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+          "outputs_owned_copies": true,
+          "numpy_output_copy": false,
+          "wsvt_workspace": "streamed",
+          "spatial_chunk": 16,
+          "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+          "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+        },
+        "load": [
+          3.49,
+          1.54,
+          1.17
+        ],
+        "repeat": 2
+      },
+      {
+        "solver_s": 1.6062338409828953,
+        "api_s": 1.6372905370080844,
+        "reference_s": 0.4927771729999222,
+        "sample_s": 1.1134566679829732,
+        "download_s": 0.03081045302678831,
+        "detail": {
+          "kind": "wsvt",
+          "front": "baseline",
+          "spline": "gpu",
+          "input_dtype": "uint16",
+          "solver_s": 1.1134566679829732,
+          "call_with_download_s": 1.1442671210097615,
+          "reference_prepare_s": 0.4927771729999222,
+          "gpu_event_s": {
+            "input": 0.09590940856933594,
+            "transmission": 0.002068160057067871,
+            "sample_front": 0.3936943664550781,
+            "coarse_match": 0.12121600341796875,
+            "spline": 0.023227712631225587,
+            "fine_match": 0.45784640502929685,
+            "DPC": 0.0032082560062408447,
+            "phase": 0.015410592079162597
+          },
+          "spline_enqueue_or_cpu_handoff_wall_s": 9.465697803534567e-05,
+          "persistent_device_bytes": 4571387824,
+          "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+          "outputs_owned_copies": true,
+          "numpy_output_copy": false,
+          "wsvt_workspace": "streamed",
+          "spatial_chunk": 16,
+          "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+          "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+        },
+        "load": [
+          3.49,
+          1.54,
+          1.17
+        ],
+        "repeat": 3
+      },
+      {
+        "solver_s": 1.6026092490064912,
+        "api_s": 1.6284560530039016,
+        "reference_s": 0.48977729299804196,
+        "sample_s": 1.1128319560084492,
+        "download_s": 0.025633937999373302,
+        "detail": {
+          "kind": "wsvt",
+          "front": "baseline",
+          "spline": "gpu",
+          "input_dtype": "uint16",
+          "solver_s": 1.1128319560084492,
+          "call_with_download_s": 1.1384658940078225,
+          "reference_prepare_s": 0.48977729299804196,
+          "gpu_event_s": {
+            "input": 0.09486627197265625,
+            "transmission": 0.002058367967605591,
+            "sample_front": 0.39378167724609375,
+            "coarse_match": 0.1215456314086914,
+            "spline": 0.023094207763671874,
+            "fine_match": 0.4581527099609375,
+            "DPC": 0.0032098240852355955,
+            "phase": 0.015433823585510254
+          },
+          "spline_enqueue_or_cpu_handoff_wall_s": 9.904199396260083e-05,
+          "persistent_device_bytes": 4571387824,
+          "scope": "sample solver with reference precomputed; pair latency must add reference preparation; no disk I/O",
+          "outputs_owned_copies": true,
+          "numpy_output_copy": false,
+          "wsvt_workspace": "streamed",
+          "spatial_chunk": 16,
+          "output_storage": "independent host tensor retained by NumPy base; no session-buffer alias",
+          "geometry_status": "explicit session settings; calibration is not inferred by runtime"
+        },
+        "load": [
+          3.49,
+          1.54,
+          1.17
+        ],
+        "repeat": 4
+      }
+    ],
+    "features_sha256": {
+      "ref_fine": "47b3fe66e8a66fb3f477a478c0328903f8bbe0fed6cb2c8dc99486ce4ab8813b",
+      "ref_coarse": "2b92c58fff765fb832c25b52d159db9e3e29887bfb7ec65dc4179997a9c1c0b8",
+      "sample_fine": "9aacce5acdeb24288b9a0ea7a8fec197444d2c1a3512bda26c9a5912eb003fbd",
+      "sample_coarse": "92bf6dee869e757b3b1a684d39ce96187dbbb812dcfbfabf988d7218bc57cb36"
+    },
+    "read_decode_s": 11.836549326981185,
+    "output_save_s": 0.08903694699984044,
+    "shape": [
+      100,
+      2048,
+      2048
+    ],
+    "input_dtype": "uint16",
+    "settings": {
+      "half": 10,
+      "coarse": 5,
+      "fine": 4,
+      "levels": 2,
+      "iterations": 1,
+      "cut": 1,
+      "spatial_template": 0,
+      "frames": 100,
+      "spline": "gpu",
+      "host_threads": 2,
+      "device": 0,
+      "wsvt_workspace": "streamed",
+      "spatial_chunk": 16,
+      "numpy_output_copy": false,
+      "reference_policy": "each-pair"
+    },
+    "timing_scope": {
+      "solver": "reference rebuild + sample solver, including input uploads and final GPU synchronization; excludes validation, output download, initialization and file I/O",
+      "api": "ready contiguous host arrays -> seven independent writable NumPy arrays, including validation, reference rebuild and output download; excludes initialization and file I/O"
+    },
+    "hashes": {
+      "runtime": "ec5907edd5466ced3835ba37691d3dcb9e849bf9fdf2845f7b5c0b39963b3bc0",
+      "native": "38877862f03ec0c90042c282fd11951c4cd574a6d922deec095435c78811b7a7",
+      "script": "9650a71b302c76b0b7749a3c7ecf0df855d519f220ee152c894666cc45ce4078"
+    },
+    "environment": {
+      "torch": "2.0.0+nv23.05",
+      "cuda": "11.4",
+      "device_name": "Orin",
+      "properties": "_CudaDeviceProperties(name='Orin', major=8, minor=7, total_memory=62796MB, multi_processor_count=16)"
+    }
+  }
+}

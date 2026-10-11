@@ -1,0 +1,12 @@
+SMOKE_PASS odd_u16 speed
+SMOKE_PASS odd_u16 low_memory
+SMOKE_PASS even_u16 speed
+SMOKE_PASS even_u16 low_memory
+SMOKE_PASS odd_float speed
+SMOKE_PASS odd_float low_memory
+SMOKE_PASS constant speed
+SMOKE_PASS constant low_memory
+PROFILE_COMPLETE original
+PROFILE_COMPLETE speed
+PROFILE_COMPLETE low_memory
+BATCH_COMPLETE

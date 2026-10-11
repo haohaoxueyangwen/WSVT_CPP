@@ -1,0 +1,162 @@
+[
+  {
+    "case": "odd_u16",
+    "profile": "speed",
+    "outputs": {
+      "displace_y": true,
+      "displace_x": true,
+      "DPC_y": true,
+      "DPC_x": true,
+      "phase": true,
+      "transmission": true,
+      "match_score_neg_ssd": true
+    },
+    "features": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "odd_u16",
+    "profile": "low_memory",
+    "outputs": {
+      "displace_y": true,
+      "displace_x": true,
+      "DPC_y": true,
+      "DPC_x": true,
+      "phase": true,
+      "transmission": true,
+      "match_score_neg_ssd": true
+    },
+    "features": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "even_u16",
+    "profile": "speed",
+    "outputs": {
+      "displace_y": true,
+      "displace_x": true,
+      "DPC_y": true,
+      "DPC_x": true,
+      "phase": true,
+      "transmission": true,
+      "match_score_neg_ssd": true
+    },
+    "features": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "even_u16",
+    "profile": "low_memory",
+    "outputs": {
+      "displace_y": true,
+      "displace_x": true,
+      "DPC_y": true,
+      "DPC_x": true,
+      "phase": true,
+      "transmission": true,
+      "match_score_neg_ssd": true
+    },
+    "features": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "odd_float",
+    "profile": "speed",
+    "outputs": {
+      "displace_y": true,
+      "displace_x": true,
+      "DPC_y": true,
+      "DPC_x": true,
+      "phase": true,
+      "transmission": true,
+      "match_score_neg_ssd": true
+    },
+    "features": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "odd_float",
+    "profile": "low_memory",
+    "outputs": {
+      "displace_y": true,
+      "displace_x": true,
+      "DPC_y": true,
+      "DPC_x": true,
+      "phase": true,
+      "transmission": true,
+      "match_score_neg_ssd": true
+    },
+    "features": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "constant",
+    "profile": "speed",
+    "outputs": {
+      "displace_y": true,
+      "displace_x": true,
+      "DPC_y": true,
+      "DPC_x": true,
+      "phase": true,
+      "transmission": true,
+      "match_score_neg_ssd": true
+    },
+    "features": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  },
+  {
+    "case": "constant",
+    "profile": "low_memory",
+    "outputs": {
+      "displace_y": true,
+      "displace_x": true,
+      "DPC_y": true,
+      "DPC_x": true,
+      "phase": true,
+      "transmission": true,
+      "match_score_neg_ssd": true
+    },
+    "features": {
+      "ref_fine": true,
+      "ref_coarse": true,
+      "sample_fine": true,
+      "sample_coarse": true
+    },
+    "ownership_pass": true
+  }
+]

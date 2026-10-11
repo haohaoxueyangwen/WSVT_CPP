@@ -1,0 +1,7 @@
+mode,backend,mean_s,sample_sd_s,warmup,repeats,speedup_vs_cli,scope
+wxst,original_cpp_cli,2.736534,0.011399663591527633,1,5,,solver
+wxst,cuda_pair_solver,0.0478012046776712,0.0010653003702027653,1,5,57.24822247582986,solver
+wxst,cuda_pair_api,0.0672911323606968,0.0013793307853452162,1,5,,"owned output return, no file I/O"
+wsvt,original_cpp_cli,6.545184,0.06578701300408757,1,5,,solver
+wsvt,cuda_pair_solver,0.20920982919633388,0.004489945881453708,1,5,31.285260473386476,solver
+wsvt,cuda_pair_api,0.22664771210402251,0.004395417757200654,1,5,,"owned output return, no file I/O"

@@ -1,3 +1,9 @@
+# 0.1.1 isolated memory optimization
+
+Original package ../edge_speckle0.1.0 is unchanged. Default output download creates independent host Tensor storage retained by NumPy; removes the redundant NumPy copy. WSVT streamed workspace keeps original operator ordering with chunk16. Explicit speed profile keeps materialized workspace. No subpixel/SSD/spline/phase changes. Exact descriptors/seven-field checks and BB11 full2048 timings are in MEMORY_BENCHMARK.md. New optimization tested on RTX5880Ada; no new Orin speed claim.
+
+The registry below records the preserved 0.1.0 ancestry.
+
 # 版本职责与迁移关系
 
 这里使用版本的功能名称区分算法改动、执行方式与工程封装。`v1/v2/v3` 是已有 WXST GPU 原型标签；`0.1.0` 是本工程包版本。二者不是同一条数字序列。

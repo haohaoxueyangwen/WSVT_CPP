@@ -27,7 +27,9 @@ def parser():
         p.add_argument('--input-dtype', choices=('auto', 'float32', 'uint16'))
         p.add_argument('--wsvt-workspace', choices=('materialized','streamed'))
         p.add_argument('--spatial-chunk', type=int)
-        p.add_argument('--numpy-output-copy', action=argparse.BooleanOptionalAction, default=None)
+        copies = p.add_mutually_exclusive_group()
+        copies.add_argument('--numpy-output-copy', action='store_true', default=None)
+        copies.add_argument('--no-numpy-output-copy', dest='numpy_output_copy', action='store_false', default=None)
         p.add_argument('--reference-policy', choices=('each-pair', 'static'))
         for name in ('warmup', 'repeats', 'cpu-threads', 'device'):
             p.add_argument('--' + name, type=int)

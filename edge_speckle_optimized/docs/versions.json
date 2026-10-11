@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "package_version": "0.1.0",
+  "package_version": "0.1.1",
   "variants": [
     {
       "id": "python-reference",
@@ -117,5 +117,20 @@
       "default": false,
       "gate_status": "historical full-size RMSE threshold exceeded; explicit opt-in required"
     }
-  ]
+  ],
+  "preserved_baseline": "../edge_speckle0.1.0",
+  "memory_optimization_profiles": [
+    {
+      "config": "configs/wsvt_speed.json",
+      "workspace": "materialized",
+      "extra_numpy_copy": false
+    },
+    {
+      "config": "configs/wsvt_memory.json",
+      "workspace": "streamed",
+      "chunk": 16,
+      "extra_numpy_copy": false
+    }
+  ],
+  "new_validation": "docs/memory_benchmark; RTX5880Ada only. Original variants remain historical ancestry."
 }

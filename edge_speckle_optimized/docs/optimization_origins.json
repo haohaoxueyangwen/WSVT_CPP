@@ -9,9 +9,21 @@
       "baseline_sha256": "1514a0b0232542aa4309abe8162dd281b7b0631484d3c64d53d06ba3f271a2d7",
       "candidate_sha256": "08b0a4c159a0a7b17dc415fa124097f0da5390b1c6d2d2d336de9ca45e1750e0"
     },
+    "docs/AGENT_HANDOFF_CURRENT.md": {
+      "baseline_sha256": "dc60b97ac2ba73a4d4385396e941e30971c801806475f3e6e0b1f619d469b37c",
+      "candidate_sha256": "3a5f3ad08cc65d9e9c22425d21eacb1b65bab5938d86acf9354e96fb70ed31c4"
+    },
+    "docs/AI_PROJECT_BRIEF.md": {
+      "baseline_sha256": "0a6bc8c806df2c9b204becbcdf47438b9efde98f520cc7b387aa76f1cc9aaa9b",
+      "candidate_sha256": "aa9a35e5be4ccc15e973786afb40c3eb5d9b79701f74fff714734c2e19f8f41e"
+    },
     "docs/evidence_registry.json": {
       "baseline_sha256": "e856155f8e02b82544dc5f30f1f09e26f4dcc1763e96cb31283f20ea60a5a9df",
       "candidate_sha256": "d130d691ed980ab760bda3c83a116f2fa96b0c91bc0a4cb6423ddd20e11896bd"
+    },
+    "docs/PAPER_ROADMAP.md": {
+      "baseline_sha256": "75b5b98581ce7b2dd9cb61cb1eff1170b8f806a9b251a254c8c95c9cab2f659e",
+      "candidate_sha256": "09be3be4b38c890ddd6f9c3608c9f798210862fa8b2755812e3b80cb093e8f5d"
     },
     "docs/source_check_windows.json": {
       "baseline_sha256": "45d920228df7e0a38bdcc52003ea7b5f19ee602fdce598064efb1e738d488560",
@@ -23,7 +35,11 @@
     },
     "docs/versions.json": {
       "baseline_sha256": "b7885afbfd9978e3a69690eae2fb1c849154cd2d640ae20da0af3dde503ac12c",
-      "candidate_sha256": "015e68926721afc51f6aef95933a9b21aa3babfbdaadaf3723042e6d9e0045e9"
+      "candidate_sha256": "0723047d1e0800c6a2875f9a5f0d2869eb2de845feeb428e38363b98858ea601"
+    },
+    "docs/VERSIONS.md": {
+      "baseline_sha256": "c4cee7f61d373211f1086e2c2221113cc7af6e035b255aa3847760b336a14ca0",
+      "candidate_sha256": "6f01768f59c4d5355182b713e0fec311dfc67e79bfc999d2e3459b1182b51be5"
     },
     "native/edge_kernels.cu": {
       "baseline_sha256": "b943ecd8c81073cc07b5f3632e7c4f6d967d89ae59ae46aa16f37aa75809c481",
@@ -35,7 +51,7 @@
     },
     "speckle_edge/cli.py": {
       "baseline_sha256": "03216c38e5c27678868b06e1cc39f9764bb443da899a5b1bf84fb293427e517d",
-      "candidate_sha256": "ca279ac1dc0525e39ff3de1929b7398c2c193d6e3883e4e10e15c4e1d7603997"
+      "candidate_sha256": "6302438a15e9e3bb2faef9773019d759e2d106d8ca6b723af488ab70b305c217"
     },
     "speckle_edge/config.py": {
       "baseline_sha256": "ad598a52f3d78652e389f7a69b084ebd339764453b3266170d44bf159f4c5ec6",
@@ -80,13 +96,9 @@
     "benchmarks/README.md": "628a1c306df74a460b27bfea476e90ea1f683103ab60fd2faa7fd0dbac9049b3",
     "configs/wsvt.json": "9f48a022be693b63d3245b0352ddf5c6d8409ee506a06cec47ca3ba4624f9c45",
     "configs/wxst.json": "aeb1148e33e2b0a068b3bcd9a3f2d7e3d264ed14134a9baf265c748d4ee446a5",
-    "docs/AGENT_HANDOFF_CURRENT.md": "dc60b97ac2ba73a4d4385396e941e30971c801806475f3e6e0b1f619d469b37c",
-    "docs/AI_PROJECT_BRIEF.md": "0a6bc8c806df2c9b204becbcdf47438b9efde98f520cc7b387aa76f1cc9aaa9b",
     "docs/ARCHITECTURE.md": "bcbef5f8a2d642589d73e9f57192712c2d0b52b6839c9e829af0d27148097694",
     "docs/OUTPUTS.md": "6ae634165a82317f82a5583cc6c09fc1beea77d4e65ada57046a681580e55ecf",
-    "docs/PAPER_ROADMAP.md": "75b5b98581ce7b2dd9cb61cb1eff1170b8f806a9b251a254c8c95c9cab2f659e",
     "docs/VALIDATION.md": "85ea10f927b15cad5518fe15eafda15056374701ac52579778ea225aaade6c1c",
-    "docs/VERSIONS.md": "c4cee7f61d373211f1086e2c2221113cc7af6e035b255aa3847760b336a14ca0",
     "native/cached_match.cuh": "d51f35691afdbd2f0a5e28c8fb3f4b002ba128667d5135f036790937c9fe653a",
     "native/edge_spline.cpp": "ad226b1f699fa80491104bb10e81fe7dcf7a46597fac8eb4e52ba8002c15c70e",
     "native/features.cuh": "ebca2ed19926907f00b5e354f6d2ce953a5b7707fae018d9d476eac676218341",

@@ -1,0 +1,62 @@
+[
+  {
+    "time": 1791768600.2896104,
+    "load": [
+      4.70654296875,
+      2.69580078125,
+      1.15771484375
+    ],
+    "available_bytes": 117784084480,
+    "foreign_gpu": [],
+    "training": {},
+    "external_cpu_over_one_core": {}
+  },
+  {
+    "time": 1791768602.4012845,
+    "load": [
+      4.40966796875,
+      2.66748046875,
+      1.15673828125
+    ],
+    "available_bytes": 117544386560,
+    "foreign_gpu": [],
+    "training": {},
+    "external_cpu_over_one_core": {}
+  },
+  {
+    "time": 1791768604.5102055,
+    "load": [
+      4.40966796875,
+      2.66748046875,
+      1.15673828125
+    ],
+    "available_bytes": 117526798336,
+    "foreign_gpu": [],
+    "training": {},
+    "external_cpu_over_one_core": {}
+  },
+  {
+    "time": 1791768606.6191022,
+    "load": [
+      4.13623046875,
+      2.6396484375,
+      1.15576171875
+    ],
+    "available_bytes": 117542014976,
+    "foreign_gpu": [],
+    "training": {},
+    "external_cpu_over_one_core": {}
+  },
+  {
+    "time": 1791768608.7300916,
+    "load": [
+      4.13623046875,
+      2.6396484375,
+      1.15576171875
+    ],
+    "available_bytes": 121199063040,
+    "foreign_gpu": [],
+    "training": {},
+    "external_cpu_over_one_core": {}
+  }
+]

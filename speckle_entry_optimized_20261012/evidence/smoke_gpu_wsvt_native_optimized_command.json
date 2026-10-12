@@ -1,0 +1,16 @@
+[
+  "/home/yrc/vscodespace/anaconda3/bin/python",
+  "-u",
+  "/home/yrc/vscodespace/research/WSVT_project/bench_results/entry_optimized_20261012/workflow/matched_entry.py",
+  "worker",
+  "--tag",
+  "smoke_gpu_wsvt_native_optimized",
+  "--backend",
+  "native_optimized",
+  "--mode",
+  "wsvt",
+  "--size",
+  "128",
+  "--repeats",
+  "1"
+]

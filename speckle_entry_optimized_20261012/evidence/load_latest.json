@@ -1,0 +1,13 @@
+{
+  "time": 1791768807.5876052,
+  "load": [
+    2.88818359375,
+    3.0615234375,
+    1.6181640625
+  ],
+  "available_bytes": 121646886912,
+  "foreign_gpu": [],
+  "training": {},
+  "idle": true,
+  "external_data_tasks": {}
+}

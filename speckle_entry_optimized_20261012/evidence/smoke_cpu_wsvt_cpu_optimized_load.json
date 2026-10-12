@@ -1,0 +1,14 @@
+[
+  {
+    "time": 1791768203.2066257,
+    "load": [
+      0.20751953125,
+      0.2060546875,
+      0.1806640625
+    ],
+    "available_bytes": 121682628608,
+    "foreign_gpu": [],
+    "training": {},
+    "external_cpu_over_one_core": {}
+  }
+]

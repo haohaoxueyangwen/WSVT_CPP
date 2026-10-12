@@ -1,0 +1,403 @@
+{
+  "rows": [
+    {
+      "mode": "wsvt",
+      "backend": "cpu_cpp",
+      "array_api_mean_s": 7.636963241919875,
+      "array_api_sd_s": 0.04767559806959049,
+      "n": 5,
+      "detail_means": {
+        "copy_s": 1.6527209496,
+        "constructor_s": 0.0014471826,
+        "solver_wall_s": 5.9738805184,
+        "reported_solver_s": 5.8308864204,
+        "c_api_s": 7.6280552486
+      },
+      "process_memory": {
+        "VmHWM": "12952336 kB",
+        "VmRSS": "4028052 kB"
+      },
+      "input_sha256": [
+        "9863ce78dd483a81ad867739bf60b31a8b47835d8648ca0fd44010d11f5a8d4b",
+        "6b8587a38aa8788462e576c527db4bc0e21ac4a141814e8da798e349b6255a2b"
+      ]
+    },
+    {
+      "mode": "wsvt",
+      "backend": "cpu_optimized",
+      "array_api_mean_s": 5.947855188418179,
+      "array_api_sd_s": 0.17133512642003748,
+      "n": 5,
+      "detail_means": {
+        "copy_s": 3.7999999999999996e-08,
+        "constructor_s": 0.00160895,
+        "solver_wall_s": 5.9376206374,
+        "reported_solver_s": 5.7820172796,
+        "c_api_s": 5.9392373714
+      },
+      "process_memory": {
+        "VmHWM": "12924996 kB",
+        "VmRSS": "4019760 kB"
+      },
+      "input_sha256": [
+        "9863ce78dd483a81ad867739bf60b31a8b47835d8648ca0fd44010d11f5a8d4b",
+        "6b8587a38aa8788462e576c527db4bc0e21ac4a141814e8da798e349b6255a2b"
+      ]
+    },
+    {
+      "mode": "wsvt",
+      "backend": "native_gpu",
+      "array_api_mean_s": 0.7148537294007837,
+      "array_api_sd_s": 0.017423405026103712,
+      "n": 5,
+      "detail_means": {
+        "reference_s": 0.12612771978601814,
+        "sample_solver_s": 0.1708070279099047,
+        "download_s": 0.011250630114227533,
+        "call_s": 0.4102561864070594,
+        "persistent_bytes": 7761248260,
+        "fft_workspace_bytes": 32902272,
+        "device_allocation_bytes": 7794150532,
+        "reference_api_s": 0.2632289350964129,
+        "sample_api_s": 0.4104406944476068,
+        "host_validation_and_reference_dispatch_s": 0.13710121531039476,
+        "host_validation_and_sample_dispatch_s": 0.22838303642347454,
+        "constructor_s": 0.041175299882888795,
+        "reference_rebuild_s": 0.12612771978601814
+      },
+      "process_memory": {
+        "VmHWM": "4951756 kB",
+        "VmRSS": "3563392 kB"
+      },
+      "input_sha256": [
+        "9863ce78dd483a81ad867739bf60b31a8b47835d8648ca0fd44010d11f5a8d4b",
+        "6b8587a38aa8788462e576c527db4bc0e21ac4a141814e8da798e349b6255a2b"
+      ]
+    },
+    {
+      "mode": "wsvt",
+      "backend": "native_optimized",
+      "array_api_mean_s": 0.4690199442207813,
+      "array_api_sd_s": 0.019159924639403195,
+      "n": 5,
+      "detail_means": {
+        "reference_s": 0.1262417359277606,
+        "sample_solver_s": 0.17296316828578712,
+        "download_s": 0.011187435500323773,
+        "call_s": 0.2419129926711321,
+        "persistent_bytes": 7761248260,
+        "fft_workspace_bytes": 32902272,
+        "device_allocation_bytes": 7794150532,
+        "reference_api_s": 0.1845582420937717,
+        "sample_api_s": 0.24209710266441106,
+        "host_validation_and_reference_dispatch_s": 0.0583165061660111,
+        "host_validation_and_sample_dispatch_s": 0.05794649887830019,
+        "constructor_s": 0.042356401681900024,
+        "reference_rebuild_s": 0.1262417359277606
+      },
+      "process_memory": {
+        "VmHWM": "4951752 kB",
+        "VmRSS": "3563092 kB"
+      },
+      "input_sha256": [
+        "9863ce78dd483a81ad867739bf60b31a8b47835d8648ca0fd44010d11f5a8d4b",
+        "6b8587a38aa8788462e576c527db4bc0e21ac4a141814e8da798e349b6255a2b"
+      ]
+    },
+    {
+      "mode": "wxst",
+      "backend": "cpu_cpp",
+      "array_api_mean_s": 2.439739362336695,
+      "array_api_sd_s": 0.030322830265791863,
+      "n": 5,
+      "detail_means": {
+        "copy_s": 0.0039148746,
+        "constructor_s": 0.0097962152,
+        "solver_wall_s": 2.4171294354,
+        "reported_solver_s": 2.2729569706,
+        "c_api_s": 2.4308439252
+      },
+      "process_memory": {
+        "VmHWM": "4207348 kB",
+        "VmRSS": "272684 kB"
+      },
+      "input_sha256": [
+        "d8acf65584f47a5359e3d73951303827586ba4351fca4cff590eac44851657b4",
+        "df88ea033fc2c8557261efd75d69c8c80c714f805804845e7901c0a41c022392"
+      ]
+    },
+    {
+      "mode": "wxst",
+      "backend": "cpu_optimized",
+      "array_api_mean_s": 2.3918013516813517,
+      "array_api_sd_s": 0.021903891817970724,
+      "n": 5,
+      "detail_means": {
+        "copy_s": 3e-08,
+        "constructor_s": 0.0028101802,
+        "solver_wall_s": 2.380166972,
+        "reported_solver_s": 2.2354632814,
+        "c_api_s": 2.3829797982
+      },
+      "process_memory": {
+        "VmHWM": "4243772 kB",
+        "VmRSS": "341044 kB"
+      },
+      "input_sha256": [
+        "d8acf65584f47a5359e3d73951303827586ba4351fca4cff590eac44851657b4",
+        "df88ea033fc2c8557261efd75d69c8c80c714f805804845e7901c0a41c022392"
+      ]
+    },
+    {
+      "mode": "wxst",
+      "backend": "native_gpu",
+      "array_api_mean_s": 0.06406459910795093,
+      "array_api_sd_s": 0.006316092446832137,
+      "n": 5,
+      "detail_means": {
+        "reference_s": 0.004292622487992048,
+        "sample_solver_s": 0.03956757402047515,
+        "download_s": 0.010950275603681803,
+        "call_s": 0.05280888732522726,
+        "persistent_bytes": 1679340948,
+        "fft_workspace_bytes": 32902272,
+        "device_allocation_bytes": 1712243220,
+        "reference_api_s": 0.005702873039990663,
+        "sample_api_s": 0.052937277406454084,
+        "host_validation_and_reference_dispatch_s": 0.0014102505519986153,
+        "host_validation_and_sample_dispatch_s": 0.0024194277822971342,
+        "constructor_s": 0.005417768564075232,
+        "reference_rebuild_s": 0.004292622487992048
+      },
+      "process_memory": {
+        "VmHWM": "319348 kB",
+        "VmRSS": "319348 kB"
+      },
+      "input_sha256": [
+        "d8acf65584f47a5359e3d73951303827586ba4351fca4cff590eac44851657b4",
+        "df88ea033fc2c8557261efd75d69c8c80c714f805804845e7901c0a41c022392"
+      ]
+    },
+    {
+      "mode": "wxst",
+      "backend": "native_optimized",
+      "array_api_mean_s": 0.06170980483293533,
+      "array_api_sd_s": 0.0060603920728809655,
+      "n": 5,
+      "detail_means": {
+        "reference_s": 0.00428357245400548,
+        "sample_solver_s": 0.039481015782803296,
+        "download_s": 0.010970907472074031,
+        "call_s": 0.051106139365583655,
+        "persistent_bytes": 1679340948,
+        "fft_workspace_bytes": 32902272,
+        "device_allocation_bytes": 1712243220,
+        "reference_api_s": 0.004954680521041155,
+        "sample_api_s": 0.051232959423214194,
+        "host_validation_and_reference_dispatch_s": 0.0006711080670356751,
+        "host_validation_and_sample_dispatch_s": 0.0007810361683368682,
+        "constructor_s": 0.005515676829963923,
+        "reference_rebuild_s": 0.00428357245400548
+      },
+      "process_memory": {
+        "VmHWM": "319064 kB",
+        "VmRSS": "319064 kB"
+      },
+      "input_sha256": [
+        "d8acf65584f47a5359e3d73951303827586ba4351fca4cff590eac44851657b4",
+        "df88ea033fc2c8557261efd75d69c8c80c714f805804845e7901c0a41c022392"
+      ]
+    }
+  ],
+  "checks": {
+    "wsvt_cpu": {
+      "pass_gate": true,
+      "fields": {
+        "displace_y": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "displace_x": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "DPC_y": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "DPC_x": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "phase": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "transmission": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "match_score_neg_ssd": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        }
+      },
+      "input_size": 2048,
+      "scope": "Unchanged numerical reconstruction rules; not a physical-truth test."
+    },
+    "wsvt_gpu": {
+      "pass_gate": true,
+      "fields": {
+        "displace_y": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "displace_x": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "DPC_y": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "DPC_x": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "phase": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "transmission": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "match_score_neg_ssd": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        }
+      },
+      "input_size": 2048,
+      "scope": "Unchanged numerical reconstruction rules; not a physical-truth test."
+    },
+    "wxst_cpu": {
+      "pass_gate": true,
+      "fields": {
+        "displace_y": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "displace_x": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "DPC_y": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "DPC_x": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "phase": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "transmission": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "match_score_neg_ssd": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        }
+      },
+      "input_size": 2048,
+      "scope": "Unchanged numerical reconstruction rules; not a physical-truth test."
+    },
+    "wxst_gpu": {
+      "pass_gate": true,
+      "fields": {
+        "displace_y": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "displace_x": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "DPC_y": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "DPC_x": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "phase": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "transmission": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        },
+        "match_score_neg_ssd": {
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "rmse": 0.0
+        }
+      },
+      "input_size": 2048,
+      "scope": "Unchanged numerical reconstruction rules; not a physical-truth test."
+    }
+  },
+  "all_gate_pass": true,
+  "formal_trials": 40,
+  "competition_detected": false,
+  "phase_roi": {
+    "output_y": [
+      758,
+      1270
+    ],
+    "output_x": [
+      758,
+      1270
+    ],
+    "raw_origin_offset": 10
+  },
+  "boundary": "Cold complete array API, float32 pageable, reference rebuilt, seven independent host results; no file I/O/destruction.",
+  "notes": [
+    "CPU copy_s ABI slot is O(1) view setup in optimized entry, not an array copy.",
+    "Reported CPU solver and solver() wall clocks differ; both are retained separately.",
+    "GPU sample_solver_s excludes reference, init, finite validation and output download.",
+    "VmHWM is sampled whole-process high-water RSS including ready input/output arrays, not isolated algorithm allocation."
+  ]
+}

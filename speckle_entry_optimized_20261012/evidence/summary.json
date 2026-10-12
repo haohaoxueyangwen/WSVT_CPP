@@ -1,0 +1,3422 @@
+[
+  {
+    "input_sha256": [
+      "9863ce78dd483a81ad867739bf60b31a8b47835d8648ca0fd44010d11f5a8d4b",
+      "6b8587a38aa8788462e576c527db4bc0e21ac4a141814e8da798e349b6255a2b"
+    ],
+    "input_unchanged": true,
+    "process_memory": {
+      "VmHWM": "12952336 kB",
+      "VmRSS": "4028052 kB"
+    },
+    "backend": "cpu_cpp",
+    "mode": "wsvt",
+    "size": 2048,
+    "hot": false,
+    "input_shape": [
+      100,
+      2048,
+      2048
+    ],
+    "input_dtype": "float32",
+    "input_transport": "pageable",
+    "source": {
+      "library": "/home/yrc/vscodespace/research/WSVT_project/bench_results/edge_gpu_workstation_20261011/cpu_build/libcpu_driver.so",
+      "library_sha256": "6ff7e9f0434a7554465dae8fdbb777ce0fe47a214cf09feff30edf64212b897e",
+      "python_executable": "/home/yrc/vscodespace/anaconda3/bin/python",
+      "numpy": "1.26.4"
+    },
+    "warmup": {
+      "array_api_s": 7.990353297907859,
+      "detail": {
+        "copy_s": 1.649209869,
+        "constructor_s": 0.014105972,
+        "solver_wall_s": 6.317929506,
+        "reported_solver_s": 6.158585444,
+        "stage_s": [
+          2.617337803,
+          1.66076459,
+          5.738130556,
+          0.412021027,
+          0.279557389
+        ],
+        "c_api_s": 7.981259757
+      }
+    },
+    "records": [
+      {
+        "repeat": 0,
+        "array_api_s": 7.697216358035803,
+        "detail": {
+          "copy_s": 1.65322445,
+          "constructor_s": 0.00146793,
+          "solver_wall_s": 6.033595147,
+          "reported_solver_s": 5.876954216,
+          "stage_s": [
+            2.639872166,
+            1.596203792,
+            5.613139789,
+            0.261595617,
+            0.122983958
+          ],
+          "c_api_s": 7.688294847
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 1,
+        "array_api_s": 7.587002634070814,
+        "detail": {
+          "copy_s": 1.65509017,
+          "constructor_s": 0.00147161,
+          "solver_wall_s": 5.921356663,
+          "reported_solver_s": 5.782022403,
+          "stage_s": [
+            2.626612505,
+            1.516946601,
+            5.514439056,
+            0.265349757,
+            0.127500487
+          ],
+          "c_api_s": 7.577925373
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 2,
+        "array_api_s": 7.5956711559556425,
+        "detail": {
+          "copy_s": 1.646186558,
+          "constructor_s": 0.001404701,
+          "solver_wall_s": 5.939094125,
+          "reported_solver_s": 5.799549796,
+          "stage_s": [
+            2.650882208,
+            1.516835711,
+            5.525863218,
+            0.271474608,
+            0.132166008
+          ],
+          "c_api_s": 7.586691654
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 3,
+        "array_api_s": 7.6722092581912875,
+        "detail": {
+          "copy_s": 1.65301776,
+          "constructor_s": 0.001436521,
+          "solver_wall_s": 6.008886206,
+          "reported_solver_s": 5.869535036,
+          "stage_s": [
+            2.698024705,
+            1.524100892,
+            5.593627038,
+            0.273649218,
+            0.139462539
+          ],
+          "c_api_s": 7.663346847
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 4,
+        "array_api_s": 7.632716803345829,
+        "detail": {
+          "copy_s": 1.65608581,
+          "constructor_s": 0.001455151,
+          "solver_wall_s": 5.966470451,
+          "reported_solver_s": 5.826370651,
+          "stage_s": [
+            2.624663005,
+            1.569499359,
+            5.556440574,
+            0.267692267,
+            0.131941058
+          ],
+          "c_api_s": 7.624017522
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      }
+    ],
+    "mean_s": 7.636963241919875,
+    "sample_sd_s": 0.04767559806959049,
+    "boundary": "Ready host arrays to independently owned host results; fresh object/session including init and reference rebuild; no file I/O. Destruction after clock. Imports and JIT warmup excluded."
+  },
+  {
+    "input_sha256": [
+      "9863ce78dd483a81ad867739bf60b31a8b47835d8648ca0fd44010d11f5a8d4b",
+      "6b8587a38aa8788462e576c527db4bc0e21ac4a141814e8da798e349b6255a2b"
+    ],
+    "input_unchanged": true,
+    "process_memory": {
+      "VmHWM": "12924996 kB",
+      "VmRSS": "4019760 kB"
+    },
+    "backend": "cpu_optimized",
+    "mode": "wsvt",
+    "size": 2048,
+    "hot": false,
+    "input_shape": [
+      100,
+      2048,
+      2048
+    ],
+    "input_dtype": "float32",
+    "input_transport": "pageable",
+    "source": {
+      "library": "/home/yrc/vscodespace/research/WSVT_project/bench_results/entry_optimized_20261012/build_cpu/libcpu_driver.so",
+      "library_sha256": "3f19550376ed2e5c362d0a749b7c5da359851d673abb69a1f2595c7c3a497a20",
+      "python_executable": "/home/yrc/vscodespace/anaconda3/bin/python",
+      "numpy": "1.26.4"
+    },
+    "warmup": {
+      "array_api_s": 6.364468721207231,
+      "detail": {
+        "copy_s": 3e-08,
+        "constructor_s": 0.015206662,
+        "solver_wall_s": 6.340392428,
+        "reported_solver_s": 6.176441385,
+        "stage_s": [
+          2.624257217,
+          1.662918593,
+          5.755452196,
+          0.412092607,
+          0.279448249
+        ],
+        "c_api_s": 6.35561108
+      }
+    },
+    "records": [
+      {
+        "repeat": 0,
+        "array_api_s": 6.069224559701979,
+        "detail": {
+          "copy_s": 8e-08,
+          "constructor_s": 0.00171829,
+          "solver_wall_s": 6.058806619,
+          "reported_solver_s": 5.899235527,
+          "stage_s": [
+            2.623060728,
+            1.598940174,
+            5.625258748,
+            0.271921239,
+            0.120688787
+          ],
+          "c_api_s": 6.060531939
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 1,
+        "array_api_s": 6.151632383000106,
+        "detail": {
+          "copy_s": 2e-08,
+          "constructor_s": 0.00171437,
+          "solver_wall_s": 6.141119791,
+          "reported_solver_s": 5.982065799,
+          "stage_s": [
+            2.646853021,
+            1.630834239,
+            5.688809518,
+            0.291197691,
+            0.14057594
+          ],
+          "c_api_s": 6.142840241
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 2,
+        "array_api_s": 5.970931697636843,
+        "detail": {
+          "copy_s": 3e-08,
+          "constructor_s": 0.00155849,
+          "solver_wall_s": 5.960656867,
+          "reported_solver_s": 5.818311907,
+          "stage_s": [
+            2.628982268,
+            1.547487478,
+            5.539840607,
+            0.276498699,
+            0.133934979
+          ],
+          "c_api_s": 5.962221787
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 3,
+        "array_api_s": 5.77215422084555,
+        "detail": {
+          "copy_s": 3e-08,
+          "constructor_s": 0.00154252,
+          "solver_wall_s": 5.76219467,
+          "reported_solver_s": 5.603908197,
+          "stage_s": [
+            2.645508351,
+            1.556888019,
+            5.432801123,
+            0.169120543,
+            0.124351927
+          ],
+          "c_api_s": 5.76375013
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 4,
+        "array_api_s": 5.775333080906421,
+        "detail": {
+          "copy_s": 3e-08,
+          "constructor_s": 0.00151108,
+          "solver_wall_s": 5.76532524,
+          "reported_solver_s": 5.606564968,
+          "stage_s": [
+            2.621668779,
+            1.559951389,
+            5.427335573,
+            0.177189835,
+            0.132611289
+          ],
+          "c_api_s": 5.76684276
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      }
+    ],
+    "mean_s": 5.947855188418179,
+    "sample_sd_s": 0.17133512642003748,
+    "boundary": "Ready host arrays to independently owned host results; fresh object/session including init and reference rebuild; no file I/O. Destruction after clock. Imports and JIT warmup excluded."
+  },
+  {
+    "input_sha256": [
+      "9863ce78dd483a81ad867739bf60b31a8b47835d8648ca0fd44010d11f5a8d4b",
+      "6b8587a38aa8788462e576c527db4bc0e21ac4a141814e8da798e349b6255a2b"
+    ],
+    "input_unchanged": true,
+    "process_memory": {
+      "VmHWM": "4951756 kB",
+      "VmRSS": "3563392 kB"
+    },
+    "backend": "native_gpu",
+    "mode": "wsvt",
+    "size": 2048,
+    "hot": false,
+    "input_shape": [
+      100,
+      2048,
+      2048
+    ],
+    "input_dtype": "float32",
+    "input_transport": "pageable",
+    "source": {
+      "library": "/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/build_desktop/lib/libspeckle_native.so",
+      "library_sha256": "c13f30f2beeeb4d0e338dc8e1f309f7b4339fe79c1063bcba43c104f324271d2",
+      "python_executable": "/home/yrc/vscodespace/anaconda3/bin/python",
+      "numpy": "1.26.4"
+    },
+    "warmup": {
+      "array_api_s": 0.9134138091467321,
+      "detail": {
+        "reference_s": 0.1284373481757939,
+        "sample_solver_s": 0.17269319389015436,
+        "download_s": 0.022344502620398998,
+        "call_s": 0.42317494889721274,
+        "persistent_bytes": 7761248260,
+        "fft_workspace_bytes": 32902272,
+        "device_allocation_bytes": 7794150532,
+        "stages_s": [
+          0.10212783813476563,
+          0.00016835199296474457,
+          0.023832576751708984,
+          0.009761792182922363,
+          0.002647167921066284,
+          0.03329433441162109,
+          0.0003615359961986542,
+          0.0004628480076789856
+        ],
+        "reference_api_s": 0.2655632570385933,
+        "sample_api_s": 0.423428219743073,
+        "host_validation_and_reference_dispatch_s": 0.1371259088627994,
+        "host_validation_and_sample_dispatch_s": 0.22839052323251963,
+        "constructor_s": 0.22441417211666703,
+        "reference_rebuild_s": 0.1284373481757939
+      }
+    },
+    "records": [
+      {
+        "repeat": 0,
+        "array_api_s": 0.7308353036642075,
+        "detail": {
+          "reference_s": 0.1262074070982635,
+          "sample_solver_s": 0.16788647323846817,
+          "download_s": 0.022723664063960314,
+          "call_s": 0.418787129689008,
+          "persistent_bytes": 7761248260,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 7794150532,
+          "stages_s": [
+            0.1024012451171875,
+            0.00011814399808645249,
+            0.023840768814086914,
+            0.009751551628112793,
+            0.002421760082244873,
+            0.028647424697875977,
+            0.00028467199206352233,
+            0.00038912001252174375
+          ],
+          "reference_api_s": 0.26328115724027157,
+          "sample_api_s": 0.419013740029186,
+          "host_validation_and_reference_dispatch_s": 0.13707375014200807,
+          "host_validation_and_sample_dispatch_s": 0.22840360272675753,
+          "constructor_s": 0.04852806683629751,
+          "reference_rebuild_s": 0.1262074070982635
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 1,
+        "array_api_s": 0.6850808472372591,
+        "detail": {
+          "reference_s": 0.12616504821926355,
+          "sample_solver_s": 0.1719421441666782,
+          "download_s": 0.009669291786849499,
+          "call_s": 0.4099106080830097,
+          "persistent_bytes": 7761248260,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 7794150532,
+          "stages_s": [
+            0.10235465240478515,
+            0.00011865600198507309,
+            0.023823648452758788,
+            0.00971571159362793,
+            0.0023081600666046143,
+            0.03280998229980469,
+            0.00034201601147651673,
+            0.0004362240135669708
+          ],
+          "reference_api_s": 0.26318856701254845,
+          "sample_api_s": 0.41010281816124916,
+          "host_validation_and_reference_dispatch_s": 0.1370235187932849,
+          "host_validation_and_sample_dispatch_s": 0.22849138220772147,
+          "constructor_s": 0.011782221961766481,
+          "reference_rebuild_s": 0.12616504821926355
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 2,
+        "array_api_s": 0.7201854418963194,
+        "detail": {
+          "reference_s": 0.1259938981384039,
+          "sample_solver_s": 0.1720712543465197,
+          "download_s": 0.00791008211672306,
+          "call_s": 0.4080448281019926,
+          "persistent_bytes": 7761248260,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 7794150532,
+          "stages_s": [
+            0.10256272125244141,
+            0.00011744000017642975,
+            0.023799808502197265,
+            0.009722880363464356,
+            0.002367487907409668,
+            0.03268403244018555,
+            0.000347135990858078,
+            0.0004382719993591309
+          ],
+          "reference_api_s": 0.2630611672066152,
+          "sample_api_s": 0.408208838198334,
+          "host_validation_and_reference_dispatch_s": 0.13706726906821132,
+          "host_validation_and_sample_dispatch_s": 0.2282275017350912,
+          "constructor_s": 0.048907177057117224,
+          "reference_rebuild_s": 0.1259938981384039
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 3,
+        "array_api_s": 0.7170518520288169,
+        "detail": {
+          "reference_s": 0.1260801083408296,
+          "sample_solver_s": 0.16910258401185274,
+          "download_s": 0.007895691320300102,
+          "call_s": 0.4052753080613911,
+          "persistent_bytes": 7761248260,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 7794150532,
+          "stages_s": [
+            0.10256348419189452,
+            0.00011772800236940384,
+            0.023852031707763673,
+            0.009852928161621094,
+            0.0025753600597381594,
+            0.02940620803833008,
+            0.0003031040132045746,
+            0.00039936000108718874
+          ],
+          "reference_api_s": 0.2631978169083595,
+          "sample_api_s": 0.40545202791690826,
+          "host_validation_and_reference_dispatch_s": 0.13711770856752992,
+          "host_validation_and_sample_dispatch_s": 0.22845375258475542,
+          "constructor_s": 0.04839400667697191,
+          "reference_rebuild_s": 0.1260801083408296
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 4,
+        "array_api_s": 0.721115202177316,
+        "detail": {
+          "reference_s": 0.1261921371333301,
+          "sample_solver_s": 0.17303268378600478,
+          "download_s": 0.008054421283304691,
+          "call_s": 0.4092630580998957,
+          "persistent_bytes": 7761248260,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 7794150532,
+          "stages_s": [
+            0.10223292541503906,
+            0.00011750400066375733,
+            0.023824575424194337,
+            0.009720831871032716,
+            0.0022906880378723146,
+            0.03402239990234375,
+            0.0003543039858341217,
+            0.0004331519901752472
+          ],
+          "reference_api_s": 0.26341596711426973,
+          "sample_api_s": 0.4094260479323566,
+          "host_validation_and_reference_dispatch_s": 0.13722382998093963,
+          "host_validation_and_sample_dispatch_s": 0.22833894286304712,
+          "constructor_s": 0.04826502688229084,
+          "reference_rebuild_s": 0.1261921371333301
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      }
+    ],
+    "mean_s": 0.7148537294007837,
+    "sample_sd_s": 0.017423405026103712,
+    "boundary": "Ready host arrays to independently owned host results; fresh object/session including init and reference rebuild; no file I/O. Destruction after clock. Imports and JIT warmup excluded."
+  },
+  {
+    "input_sha256": [
+      "9863ce78dd483a81ad867739bf60b31a8b47835d8648ca0fd44010d11f5a8d4b",
+      "6b8587a38aa8788462e576c527db4bc0e21ac4a141814e8da798e349b6255a2b"
+    ],
+    "input_unchanged": true,
+    "process_memory": {
+      "VmHWM": "4951752 kB",
+      "VmRSS": "3563092 kB"
+    },
+    "backend": "native_optimized",
+    "mode": "wsvt",
+    "size": 2048,
+    "hot": false,
+    "input_shape": [
+      100,
+      2048,
+      2048
+    ],
+    "input_dtype": "float32",
+    "input_transport": "pageable",
+    "source": {
+      "library": "/home/yrc/vscodespace/research/WSVT_project/bench_results/entry_optimized_20261012/build_gpu/lib/libspeckle_native.so",
+      "library_sha256": "cde3aa2ee5098f3d0c8580d44cce262b873a1457f62d8e10f258be1348508b10",
+      "python_executable": "/home/yrc/vscodespace/anaconda3/bin/python",
+      "numpy": "1.26.4"
+    },
+    "warmup": {
+      "array_api_s": 0.6661945749074221,
+      "detail": {
+        "reference_s": 0.1287479791790247,
+        "sample_solver_s": 0.1732140639796853,
+        "download_s": 0.023763923905789852,
+        "call_s": 0.25473678624257445,
+        "persistent_bytes": 7761248260,
+        "fft_workspace_bytes": 32902272,
+        "device_allocation_bytes": 7794150532,
+        "stages_s": [
+          0.1022375717163086,
+          0.0001674560010433197,
+          0.023835647583007814,
+          0.009720831871032716,
+          0.0022978560924530027,
+          0.034095104217529294,
+          0.0003648639917373657,
+          0.00046079999208450316
+        ],
+        "reference_api_s": 0.1872051670216024,
+        "sample_api_s": 0.255003125872463,
+        "host_validation_and_reference_dispatch_s": 0.058457187842577696,
+        "host_validation_and_sample_dispatch_s": 0.05802513798698783,
+        "constructor_s": 0.22397796204313636,
+        "reference_rebuild_s": 0.1287479791790247
+      }
+    },
+    "records": [
+      {
+        "repeat": 0,
+        "array_api_s": 0.4883398488163948,
+        "detail": {
+          "reference_s": 0.12641577841714025,
+          "sample_solver_s": 0.1740310350432992,
+          "download_s": 0.022486272733658552,
+          "call_s": 0.25421742629259825,
+          "persistent_bytes": 7761248260,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 7794150532,
+          "stages_s": [
+            0.10259820556640625,
+            0.0001178240031003952,
+            0.023788543701171876,
+            0.009721856117248535,
+            0.0022855679988861084,
+            0.034664447784423826,
+            0.0003676159977912903,
+            0.0004546560049057007
+          ],
+          "reference_api_s": 0.18438174622133374,
+          "sample_api_s": 0.25445318641141057,
+          "host_validation_and_reference_dispatch_s": 0.0579659678041935,
+          "host_validation_and_sample_dispatch_s": 0.05793587863445282,
+          "constructor_s": 0.049493127036839724,
+          "reference_rebuild_s": 0.12641577841714025
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 1,
+        "array_api_s": 0.43681918177753687,
+        "detail": {
+          "reference_s": 0.12607988715171814,
+          "sample_solver_s": 0.1732101235538721,
+          "download_s": 0.009706351906061172,
+          "call_s": 0.240611394867301,
+          "persistent_bytes": 7761248260,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 7794150532,
+          "stages_s": [
+            0.10253968048095703,
+            0.0001178240031003952,
+            0.023800832748413086,
+            0.009724991798400879,
+            0.0022865920066833497,
+            0.033860607147216795,
+            0.0003788799941539764,
+            0.0004659520089626312
+          ],
+          "reference_api_s": 0.1844283463433385,
+          "sample_api_s": 0.24080076487734914,
+          "host_validation_and_reference_dispatch_s": 0.05834845919162035,
+          "host_validation_and_sample_dispatch_s": 0.05788428941741586,
+          "constructor_s": 0.01158380089327693,
+          "reference_rebuild_s": 0.12607988715171814
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 2,
+        "array_api_s": 0.47471770690754056,
+        "detail": {
+          "reference_s": 0.1261100578121841,
+          "sample_solver_s": 0.17247096402570605,
+          "download_s": 0.007920640986412764,
+          "call_s": 0.23817120399326086,
+          "persistent_bytes": 7761248260,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 7794150532,
+          "stages_s": [
+            0.1023980484008789,
+            0.00012038400024175644,
+            0.023799808502197265,
+            0.009733119964599609,
+            0.0023664638996124267,
+            0.03311513519287109,
+            0.0004147199988365173,
+            0.0004925439953804016
+          ],
+          "reference_api_s": 0.18430064572021365,
+          "sample_api_s": 0.23832964384928346,
+          "host_validation_and_reference_dispatch_s": 0.058190587908029556,
+          "host_validation_and_sample_dispatch_s": 0.05793803883716464,
+          "constructor_s": 0.052080046851187944,
+          "reference_rebuild_s": 0.1261100578121841
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 3,
+        "array_api_s": 0.47260422678664327,
+        "detail": {
+          "reference_s": 0.12631407799199224,
+          "sample_solver_s": 0.17212184378877282,
+          "download_s": 0.007910010870546103,
+          "call_s": 0.23782070400193334,
+          "persistent_bytes": 7761248260,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 7794150532,
+          "stages_s": [
+            0.10254361724853515,
+            0.0001173119992017746,
+            0.023840959548950196,
+            0.00972697639465332,
+            0.0022867200374603273,
+            0.03281532669067383,
+            0.00033484798669815064,
+            0.00042086398601531985
+          ],
+          "reference_api_s": 0.1853102263994515,
+          "sample_api_s": 0.23800036404281855,
+          "host_validation_and_reference_dispatch_s": 0.05899614840745926,
+          "host_validation_and_sample_dispatch_s": 0.05796850938349962,
+          "constructor_s": 0.04928643675521016,
+          "reference_rebuild_s": 0.12631407799199224
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 4,
+        "array_api_s": 0.47261875681579113,
+        "detail": {
+          "reference_s": 0.1262888782657683,
+          "sample_solver_s": 0.17298187501728535,
+          "download_s": 0.007913901004940271,
+          "call_s": 0.238744234200567,
+          "persistent_bytes": 7761248260,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 7794150532,
+          "stages_s": [
+            0.10257753753662109,
+            0.00011721599847078323,
+            0.023840768814086914,
+            0.009731072425842285,
+            0.0023029758930206297,
+            0.03347558212280274,
+            0.0004116480052471161,
+            0.0004904960095882415
+          ],
+          "reference_api_s": 0.1843702457845211,
+          "sample_api_s": 0.23890155414119363,
+          "host_validation_and_reference_dispatch_s": 0.05808136751875281,
+          "host_validation_and_sample_dispatch_s": 0.05800577811896801,
+          "constructor_s": 0.04933859687298536,
+          "reference_rebuild_s": 0.1262888782657683
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      }
+    ],
+    "mean_s": 0.4690199442207813,
+    "sample_sd_s": 0.019159924639403195,
+    "boundary": "Ready host arrays to independently owned host results; fresh object/session including init and reference rebuild; no file I/O. Destruction after clock. Imports and JIT warmup excluded."
+  },
+  {
+    "input_sha256": [
+      "d8acf65584f47a5359e3d73951303827586ba4351fca4cff590eac44851657b4",
+      "df88ea033fc2c8557261efd75d69c8c80c714f805804845e7901c0a41c022392"
+    ],
+    "input_unchanged": true,
+    "process_memory": {
+      "VmHWM": "4207348 kB",
+      "VmRSS": "272684 kB"
+    },
+    "backend": "cpu_cpp",
+    "mode": "wxst",
+    "size": 2048,
+    "hot": false,
+    "input_shape": [
+      2048,
+      2048
+    ],
+    "input_dtype": "float32",
+    "input_transport": "pageable",
+    "source": {
+      "library": "/home/yrc/vscodespace/research/WSVT_project/bench_results/edge_gpu_workstation_20261011/cpu_build/libcpu_driver.so",
+      "library_sha256": "6ff7e9f0434a7554465dae8fdbb777ce0fe47a214cf09feff30edf64212b897e",
+      "python_executable": "/home/yrc/vscodespace/anaconda3/bin/python",
+      "numpy": "1.26.4"
+    },
+    "warmup": {
+      "array_api_s": 2.7213190980255604,
+      "detail": {
+        "copy_s": 0.016950602,
+        "constructor_s": 0.031546595,
+        "solver_wall_s": 2.651938848,
+        "reported_solver_s": 2.506844787,
+        "stage_s": [
+          0.557235769,
+          1.266639321,
+          0.355889061,
+          0.326859616,
+          0.28094948
+        ],
+        "c_api_s": 2.702785835
+      }
+    },
+    "records": [
+      {
+        "repeat": 0,
+        "array_api_s": 2.482575934845954,
+        "detail": {
+          "copy_s": 0.009817262,
+          "constructor_s": 0.033566764,
+          "solver_wall_s": 2.430328607,
+          "reported_solver_s": 2.286343047,
+          "stage_s": [
+            0.547210478,
+            1.267936022,
+            0.323389566,
+            0.147606591,
+            0.114493767
+          ],
+          "c_api_s": 2.473716063
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 1,
+        "array_api_s": 2.403051652945578,
+        "detail": {
+          "copy_s": 0.00253258,
+          "constructor_s": 0.003838781,
+          "solver_wall_s": 2.387764551,
+          "reported_solver_s": 2.2448108,
+          "stage_s": [
+            0.546023088,
+            1.278157822,
+            0.287396031,
+            0.133026569,
+            0.100293184
+          ],
+          "c_api_s": 2.394139172
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 2,
+        "array_api_s": 2.421019465662539,
+        "detail": {
+          "copy_s": 0.002393441,
+          "constructor_s": 0.00384927,
+          "solver_wall_s": 2.405842904,
+          "reported_solver_s": 2.261828063,
+          "stage_s": [
+            0.547278598,
+            1.279979263,
+            0.301150823,
+            0.133204649,
+            0.100899054
+          ],
+          "c_api_s": 2.412089005
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 3,
+        "array_api_s": 2.440215997863561,
+        "detail": {
+          "copy_s": 0.00238254,
+          "constructor_s": 0.00387593,
+          "solver_wall_s": 2.425058977,
+          "reported_solver_s": 2.280159816,
+          "stage_s": [
+            0.548593689,
+            1.274058482,
+            0.299683193,
+            0.157605792,
+            0.124948438
+          ],
+          "c_api_s": 2.431320687
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 4,
+        "array_api_s": 2.4518337603658438,
+        "detail": {
+          "copy_s": 0.00244855,
+          "constructor_s": 0.003850331,
+          "solver_wall_s": 2.436652138,
+          "reported_solver_s": 2.291643127,
+          "stage_s": [
+            0.549419088,
+            1.277930223,
+            0.302031703,
+            0.162052783,
+            0.129712868
+          ],
+          "c_api_s": 2.442954699
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      }
+    ],
+    "mean_s": 2.439739362336695,
+    "sample_sd_s": 0.030322830265791863,
+    "boundary": "Ready host arrays to independently owned host results; fresh object/session including init and reference rebuild; no file I/O. Destruction after clock. Imports and JIT warmup excluded."
+  },
+  {
+    "input_sha256": [
+      "d8acf65584f47a5359e3d73951303827586ba4351fca4cff590eac44851657b4",
+      "df88ea033fc2c8557261efd75d69c8c80c714f805804845e7901c0a41c022392"
+    ],
+    "input_unchanged": true,
+    "process_memory": {
+      "VmHWM": "4243772 kB",
+      "VmRSS": "341044 kB"
+    },
+    "backend": "cpu_optimized",
+    "mode": "wxst",
+    "size": 2048,
+    "hot": false,
+    "input_shape": [
+      2048,
+      2048
+    ],
+    "input_dtype": "float32",
+    "input_transport": "pageable",
+    "source": {
+      "library": "/home/yrc/vscodespace/research/WSVT_project/bench_results/entry_optimized_20261012/build_cpu/libcpu_driver.so",
+      "library_sha256": "3f19550376ed2e5c362d0a749b7c5da359851d673abb69a1f2595c7c3a497a20",
+      "python_executable": "/home/yrc/vscodespace/anaconda3/bin/python",
+      "numpy": "1.26.4"
+    },
+    "warmup": {
+      "array_api_s": 2.663151062093675,
+      "detail": {
+        "copy_s": 2e-08,
+        "constructor_s": 0.016060512,
+        "solver_wall_s": 2.630551818,
+        "reported_solver_s": 2.485619557,
+        "stage_s": [
+          0.534338517,
+          1.268688122,
+          0.354715821,
+          0.327671417,
+          0.27910659
+        ],
+        "c_api_s": 2.6466186
+      }
+    },
+    "records": [
+      {
+        "repeat": 0,
+        "array_api_s": 2.4194683181121945,
+        "detail": {
+          "copy_s": 2e-08,
+          "constructor_s": 0.007680151,
+          "solver_wall_s": 2.403169195,
+          "reported_solver_s": 2.258640135,
+          "stage_s": [
+            0.523693986,
+            1.271078002,
+            0.310038995,
+            0.153628702,
+            0.111810296
+          ],
+          "c_api_s": 2.410851896
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 1,
+        "array_api_s": 2.3700247700326145,
+        "detail": {
+          "copy_s": 3e-08,
+          "constructor_s": 0.00170879,
+          "solver_wall_s": 2.359404009,
+          "reported_solver_s": 2.214604198,
+          "stage_s": [
+            0.536429007,
+            1.265061801,
+            0.291556712,
+            0.121352788,
+            0.096259314
+          ],
+          "c_api_s": 2.361115569
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 2,
+        "array_api_s": 2.3726396509446204,
+        "detail": {
+          "copy_s": 4e-08,
+          "constructor_s": 0.00154719,
+          "solver_wall_s": 2.36227378,
+          "reported_solver_s": 2.217957039,
+          "stage_s": [
+            0.535893327,
+            1.266121662,
+            0.286721981,
+            0.129015299,
+            0.104420385
+          ],
+          "c_api_s": 2.36382399
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 3,
+        "array_api_s": 2.3878491232171655,
+        "detail": {
+          "copy_s": 3e-08,
+          "constructor_s": 0.00154464,
+          "solver_wall_s": 2.377333272,
+          "reported_solver_s": 2.232896091,
+          "stage_s": [
+            0.539583048,
+            1.268302092,
+            0.292040562,
+            0.132781269,
+            0.107629695
+          ],
+          "c_api_s": 2.378880502
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 4,
+        "array_api_s": 2.4090248961001635,
+        "detail": {
+          "copy_s": 3e-08,
+          "constructor_s": 0.00157013,
+          "solver_wall_s": 2.398654604,
+          "reported_solver_s": 2.253218944,
+          "stage_s": [
+            0.537891877,
+            1.284210945,
+            0.291306801,
+            0.139607451,
+            0.114559657
+          ],
+          "c_api_s": 2.400227034
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      }
+    ],
+    "mean_s": 2.3918013516813517,
+    "sample_sd_s": 0.021903891817970724,
+    "boundary": "Ready host arrays to independently owned host results; fresh object/session including init and reference rebuild; no file I/O. Destruction after clock. Imports and JIT warmup excluded."
+  },
+  {
+    "input_sha256": [
+      "d8acf65584f47a5359e3d73951303827586ba4351fca4cff590eac44851657b4",
+      "df88ea033fc2c8557261efd75d69c8c80c714f805804845e7901c0a41c022392"
+    ],
+    "input_unchanged": true,
+    "process_memory": {
+      "VmHWM": "319348 kB",
+      "VmRSS": "319348 kB"
+    },
+    "backend": "native_gpu",
+    "mode": "wxst",
+    "size": 2048,
+    "hot": false,
+    "input_shape": [
+      2048,
+      2048
+    ],
+    "input_dtype": "float32",
+    "input_transport": "pageable",
+    "source": {
+      "library": "/home/yrc/vscodespace/research/WSVT_project/bench_results/native_four_editions_20261011/release/build_desktop/lib/libspeckle_native.so",
+      "library_sha256": "c13f30f2beeeb4d0e338dc8e1f309f7b4339fe79c1063bcba43c104f324271d2",
+      "python_executable": "/home/yrc/vscodespace/anaconda3/bin/python",
+      "numpy": "1.26.4"
+    },
+    "warmup": {
+      "array_api_s": 0.29734714329242706,
+      "detail": {
+        "reference_s": 0.004967411048710346,
+        "sample_solver_s": 0.04045218462124467,
+        "download_s": 0.02154814312234521,
+        "call_s": 0.06428404897451401,
+        "persistent_bytes": 1679340948,
+        "fft_workspace_bytes": 32902272,
+        "device_allocation_bytes": 1712243220,
+        "stages_s": [
+          0.000838271975517273,
+          0.00013833600282669068,
+          2.764800004661083e-05,
+          0.008972288131713867,
+          0.0025425920486450196,
+          0.02716160011291504,
+          0.0003226880133152008,
+          0.00042495998740196226
+        ],
+        "reference_api_s": 0.006388770882040262,
+        "sample_api_s": 0.06449631974101067,
+        "host_validation_and_reference_dispatch_s": 0.001421359833329916,
+        "host_validation_and_sample_dispatch_s": 0.002495991997420788,
+        "constructor_s": 0.226455292198807,
+        "reference_rebuild_s": 0.004967411048710346
+      }
+    },
+    "records": [
+      {
+        "repeat": 0,
+        "array_api_s": 0.0750265708193183,
+        "detail": {
+          "reference_s": 0.0043248808942735195,
+          "sample_solver_s": 0.03951112600043416,
+          "download_s": 0.021828093100339174,
+          "call_s": 0.06365113891661167,
+          "persistent_bytes": 1679340948,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 1712243220,
+          "stages_s": [
+            0.0008426240086555481,
+            0.00013702400028705596,
+            2.6623999699950218e-05,
+            0.008922112464904786,
+            0.002527456045150757,
+            0.026335231781005858,
+            0.0002979840040206909,
+            0.0004003840088844299
+          ],
+          "reference_api_s": 0.0057423310354352,
+          "sample_api_s": 0.06383053865283728,
+          "host_validation_and_reference_dispatch_s": 0.0014174501411616802,
+          "host_validation_and_sample_dispatch_s": 0.002491319552063942,
+          "constructor_s": 0.005444550886750221,
+          "reference_rebuild_s": 0.0043248808942735195
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 1,
+        "array_api_s": 0.06160283833742142,
+        "detail": {
+          "reference_s": 0.004138819873332977,
+          "sample_solver_s": 0.03864717623218894,
+          "download_s": 0.009560481179505587,
+          "call_s": 0.050488846842199564,
+          "persistent_bytes": 1679340948,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 1712243220,
+          "stages_s": [
+            0.0008189120292663574,
+            0.00011750400066375733,
+            2.3552000522613525e-05,
+            0.008631296157836914,
+            0.002288640022277832,
+            0.026085376739501953,
+            0.00027647998929023745,
+            0.00038502401113510134
+          ],
+          "reference_api_s": 0.0055409809574484825,
+          "sample_api_s": 0.050613116938620806,
+          "host_validation_and_reference_dispatch_s": 0.0014021610841155052,
+          "host_validation_and_sample_dispatch_s": 0.002405459526926279,
+          "constructor_s": 0.005442660301923752,
+          "reference_rebuild_s": 0.004138819873332977
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 2,
+        "array_api_s": 0.06371214939281344,
+        "detail": {
+          "reference_s": 0.00456466106697917,
+          "sample_solver_s": 0.042086665984243155,
+          "download_s": 0.007858331315219402,
+          "call_s": 0.052232197020202875,
+          "persistent_bytes": 1679340948,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 1712243220,
+          "stages_s": [
+            0.0008372480273246766,
+            0.00013920000195503235,
+            2.8672000393271447e-05,
+            0.009407487869262696,
+            0.002673664093017578,
+            0.028214271545410157,
+            0.00033587199449539186,
+            0.00043007999658584595
+          ],
+          "reference_api_s": 0.005970821250230074,
+          "sample_api_s": 0.05234192684292793,
+          "host_validation_and_reference_dispatch_s": 0.001406160183250904,
+          "host_validation_and_sample_dispatch_s": 0.002396929543465376,
+          "constructor_s": 0.005393201019614935,
+          "reference_rebuild_s": 0.00456466106697917
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 3,
+        "array_api_s": 0.060112738981842995,
+        "detail": {
+          "reference_s": 0.0042915306985378265,
+          "sample_solver_s": 0.03881623595952988,
+          "download_s": 0.007756791077554226,
+          "call_s": 0.048855296801775694,
+          "persistent_bytes": 1679340948,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 1712243220,
+          "stages_s": [
+            0.0008661119937896729,
+            0.00013283200562000275,
+            2.6623999699950218e-05,
+            0.008654848098754882,
+            0.002339103937149048,
+            0.02610380744934082,
+            0.0002826240062713623,
+            0.0003880960047245026
+          ],
+          "reference_api_s": 0.005705990828573704,
+          "sample_api_s": 0.04897501738741994,
+          "host_validation_and_reference_dispatch_s": 0.0014144601300358772,
+          "host_validation_and_sample_dispatch_s": 0.0024019903503358364,
+          "constructor_s": 0.005425810813903809,
+          "reference_rebuild_s": 0.0042915306985378265
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 4,
+        "array_api_s": 0.05986869800835848,
+        "detail": {
+          "reference_s": 0.004143219906836748,
+          "sample_solver_s": 0.038776665925979614,
+          "download_s": 0.007747681345790625,
+          "call_s": 0.0488169570453465,
+          "persistent_bytes": 1679340948,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 1712243220,
+          "stages_s": [
+            0.0008159679770469666,
+            0.00012252800166606903,
+            2.486399933695793e-05,
+            0.008648703575134278,
+            0.0023664638996124267,
+            0.02611199951171875,
+            0.00028057599067687986,
+            0.0003840000033378601
+          ],
+          "reference_api_s": 0.005554241128265858,
+          "sample_api_s": 0.04892578721046448,
+          "host_validation_and_reference_dispatch_s": 0.0014110212214291096,
+          "host_validation_and_sample_dispatch_s": 0.0024014399386942387,
+          "constructor_s": 0.005382619798183441,
+          "reference_rebuild_s": 0.004143219906836748
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      }
+    ],
+    "mean_s": 0.06406459910795093,
+    "sample_sd_s": 0.006316092446832137,
+    "boundary": "Ready host arrays to independently owned host results; fresh object/session including init and reference rebuild; no file I/O. Destruction after clock. Imports and JIT warmup excluded."
+  },
+  {
+    "input_sha256": [
+      "d8acf65584f47a5359e3d73951303827586ba4351fca4cff590eac44851657b4",
+      "df88ea033fc2c8557261efd75d69c8c80c714f805804845e7901c0a41c022392"
+    ],
+    "input_unchanged": true,
+    "process_memory": {
+      "VmHWM": "319064 kB",
+      "VmRSS": "319064 kB"
+    },
+    "backend": "native_optimized",
+    "mode": "wxst",
+    "size": 2048,
+    "hot": false,
+    "input_shape": [
+      2048,
+      2048
+    ],
+    "input_dtype": "float32",
+    "input_transport": "pageable",
+    "source": {
+      "library": "/home/yrc/vscodespace/research/WSVT_project/bench_results/entry_optimized_20261012/build_gpu/lib/libspeckle_native.so",
+      "library_sha256": "cde3aa2ee5098f3d0c8580d44cce262b873a1457f62d8e10f258be1348508b10",
+      "python_executable": "/home/yrc/vscodespace/anaconda3/bin/python",
+      "numpy": "1.26.4"
+    },
+    "warmup": {
+      "array_api_s": 0.28617319092154503,
+      "detail": {
+        "reference_s": 0.00489642983302474,
+        "sample_solver_s": 0.04104535514488816,
+        "download_s": 0.021453883033245802,
+        "call_s": 0.06318658916279674,
+        "persistent_bytes": 1679340948,
+        "fft_workspace_bytes": 32902272,
+        "device_allocation_bytes": 1712243220,
+        "stages_s": [
+          0.0008497920036315918,
+          0.00013795199990272521,
+          2.764800004661083e-05,
+          0.008929280281066895,
+          0.0025384960174560547,
+          0.02778112030029297,
+          0.00032767999172210693,
+          0.00043212801218032835
+        ],
+        "reference_api_s": 0.005677841138094664,
+        "sample_api_s": 0.06339568924158812,
+        "host_validation_and_reference_dispatch_s": 0.0007814113050699234,
+        "host_validation_and_sample_dispatch_s": 0.0008964510634541512,
+        "constructor_s": 0.21709266118705273,
+        "reference_rebuild_s": 0.00489642983302474
+      }
+    },
+    "records": [
+      {
+        "repeat": 0,
+        "array_api_s": 0.07233798084780574,
+        "detail": {
+          "reference_s": 0.004344320856034756,
+          "sample_solver_s": 0.03919400600716472,
+          "download_s": 0.021896183025091887,
+          "call_s": 0.06172474892809987,
+          "persistent_bytes": 1679340948,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 1712243220,
+          "stages_s": [
+            0.0008089920282363892,
+            0.00013286399841308595,
+            2.6623999699950218e-05,
+            0.008875007629394532,
+            0.0025221118927001955,
+            0.02612735939025879,
+            0.00028774398565292356,
+            0.00039219200611114504
+          ],
+          "reference_api_s": 0.0049521708860993385,
+          "sample_api_s": 0.06188403908163309,
+          "host_validation_and_reference_dispatch_s": 0.0006078500300645828,
+          "host_validation_and_sample_dispatch_s": 0.0007938500493764877,
+          "constructor_s": 0.005492470692843199,
+          "reference_rebuild_s": 0.004344320856034756
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 1,
+        "array_api_s": 0.06093424838036299,
+        "detail": {
+          "reference_s": 0.004135310649871826,
+          "sample_solver_s": 0.040082075633108616,
+          "download_s": 0.009559760801494122,
+          "call_s": 0.05032974714413285,
+          "persistent_bytes": 1679340948,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 1712243220,
+          "stages_s": [
+            0.0008292480111122131,
+            0.00012060800194740295,
+            2.3871999233961107e-05,
+            0.008640607833862305,
+            0.002288831949234009,
+            0.02733465576171875,
+            0.00036556801199913024,
+            0.0004556800127029419
+          ],
+          "reference_api_s": 0.005005971062928438,
+          "sample_api_s": 0.05047091701999307,
+          "host_validation_and_reference_dispatch_s": 0.000870660413056612,
+          "host_validation_and_sample_dispatch_s": 0.0008290805853903294,
+          "constructor_s": 0.005452040117233992,
+          "reference_rebuild_s": 0.004135310649871826
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 2,
+        "array_api_s": 0.05766012892127037,
+        "detail": {
+          "reference_s": 0.004200000781565905,
+          "sample_solver_s": 0.03882675478234887,
+          "download_s": 0.007792471908032894,
+          "call_s": 0.04726782673969865,
+          "persistent_bytes": 1679340948,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 1712243220,
+          "stages_s": [
+            0.0008150399923324585,
+            0.0001244800016283989,
+            2.5919999927282332e-05,
+            0.008651776313781738,
+            0.0023900160789489745,
+            0.02612019157409668,
+            0.0002867200076580048,
+            0.0003932160139083862
+          ],
+          "reference_api_s": 0.004822450689971447,
+          "sample_api_s": 0.04737694701179862,
+          "host_validation_and_reference_dispatch_s": 0.0006224499084055424,
+          "host_validation_and_sample_dispatch_s": 0.0007577203214168549,
+          "constructor_s": 0.005454380996525288,
+          "reference_rebuild_s": 0.004200000781565905
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 3,
+        "array_api_s": 0.05856662802398205,
+        "detail": {
+          "reference_s": 0.004367730114609003,
+          "sample_solver_s": 0.03939674608409405,
+          "download_s": 0.007803510874509811,
+          "call_s": 0.04784919694066048,
+          "persistent_bytes": 1679340948,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 1712243220,
+          "stages_s": [
+            0.000811743974685669,
+            0.00013068799674510956,
+            2.6623999699950218e-05,
+            0.008902655601501466,
+            0.00249564790725708,
+            0.02631171226501465,
+            0.0002959359884262085,
+            0.00039936000108718874
+          ],
+          "reference_api_s": 0.004995639901608229,
+          "sample_api_s": 0.04796605696901679,
+          "host_validation_and_reference_dispatch_s": 0.0006279097869992256,
+          "host_validation_and_sample_dispatch_s": 0.0007658000104129314,
+          "constructor_s": 0.00559880118817091,
+          "reference_rebuild_s": 0.004367730114609003
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      },
+      {
+        "repeat": 4,
+        "array_api_s": 0.05905003799125552,
+        "detail": {
+          "reference_s": 0.0043704998679459095,
+          "sample_solver_s": 0.039905496407300234,
+          "download_s": 0.0078026107512414455,
+          "call_s": 0.04835917707532644,
+          "persistent_bytes": 1679340948,
+          "fft_workspace_bytes": 32902272,
+          "device_allocation_bytes": 1712243220,
+          "stages_s": [
+            0.0008204799890518189,
+            0.00013120000064373018,
+            2.6623999699950218e-05,
+            0.008668479919433593,
+            0.0023490560054779054,
+            0.027164703369140626,
+            0.00030924800038337706,
+            0.00041369599103927615
+          ],
+          "reference_api_s": 0.004997170064598322,
+          "sample_api_s": 0.04846683703362942,
+          "host_validation_and_reference_dispatch_s": 0.0006266701966524124,
+          "host_validation_and_sample_dispatch_s": 0.000758729875087738,
+          "constructor_s": 0.005580691155046225,
+          "reference_rebuild_s": 0.0043704998679459095
+        },
+        "fields": {
+          "displace_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "displace_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_y": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "DPC_x": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "phase": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          },
+          "transmission": {
+            "shape": [
+              2048,
+              2048
+            ],
+            "dtype": "float32"
+          },
+          "match_score_neg_ssd": {
+            "shape": [
+              2028,
+              2028
+            ],
+            "dtype": "float32"
+          }
+        }
+      }
+    ],
+    "mean_s": 0.06170980483293533,
+    "sample_sd_s": 0.0060603920728809655,
+    "boundary": "Ready host arrays to independently owned host results; fresh object/session including init and reference rebuild; no file I/O. Destruction after clock. Imports and JIT warmup excluded."
+  }
+]

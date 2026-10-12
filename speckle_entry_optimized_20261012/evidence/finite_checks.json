@@ -1,0 +1,11 @@
+{
+  "pass_gate": true,
+  "cases": 123,
+  "host_validation_threads": 1,
+  "checks": [
+    "IEEE finite extremes/subnormals/signed zero",
+    "unaligned and SIMD tails",
+    "NaN and +/-Inf",
+    "revalidate changed reference/sample buffers"
+  ]
+}

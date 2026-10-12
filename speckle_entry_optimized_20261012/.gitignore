@@ -1,0 +1,11 @@
+build_*/
+__pycache__/
+*.pyc
+*.so
+*.npy
+*.npz
+*.tar.gz
+*.zip
+evidence/formal_*/
+evidence/smoke_*/
+evidence/*.log

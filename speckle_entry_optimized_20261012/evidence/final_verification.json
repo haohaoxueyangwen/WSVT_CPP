@@ -1,0 +1,6 @@
+{
+  "measured_binaries_unchanged": true,
+  "tested_compute_sources_unchanged": true,
+  "original_libraries_retained": true,
+  "verification_scope": "Recorded original/optimized binaries and compiled sources; packaging helpers may differ."
+}
